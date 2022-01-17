@@ -1,6 +1,5 @@
 package web.Course.service;
 
-
 import java.sql.Timestamp;
 
 import ProjectInterfaces.CourseInterface;

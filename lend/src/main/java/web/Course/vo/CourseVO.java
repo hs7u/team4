@@ -1,6 +1,5 @@
 package web.Course.vo;
 
-
 import java.sql.Timestamp;
 
 public class CourseVO implements java.io.Serializable{

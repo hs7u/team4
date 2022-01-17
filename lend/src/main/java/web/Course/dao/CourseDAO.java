@@ -144,7 +144,7 @@ public class CourseDAO implements CourseInterface<CourseVO> {
                 cVo.setSignUpStartdate(rs.getTimestamp("signUp_startdate"));
                 cVo.setSignUpDeadline(rs.getTimestamp("signUp_deadline"));
                 cVo.setCourseDescribe(rs.getString("course_describe"));
-                cVo.setCourse_state(rs.getByte("course_state"));
+                cVo.setCourseState(rs.getByte("course_state"));
             }
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
