@@ -36,12 +36,12 @@ public class CreditcardDAO implements CreditcradInterface<CreditcradVO>{
     public void insert(CreditcradVO cVo){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT)) {
-            ps.setInt(1, cVo.getCreditcard_number());
-            ps.setInt(2, cVo.getCustomer_id());
-            ps.setString(3, cVo.getCvv_code());
-            ps.setString(4, cVo.getExpire_year());
-            ps.setString(5, cVo.getExpire_month());
-            ps.setString(6, cVo.getCardholder_name());
+            ps.setInt(1, cVo.getCreditcardNumber());
+            ps.setInt(2, cVo.getCustomerId());
+            ps.setString(3, cVo.getCvvCode());
+            ps.setString(4, cVo.getExpireYear());
+            ps.setString(5, cVo.getExpireMonth());
+            ps.setString(6, cVo.getCardholderName());
             ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
@@ -51,27 +51,27 @@ public class CreditcardDAO implements CreditcradInterface<CreditcradVO>{
     public void update(CreditcradVO cVo){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(UPDATE)) {
-            ps.setInt(1, cVo.getCreditcard_number());
-            ps.setInt(2, cVo.getCustomer_id());
-            ps.setString(3, cVo.getCvv_code());
-            ps.setString(4, cVo.getExpire_year());
-            ps.setString(5, cVo.getExpire_month());
-            ps.setString(6, cVo.getCardholder_name());
-            ps.setInt(7, cVo.getCustomer_id());
+            ps.setInt(1, cVo.getCreditcardNumber());
+            ps.setInt(2, cVo.getCustomerId());
+            ps.setString(3, cVo.getCvvCode());
+            ps.setString(4, cVo.getExpireYear());
+            ps.setString(5, cVo.getExpireMonth());
+            ps.setString(6, cVo.getCardholderName());
+            ps.setInt(7, cVo.getCustomerId());
             ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
         }
     }
-    public void delete(Integer customer_id){
+    public void delete(Integer customerId){
         Connection con = null;
         PreparedStatement ps = null;
         try {
             con = ds.getConnection();
             con.setAutoCommit(false);
             ps = con.prepareStatement(DELETE);
-            ps.setInt(1, customer_id);
+            ps.setInt(1, customerId);
             ps.executeUpdate();
             con.commit();
             con.setAutoCommit(true);
@@ -103,19 +103,19 @@ public class CreditcardDAO implements CreditcradInterface<CreditcradVO>{
             }
         }
     }
-    public CreditcradVO selectByCustomerId(Integer customer_id){
+    public CreditcradVO selectByCustomerId(Integer customerId){
         CreditcradVO cVo = new CreditcradVO();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(GET_ONE_STM)) {
-            ps.setInt(1, customer_id);
+            ps.setInt(1, customerId);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                cVo.setCreditcard_number(rs.getInt("creditcard_number"));
-                cVo.setCardholder_name(rs.getString("cardholder_name"));
-                cVo.setCustomer_id(rs.getInt("customer_id"));
-                cVo.setCvv_code(rs.getString("cvv_code"));
-                cVo.setExpire_year(rs.getString("expire_year"));
-                cVo.setExpire_month(rs.getString("expire_month"));
+                cVo.setCreditcardNumber(rs.getInt("creditcard_number"));
+                cVo.setCardholderName(rs.getString("cardholder_name"));
+                cVo.setCustomerId(rs.getInt("customer_id"));
+                cVo.setCvvCode(rs.getString("cvv_code"));
+                cVo.setExpireYear(rs.getString("expire_year"));
+                cVo.setExpireMonth(rs.getString("expire_month"));
             }
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "

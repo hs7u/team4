@@ -9,49 +9,49 @@ public class ProductService {
     public ProductService(){
         dao = new ProductDAO();
     }
-    public ProductVO addProduct(Integer product_category_code, Integer product_price, String product_name,byte[] product_image,
-            String product_description, Integer product_inventory, Byte customization, Integer customer_product_price){
-            java.sql.Timestamp released_time = new java.sql.Timestamp(System.currentTimeMillis());
+    public ProductVO addProduct(Integer productCategoryCode, Integer productPrice, String productName,byte[] productImage,
+            String productDescription, Integer productInventory, Byte customization, Integer customerProductPrice){
+            java.sql.Timestamp releasedTime = new java.sql.Timestamp(System.currentTimeMillis());
             ProductVO pVo = new ProductVO();
-        pVo.setProduct_id(hashCode(product_name, product_description));
-        pVo.setProduct_category_code(product_category_code);
-        pVo.setProduct_price(product_price);
-        pVo.setProduct_name(product_name);
-        pVo.setProduct_image(product_image);
-        pVo.setProduct_description(product_description);
-        pVo.setProduct_inventory(product_inventory);
-        pVo.setReleased_time(released_time);
+        pVo.setProductId(hashCode(productName, productDescription));
+        pVo.setProductCategoryCode(productCategoryCode);
+        pVo.setProductPrice(productPrice);
+        pVo.setProductName(productName);
+        pVo.setProductImage(productImage);
+        pVo.setProductDescription(productDescription);
+        pVo.setProductInventory(productInventory);
+        pVo.setReleasedTime(releasedTime);
         pVo.setCustomization(customization);
-        pVo.setCustomer_product_price(customer_product_price);
+        pVo.setCustomerProductPrice(customerProductPrice);
         dao.insert(pVo);    
         return pVo;
     }
-    public ProductVO updateProduct(Integer Product_id, Integer product_category_code, Integer product_price, String product_name,byte[] product_image,
-            String product_description, Integer product_inventory, Byte customization, Integer customer_product_price) {
+    public ProductVO updateProduct(Integer ProductId, Integer productCategoryCode, Integer productPrice, String productName,byte[] productImage,
+            String productDescription, Integer productInventory, Byte customization, Integer customerProductPrice) {
         ProductVO pVo = new ProductVO();
-        pVo.setProduct_id(Product_id);
-        pVo.setProduct_category_code(product_category_code);
-        pVo.setProduct_price(product_price);
-        pVo.setProduct_name(product_name);
-        pVo.setProduct_image(product_image);
-        pVo.setProduct_description(product_description);
-        pVo.setProduct_inventory(product_inventory);
+        pVo.setProductId(ProductId);
+        pVo.setProductCategoryCode(productCategoryCode);
+        pVo.setProductPrice(productPrice);
+        pVo.setProductName(productName);
+        pVo.setProductImage(productImage);
+        pVo.setProductDescription(productDescription);
+        pVo.setProductInventory(productInventory);
         pVo.setCustomization(customization);
-        pVo.setCustomer_product_price(customer_product_price);
+        pVo.setCustomerProductPrice(customerProductPrice);
         dao.update(pVo);
         return pVo;    
     }
-    public void updateSold(Integer product_id, Integer sold) {
-        dao.sold(product_id, sold);
+    public void updateSold(Integer productId, Integer sold) {
+        dao.sold(productId, sold);
     }
-    public void updateStatus(Integer product_id, Byte status_code) {
-        dao.changeStatus(product_id, status_code);
+    public void updateStatus(Integer productId, Byte statusCode) {
+        dao.changeStatus(productId, statusCode);
     }
-    public int hashCode(String product_name, String product_description) {
+    public int hashCode(String productName, String productDescription) {
         final int prime = 31;
 		int result = 1;
-		result = result * prime + (product_name == null ? 0 : (product_name).hashCode()); 
-		result = result * prime + (product_description == null ? 0 : (product_description).hashCode()); 
+		result = result * prime + (productName == null ? 0 : (productName).hashCode()); 
+		result = result * prime + (productDescription == null ? 0 : (productDescription).hashCode()); 
 		
 		return result;
     }

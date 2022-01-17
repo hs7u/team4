@@ -35,10 +35,10 @@ public class CustomerServiceDAO implements CustomerServiceInterface<CustomerServ
     public void insert(CustomerServiceVO csVO){
         try (Connection con = ds.getConnection();
          PreparedStatement ps = con.prepareStatement(INSERT)) {
-            ps.setInt(1,csVO.getCusotmer_id());
-            ps.setTimestamp(2,csVO.getMessage_time());
-            ps.setString(3,csVO.getMessage_title());
-            ps.setString(4,csVO.getMessage_context());
+            ps.setInt(1,csVO.getCusotmerId());
+            ps.setTimestamp(2,csVO.getMessageTime());
+            ps.setString(3,csVO.getMessageTitle());
+            ps.setString(4,csVO.getMessageContext());
             ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
@@ -48,31 +48,31 @@ public class CustomerServiceDAO implements CustomerServiceInterface<CustomerServ
     public void update(CustomerServiceVO csVO){
         try (Connection con = ds.getConnection();
          PreparedStatement ps = con.prepareStatement(UPDATE)) {
-            ps.setInt(1,csVO.getMessage_id());
-            ps.setInt(2,csVO.getCusotmer_id());
-            ps.setString(3,csVO.getMessage_title());
-            ps.setString(4,csVO.getMessage_context());
-            ps.setString(5,csVO.getReply_context());
-            ps.setInt(6,csVO.getMessage_id());
+            ps.setInt(1,csVO.getMessageId());
+            ps.setInt(2,csVO.getCusotmerId());
+            ps.setString(3,csVO.getMessageTitle());
+            ps.setString(4,csVO.getMessageContext());
+            ps.setString(5,csVO.getReplyContext());
+            ps.setInt(6,csVO.getMessageId());
             ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
         }
     }
-    public CustomerServiceVO selectByMessageId(Integer message_id){
+    public CustomerServiceVO selectByMessageId(Integer messageId){
         CustomerServiceVO csVO = new CustomerServiceVO();
         try (Connection con = ds.getConnection();
          PreparedStatement ps = con.prepareStatement(GET_ONE_STM)) {
-            ps.setInt(1, message_id);
+            ps.setInt(1, messageId);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                csVO.setMessage_id(rs.getInt("message_id"));
-                csVO.setCusotmer_id(rs.getInt("cusotmer_id"));
-                csVO.setMessage_time(rs.getTimestamp("message_time"));
-                csVO.setMessage_title(rs.getString("message_title"));
-                csVO.setMessage_context(rs.getString("message_context"));
-                csVO.setReply_context(rs.getString("reply_context"));
+                csVO.setMessageId(rs.getInt("message_id"));
+                csVO.setCusotmerId(rs.getInt("cusotmer_id"));
+                csVO.setMessageTime(rs.getTimestamp("message_time"));
+                csVO.setMessageTitle(rs.getString("message_title"));
+                csVO.setMessageContext(rs.getString("message_context"));
+                csVO.setReplyContext(rs.getString("reply_context"));
             }
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "

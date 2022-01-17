@@ -3,58 +3,58 @@ package web.CustomerService.vo;
 import java.sql.Timestamp;
 
 public class CustomerServiceVO implements java.io.Serializable{
-    private Integer message_id;
-    private Integer cusotmer_id;
-    private Timestamp message_time;
-    private String message_title;
-    private String message_context;
-    private String reply_context;
+    private Integer messageId;
+    private Integer cusotmerId;
+    private Timestamp messageTime;
+    private String messageTitle;
+    private String messageContext;
+    private String replyContext;
 	public CustomerServiceVO() {
 		super();
 	}
-	public CustomerServiceVO(Integer message_id, Integer cusotmer_id, Timestamp message_time, String message_title,
-			String message_context, String reply_context) {
-		setMessage_id(message_id);
-        setCusotmer_id(cusotmer_id);
-        setMessage_time(message_time);
-        setMessage_title(message_title);
-        setMessage_context(message_context);
-        setReply_context(reply_context);
+	public CustomerServiceVO(Integer messageId, Integer cusotmerId, Timestamp messageTime, String messageTitle,
+			String messageContext, String replyContext) {
+		setMessageId(messageId);
+        setCusotmerId(cusotmerId);
+        setMessageTime(messageTime);
+        setMessageTitle(messageTitle);
+        setMessageContext(messageContext);
+        setReplyContext(replyContext);
 	}
-	public Integer getMessage_id() {
-		return message_id;
+	public Integer getMessageId() {
+		return messageId;
 	}
-	public void setMessage_id(Integer message_id) {
-		this.message_id = message_id;
+	public void setMessageId(Integer messageId) {
+		this.messageId = messageId;
 	}
-	public Integer getCusotmer_id() {
-		return cusotmer_id;
+	public Integer getCusotmerId() {
+		return cusotmerId;
 	}
-	public void setCusotmer_id(Integer cusotmer_id) {
-		this.cusotmer_id = cusotmer_id;
+	public void setCusotmerId(Integer cusotmerId) {
+		this.cusotmerId = cusotmerId;
 	}
-	public Timestamp getMessage_time() {
-		return message_time;
+	public Timestamp getMessageTime() {
+		return messageTime;
 	}
-	public void setMessage_time(Timestamp message_time) {
-		this.message_time = message_time;
+	public void setMessageTime(Timestamp messageTime) {
+		this.messageTime = messageTime;
 	}
-	public String getMessage_title() {
-		return message_title;
+	public String getMessageTitle() {
+		return messageTitle;
 	}
-	public void setMessage_title(String message_title) {
-		this.message_title = message_title;
+	public void setMessageTitle(String messageTitle) {
+		this.messageTitle = messageTitle;
 	}
-	public String getMessage_context() {
-		return message_context;
+	public String getMessageContext() {
+		return messageContext;
 	}
-	public void setMessage_context(String message_context) {
-		this.message_context = message_context;
+	public void setMessageContext(String messageContext) {
+		this.messageContext = messageContext;
 	}
-	public String getReply_context() {
-		return reply_context;
+	public String getReplyContext() {
+		return replyContext;
 	}
-	public void setReply_context(String reply_context) {
-		this.reply_context = reply_context;
+	public void setReplyContext(String replyContext) {
+		this.replyContext = replyContext;
 	}
 }

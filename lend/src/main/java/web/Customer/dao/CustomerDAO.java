@@ -40,15 +40,15 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     public void insert(CustomerVO customerVo){
         try (Connection con = ds.getConnection(); 
             PreparedStatement ps = con.prepareStatement(INSERT_STMT)){
-            ps.setInt(1, customerVo.getCustomer_id());
-            ps.setString(2, customerVo.getCustomer_name());
-            ps.setString(3, customerVo.getCustomer_email());
-            ps.setString(4, customerVo.getCustomer_password());
-            ps.setString(5, customerVo.getCustomer_phone());
-            ps.setDate(6, customerVo.getCustomer_birthday());
-            ps.setString(7, customerVo.getCustomer_gender());
-            ps.setString(8, customerVo.getCustomer_address());
-            ps.setTimestamp(9, customerVo.getCustomer_register_time());
+            ps.setInt(1, customerVo.getCustomerId());
+            ps.setString(2, customerVo.getCustomerName());
+            ps.setString(3, customerVo.getCustomerEmail());
+            ps.setString(4, customerVo.getCustomerPassword());
+            ps.setString(5, customerVo.getCustomerPhone());
+            ps.setDate(6, customerVo.getCustomerBirthday());
+            ps.setString(7, customerVo.getCustomerGender());
+            ps.setString(8, customerVo.getCustomerAddress());
+            ps.setTimestamp(9, customerVo.getCustomerRegisterTime());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,29 +57,29 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     public void update(CustomerVO customerVo){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(UPDATE)) {
-            ps.setInt(1, customerVo.getCustomer_id());
-            ps.setString(2, customerVo.getCustomer_name());
-            ps.setString(3, customerVo.getCustomer_email());
-            ps.setString(4, customerVo.getCustomer_password());
-            ps.setString(5, customerVo.getCustomer_phone());
-            ps.setDate(6, customerVo.getCustomer_birthday());
-            ps.setString(7, customerVo.getCustomer_gender());
-            ps.setString(8, customerVo.getCustomer_address());
-            ps.setInt(9, customerVo.getCustomer_id());
+            ps.setInt(1, customerVo.getCustomerId());
+            ps.setString(2, customerVo.getCustomerName());
+            ps.setString(3, customerVo.getCustomerEmail());
+            ps.setString(4, customerVo.getCustomerPassword());
+            ps.setString(5, customerVo.getCustomerPhone());
+            ps.setDate(6, customerVo.getCustomerBirthday());
+            ps.setString(7, customerVo.getCustomerGender());
+            ps.setString(8, customerVo.getCustomerAddress());
+            ps.setInt(9, customerVo.getCustomerId());
             ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
         }
     }
-    public void delete(Integer customer_id){
+    public void delete(Integer customerId){
         Connection con = null;
         PreparedStatement ps = null;
         try {
             con = ds.getConnection();
             con.setAutoCommit(false);
             ps = con.prepareStatement(DELETE);
-            ps.setInt(1, customer_id);
+            ps.setInt(1, customerId);
             ps.executeUpdate();
             con.commit();
             con.setAutoCommit(true);
@@ -111,34 +111,34 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
             }
         }
     }
-    public void changeStatus(Integer customer_id ,Byte status_code){
+    public void changeStatus(Integer customerId ,Byte statusCode){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(CUSTOMER_STATUS)) {
-            ps.setByte(1, status_code);
-            ps.setInt(2, customer_id);
+            ps.setByte(1, statusCode);
+            ps.setInt(2, customerId);
             ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
         }
     }
-    public CustomerVO selectByUserEmailAndPassword(String customer_email, String customer_password){
+    public CustomerVO selectByUserEmailAndPassword(String customerEmail, String customerPassword){
         CustomerVO cVo = new CustomerVO();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(GET_ONE_STMT)){
-            ps.setString(1, customer_email);
-            ps.setString(2, customer_password);
+            ps.setString(1, customerEmail);
+            ps.setString(2, customerPassword);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                cVo.setCustomer_id(rs.getInt("customer_id"));
-                cVo.setCustomer_name(rs.getString("customer_name"));
-                cVo.setCustomer_email(rs.getString("customer_email"));
-                cVo.setCustomer_password(rs.getString("customer_password"));
-                cVo.setCustomer_phone(rs.getString("customer_phone"));
-                cVo.setCustomer_birthday(rs.getDate("customer_birthday"));
-                cVo.setCustomer_gender(rs.getString("customer_gender"));
-                cVo.setCustomer_address(rs.getString("customer_address"));
-                cVo.setCustomer_register_time(rs.getTimestamp("customer_register_time"));
+                cVo.setCustomerId(rs.getInt("customer_id"));
+                cVo.setCustomerName(rs.getString("customer_name"));
+                cVo.setCustomerEmail(rs.getString("customer_email"));
+                cVo.setCustomerPassword(rs.getString("customer_password"));
+                cVo.setCustomerPhone(rs.getString("customer_phone"));
+                cVo.setCustomerBirthday(rs.getDate("customer_birthday"));
+                cVo.setCustomerGender(rs.getString("customer_gender"));
+                cVo.setCustomerAddress(rs.getString("customer_address"));
+                cVo.setCustomerRegisterTime(rs.getTimestamp("customer_register_time"));
                 cVo.setCustomer_status(rs.getByte("customer_status"));
             }
 

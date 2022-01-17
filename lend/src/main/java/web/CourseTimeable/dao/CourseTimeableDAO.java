@@ -1,4 +1,4 @@
-package web.Course_Timeable.dao;
+package web.CourseTimeable.dao;
 
 
 import java.sql.Connection;
@@ -14,9 +14,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import ProjectInterfaces.Course_TimeableInterface;
-import web.Course_Timeable.vo.Course_TimeableVO;
+import web.CourseTimeable.vo.CourseTimeableVO;
 
-public class Course_TimeableDAO implements Course_TimeableInterface<Course_TimeableVO>{
+public class CourseTimeableDAO implements CourseTimeableInterface<CourseTimeableVO>{
     private static DataSource ds = null;
     static{
         try {
@@ -36,38 +36,38 @@ public class Course_TimeableDAO implements Course_TimeableInterface<Course_Timea
     +"WHERE `course_timeable_id` = ?;";
     private static final String DELETE ="DELETE FROM `TEAM4`.`Course_Timeable` WHERE `course_timele_id` = ?;";
     private static final String selectByCourseId ="SELECT `course_date` FROM TEAM4.Course_Timeable WHERE `course_id` = ?;";
-    public void insert(Course_TimeableVO ctvo){
+    public void insert(CourseTimeableVO ctvo){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT)) {
-            ps.setInt(1, ctvo.getCourse_id());
-            ps.setTimestamp(2, ctvo.getCourse_date());
+            ps.setInt(1, ctvo.getCourseId());
+            ps.setTimestamp(2, ctvo.getCourseDate());
             ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
         }
     }        
-    public void update(Course_TimeableVO ctvo){
+    public void update(CourseTimeableVO ctvo){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(UPDATE)) {
-            ps.setInt(1, ctvo.getCourse_timeable_id());
-            ps.setInt(2, ctvo.getCourse_id());
-            ps.setTimestamp(3, ctvo.getCourse_date());
-            ps.setInt(4, ctvo.getCourse_timeable_id());
+            ps.setInt(1, ctvo.getCourseTimeableId());
+            ps.setInt(2, ctvo.getCourseId());
+            ps.setTimestamp(3, ctvo.getCourseDate());
+            ps.setInt(4, ctvo.getCourseTimeableId());
             ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
         }
     }    
-    public void delete(Integer course_timeable_id){
+    public void delete(Integer courseTimeableId){
         Connection con = null;
         PreparedStatement ps = null;
         try {
             con = ds.getConnection();
             con.setAutoCommit(false);
             ps = con.prepareStatement(DELETE);
-            ps.setInt(1, course_timeable_id);
+            ps.setInt(1, courseTimeableId);
             ps.executeUpdate();
             con.commit();
             con.setAutoCommit(true);
@@ -99,11 +99,11 @@ public class Course_TimeableDAO implements Course_TimeableInterface<Course_Timea
             }
         }
     }    
-    public ArrayList<Timestamp> selectByCourseId(Integer course_id){
+    public ArrayList<Timestamp> selectByCourseId(Integer courseId){
         ArrayList<Timestamp> list = new ArrayList<Timestamp>();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(selectByCourseId)) {
-            ps.setInt(1, course_id);
+            ps.setInt(1, courseId);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 list.add(rs.getTimestamp("course_date"));

@@ -9,21 +9,21 @@ public class ProductTagService {
     public ProductTagService(){
         dao = new ProductTagDAO();
     }
-    public ProductTagVO addTag(Integer product_category_code, String product_label_name){
+    public ProductTagVO addTag(Integer productCategoryCode, String productLabelName){
         ProductTagVO pVo = new ProductTagVO();
-        pVo.setProduct_category_code(product_category_code);
-        pVo.setProduct_label_name(product_label_name);
+        pVo.setProductCategoryCode(productCategoryCode);
+        pVo.setProductLabelName(productLabelName);
         dao.insert(pVo);
         return pVo;
     }
-    public ProductTagVO updateTag(Integer product_category_code, String product_label_name){
+    public ProductTagVO updateTag(Integer productCategoryCode, String productLabelName){
         ProductTagVO pVo = new ProductTagVO();
-        pVo.setProduct_category_code(product_category_code);
-        pVo.setProduct_label_name(product_label_name);
+        pVo.setProductCategoryCode(productCategoryCode);
+        pVo.setProductLabelName(productLabelName);
         dao.update(pVo);
         return pVo;
     }
-    public ProductTagVO selectByCode(Integer product_category_code){
-        return dao.selectOneTag(product_category_code);
+    public ProductTagVO selectByCode(Integer productCategoryCode){
+        return dao.selectOneTag(productCategoryCode);
     }
 }

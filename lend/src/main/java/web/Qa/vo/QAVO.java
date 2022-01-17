@@ -1,22 +1,22 @@
 package web.Qa.vo;
 
 public class QAVO implements java.io.Serializable{
-    private Integer qa_id;
+    private Integer qaId;
     private String answer;
     private String quession;
 	public QAVO() {
 		super();
 	}
-	public QAVO(Integer qa_id, String answer, String quession) {
-		setQa_id(qa_id);
+	public QAVO(Integer qaId, String answer, String quession) {
+		setQaId(qaId);
 		setAnswer(answer);
 		setQuession(quession);
 	}
-	public Integer getQa_id() {
-		return qa_id;
+	public Integer getQaId() {
+		return qaId;
 	}
-	public void setQa_id(Integer qa_id) {
-		this.qa_id = qa_id;
+	public void setQaId(Integer qaId) {
+		this.qaId = qaId;
 	}
 	public String getAnswer() {
 		return answer;

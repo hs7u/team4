@@ -1,45 +1,45 @@
 package web.CourseRegistraion.vo;
 
 public class CourseRegistraionVO implements java.io.Serializable{
-    private Integer registration_id;
-    private Integer customer_id;
-    private Integer course_id;
-    private Integer course_timeable_id;
+    private Integer registrationId;
+    private Integer customerId;
+    private Integer courseId;
+    private Integer courseTimeableId;
     private Integer numOfPeople;
 	public CourseRegistraionVO() {
 		super();
 	}
-	public CourseRegistraionVO(Integer registration_id, Integer customer_id, Integer course_id,
-			Integer course_timeable_id, Integer numOfPeople) {
-		setRegistration_id(registration_id);
-		setCustomer_id(customer_id);
-		setCourse_id(course_id);
-		setCourse_timeable_id(course_timeable_id);
+	public CourseRegistraionVO(Integer registrationId, Integer customerId, Integer courseId,
+			Integer courseTimeableId, Integer numOfPeople) {
+		setRegistrationId(registrationId);
+		setCustomerId(customerId);
+		setCourseId(courseId);
+		setCourseTimeableId(courseTimeableId);
 		setNumOfPeople(numOfPeople);
 	}
-	public Integer getRegistration_id() {
-		return registration_id;
+	public Integer getRegistrationId() {
+		return registrationId;
 	}
-	public void setRegistration_id(Integer registration_id) {
-		this.registration_id = registration_id;
+	public void setRegistrationId(Integer registrationId) {
+		this.registrationId = registrationId;
 	}
-	public Integer getCustomer_id() {
-		return customer_id;
+	public Integer getCustomerId() {
+		return customerId;
 	}
-	public void setCustomer_id(Integer customer_id) {
-		this.customer_id = customer_id;
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
 	}
-	public Integer getCourse_id() {
-		return course_id;
+	public Integer getCourseId() {
+		return courseId;
 	}
-	public void setCourse_id(Integer course_id) {
-		this.course_id = course_id;
+	public void setCourseId(Integer courseId) {
+		this.courseId = courseId;
 	}
-	public Integer getCourse_timeable_id() {
-		return course_timeable_id;
+	public Integer getCourseTimeableId() {
+		return courseTimeableId;
 	}
-	public void setCourse_timeable_id(Integer course_timeable_id) {
-		this.course_timeable_id = course_timeable_id;
+	public void setCourseTimeableId(Integer courseTimeableId) {
+		this.courseTimeableId = courseTimeableId;
 	}
 	public Integer getNumOfPeople() {
 		return numOfPeople;

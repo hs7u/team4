@@ -35,8 +35,8 @@ public class ProductTagDAO implements ProductTagInterface<ProductTagVO>{
     public void insert(ProductTagVO pVo){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT)) {
-            ps.setInt(1, pVo.getProduct_category_code());
-            ps.setString(2, pVo.getProduct_label_name());
+            ps.setInt(1, pVo.getProductCategoryCode());
+            ps.setString(2, pVo.getProductLabelName());
             ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
@@ -46,9 +46,9 @@ public class ProductTagDAO implements ProductTagInterface<ProductTagVO>{
     public void update(ProductTagVO pVo){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(UPDATE)) {
-            ps.setInt(1, pVo.getProduct_category_code());
-            ps.setString(2, pVo.getProduct_label_name());
-            ps.setInt(3, pVo.getProduct_category_code());
+            ps.setInt(1, pVo.getProductCategoryCode());
+            ps.setString(2, pVo.getProductLabelName());
+            ps.setInt(3, pVo.getProductCategoryCode());
             ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
@@ -56,15 +56,15 @@ public class ProductTagDAO implements ProductTagInterface<ProductTagVO>{
         }
     
     }
-    public ProductTagVO selectOneTag(Integer product_category_code){
+    public ProductTagVO selectOneTag(Integer productCategoryCode){
         ProductTagVO pVo = new ProductTagVO();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(GET_ONE_TAG)) {
-            ps.setInt(1, product_category_code);
+            ps.setInt(1, productCategoryCode);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                pVo.setProduct_category_code(rs.getInt("product_category_code"));
-                pVo.setProduct_label_name(rs.getString("product_label_name"));
+                pVo.setProductCategoryCode(rs.getInt("product_category_code"));
+                pVo.setProductLabelName(rs.getString("product_label_name"));
             }
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "

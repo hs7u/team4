@@ -38,17 +38,17 @@ public class CourseDAO implements CourseInterface<CourseVO> {
     public void insert(CourseVO cVo){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT)) {
-            ps.setInt(1, cVo.getCourse_id());
-            ps.setString(2, cVo.getCourse_name());
-            ps.setInt(3, cVo.getCourse_price());
-            ps.setBytes(4, cVo.getCourse_image());
-            ps.setTimestamp(5, cVo.getReleased_time());
+            ps.setInt(1, cVo.getCourseId());
+            ps.setString(2, cVo.getCourseName());
+            ps.setInt(3, cVo.getCoursePrice());
+            ps.setBytes(4, cVo.getCourseImage());
+            ps.setTimestamp(5, cVo.getReleasedTime());
             ps.setInt(6, cVo.getMaxOfCourse());
             ps.setInt(7, cVo.getMinOfCourse());
-            ps.setString(8, cVo.getCourse_location());
-            ps.setTimestamp(9, cVo.getSignUp_startdate());
-            ps.setTimestamp(10, cVo.getSignUp_deadline());
-            ps.setString(11, cVo.getCourse_describe());
+            ps.setString(8, cVo.getCourseLocation());
+            ps.setTimestamp(9, cVo.getSignUpStartdate());
+            ps.setTimestamp(10, cVo.getSignUpDeadline());
+            ps.setString(11, cVo.getCourseDescribe());
             ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
@@ -58,31 +58,31 @@ public class CourseDAO implements CourseInterface<CourseVO> {
     public void update(CourseVO cVo){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(UPDATE)) {
-                ps.setInt(1, cVo.getCourse_id());
-                ps.setString(2, cVo.getCourse_name());
-                ps.setInt(3, cVo.getCourse_price());
-                ps.setBytes(4, cVo.getCourse_image());
+                ps.setInt(1, cVo.getCourseId());
+                ps.setString(2, cVo.getCourseName());
+                ps.setInt(3, cVo.getCoursePrice());
+                ps.setBytes(4, cVo.getCourseImage());
                 ps.setInt(5, cVo.getMaxOfCourse());
                 ps.setInt(6, cVo.getMinOfCourse());
-                ps.setString(7, cVo.getCourse_location());
-                ps.setTimestamp(8, cVo.getSignUp_startdate());
-                ps.setTimestamp(9, cVo.getSignUp_deadline());
-                ps.setString(10, cVo.getCourse_describe());
-                ps.setInt(11, cVo.getCourse_id());
+                ps.setString(7, cVo.getCourseLocation());
+                ps.setTimestamp(8, cVo.getSignUpStartdate());
+                ps.setTimestamp(9, cVo.getSignUpDeadline());
+                ps.setString(10, cVo.getCourseDescribe());
+                ps.setInt(11, cVo.getCourseId());
                 ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
         }
     }
-    public void delete(Integer course_id){
+    public void delete(Integer courseId){
         Connection con = null;
         PreparedStatement ps = null;
         try {
             con = ds.getConnection();
             con.setAutoCommit(false);
             ps = con.prepareStatement(DELETE);
-            ps.setInt(1, course_id);
+            ps.setInt(1, courseId);
             ps.executeUpdate();
             con.commit();
             con.setAutoCommit(true);    
@@ -114,35 +114,35 @@ public class CourseDAO implements CourseInterface<CourseVO> {
             }
         }
     }
-    public void changeState(Integer course_id, Byte course_state){
+    public void changeState(Integer courseId, Byte courseState){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(CHANGE_STATE)) {
-            ps.setByte(1, course_state);
-            ps.setInt(2, course_id);
+            ps.setByte(1, courseState);
+            ps.setInt(2, courseId);
             ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
         }
     }
-    public CourseVO selectByCourseId(Integer course_id){
+    public CourseVO selectByCourseId(Integer courseId){
         CourseVO cVo = new CourseVO();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(GET_ONE_STM)) {
-            ps.setInt(1, course_id);
+            ps.setInt(1, courseId);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                cVo.setCourse_id(rs.getInt("course_id"));
-                cVo.setCourse_name(rs.getString("course_name"));
-                cVo.setCourse_price(rs.getInt("course_price"));
-                cVo.setCourse_image(rs.getBytes("course_image"));
-                cVo.setReleased_time(rs.getTimestamp("released_time"));
+                cVo.setCourseId(rs.getInt("course_id"));
+                cVo.setCourseName(rs.getString("course_name"));
+                cVo.setCoursePrice(rs.getInt("course_price"));
+                cVo.setCourseImage(rs.getBytes("course_image"));
+                cVo.setReleasedTime(rs.getTimestamp("released_time"));
                 cVo.setMaxOfCourse(rs.getInt("maxOfCourse"));
                 cVo.setMinOfCourse(rs.getInt("minOfCourse"));
-                cVo.setCourse_location(rs.getString("course_location"));
-                cVo.setSignUp_startdate(rs.getTimestamp("signUp_startdate"));
-                cVo.setSignUp_deadline(rs.getTimestamp("signUp_deadline"));
-                cVo.setCourse_describe(rs.getString("course_describe"));
+                cVo.setCourseLocation(rs.getString("course_location"));
+                cVo.setSignUpStartdate(rs.getTimestamp("signUp_startdate"));
+                cVo.setSignUpDeadline(rs.getTimestamp("signUp_deadline"));
+                cVo.setCourseDescribe(rs.getString("course_describe"));
                 cVo.setCourse_state(rs.getByte("course_state"));
             }
         } catch (SQLException se) {

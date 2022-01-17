@@ -1,110 +1,110 @@
 package web.CustomerOrders.vo;
 import java.sql.Timestamp;
 public class CustomerOrdersVO implements java.io.Serializable{
-	private Integer order_id;
-	private Integer customer_id;
-    private Integer shipping_mothod_code;
-    private Timestamp order_created_date;
-    private Integer order_delivery_charge;
-	private Timestamp order_shipping_date;
+	private Integer orderId;
+	private Integer customerId;
+    private Integer shippingMethodCode;
+    private Timestamp orderCreatedDate;
+    private Integer orderDeliveryCharge;
+	private Timestamp orderShippingDate;
 	private String recipient;
-	private String senders_address;
-    private String order_details;
-	private Byte order_status;
-	private Byte payment_status;
-	private Byte shipping_status;
-	private Byte return_status;
+	private String sendersAddress;
+    private String orderDetails;
+	private Byte orderStatus;
+	private Byte paymentStatus;
+	private Byte shippingStatus;
+	private Byte returnStatus;
 	public CustomerOrdersVO() {
 		super();
 	}
-	public CustomerOrdersVO(Integer order_id, Integer customer_id, Integer shipping_mothod_code,
-			Timestamp order_created_date, Integer order_delivery_charge, Timestamp order_shipping_date, 
-			String recipient, String senders_address, String order_details) {
-			setOrder_id(order_id);
-			setCustomer_id(customer_id);
-			setShipping_mothod_code(shipping_mothod_code);
-			setOrder_created_date(order_created_date);
-			setOrder_delivery_charge(order_delivery_charge);
+	public CustomerOrdersVO(Integer orderId, Integer customerId, Integer shippingMethodCode,
+			Timestamp orderCreatedDate, Integer orderDeliveryCharge, Timestamp orderShippingDate, 
+			String recipient, String sendersAddress, String orderDetails) {
+			setOrderId(orderId);
+			setCustomerId(customerId);
+			setShippingMethodCode(shippingMethodCode);
+			setOrderCreatedDate(orderCreatedDate);
+			setOrderDeliveryCharge(orderDeliveryCharge);
 			setRecipient(recipient);
-			setSenders_address(senders_address);
-			setOrder_details(order_details);
+			setSendersAddress(sendersAddress);
+			setOrderDetails(orderDetails);
 	}
-	public Integer getOrder_id() {
-		return order_id;
+	public Integer getOrderId() {
+		return orderId;
 	}
-	public void setOrder_id(Integer order_id) {
-		this.order_id = order_id;
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
 	}
-	public Integer getCustomer_id() {
-		return customer_id;
+	public Integer getCustomerId() {
+		return customerId;
 	}
-	public void setCustomer_id(Integer customer_id) {
-		this.customer_id = customer_id;
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
 	}
-	public Integer getShipping_mothod_code() {
-		return shipping_mothod_code;
+	public Integer getShippingMethodCode() {
+		return shippingMethodCode;
 	}
-	public void setShipping_mothod_code(Integer shipping_mothod_code) {
-		this.shipping_mothod_code = shipping_mothod_code;
+	public void setShippingMethodCode(Integer shippingMethodCode) {
+		this.shippingMethodCode = shippingMethodCode;
 	}
-	public Timestamp getOrder_created_date() {
-		return order_created_date;
+	public Timestamp getOrderCreatedDate() {
+		return orderCreatedDate;
 	}
-	public void setOrder_created_date(Timestamp order_created_date) {
-		this.order_created_date = order_created_date;
+	public void setOrderCreatedDate(Timestamp orderCreatedDate) {
+		this.orderCreatedDate = orderCreatedDate;
 	}
-	public Integer getOrder_delivery_charge() {
-		return order_delivery_charge;
+	public Integer getOrderDeliveryCharge() {
+		return orderDeliveryCharge;
 	}
-	public void setOrder_delivery_charge(Integer order_delivery_charge) {
-		this.order_delivery_charge = order_delivery_charge;
+	public void setOrderDeliveryCharge(Integer orderDeliveryCharge) {
+		this.orderDeliveryCharge = orderDeliveryCharge;
 	}
-	public void setOrder_shipping_date(Timestamp order_shipping_date){
-		this.order_shipping_date = order_shipping_date;
+	public Timestamp getOrderShippingDate(){
+		return orderShippingDate;
 	}
-	public Timestamp getOrder_shipping_date(){
-		return order_shipping_date;
+	public void setOrderShippingDate(Timestamp orderShippingDate){
+		this.orderShippingDate = orderShippingDate;
 	}
 	public String getRecipint(){
-		return this.recipient;
+		return recipient;
 	}
 	public void setRecipient(String recipient){
 		this.recipient = recipient;
 	}
-	public String getSenders_address(){
-		return this.senders_address;
+	public String getSendersAddress(){
+		return sendersAddress;
 	}	
-	public void setSenders_address(String senders_address){
-		this.senders_address = senders_address;
+	public void setSendersAddress(String sendersAddress){
+		this.sendersAddress = sendersAddress;
 	}
-	public String getOrder_details() {
-		return order_details;
+	public String getOrderDetails() {
+		return orderDetails;
 	}
-	public void setOrder_details(String order_details) {
-		this.order_details = order_details;
+	public void setOrderDetails(String orderDetails) {
+		this.orderDetails = orderDetails;
 	}
-	public Byte getOrder_status(){
-		return this.order_status;
+	public Byte getOrderStatus(){
+		return orderStatus;
 	}
-	public void setOrder_status(Byte order_status){
-		this.order_status = order_status;
+	public void setOrderStatus(Byte orderStatus){
+		this.orderStatus = orderStatus;
 	}
-	public Byte getPayment_status(){
-		return this.payment_status;
+	public Byte getPaymentStatus(){
+		return paymentStatus;
 	}
-	public void setPayment_status(Byte payment_status){
-		this.payment_status = payment_status;
+	public void setPaymentStatus(Byte paymentStatus){
+		this.paymentStatus = paymentStatus;
 	}
-	public Byte getShipping_status(){
-		return this.shipping_status;
+	public Byte getShippingStatus(){
+		return shippingStatus;
 	}
-	public void setShipping_status(Byte shipping_status){
-		this.shipping_status = shipping_status;
+	public void setShippingStatus(Byte shippingStatus){
+		this.shippingStatus = shippingStatus;
 	}
-	public Byte getReturn_status(){
-		return this.return_status;
+	public Byte getReturnStatus(){
+		return returnStatus;
 	}
-	public void setReturn_status(Byte return_status){
-		this.return_status = return_status;
+	public void setReturnStatus(Byte returnStatus){
+		this.returnStatus = returnStatus;
 	}
 }

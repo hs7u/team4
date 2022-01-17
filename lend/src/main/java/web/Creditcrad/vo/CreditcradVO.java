@@ -1,58 +1,58 @@
 package web.Creditcrad.vo;
 
 public class CreditcradVO implements java.io.Serializable{
-    private Integer creditcard_number;
-    private Integer customer_id;
-    private String cardholder_name;
-    private String cvv_code;
-    private String expire_month;
-	private String expire_year;
+    private Integer creditcardNumber;
+    private Integer customerId;
+    private String cardholderName;
+    private String cvvCode;
+    private String expireMonth;
+	private String expireYear;
 	public CreditcradVO() {
 		super();
 	}
-	public CreditcradVO(Integer creditcard_number, Integer customer_id, String cardholder_name, String cvv_code,
-				String expire_month, String expire_year) {
-			setCreditcard_number(creditcard_number);
-			setCustomer_id(customer_id);
-			setCardholder_name(cardholder_name);
-			setCvv_code(cvv_code);
-			setExpire_month(expire_month);
-			setExpire_year(expire_year);
+	public CreditcradVO(Integer creditcardNumber, Integer customerId, String cardholderName, String cvvCode,
+				String expireMonth, String expireYear) {
+			setCreditcardNumber(creditcardNumber);
+			setCustomerId(customerId);
+			setCardholderName(cardholderName);
+			setCvvCode(cvvCode);
+			setExpireMonth(expireMonth);
+			setExpireYear(expireYear);
 		}
-	public Integer getCreditcard_number() {
-		return creditcard_number;
+	public Integer getCreditcardNumber() {
+		return creditcardNumber;
 	}
-	public void setCreditcard_number(Integer creditcard_number) {
-		this.creditcard_number = creditcard_number;
+	public void setCreditcardNumber(Integer creditcardNumber) {
+		this.creditcardNumber = creditcardNumber;
 	}
-	public Integer getCustomer_id() {
-		return customer_id;
+	public Integer getCustomerId() {
+		return customerId;
 	}
-	public void setCustomer_id(Integer customer_id) {
-		this.customer_id = customer_id;
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
 	}
-	public String getCardholder_name() {
-		return cardholder_name;
+	public String getCardholderName() {
+		return cardholderName;
 	}
-	public void setCardholder_name(String cardholder_name) {
-		this.cardholder_name = cardholder_name;
+	public void setCardholderName(String cardholderName) {
+		this.cardholderName = cardholderName;
 	}
-	public String getCvv_code() {
-		return cvv_code;
+	public String getCvvCode() {
+		return cvvCode;
 	}
-	public void setCvv_code(String cvv_code) {
-		this.cvv_code = cvv_code;
+	public void setCvvCode(String cvvCode) {
+		this.cvvCode = cvvCode;
 	}
-	public String getExpire_month() {
-		return expire_month;
+	public String getExpireMonth() {
+		return expireMonth;
 	}
-	public void setExpire_month(String expire_month) {
-		this.expire_month = expire_month;
+	public void setExpireMonth(String expireMonth) {
+		this.expireMonth = expireMonth;
 	}
-	public String getExpire_year() {
-		return expire_year;
+	public String getExpireYear() {
+		return expireYear;
 	}
-	public void setExpire_year(String expire_year) {
-		this.expire_year = expire_year;
+	public void setExpireYear(String expireYear) {
+		this.expireYear = expireYear;
 	}
 }

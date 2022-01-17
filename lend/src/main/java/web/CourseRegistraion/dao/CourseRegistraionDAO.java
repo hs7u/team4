@@ -36,10 +36,10 @@ public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRe
     public void insert(CourseRegistraionVO crVo){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT)) {
-            ps.setInt(1, crVo.getRegistration_id());
-            ps.setInt(2, crVo.getCustomer_id());
-            ps.setInt(3, crVo.getCourse_id());
-            ps.setInt(4, crVo.getCourse_timeable_id());
+            ps.setInt(1, crVo.getRegistrationId());
+            ps.setInt(2, crVo.getCustomerId());
+            ps.setInt(3, crVo.getCourseId());
+            ps.setInt(4, crVo.getCourseTimeableId());
             ps.setInt(5, crVo.getNumOfPeople());
             ps.executeUpdate();
         } catch (SQLException se) {
@@ -56,14 +56,14 @@ public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRe
 	// 				+ se.getMessage());
     //     }        
     // }
-    public void delete(Integer registration_id){
+    public void delete(Integer registrationId){
         Connection con = null;
         PreparedStatement ps = null;
         try {
             con = ds.getConnection();
             con.setAutoCommit(false);
             ps = con.prepareStatement(DELETE);
-            ps.setInt(1, registration_id);
+            ps.setInt(1, registrationId);
             ps.executeUpdate();
             con.commit();
             con.setAutoCommit(true);
@@ -95,18 +95,18 @@ public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRe
             }
         }
     }
-    public CourseRegistraionVO selectByCustomerId(Integer customer_id, Integer course_timeable_id){
+    public CourseRegistraionVO selectByCustomerId(Integer customerId, Integer courseTimeableId){
         CourseRegistraionVO crVo = new CourseRegistraionVO();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(GET_ONE_STM)) {
-            ps.setInt(1, customer_id);
-            ps.setInt(2, course_timeable_id);
+            ps.setInt(1, customerId);
+            ps.setInt(2, courseTimeableId);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                crVo.setRegistration_id(rs.getInt("registration_id"));
-                crVo.setCustomer_id(rs.getInt("customer_id"));
-                crVo.setCourse_id(rs.getInt("course_id"));
-                crVo.setCourse_timeable_id(rs.getInt("course_timeble_id"));
+                crVo.setRegistrationId(rs.getInt("registration_id"));
+                crVo.setCustomerId(rs.getInt("customer_id"));
+                crVo.setCourseId(rs.getInt("course_id"));
+                crVo.setCourseTimeableId(rs.getInt("course_timeble_id"));
                 crVo.setNumOfPeople(rs.getInt("numOfPeople"));
             }
         } catch (SQLException se) {
@@ -115,18 +115,18 @@ public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRe
         }            
         return crVo;
     }
-    public ArrayList<CourseRegistraionVO> selectAllCustomerRegister(Integer customer_id){
+    public ArrayList<CourseRegistraionVO> selectAllCustomerRegister(Integer customerId){
         ArrayList<CourseRegistraionVO> list = new ArrayList<CourseRegistraionVO>();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(GET_ALL_CU)) {
-            ps.setInt(1, customer_id);
+            ps.setInt(1, customerId);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 CourseRegistraionVO crVo = new CourseRegistraionVO();
-                crVo.setRegistration_id(rs.getInt("registration_id"));
-                crVo.setCustomer_id(rs.getInt("customer_id"));
-                crVo.setCourse_id(rs.getInt("course_id"));
-                crVo.setCourse_timeable_id(rs.getInt("course_timeble_id"));
+                crVo.setRegistrationId(rs.getInt("registration_id"));
+                crVo.setCustomerId(rs.getInt("customer_id"));
+                crVo.setCourseId(rs.getInt("course_id"));
+                crVo.setCourseTimeableId(rs.getInt("course_timeble_id"));
                 crVo.setNumOfPeople(rs.getInt("numOfPeople"));
                 list.add(crVo);
             }
@@ -136,18 +136,18 @@ public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRe
         }            
         return list;
     }
-    public ArrayList<CourseRegistraionVO> selectByTimeableId(Integer course_timeable_id){
+    public ArrayList<CourseRegistraionVO> selectByTimeableId(Integer courseTimeableId){
         ArrayList<CourseRegistraionVO> list = new ArrayList<CourseRegistraionVO>();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(GET_ALL_TI)) {
-            ps.setInt(1, course_timeable_id);
+            ps.setInt(1, courseTimeableId);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 CourseRegistraionVO crVo = new CourseRegistraionVO();
-                crVo.setRegistration_id(rs.getInt("registration_id"));
-                crVo.setCustomer_id(rs.getInt("customer_id"));
-                crVo.setCourse_id(rs.getInt("course_id"));
-                crVo.setCourse_timeable_id(rs.getInt("course_timeble_id"));
+                crVo.setRegistrationId(rs.getInt("registration_id"));
+                crVo.setCustomerId(rs.getInt("customer_id"));
+                crVo.setCourseId(rs.getInt("course_id"));
+                crVo.setCourseTimeableId(rs.getInt("course_timeble_id"));
                 crVo.setNumOfPeople(rs.getInt("numOfPeople"));
                 list.add(crVo);
             }

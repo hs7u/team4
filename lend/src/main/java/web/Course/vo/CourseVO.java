@@ -3,65 +3,65 @@ package web.Course.vo;
 import java.sql.Timestamp;
 
 public class CourseVO implements java.io.Serializable{
-	private Integer course_id;
-    private String course_name;
-    private Integer course_price;
-    private byte[] course_image;
-    private Timestamp released_time;
+	private Integer courseId;
+    private String courseName;
+    private Integer coursePrice;
+    private byte[] courseImage;
+    private Timestamp releasedTime;
     private Integer maxOfCourse;
     private Integer minOfCourse;
-    private String course_location;
-    private Timestamp signUp_startdate;
-    private Timestamp signUp_deadline;
-    private String course_describe;
-	private Byte course_state;
+    private String courseLocation;
+    private Timestamp signUpStartdate;
+    private Timestamp signUpDeadline;
+    private String courseDescribe;
+	private Byte courseState;
     public CourseVO() {
 		super();
 	}
-    public CourseVO(Integer course_id, String course_name, Integer course_price, byte[] course_image,
-			Timestamp released_time, Integer maxOfCourse, Integer minOfCourse, String course_location,
-			Timestamp signUp_startdate, Timestamp signUp_deadline, String course_describe) {
-		setCourse_id(course_id);
-		setCourse_name(course_name);
-		setCourse_price(course_price);
-		setCourse_image(course_image);
-		setReleased_time(released_time);
+    public CourseVO(Integer courseId, String courseName, Integer coursePrice, byte[] courseImage,
+			Timestamp releasedTime, Integer maxOfCourse, Integer minOfCourse, String courseLocation,
+			Timestamp signUpStartdate, Timestamp signUpDeadline, String courseDescribe) {
+		setCourseId(courseId);
+		setCourseName(courseName);
+		setCoursePrice(coursePrice);
+		setCourseImage(courseImage);
+		setReleasedTime(releasedTime);
 		setMaxOfCourse(maxOfCourse);
 		setMinOfCourse(minOfCourse);
-		setCourse_location(course_location);
-		setSignUp_startdate(signUp_startdate);
-		setSignUp_deadline(signUp_deadline);
-		setCourse_describe(course_describe);
+		setCourseLocation(courseLocation);
+		setSignUpStartdate(signUpStartdate);
+		setSignUpDeadline(signUpDeadline);
+		setCourseDescribe(courseDescribe);
 	}
-	public Integer getCourse_id() {
-		return course_id;
+	public Integer getCourseId() {
+		return courseId;
 	}
-	public void setCourse_id(Integer course_id) {
-		this.course_id = course_id;
+	public void setCourseId(Integer courseId) {
+		this.courseId = courseId;
 	}
-	public String getCourse_name() {
-		return course_name;
+	public String getCourseName() {
+		return courseName;
 	}
-	public void setCourse_name(String course_name) {
-		this.course_name = course_name;
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
-	public Integer getCourse_price() {
-		return course_price;
+	public Integer getCoursePrice() {
+		return coursePrice;
 	}
-	public void setCourse_price(Integer course_price) {
-		this.course_price = course_price;
+	public void setCoursePrice(Integer coursePrice) {
+		this.coursePrice = coursePrice;
 	}
-	public byte[] getCourse_image() {
-		return course_image;
+	public byte[] getCourseImage() {
+		return courseImage;
 	}
-	public void setCourse_image(byte[] course_image) {
-		this.course_image= course_image;
+	public void setCourseImage(byte[] courseImage) {
+		this.courseImage= courseImage;
 	}
-	public Timestamp getReleased_time() {
-		return released_time;
+	public Timestamp getReleasedTime() {
+		return releasedTime;
 	}
-	public void setReleased_time(Timestamp released_time) {
-		this.released_time = released_time;
+	public void setReleasedTime(Timestamp releasedTime) {
+		this.releasedTime = releasedTime;
 	}
 	public Integer getMaxOfCourse() {
 		return maxOfCourse;
@@ -75,34 +75,34 @@ public class CourseVO implements java.io.Serializable{
 	public void setMinOfCourse(Integer minOfCourse) {
 		this.minOfCourse = minOfCourse;
 	}
-	public String getCourse_location() {
-		return course_location;
+	public String getCourseLocation() {
+		return courseLocation;
 	}
-	public void setCourse_location(String course_location) {
-		this.course_location = course_location;
+	public void setCourseLocation(String courseLocation) {
+		this.courseLocation = courseLocation;
 	}
-	public Timestamp getSignUp_startdate() {
-		return signUp_startdate;
+	public Timestamp getSignUpStartdate() {
+		return signUpStartdate;
 	}
-	public void setSignUp_startdate(Timestamp signUp_startdate) {
-		this.signUp_startdate = signUp_startdate;
+	public void setSignUpStartdate(Timestamp signUpStartdate) {
+		this.signUpStartdate = signUpStartdate;
 	}
-	public Timestamp getSignUp_deadline() {
-		return signUp_deadline;
+	public Timestamp getSignUpDeadline() {
+		return signUpDeadline;
 	}
-	public void setSignUp_deadline(Timestamp signUp_deadline) {
-		this.signUp_deadline = signUp_deadline;
+	public void setSignUpDeadline(Timestamp signUpDeadline) {
+		this.signUpDeadline = signUpDeadline;
 	}
-	public String getCourse_describe() {
-		return course_describe;
+	public String getCourseDescribe() {
+		return courseDescribe;
 	}
-	public void setCourse_describe(String course_describe) {
-		this.course_describe = course_describe;
+	public void setCourseDescribe(String courseDescribe) {
+		this.courseDescribe = courseDescribe;
 	} 
-	public Byte getCourse_state(){
-		return this.course_state;
+	public Byte getCourseState(){
+		return this.courseState;
 	}
-	public void setCourse_state(Byte course_state){
-		this.course_state = course_state;
+	public void setCourseState(Byte courseState){
+		this.courseState = courseState;
 	}
 }

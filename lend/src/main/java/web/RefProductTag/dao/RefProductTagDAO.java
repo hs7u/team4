@@ -1,4 +1,4 @@
-package web.Ref_ProductTag.dao;
+package web.RefProductTag.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 import ProjectInterfaces.Ref_ProductTagInterface;
 import web.Ref_ProductTag.vo.Ref_ProductTagVO;
 
-public class Ref_ProductTagDAO implements Ref_ProductTagInterface<Ref_ProductTagVO>{
+public class RefProductTagDAO implements RefProductTagInterface<RefProductTagVO>{
     private static DataSource ds = null;
     static{
         try {
@@ -36,8 +36,8 @@ public class Ref_ProductTagDAO implements Ref_ProductTagInterface<Ref_ProductTag
     public void insert(Ref_ProductTagVO rVo){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT)) {
-            ps.setInt(1, rVo.getProduct_category_code());
-            ps.setInt(2, rVo.getProduct_id());
+            ps.setInt(1, rVo.getProductCategoryCode());
+            ps.setInt(2, rVo.getProductId());
             ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
@@ -47,21 +47,21 @@ public class Ref_ProductTagDAO implements Ref_ProductTagInterface<Ref_ProductTag
     public void update(Ref_ProductTagVO rVo){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(UPDATE)) {
-            ps.setInt(1, rVo.getSerial_number());
-            ps.setInt(2, rVo.getProduct_category_code());
-            ps.setInt(3, rVo.getProduct_id());
-            ps.setInt(4, rVo.getSerial_number());
+            ps.setInt(1, rVo.getSerialNumber());
+            ps.setInt(2, rVo.getProductCategoryCode());
+            ps.setInt(3, rVo.getProductId());
+            ps.setInt(4, rVo.getSerialNumber());
             ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
         }
     }
-    public ArrayList<Integer> selectByProductId(Integer product_id){
+    public ArrayList<Integer> selectByProductId(Integer productId){
         ArrayList<Integer> list = new ArrayList<Integer>();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(GET_ALL_TAG)) {
-            ps.setInt(1, product_id);
+            ps.setInt(1, productId);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 list.add(rs.getInt("product_category_code"));

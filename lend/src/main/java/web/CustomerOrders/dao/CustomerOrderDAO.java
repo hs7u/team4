@@ -29,7 +29,7 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
     +"(?,?,?,?,?,?,?,?,?);";
     private static final String UPDATE = "UPDATE `TEAM4`.`Customer_Orders`"
     +"SET"
-    +"`order_id` = ?,`customer_id` = ?,`shipping_mothod_code` = ?,`order_delivery_charge` = ?,`order_shipping_date`,`recipient` = ?,`senders_address` = ?,`order_details` = ?"
+    +"`order_id` = ?,`customer_id` = ?,`shipping_method_code` = ?,`order_delivery_charge` = ?,`order_shipping_date`,`recipient` = ?,`senders_address` = ?,`order_details` = ?"
     +"WHERE `order_id` = ?;";
     private static final String DELETE = "DELETE FROM `TEAM4`.`Customer_Orders` WHERE `order_id` = ?;";
     private static final String GET_ONE_STMT = "SELECT * FROM TEAM4.Customer_Orders WHERE `order_id` = ?";
@@ -52,15 +52,15 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
     public void insert(CustomerOrdersVO coVo){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT_STMT)) {
-            ps.setInt(1, coVo.getOrder_id());
-            ps.setInt(2, coVo.getCustomer_id());
-            ps.setInt(3, coVo.getShipping_mothod_code());
-            ps.setTimestamp(4, coVo.getOrder_created_date());
-            ps.setInt(5, coVo.getOrder_delivery_charge());
-            ps.setTimestamp(6, coVo.getOrder_shipping_date());
+            ps.setInt(1, coVo.getOrderId());
+            ps.setInt(2, coVo.getCustomerId());
+            ps.setInt(3, coVo.getShippingMethodCode());
+            ps.setTimestamp(4, coVo.getOrderCreatedDate());
+            ps.setInt(5, coVo.getOrderDeliveryCharge());
+            ps.setTimestamp(6, coVo.getOrderShippingDate());
             ps.setString(7, coVo.getRecipint());
-            ps.setString(8, coVo.getSenders_address());
-            ps.setString(9, coVo.getOrder_details());
+            ps.setString(8, coVo.getSendersAddress());
+            ps.setString(9, coVo.getOrderDetails());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -69,29 +69,29 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
     public void update(CustomerOrdersVO coVo){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(UPDATE)) {
-            ps.setInt(1, coVo.getOrder_id());
-            ps.setInt(2, coVo.getCustomer_id());
-            ps.setInt(3, coVo.getShipping_mothod_code());
-            ps.setInt(4, coVo.getOrder_delivery_charge());
-            ps.setTimestamp(5, coVo.getOrder_shipping_date());
+            ps.setInt(1, coVo.getOrderId());
+            ps.setInt(2, coVo.getCustomerId());
+            ps.setInt(3, coVo.getShippingMethodCode());
+            ps.setInt(4, coVo.getOrderDeliveryCharge());
+            ps.setTimestamp(5, coVo.getOrderShippingDate());
             ps.setString(6, coVo.getRecipint());    
-            ps.setString(7, coVo.getSenders_address());    
-            ps.setString(8, coVo.getOrder_details());
-            ps.setInt(9, coVo.getCustomer_id());
+            ps.setString(7, coVo.getSendersAddress());    
+            ps.setString(8, coVo.getOrderDetails());
+            ps.setInt(9, coVo.getCustomerId());
             ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
         }
     }
-    public void delete(Integer order_id){
+    public void delete(Integer orderId){
         Connection con = null;
         PreparedStatement ps = null;
         try {
             con = ds.getConnection();
             con.setAutoCommit(false);
             ps = con.prepareStatement(DELETE);
-            ps.setInt(1, order_id);
+            ps.setInt(1, orderId);
             ps.executeUpdate();
             con.commit();
             con.setAutoCommit(true);
@@ -123,9 +123,9 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
             }
         }
     }
-    public void updateStatus(String status_name, Integer order_id, Byte status_code) {
+    public void updateStatus(String statusName, Integer orderId, Byte statusCode) {
         String sql = null;
-        switch (status_name) {
+        switch (statusName) {
             case "order_status":
                 sql = UPDATEORDERSTATUS;
                 break;
@@ -143,34 +143,34 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
         }
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setByte(1, status_code);
-            ps.setInt(2, order_id);
+            ps.setByte(1, statusCode);
+            ps.setInt(2, orderId);
             ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
         }
     }
-    public CustomerOrdersVO selectByOrderId(Integer order_id){
+    public CustomerOrdersVO selectByOrderId(Integer orderId){
         CustomerOrdersVO coVo = new CustomerOrdersVO();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(GET_ONE_STMT)) {
-            ps.setInt(1, order_id);
+            ps.setInt(1, orderId);
             ResultSet rs =  ps.executeQuery();
             while (rs.next()) {
-                coVo.setOrder_id(rs.getInt("order_id"));
-                coVo.setCustomer_id(rs.getInt("customer_id"));
-                coVo.setShipping_mothod_code(rs.getInt("shipping_mothod_code"));
-                coVo.setOrder_created_date(rs.getTimestamp("order_created_date")); 
-                coVo.setOrder_delivery_charge(rs.getInt("order_delivery_charge"));
-                coVo.setOrder_shipping_date(rs.getTimestamp("order_shipping_date")); 
+                coVo.setOrderId(rs.getInt("order_id"));
+                coVo.setCustomerId(rs.getInt("customer_id"));
+                coVo.setShippingMethodCode(rs.getInt("shipping_method_code"));
+                coVo.setOrderCreatedDate(rs.getTimestamp("order_created_date")); 
+                coVo.setOrderDeliveryCharge(rs.getInt("order_delivery_charge"));
+                coVo.setOrderShippingDate(rs.getTimestamp("order_shipping_date")); 
                 coVo.setRecipient(rs.getString("recipient"));
-                coVo.setSenders_address(rs.getString("senders_address"));
-                coVo.setOrder_details(rs.getString("order_details"));
-                coVo.setOrder_status(rs.getByte("order_status"));
-                coVo.setPayment_status(rs.getByte("payment_status"));
-                coVo.setShipping_status(rs.getByte("shipping_status"));
-                coVo.setReturn_status(rs.getByte("return_status"));
+                coVo.setSendersAddress(rs.getString("senders_address"));
+                coVo.setOrderDetails(rs.getString("order_details"));
+                coVo.setOrderStatus(rs.getByte("order_status"));
+                coVo.setPaymentStatus(rs.getByte("payment_status"));
+                coVo.setShippingStatus(rs.getByte("shipping_status"));
+                coVo.setReturnStatus(rs.getByte("return_status"));
             }
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "

@@ -11,21 +11,21 @@ public class FavoriteService {
     public FavoriteService(){
         dao = new FavoriteDAO();
     }
-    public FavoriteVO addFavorite(Integer customer_id, Integer product_id){
+    public FavoriteVO addFavorite(Integer customerId, Integer productId){
         FavoriteVO fVo = new FavoriteVO();
-        fVo.setCustomer_id(customer_id);
-        fVo.setProduct_id(product_id);
+        fVo.setCustomerId(customerId);
+        fVo.setProductId(productId);
         dao.insert(fVo);
         return fVo;
     }
-    public FavoriteVO deleFavorite(Integer customer_id, Integer product_id){
+    public FavoriteVO deleFavorite(Integer customerId, Integer productId){
         FavoriteVO fVo = new FavoriteVO();
-        fVo.setCustomer_id(customer_id);
-        fVo.setProduct_id(product_id);
-        dao.delete(customer_id, product_id);
+        fVo.setCustomerId(customerId);
+        fVo.setProductId(productId);
+        dao.delete(customerId, productId);
         return fVo;
     }
-    public ArrayList<Integer> selectByCustomerId(Integer customer_id){
-        return dao.selectByCustomerId(customer_id);
+    public ArrayList<Integer> selectByCustomerId(Integer customerId){
+        return dao.selectByCustomerId(customerId);
     }
 }

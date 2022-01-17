@@ -47,24 +47,24 @@ public class QADAO implements QAInterface<QAVO>{
     public void update(QAVO qavo){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(UPDATE)) {
-            ps.setInt(1, qavo.getQa_id());
+            ps.setInt(1, qavo.getQaId());
             ps.setString(2, qavo.getQuession());
             ps.setString(3, qavo.getAnswer());
-            ps.setInt(4, qavo.getQa_id());
+            ps.setInt(4, qavo.getQaId());
             ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
         }
     }      
-    public void delete(Integer qa_id){
+    public void delete(Integer qaId){
         Connection con = null;
         PreparedStatement ps = null;
         try {
             con = ds.getConnection();
             con.setAutoCommit(false);
             ps = con.prepareStatement(DELETE);
-            ps.setInt(1, qa_id);
+            ps.setInt(1, qaId);
             ps.executeUpdate();
             con.commit();
             con.setAutoCommit(true);
@@ -96,14 +96,14 @@ public class QADAO implements QAInterface<QAVO>{
             }
         }
     }      
-    public QAVO selectByQAId(Integer qa_id){
+    public QAVO selectByQAId(Integer qaId){
         QAVO qa = new QAVO();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(SELECT_BY_QAID)) {
-            ps.setInt(1, qa_id);
+            ps.setInt(1, qaId);
             ResultSet rs =  ps.executeQuery();
             while(rs.next()){
-                qa.setQa_id(rs.getInt("qa_id"));
+                qa.setQaId(rs.getInt("qa_id"));
                 qa.setQuession(rs.getString("quession"));
                 qa.setAnswer(rs.getString("answer"));
             }

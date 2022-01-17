@@ -9,27 +9,27 @@ public class CSService {
     public CSService() {
         dao = new CustomerServiceDAO();
     }
-    public CustomerServiceVO addProblem(Integer cusotmer_id, String message_title, String message_context) {
-        java.sql.Timestamp message_time = new java.sql.Timestamp(System.currentTimeMillis());
+    public CustomerServiceVO addProblem(Integer cusotmerId, String messageTitle, String messageContext) {
+        java.sql.Timestamp messageTime = new java.sql.Timestamp(System.currentTimeMillis());
         CustomerServiceVO csVO = new CustomerServiceVO();
-        csVO.setCusotmer_id(cusotmer_id);
-        csVO.setMessage_title(message_title);
-        csVO.setMessage_time(message_time);
-        csVO.setMessage_context(message_context);
+        csVO.setCusotmerId(cusotmerId);
+        csVO.setMessageTitle(messageTitle);
+        csVO.setMessageTime(messageTime);
+        csVO.setMessageContext(messageContext);
         dao.insert(csVO);
         return csVO;
     }
-    public CustomerServiceVO addReply(Integer message_id, Integer cusotmer_id, String message_title, String message_context, String reply_context){
+    public CustomerServiceVO addReply(Integer messageId, Integer cusotmerId, String messageTitle, String messageContext, String replyContext){
         CustomerServiceVO csVO = new CustomerServiceVO();
-        csVO.setMessage_id(message_id);
-        csVO.setMessage_title(message_title);
-        csVO.setMessage_context(message_context);
-        csVO.setCusotmer_id(cusotmer_id);
-        csVO.setReply_context(reply_context);
+        csVO.setMessageId(messageId);
+        csVO.setMessageTitle(messageTitle);
+        csVO.setMessageContext(messageContext);
+        csVO.setCusotmerId(cusotmerId);
+        csVO.setReplyContext(replyContext);
         dao.update(csVO);
         return csVO;
     }
-    public CustomerServiceVO getOneReply(Integer message_id){
-        return dao.selectByMessageId(message_id);
+    public CustomerServiceVO getOneReply(Integer messageId){
+        return dao.selectByMessageId(messageId);
     }
 }

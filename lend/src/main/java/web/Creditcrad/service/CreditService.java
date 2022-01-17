@@ -9,34 +9,34 @@ public class CreditService {
     public CreditService() {
         dao = new CreditcardDAO();
     }
-    public CreditcradVO addCreditcard(Integer creditcard_number, Integer customer_id, String cardholder_name,
-            String cvv_code,String expire_month, String expire_year) {
+    public CreditcradVO addCreditcard(Integer creditcardNumber, Integer customerId, String cardholderName,
+            String cvvCode,String expireMonth, String expireYear) {
         CreditcradVO cVo = new CreditcradVO();
-        cVo.setCreditcard_number(creditcard_number);
-        cVo.setCardholder_name(cardholder_name);
-        cVo.setCustomer_id(customer_id);
-        cVo.setCvv_code(cvv_code);
-        cVo.setExpire_year(expire_year);
-        cVo.setExpire_month(expire_month);
+        cVo.setCreditcardNumber(creditcardNumber);
+        cVo.setCardholderName(cardholderName);
+        cVo.setCustomerId(customerId);
+        cVo.setCvvCode(cvvCode);
+        cVo.setExpireYear(expireYear);
+        cVo.setExpireMonth(expireMonth);
         dao.insert(cVo);
         return cVo;
     }
-    public CreditcradVO updateCreditcard(Integer creditcard_number, Integer customer_id, String cardholder_name,
-            String cvv_code,String expire_month, String expire_year){
+    public CreditcradVO updateCreditcard(Integer creditcardNumber, Integer customerId, String cardholderName,
+            String cvvCode,String expireMonth, String expireYear){
         CreditcradVO cVo = new CreditcradVO();
-        cVo.setCreditcard_number(creditcard_number);
-        cVo.setCardholder_name(cardholder_name);
-        cVo.setCustomer_id(customer_id);
-        cVo.setCvv_code(cvv_code);
-        cVo.setExpire_year(expire_year);
-        cVo.setExpire_month(expire_month);
+        cVo.setCreditcardNumber(creditcardNumber);
+        cVo.setCardholderName(cardholderName);
+        cVo.setCustomerId(customerId);
+        cVo.setCvvCode(cvvCode);
+        cVo.setExpireYear(expireYear);
+        cVo.setExpireMonth(expireMonth);
         dao.update(cVo);
         return cVo;
     }
-    public void deleteCreditcard(Integer customer_id) {
-        dao.delete(customer_id);
+    public void deleteCreditcard(Integer customerId) {
+        dao.delete(customerId);
     }
-    public CreditcradVO getOneCard(Integer customer_id){
-        return dao.selectByCustomerId(customer_id);
+    public CreditcradVO getOneCard(Integer customerId){
+        return dao.selectByCustomerId(customerId);
     }
 }

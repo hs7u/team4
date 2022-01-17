@@ -1,87 +1,87 @@
 package web.Product.vo;
 import java.sql.Timestamp;
 public class ProductVO implements java.io.Serializable{
-	private Integer product_id;
-	private Integer product_category_code;
-	private Integer product_price;
-	private String product_name;
-	private byte[] product_image;
-	private String product_description;
-	private Integer product_inventory;
-	private Integer product_sold;
-	private Timestamp released_time;
+	private Integer productId;
+	private Integer productCategoryCode;
+	private Integer productPrice;
+	private String productName;
+	private byte[] productImage;
+	private String productDescription;
+	private Integer productInventory;
+	private Integer productSold;
+	private Timestamp releasedTime;
 	private Byte customization;
-	private Integer customer_product_price;
-	private Byte product_status;
+	private Integer customerProductPrice;
+	private Byte productStatus;
 	public ProductVO() {
 		super();
 	}
-	public ProductVO(Integer product_id, Integer product_category_code, Integer product_price, String product_name,
-			byte[] product_image, String product_description, Integer product_inventory,Timestamp released_time, Byte customization, Integer customer_product_price) {
-		setProduct_id(product_id);
-		setProduct_category_code(product_category_code);
-		setProduct_price(product_price);
-		setProduct_name(product_name);
-		setProduct_image(product_image);
-		setProduct_description(product_description);
-		setProduct_inventory(product_inventory);
-		setReleased_time(released_time);
+	public ProductVO(Integer productId, Integer productCategoryCode, Integer productPrice, String productName,
+			byte[] productImage, String productDescription, Integer productInventory,Timestamp releasedTime, Byte customization, Integer customerProductPrice) {
+		setProductId(productId);
+		setProductCategoryCode(productCategoryCode);
+		setProductPrice(productPrice);
+		setProductName(productName);
+		setProductImage(productImage);
+		setProductDescription(productDescription);
+		setProductInventory(productInventory);
+		setReleasedTime(releasedTime);
 		setCustomization(customization);
-		setCustomer_product_price(customer_product_price);
+		setCustomerProductPrice(customerProductPrice);
 	}
-	public Integer getProduct_id() {
-		return product_id;
+	public Integer getProductId() {
+		return productId;
 	}
-	public void setProduct_id(Integer product_id) {
-		this.product_id = product_id;
+	public void setProductId(Integer productId) {
+		this.productId = productId;
 	}
-	public Integer getProduct_category_code() {
-		return product_category_code;
+	public Integer getProductCategoryCode() {
+		return productCategoryCode;
 	}
-	public void setProduct_category_code(Integer product_category_code) {
-		this.product_category_code = product_category_code;
+	public void setProductCategoryCode(Integer productCategoryCode) {
+		this.productCategoryCode = productCategoryCode;
 	}
-	public Integer getProduct_price() {
-		return product_price;
+	public Integer getProductPrice() {
+		return productPrice;
 	}
-	public void setProduct_price(Integer product_price) {
-		this.product_price = product_price;
+	public void setProductPrice(Integer productPrice) {
+		this.productPrice = productPrice;
 	}
-	public String getProduct_name(){
-		return product_name;
+	public String getProductName(){
+		return productName;
 	}
-	public void setProduct_name(String product_name){
-		this.product_name = product_name;
+	public void setProductName(String productName){
+		this.productName = productName;
 	}
-	public byte[] getProduct_image(){
-		return product_image;
+	public byte[] getProductImage(){
+		return productImage;
 	}
-	public void setProduct_image(byte[] product_image){
-		this.product_image = product_image;
+	public void setProductImage(byte[] productImage){
+		this.productImage = productImage;
 	}
-	public String getProduct_description() {
-		return product_description;
+	public String getProductDescription() {
+		return productDescription;
 	}
-	public void setProduct_description(String product_description) {
-		this.product_description = product_description;
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
 	}
-	public Integer getProduct_inventory() {
-		return product_inventory;
+	public Integer getProductInventory() {
+		return productInventory;
 	}
-	public void setProduct_inventory(Integer product_inventory) {
-		this.product_inventory = product_inventory;
+	public void setProductInventory(Integer productInventory) {
+		this.productInventory = productInventory;
 	}
-	public Integer getProduct_sold() {
-		return product_sold;
+	public Integer getProductSold() {
+		return productSold;
 	}
-	public void setProduct_sold(Integer product_sold) {
-		this.product_sold = product_sold;
+	public void setProductSold(Integer productSold) {
+		this.productSold = productSold;
 	}
-	public Timestamp getReleased_time() {
-		return released_time;
+	public Timestamp getReleasedTime() {
+		return releasedTime;
 	}
-	public void setReleased_time(Timestamp released_time) {
-		this.released_time = released_time;
+	public void setReleasedTime(Timestamp releasedTime) {
+		this.releasedTime = releasedTime;
 	}
 	public void setCustomization(Byte customization){
 		this.customization = customization;
@@ -89,16 +89,16 @@ public class ProductVO implements java.io.Serializable{
 	public Byte getCustomization(){
 		return customization;
 	}
-	public void setCustomer_product_price(Integer customer_product_price){
-		this.customer_product_price = customer_product_price;
+	public void setCustomerProductPrice(Integer customerProductPrice){
+		this.customerProductPrice = customerProductPrice;
 	}
-	public Integer getCustomer_product_price(){
-		return customer_product_price;
+	public Integer getCustomerProductPrice(){
+		return customerProductPrice;
 	}
-	public void setProduct_status(Byte product_status) {
-		this.product_status = product_status;
+	public void setProductStatus(Byte productStatus) {
+		this.productStatus = productStatus;
 	}
-	public Byte getProduct_status() {
-		return product_status;
+	public Byte getProductStatus() {
+		return productStatus;
 	}
 }

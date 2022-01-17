@@ -11,50 +11,50 @@ public class CustomerOrdersService {
     public CustomerOrdersService(){
         dao = new CustomerOrderDAO();
     }
-    public CustomerOrdersVO addOrder(Integer customer_id, Integer shipping_mothod_code,Integer order_delivery_charge, 
-            Timestamp order_shipping_date,String recipient, String senders_address,String order_details){
-        java.sql.Timestamp order_created_date = new java.sql.Timestamp(System.currentTimeMillis());
+    public CustomerOrdersVO addOrder(Integer customerId, Integer shippingMethodCode,Integer orderDeliveryCharge, 
+            Timestamp orderShippingDate,String recipient, String sendersAddress,String orderDetails){
+        java.sql.Timestamp orderCreatedDate = new java.sql.Timestamp(System.currentTimeMillis());
         CustomerOrdersVO coVo = new CustomerOrdersVO();
-        coVo.setOrder_id(hashCode(customer_id, order_details));
-        coVo.setCustomer_id(customer_id);
-        coVo.setShipping_mothod_code(shipping_mothod_code);
-        coVo.setOrder_created_date(order_created_date);
-        coVo.setOrder_delivery_charge(order_delivery_charge);
-        coVo.setOrder_shipping_date(order_shipping_date);
+        coVo.setOrderId(hashCode(customerId, orderDetails));
+        coVo.setCustomerId(customerId);
+        coVo.setShippingMethodCode(shippingMethodCode);
+        coVo.setOrderCreatedDate(orderCreatedDate);
+        coVo.setOrderDeliveryCharge(orderDeliveryCharge);
+        coVo.setOrderShippingDate(orderShippingDate);
         coVo.setRecipient(recipient);
-        coVo.setSenders_address(senders_address);
-        coVo.setOrder_details(order_details);
+        coVo.setSendersAddress(sendersAddress);
+        coVo.setOrderDetails(orderDetails);
         dao.insert(coVo);
         return coVo;
     }
-    public CustomerOrdersVO updateCustomerOrder(Integer order_id, Integer customer_id, Integer shipping_mothod_code,Integer order_delivery_charge,
-            Timestamp order_shipping_date,String recipient, String senders_address, String order_details){
+    public CustomerOrdersVO updateCustomerOrder(Integer orderId, Integer customerId, Integer shippingMethodCode,Integer orderDeliveryCharge,
+            Timestamp orderShippingDate,String recipient, String sendersAddress, String orderDetails){
         CustomerOrdersVO coVo = new CustomerOrdersVO();
-        coVo.setOrder_id(order_id);
-        coVo.setCustomer_id(customer_id);
-        coVo.setShipping_mothod_code(shipping_mothod_code);
-        coVo.setOrder_delivery_charge(order_delivery_charge);
-        coVo.setOrder_shipping_date(order_shipping_date);
+        coVo.setOrderId(orderId);
+        coVo.setCustomerId(customerId);
+        coVo.setShippingMethodCode(shippingMethodCode);
+        coVo.setOrderDeliveryCharge(orderDeliveryCharge);
+        coVo.setOrderShippingDate(orderShippingDate);
         coVo.setRecipient(recipient);
-        coVo.setSenders_address(senders_address);
-        coVo.setOrder_details(order_details);
+        coVo.setSendersAddress(sendersAddress);
+        coVo.setOrderDetails(orderDetails);
         dao.update(coVo);
         return coVo;
     }
-    public void deleteOrder(Integer order_id) {
-        dao.delete(order_id);
+    public void deleteOrder(Integer orderId) {
+        dao.delete(orderId);
     }
-    public CustomerOrdersVO getOneOrder(Integer order_id){
-        return dao.selectByOrderId(order_id); 
+    public CustomerOrdersVO getOneOrder(Integer orderId){
+        return dao.selectByOrderId(orderId); 
     }
-    public void updateStatus(String status_name, Integer order_id, Byte status_code) {
-        dao.updateStatus(status_name, order_id, status_code);
+    public void updateStatus(String status_name, Integer orderId, Byte statusCode) {
+        dao.updateStatus(status_name, orderId, statusCode);
     }
-    public int hashCode(Integer customer_id,String order_details) {
+    public int hashCode(Integer customerId,String orderDetails) {
         final int prime = 31;
 		int result = 1;
-		result = result * prime + customer_id;
-		result = result * prime + (order_details == null ? 0 : (order_details).hashCode()); 
+		result = result * prime + customerId;
+		result = result * prime + (orderDetails == null ? 0 : (orderDetails).hashCode()); 
 
 		return result;
     }

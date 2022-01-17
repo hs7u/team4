@@ -33,23 +33,23 @@ public class FavoriteDAO implements FavoriteInterface<FavoriteVO>{
     public void insert(FavoriteVO fVo){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT)) {
-            ps.setInt(1, fVo.getCustomer_id());
-            ps.setInt(2, fVo.getProduct_id());
+            ps.setInt(1, fVo.getCustomerId());
+            ps.setInt(2, fVo.getProductId());
             ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
         }
     }
-    public void delete(Integer customer_id, Integer product_id){
+    public void delete(Integer customerId, Integer productId){
         Connection con = null;
         PreparedStatement ps = null;
         try {
             con = ds.getConnection();
             con.setAutoCommit(false);
             ps = con.prepareStatement(DELETE);
-            ps.setInt(1, customer_id);
-            ps.setInt(2, product_id);
+            ps.setInt(1, customerId);
+            ps.setInt(2, productId);
             ps.executeUpdate();
             con.commit();
             con.setAutoCommit(true);
@@ -81,11 +81,11 @@ public class FavoriteDAO implements FavoriteInterface<FavoriteVO>{
             }
         }
     }
-    public ArrayList<Integer> selectByCustomerId(Integer customer_id){
+    public ArrayList<Integer> selectByCustomerId(Integer customerId){
         ArrayList<Integer> list = new ArrayList<Integer>();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(GET_ALL_STM)) {
-            ps.setInt(1, customer_id);
+            ps.setInt(1, customerId);
             ResultSet rs =  ps.executeQuery();
             while(rs.next()){
                 list.add(rs.getInt("product_id"));

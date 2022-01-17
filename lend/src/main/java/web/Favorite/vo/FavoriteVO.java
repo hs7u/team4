@@ -1,33 +1,33 @@
 package web.Favorite.vo;
 
 public class FavoriteVO implements java.io.Serializable{
-    private Integer favorite_id;
-    private Integer customer_id;
-    private Integer product_id;
+    private Integer favoriteId;
+    private Integer customerId;
+    private Integer productId;
 	public FavoriteVO() {
 		super();
 	}
-	public FavoriteVO(Integer favorite_id, Integer customer_id, Integer product_id) {
-		setFavorite_id(favorite_id);
-		setCustomer_id(customer_id);
-		setProduct_id(product_id);
+	public FavoriteVO(Integer favoriteId, Integer customerId, Integer productId) {
+		setFavoriteId(favoriteId);
+		setCustomerId(customerId);
+		setProductId(productId);
 	}
-	public Integer getFavorite_id() {
-		return favorite_id;
+	public Integer getFavoriteId() {
+		return favoriteId;
 	}
-	public void setFavorite_id(Integer favorite_id) {
-		this.favorite_id = favorite_id;
+	public void setFavoriteId(Integer favoriteId) {
+		this.favoriteId = favoriteId;
 	}
-	public Integer getCustomer_id() {
-		return customer_id;
+	public Integer getCustomerId() {
+		return customerId;
 	}
-	public void setCustomer_id(Integer customer_id) {
-		this.customer_id = customer_id;
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
 	}
-	public Integer getProduct_id() {
-		return product_id;
+	public Integer getProductId() {
+		return productId;
 	}
-	public void setProduct_id(Integer product_id) {
-		this.product_id = product_id;
+	public void setProductId(Integer productId) {
+		this.productId = productId;
 	}
 }

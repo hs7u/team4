@@ -11,56 +11,56 @@ public class CourseService {
     public CourseService() {
         dao = new CourseDAO();
     }
-    public CourseVO addCourse(String course_name, Integer course_price, byte[] course_image,
-            Integer maxOfCourse, Integer minOfCourse, String course_location,
-            Timestamp signUp_startdate, Timestamp signUp_deadline, String course_describe) {
-        java.sql.Timestamp released_time = new java.sql.Timestamp(System.currentTimeMillis());
+    public CourseVO addCourse(String courseName, Integer coursePrice, byte[] courseImage,
+            Integer maxOfCourse, Integer minOfCourse, String courseLocation,
+            Timestamp signUpStartdate, Timestamp signUpDeadline, String courseDescribe) {
+        java.sql.Timestamp releasedTime = new java.sql.Timestamp(System.currentTimeMillis());
         CourseVO cVo = new CourseVO();
-        cVo.setCourse_id(hashCode(course_name, course_location));
-		cVo.setCourse_name(course_name);
-		cVo.setCourse_price(course_price);
-		cVo.setCourse_image(course_image);
-		cVo.setReleased_time(released_time);
+        cVo.setCourseId(hashCode(courseName, courseLocation));
+		cVo.setCourseName(courseName);
+		cVo.setCoursePrice(coursePrice);
+		cVo.setCourseImage(courseImage);
+		cVo.setReleasedTime(releasedTime);
 		cVo.setMaxOfCourse(maxOfCourse);
 		cVo.setMinOfCourse(minOfCourse);
-		cVo.setCourse_location(course_location);
-		cVo.setSignUp_startdate(signUp_startdate);
-		cVo.setSignUp_deadline(signUp_deadline);
-		cVo.setCourse_describe(course_describe);
+		cVo.setCourseLocation(courseLocation);
+		cVo.setSignUpStartdate(signUpStartdate);
+		cVo.setSignUpDeadline(signUpDeadline);
+		cVo.setCourseDescribe(courseDescribe);
         dao.insert(cVo);
         return cVo;
     }
-    public CourseVO update(Integer course_id, String course_name, Integer course_price, byte[] course_image,
-            Integer maxOfCourse, Integer minOfCourse, String course_location,
-            Timestamp signUp_startdate, Timestamp signUp_deadline, String course_describe){
+    public CourseVO update(Integer courseId, String courseName, Integer coursePrice, byte[] courseImage,
+            Integer maxOfCourse, Integer minOfCourse, String courseLocation,
+            Timestamp signUpStartdate, Timestamp signUpDeadline, String courseDescribe){
         CourseVO cVo = new CourseVO();
-        cVo.setCourse_id(course_id);
-		cVo.setCourse_name(course_name);
-		cVo.setCourse_price(course_price);
-		cVo.setCourse_image(course_image);
+        cVo.setCourseId(courseId);
+		cVo.setCourseName(courseName);
+		cVo.setCoursePrice(coursePrice);
+		cVo.setCourseImage(courseImage);
 		cVo.setMaxOfCourse(maxOfCourse);
 		cVo.setMinOfCourse(minOfCourse);
-		cVo.setCourse_location(course_location);
-		cVo.setSignUp_startdate(signUp_startdate);
-		cVo.setSignUp_deadline(signUp_deadline);
-		cVo.setCourse_describe(course_describe);
+		cVo.setCourseLocation(courseLocation);
+		cVo.setSignUpStartdate(signUpStartdate);
+		cVo.setSignUpDeadline(signUpDeadline);
+		cVo.setCourseDescribe(courseDescribe);
         dao.update(cVo);
         return cVo;
     }
-    public void delete(Integer course_id){
-        dao.delete(course_id);
+    public void delete(Integer courseId){
+        dao.delete(courseId);
     }
-    public void changeState(Integer course_id, Byte course_state){
-        dao.changeState(course_id, course_state);
+    public void changeState(Integer courseId, Byte courseState){
+        dao.changeState(courseId, courseState);
     }
-    public CourseVO selectByCourseId(Integer course_id){
-        return dao.selectByCourseId(course_id);
+    public CourseVO selectByCourseId(Integer courseId){
+        return dao.selectByCourseId(courseId);
     }
-    public int hashCode(String course_name, String course_location) {
+    public int hashCode(String courseName, String courseLocation) {
         final int prime = 31;
 		int result = 1;
-		result = result * prime + (course_name == null ? 0 : (course_name).hashCode()); 
-		result = result * prime + (course_location == null ? 0 : (course_location).hashCode()); 
+		result = result * prime + (courseName == null ? 0 : (courseName).hashCode()); 
+		result = result * prime + (courseLocation == null ? 0 : (courseLocation).hashCode()); 
         
 		return result;
     }
