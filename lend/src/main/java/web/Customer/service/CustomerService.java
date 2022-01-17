@@ -15,7 +15,7 @@ public class CustomerService {
             String customerPhone, Date customerBirthday, String customerGender, String customerAddress) {
         java.sql.Timestamp customerRegisterTime = new java.sql.Timestamp(System.currentTimeMillis());
         CustomerVO cVo = new CustomerVO();
-        cVo.setCustomer_id(hashCode(customerName, customerEmail));
+        cVo.setCustomerId(hashCode(customerName, customerEmail));
         cVo.setCustomerName(customerName);
         cVo.setCustomerEmail(customerEmail);
         cVo.setCustomerPassword(customerPassword);
@@ -28,10 +28,10 @@ public class CustomerService {
 
         return cVo;
     }
-    public CustomerVO updateCustomer(Integer customer_id, String customerName, String customerEmail, String customerPassword,
-            String customerPhone, Date customerBirthday, String customerGender, String customerAddress, Byte customer_status){
+    public CustomerVO updateCustomer(Integer customeId, String customerName, String customerEmail, String customerPassword,
+            String customerPhone, Date customerBirthday, String customerGender, String customerAddress, Byte customerStatus){
         CustomerVO cVo = new CustomerVO();
-        cVo.setCustomer_id(customer_id);
+        cVo.setCustomerId(customeId);
         cVo.setCustomerName(customerName);
         cVo.setCustomerEmail(customerEmail);
         cVo.setCustomerPassword(customerPassword);
@@ -39,15 +39,15 @@ public class CustomerService {
         cVo.setCustomerBirthday(customerBirthday);
         cVo.setCustomerGender(customerGender);
         cVo.setCustomerAddress(customerAddress);
-        cVo.setCustomer_status(customer_status);
+        cVo.setCustomerStatus(customerStatus);
         dao.update(cVo);
         return cVo;
     }
-    public void deleteCustomer(Integer customer_id){
-        dao.delete(customer_id);
+    public void deleteCustomer(Integer customeId){
+        dao.delete(customeId);
     }
-    public void changeStatus(Integer customer_id ,Byte status_code){
-        dao.changeStatus(customer_id, status_code);
+    public void changeStatus(Integer customeId ,Byte statusCode){
+        dao.changeStatus(customeId, statusCode);
     }
     public CustomerVO getOneCustomer(String customerEmail,String customerPassword){
         return dao.selectByUserEmailAndPassword(customerEmail, customerPassword);
