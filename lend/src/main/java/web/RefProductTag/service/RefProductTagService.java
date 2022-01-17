@@ -2,24 +2,24 @@ package web.RefProductTag.service;
 
 import java.util.ArrayList;
 
-import ProjectInterfaces.Ref_ProductTagInterface;
-import web.Ref_ProductTag.dao.Ref_ProductTagDAO;
-import web.Ref_ProductTag.vo.Ref_ProductTagVO;
+import ProjectInterfaces.RefProductTagInterface;
+import web.RefProductTag.dao.RefProductTagDAO;
+import web.RefProductTag.vo.RefProductTagVO;
 
 public class RefProductTagService {
-    private RefProductTagInterface<Ref_ProductTagVO> dao;
+    private RefProductTagInterface<RefProductTagVO> dao;
     public RefProductTagService(){
-        dao = new Ref_ProductTagDAO();
+        dao = new RefProductTagDAO();
     }
-    public Ref_ProductTagVO addTagRef(Integer productCategoryCode, Integer productId){
-        Ref_ProductTagVO rVo = new Ref_ProductTagVO();
+    public RefProductTagVO addTagRef(Integer productCategoryCode, Integer productId){
+        RefProductTagVO rVo = new RefProductTagVO();
         rVo.setProductCategoryCode(productCategoryCode);
         rVo.setProductId(productId);
         dao.insert(rVo);
         return rVo;
     }
-    public Ref_ProductTagVO updateTagRef(Integer serialNumber, Integer productCategoryCode, Integer productId){
-        Ref_ProductTagVO rVo = new Ref_ProductTagVO();
+    public RefProductTagVO updateTagRef(Integer serialNumber, Integer productCategoryCode, Integer productId){
+        RefProductTagVO rVo = new RefProductTagVO();
         rVo.setSerialNumber(serialNumber);
         rVo.setProductCategoryCode(productCategoryCode);
         rVo.setProductId(productId);

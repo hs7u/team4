@@ -139,7 +139,7 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
                 cVo.setCustomerGender(rs.getString("customer_gender"));
                 cVo.setCustomerAddress(rs.getString("customer_address"));
                 cVo.setCustomerRegisterTime(rs.getTimestamp("customer_register_time"));
-                cVo.setCustomer_status(rs.getByte("customer_status"));
+                cVo.setCustomerStatus(rs.getByte("customer_status"));
             }
 
         } catch (SQLException se) {

@@ -13,7 +13,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import ProjectInterfaces.Course_TimeableInterface;
+import ProjectInterfaces.CourseTimeableInterface;
 import web.CourseTimeable.vo.CourseTimeableVO;
 
 public class CourseTimeableDAO implements CourseTimeableInterface<CourseTimeableVO>{

@@ -11,8 +11,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import ProjectInterfaces.Ref_ProductTagInterface;
-import web.Ref_ProductTag.vo.Ref_ProductTagVO;
+import ProjectInterfaces.RefProductTagInterface;
+import web.RefProductTag.vo.RefProductTagVO;
 
 public class RefProductTagDAO implements RefProductTagInterface<RefProductTagVO>{
     private static DataSource ds = null;
@@ -33,7 +33,7 @@ public class RefProductTagDAO implements RefProductTagInterface<RefProductTagVO>
     +"`serial_number` = ?,`product_category_code` = ?,`product_id` = ?"
     +"WHERE `serial_number` = ?;";
     private static final String GET_ALL_TAG = "SELECT * FROM TEAM4.Ref_Product_Tag WHERE `product_id` = ?;";
-    public void insert(Ref_ProductTagVO rVo){
+    public void insert(RefProductTagVO rVo){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT)) {
             ps.setInt(1, rVo.getProductCategoryCode());
@@ -44,7 +44,7 @@ public class RefProductTagDAO implements RefProductTagInterface<RefProductTagVO>
             + se.getMessage());
         }
     }
-    public void update(Ref_ProductTagVO rVo){
+    public void update(RefProductTagVO rVo){
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(UPDATE)) {
             ps.setInt(1, rVo.getSerialNumber());

@@ -56,7 +56,7 @@ public class newProduct extends HttpServlet {
                             (Byte)poc.get("customization"),
                             (Integer)poc.get("customer_product_price"));
         if (pVo != null) {
-            out.println(pVo.getProduct_name()+"\t\t"+"upload success");
+            out.println(pVo.getProductName()+"\t\t"+"upload success");
         } else {
             out.println("Upload fail");
         }

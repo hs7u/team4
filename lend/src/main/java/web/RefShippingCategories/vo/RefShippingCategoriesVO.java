@@ -6,7 +6,7 @@ public class RefShippingCategoriesVO implements java.io.Serializable{
 	public RefShippingCategoriesVO() {
 		super();
 	}
-	public Ref_ShippingCategoriesVO(Integer shippingMethodCode, String shippingCategoryDescription) {
+	public RefShippingCategoriesVO(Integer shippingMethodCode, String shippingCategoryDescription) {
 		setShippingMethodCode(shippingMethodCode);
 		setShippingCategoryDescription(shippingCategoryDescription);
 	}
