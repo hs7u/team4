@@ -28,11 +28,11 @@ public class LoginServlet extends HttpServlet {
 	    if (account == null) {
 	    	CustomerService cs = new CustomerService();
 	    	CustomerVO cVo = cs.getOneCustomer(req.getParameter("email"), req.getParameter("password"));
-	    	if(cVo.getCustomer_email() != null) {
-	    		account = cVo.getCustomer_id();
+	    	if(cVo.getCustomerEmail() != null) {
+	    		account = cVo.getCustomerId();
 	    		session.setAttribute("Customer.Id", account);
 //	    		req.setAttribute("message", cVo.getCustomer_name()+"Login Success");
-	    		out.println(cVo.getCustomer_name()+"Login Success");
+	    		out.println(cVo.getCustomerName()+"Login Success");
 	    	} else {
 //    			req.setAttribute("message", "Username or Password incorrect");
     			out.println("Username or Password incorrect");

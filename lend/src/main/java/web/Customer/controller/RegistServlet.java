@@ -12,7 +12,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
-import ProjectVO.*;
 import web.Customer.service.CustomerService;
 import web.Customer.vo.CustomerVO;
 
@@ -43,7 +42,7 @@ public class RegistServlet extends HttpServlet{
         CustomerService cs = new CustomerService();
         CustomerVO check = cs.getOneCustomer(regist.get("email"), regist.get("password"));
         CustomerVO cVo = null;
-        if(check.getCustomer_email() == null){
+        if(check.getCustomerEmail() == null){
             cVo = cs.addCustomer(regist.get("cname"),
                                 regist.get("email"),
                                 regist.get("password"),
@@ -53,7 +52,7 @@ public class RegistServlet extends HttpServlet{
                                 regist.get("address"));
         }
         if (cVo != null) {
-            out.println(cVo.getCustomer_name()+"("+cVo.getCustomer_id()+")"+"\t\t"+"regist success");
+            out.println(cVo.getCustomerName()+"("+cVo.getCustomerId()+")"+"\t\t"+"regist success");
         } else {
             out.println("Regist fail or Account already exists");
         }
