@@ -1,7 +1,6 @@
 package web.Product.controller;
 
 import java.io.*;
-import java.net.http.HttpRequest;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
