@@ -1,7 +1,17 @@
 package web.ProductTag.vo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Product_Tag")
 public class ProductTagVO implements java.io.Serializable{
-    private Integer productCategoryCode;
+    @Id
+	@Column(name = "product_category_code")
+	private Integer productCategoryCode;
+	@Column(name = "product_label_name")
     private String productLabelName;
 	public ProductTagVO() {
 		super();

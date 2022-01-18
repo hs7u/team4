@@ -1,11 +1,25 @@
 package web.Creditcrad.vo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Creditcard_Info")
 public class CreditcradVO implements java.io.Serializable{
+	@Id
+	@Column(name = "creditcard_number")
     private Integer creditcardNumber;
+	@Column(name = "customer_id")
     private Integer customerId;
+	@Column(name = "cardholder_name")
     private String cardholderName;
+	@Column(name = "cvv_code")
     private String cvvCode;
+	@Column(name = "expire_month")
     private String expireMonth;
+	@Column(name = "expire_year")
 	private String expireYear;
 	public CreditcradVO() {
 		super();

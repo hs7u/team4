@@ -1,8 +1,22 @@
 package web.Favorite.vo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Favorite")
 public class FavoriteVO implements java.io.Serializable{
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "favorite_id")
     private Integer favoriteId;
+	@Column(name = "customer_id")
     private Integer customerId;
+	@Column(name = "product_id")
     private Integer productId;
 	public FavoriteVO() {
 		super();

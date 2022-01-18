@@ -2,9 +2,22 @@ package web.CourseTimeable.vo;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name = "Course_Timeable")
 public class CourseTimeableVO implements java.io.Serializable{
-    private Integer courseTimeableId;
+    @Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "course_timeable_id")
+	private Integer courseTimeableId;
+	@Column(name = "course_id")
     private Integer courseId;
+	@Column(name = "course_date")
     private Timestamp courseDate;
 	public CourseTimeableVO() {
 		super();

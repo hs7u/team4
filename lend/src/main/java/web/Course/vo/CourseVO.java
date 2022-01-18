@@ -2,18 +2,37 @@ package web.Course.vo;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name = "Course")
 public class CourseVO implements java.io.Serializable{
+	@Id
+	@Column(name = "course_id")
 	private Integer courseId;
+	@Column(name = "course_name")
     private String courseName;
+	@Column(name = "course_price")
     private Integer coursePrice;
+	@Column(name = "course_image")
     private byte[] courseImage;
+	@Column(name = "released_time")
     private Timestamp releasedTime;
+	@Column(name = "maximun_ofCourse")
     private Integer maxOfCourse;
+	@Column(name = "minimun_ofCourse")
     private Integer minOfCourse;
+	@Column(name = "course_location")
     private String courseLocation;
+	@Column(name = "signUp_startdate")
     private Timestamp signUpStartdate;
+	@Column(name = "signUp_deadline")
     private Timestamp signUpDeadline;
+	@Column(name = "course_describe")
     private String courseDescribe;
+	@Column(name = "course_status")
 	private Byte courseState;
     public CourseVO() {
 		super();

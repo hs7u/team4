@@ -1,16 +1,34 @@
 package web.Customer.vo;
 import java.sql.Date;
 import java.sql.Timestamp;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name = "Customer")
 public class CustomerVO implements java.io.Serializable{
+	@Id
+	@Column(name = "customer_id")
 	private Integer customerId;
+	@Column(name = "customer_name")
     private String customerName;
+	@Column(name = "customer_email")
     private String customerEmail;
+	@Column(name = "customer_password")
     private String customerPassword;
+	@Column(name = "customer_phone")
     private String customerPhone;
+	@Column(name = "customer_birthday")
     private Date customerBirthday;
+	@Column(name = "customer_gender")
     private String customerGender;
+	@Column(name = "customer_address")
     private String customerAddress;
+	@Column(name = "customer_register_time")
     private Timestamp customerRegisterTime;
+	@Column(name = "customer_status")
 	private Byte customerStatus;
     public CustomerVO(){
 		

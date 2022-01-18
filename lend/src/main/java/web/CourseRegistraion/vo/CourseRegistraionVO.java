@@ -1,10 +1,23 @@
 package web.CourseRegistraion.vo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Course_Registraion")
 public class CourseRegistraionVO implements java.io.Serializable{
+	@Id
+	@Column(name = "registration_id")
     private Integer registrationId;
+	@Column(name = "customer_id")
     private Integer customerId;
+	@Column(name = "course_id")
     private Integer courseId;
+	@Column(name = "course_timeble_id")
     private Integer courseTimeableId;
+	@Column(name = "numOfPeople")
     private Integer numOfPeople;
 	public CourseRegistraionVO() {
 		super();

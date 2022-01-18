@@ -2,12 +2,28 @@ package web.CustomerService.vo;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name = "Customer_Service")
 public class CustomerServiceVO implements java.io.Serializable{
-    private Integer messageId;
+    @Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "cusotmer_id")
+	private Integer messageId;
+	@Column(name = "message_id")
     private Integer cusotmerId;
+	@Column(name = "message_time")
     private Timestamp messageTime;
+	@Column(name = "message_title")
     private String messageTitle;
+	@Column(name = "message_context")
     private String messageContext;
+	@Column(name = "reply_context")
     private String replyContext;
 	public CustomerServiceVO() {
 		super();
