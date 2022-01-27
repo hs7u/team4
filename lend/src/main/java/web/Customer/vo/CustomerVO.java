@@ -14,7 +14,7 @@ import web.Favorite.vo.FavoriteVO;
 @Entity
 @Table(name = "Customer")
 public class CustomerVO implements java.io.Serializable{
-	@OneToMany(mappedBy = "Favorite",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "Favorite",cascade = CascadeType.REMOVE)
 	private Set<FavoriteVO> fVos;
 	@Id
 	@Column(name = "customer_id")
