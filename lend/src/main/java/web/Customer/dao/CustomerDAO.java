@@ -17,18 +17,17 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import ProjectInterfaces.CustomerInterface;
 import web.Customer.vo.CustomerVO;
 
 public class CustomerDAO implements CustomerInterface<CustomerVO>{
-    private SessionFactory sf;
-    public CustomerDAO(SessionFactory sf){
-        this.sf = sf;
+    private Session s;
+    public CustomerDAO(Session s){
+        this.s = s;
     }
-   public Session getSession(){
-       return sf.getCurrentSession();
-   }
+   
     /* private static final String INSERT_STMT = "INSERT INTO `TEAM4`.`Customer`"
     +"(`customer_id`,`customer_name`,`customer_email`,`customer_password`,`customer_phone`,`customer_birthday`,`customer_gender`,`customer_address`,`customer_register_time`)"
     +"VALUES(?,?,?,?,?,?,?,?,?)";
@@ -46,11 +45,10 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     
     public void insert(CustomerVO customerVo){
         // Hibernate
-            Session s = getSession();
             if(customerVo != null && customerVo.getCustomerEmail() != null){
-                CustomerVO cVo = s.get(CustomerVO.class, customerVo.getCustomerEmail());
+                CustomerVO cVo = s.get(CustomerVO.class, customerVo.getCustomerId());
                 if(cVo == null){
-                    s.save(customerVo);
+                    this.s.save(customerVo);
                 }
             }
        
@@ -74,8 +72,7 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     }
     public void update(CustomerVO customerVo){
         //JPA CriterQuery
-        Session s = getSession();
-        CriteriaBuilder cb = s.getCriteriaBuilder();
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaUpdate<CustomerVO> cu = cb.createCriteriaUpdate(CustomerVO.class);
         Root<CustomerVO> root = cu.from(CustomerVO.class);
         cu = cu.set(root.get("customer_id"),customerVo.getCustomerId())
@@ -88,7 +85,7 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
                .set(root.get("customer_address"),customerVo.getCustomerAddress())
                .where(cb.equal(root.get("customer_id"), customerVo.getCustomerId()));
           
-        s.createQuery(cu).executeUpdate();
+        this.s.createQuery(cu).executeUpdate();
         
         // Hibernate
         /* 
@@ -129,12 +126,11 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     }
     public void delete(Integer customerId){
        // JPA CriterQurey
-        Session s = getSession();
-        CriteriaBuilder cb = s.getCriteriaBuilder();
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaDelete<CustomerVO> cd = cb.createCriteriaDelete(CustomerVO.class);
         Root<CustomerVO> root = cd.from(CustomerVO.class);
         cd = cd.where(cb.equal(root.get("customer_id"),customerId));
-        s.createQuery(cd).executeUpdate();
+        this.s.createQuery(cd).executeUpdate();
 
        // Hibernate
        /* Session s = getSession();
@@ -191,13 +187,12 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     }
     public void changeStatus(Integer customerId ,Byte statusCode){
         // JPA CriteriaQuery
-        Session s = getSession();
-        CriteriaBuilder cb = s.getCriteriaBuilder();
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaUpdate<CustomerVO> cu = cb.createCriteriaUpdate(CustomerVO.class);
         Root<CustomerVO> root = cu.from(CustomerVO.class);
         cu = cu.set(root.get("customer_status"), statusCode)
                .where(cb.equal(root.get("customer_id"), customerId));
-        s.createQuery(cu).executeUpdate();
+        this.s.createQuery(cu).executeUpdate();
 
         // Hibernate
         /* Session s = getSession();
@@ -226,16 +221,22 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     }
     public CustomerVO selectByUserEmailAndPassword(String customerEmail, String customerPassword){
         // JPA CriterQuery
-        Session s = getSession();
-        CriteriaBuilder cb = s.getCriteriaBuilder();
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaQuery<CustomerVO> cq = cb.createQuery(CustomerVO.class);
         Root<CustomerVO> root = cq.from(CustomerVO.class);
         
-        cq = cq.where(cb.and(cb.equal(root.get("customer_email"), customerEmail), 
+        cq = cq.where(cb.and(cb.equal(root.get("customerEmail"), customerEmail), 
                              cb.equal(root.get("customerPassword"), customerPassword)
                             )
                      );
-        return s.createQuery(cq).getSingleResult();
+        CustomerVO cVo = null;
+		try {
+			cVo = this.s.createQuery(cq).getSingleResult();
+			return cVo;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
         // DateSource Jdbc
         /* CustomerVO cVo = new CustomerVO();
         try (Connection con = ds.getConnection();

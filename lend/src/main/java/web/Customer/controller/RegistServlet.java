@@ -40,9 +40,10 @@ public class RegistServlet extends HttpServlet{
 			is.close();
         }
         CustomerService cs = new CustomerService();
+        cs.getSession().beginTransaction();
         CustomerVO check = cs.getOneCustomer(regist.get("email"), regist.get("password"));
         CustomerVO cVo = null;
-        if(check.getCustomerEmail() == null){
+        if(check == null) {
             cVo = cs.addCustomer(regist.get("cname"),
                                 regist.get("email"),
                                 regist.get("password"),
@@ -50,6 +51,7 @@ public class RegistServlet extends HttpServlet{
                                 java.sql.Date.valueOf(regist.get("birth")),
                                 regist.get("gender"),
                                 regist.get("address"));
+            cs.getSession().getTransaction().commit();
         }
         if (cVo != null) {
             out.println(cVo.getCustomerName()+"("+cVo.getCustomerId()+")"+"\t\t"+"regist success");
