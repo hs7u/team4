@@ -4,14 +4,17 @@
 		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/TEAM4?serverTimezone=Asia/Taipei</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">password</property>
+        <property name="hibernate.connection.datasource">java:comp/env/jdbc/ProductDB</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">validate</property>
+        
+        
         
      
     	<mapping class="web.Customer.vo.CustomerVO"/>
+    	<mapping class="web.Product.vo.ProductVO"/>
+    	<mapping class="web.Favorite.vo.FavoriteVO"/>
     </session-factory>
 </hibernate-configuration>

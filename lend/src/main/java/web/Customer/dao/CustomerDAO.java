@@ -15,11 +15,8 @@ import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
 // import javax.sql.DataSource;
 
-// import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionException;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 import ProjectInterfaces.CustomerInterface;
 import web.Customer.vo.CustomerVO;
@@ -49,19 +46,14 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     
     public void insert(CustomerVO customerVo){
         // Hibernate
-        try (Session s = getSession();) {
-            Transaction ts = s.beginTransaction();
+            Session s = getSession();
             if(customerVo != null && customerVo.getCustomerEmail() != null){
                 CustomerVO cVo = s.get(CustomerVO.class, customerVo.getCustomerEmail());
                 if(cVo == null){
                     s.save(customerVo);
                 }
             }
-            ts.commit();
-            s.close();
-        } catch (SessionException e) {
-            e.printStackTrace();
-        }
+       
         // DateSource Jdbc
         /* try (Connection con = ds.getConnection(); 
              PreparedStatement ps = con.prepareStatement(INSERT_STMT)){
@@ -83,42 +75,38 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     public void update(CustomerVO customerVo){
         //JPA CriterQuery
         Session s = getSession();
-        Transaction ts = s.beginTransaction();
         CriteriaBuilder cb = s.getCriteriaBuilder();
         CriteriaUpdate<CustomerVO> cu = cb.createCriteriaUpdate(CustomerVO.class);
         Root<CustomerVO> root = cu.from(CustomerVO.class);
-        cu.set(root.get("customer_id"),customerVo.getCustomerId())
-          .set(root.get("customer_name"),customerVo.getCustomerName())
-          .set(root.get("customer_email"),customerVo.getCustomerEmail())
-          .set(root.get("customer_password"),customerVo.getCustomerPassword())
-          .set(root.get("customer_phone"),customerVo.getCustomerPhone())
-          .set(root.get("customer_birthday"),customerVo.getCustomerBirthday())
-          .set(root.get("customer_gender"),customerVo.getCustomerGender())
-          .set(root.get("customer_address"),customerVo.getCustomerAddress())
-          .where(cb.equal(root.get("customer_id"), customerVo.getCustomerId()));
+        cu = cu.set(root.get("customer_id"),customerVo.getCustomerId())
+               .set(root.get("customer_name"),customerVo.getCustomerName())
+               .set(root.get("customer_email"),customerVo.getCustomerEmail())
+               .set(root.get("customer_password"),customerVo.getCustomerPassword())
+               .set(root.get("customer_phone"),customerVo.getCustomerPhone())
+               .set(root.get("customer_birthday"),customerVo.getCustomerBirthday())
+               .set(root.get("customer_gender"),customerVo.getCustomerGender())
+               .set(root.get("customer_address"),customerVo.getCustomerAddress())
+               .where(cb.equal(root.get("customer_id"), customerVo.getCustomerId()));
           
         s.createQuery(cu).executeUpdate();
-        ts.commit();
-        s.close();
         
         // Hibernate
-        /* try (Session s = getSession()) {
-            Transaction ts = s.beginTransaction();
-            CustomerVO cVo = s.get(CustomerVO.class, customerVo.getCustomerEmail());
-            cVo.setCustomerId(customerVo.getCustomerId());
-            cVo.setCustomerName(customerVo.getCustomerName());
-            cVo.setCustomerEmail(customerVo.getCustomerEmail());
-            cVo.setCustomerPassword(customerVo.getCustomerPassword());
-            cVo.setCustomerPhone(customerVo.getCustomerPhone());
-            cVo.setCustomerBirthday(customerVo.getCustomerBirthday());
-            cVo.setCustomerGender(customerVo.getCustomerGender());
-            cVo.setCustomerAddress(customerVo.getCustomerAddress());
-            s.update(cVo);
-            ts.commit();
-            s.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } */
+        /* 
+            CustomerVO cVo = getSession().get(CustomerVO.class, customerVo.getCustomerEmail());
+            if(cVo != null){
+                cVo.setCustomerId(customerVo.getCustomerId());
+                cVo.setCustomerName(customerVo.getCustomerName());
+                cVo.setCustomerEmail(customerVo.getCustomerEmail());
+                cVo.setCustomerPassword(customerVo.getCustomerPassword());
+                cVo.setCustomerPhone(customerVo.getCustomerPhone());
+                cVo.setCustomerBirthday(customerVo.getCustomerBirthday());
+                cVo.setCustomerGender(customerVo.getCustomerGender());
+                cVo.setCustomerAddress(customerVo.getCustomerAddress());
+                getSession().save(cVo);
+                return true;
+            }
+            return false;
+        */
         
         // DateSource Jdbc
         /* try (Connection con = ds.getConnection();
@@ -142,47 +130,24 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     public void delete(Integer customerId){
        // JPA CriterQurey
         Session s = getSession();
-        Transaction ts = s.beginTransaction();
         CriteriaBuilder cb = s.getCriteriaBuilder();
         CriteriaDelete<CustomerVO> cd = cb.createCriteriaDelete(CustomerVO.class);
         Root<CustomerVO> root = cd.from(CustomerVO.class);
-        cd.where(cb.equal(root.get("customer_id"),customerId));
+        cd = cd.where(cb.equal(root.get("customer_id"),customerId));
         s.createQuery(cd).executeUpdate();
 
-        ts.commit();
-        s.close();
        // Hibernate
-       /*  Session s = null;
-        Transaction ts = null;
-        try{
-            s = getSession();
-            ts =  s.beginTransaction();
-            if(customerId != null){ 
-                CustomerVO cVo = s.get(CustomerVO.class, customerId);
-                if(cVo != null) {
-                    s.delete(cVo);
-                    ts.commit();
-                }
-            }
-            s.close();
-            this.sf.close();
-        } catch (HibernateException e) {
-            e.printStackTrace();
-            if(ts != null)
-                try {
-                  ts.rollback();  
-                }  catch (HibernateException ee) {
-                        ee.printStackTrace();
-                    }
-        } finally{
-            if(s != null){
-                try {
-                    s.close();
-                } catch (HibernateException e) {
-                    e.printStackTrace(System.err);
-                }
-            }
-        } */
+       /* Session s = getSession();
+          if(customerId != null){ 
+             CustomerVO cVo = s.get(CustomerVO.class, customerId);
+             if(cVo != null) {
+                 s.delete(cVo);
+                 return true
+             }
+             return false;
+          }
+          return false;
+        */
         
         // DateSource Jdbc
         /* Connection con = null;
@@ -227,28 +192,27 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     public void changeStatus(Integer customerId ,Byte statusCode){
         // JPA CriteriaQuery
         Session s = getSession();
-        Transaction ts = s.beginTransaction();
         CriteriaBuilder cb = s.getCriteriaBuilder();
         CriteriaUpdate<CustomerVO> cu = cb.createCriteriaUpdate(CustomerVO.class);
         Root<CustomerVO> root = cu.from(CustomerVO.class);
-        cu.set(root.get("customer_status"), statusCode)
-          .where(cb.equal(root.get("customer_id"), customerId));
+        cu = cu.set(root.get("customer_status"), statusCode)
+               .where(cb.equal(root.get("customer_id"), customerId));
         s.createQuery(cu).executeUpdate();
 
-        ts.commit();
-        s.close();
         // Hibernate
         /* Session s = getSession();
-        Transaction ts = s.beginTransaction();
         if(customerId != null){
             CustomerVO cVo = s.get(CustomerVO.class, customerId);
             if(cVo != null){
                 cVo.setCustomerStatus(statusCode);
-                s.update(cVo);
+                s.save(cVo);
+                return true;
             }
+            return false;
         }
-        ts.commit();
-        s.close(); */
+        return false;
+        */
+
         // DateSource Jdbc
         /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(CUSTOMER_STATUS)) {
