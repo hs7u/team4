@@ -36,19 +36,6 @@ public class ProductVO implements java.io.Serializable{
 	public ProductVO() {
 		super();
 	}
-	public ProductVO(Integer productId, Integer productCategoryCode, Integer productPrice, String productName,
-			byte[] productImage, String productDescription, Integer productInventory,Timestamp releasedTime, Byte customization, Integer customerProductPrice) {
-		setProductId(productId);
-		setProductCategoryCode(productCategoryCode);
-		setProductPrice(productPrice);
-		setProductName(productName);
-		setProductImage(productImage);
-		setProductDescription(productDescription);
-		setProductInventory(productInventory);
-		setReleasedTime(releasedTime);
-		setCustomization(customization);
-		setCustomerProductPrice(customerProductPrice);
-	}
 	public Integer getProductId() {
 		return productId;
 	}

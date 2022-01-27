@@ -5,11 +5,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import web.Customer.vo.CustomerVO;
+import web.Product.vo.ProductVO;
 
 @Entity
 @Table(name = "Favorite")
 public class FavoriteVO implements java.io.Serializable{
+	@ManyToOne
+	@JoinColumn(
+		name = "customer_id",
+		referencedColumnName = "customer_id"
+	)
+	private CustomerVO cVo;
+	@ManyToOne
+	@JoinColumn(
+		name = "product_id",
+		referencedColumnName = "product_id"
+	)
+	private ProductVO pVo;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "favorite_id")
@@ -20,11 +37,6 @@ public class FavoriteVO implements java.io.Serializable{
     private Integer productId;
 	public FavoriteVO() {
 		super();
-	}
-	public FavoriteVO(Integer favoriteId, Integer customerId, Integer productId) {
-		setFavoriteId(favoriteId);
-		setCustomerId(customerId);
-		setProductId(productId);
 	}
 	public Integer getFavoriteId() {
 		return favoriteId;
@@ -43,5 +55,17 @@ public class FavoriteVO implements java.io.Serializable{
 	}
 	public void setProductId(Integer productId) {
 		this.productId = productId;
+	}
+	public CustomerVO getCustomer(){
+		return cVo;
+	}
+	public void setCustomer(CustomerVO cVo){
+		this.cVo = cVo;
+	}
+	public ProductVO getProduct(){
+		return pVo;
+	}
+	public void setProduct(ProductVO pVo){
+		this.pVo = pVo;
 	}
 }
