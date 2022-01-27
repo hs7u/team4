@@ -1,14 +1,21 @@
 package web.Customer.vo;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import web.Favorite.vo.FavoriteVO;
 @Entity
 @Table(name = "Customer")
 public class CustomerVO implements java.io.Serializable{
+	@OneToMany(mappedBy = "Favorite",cascade = CascadeType.REMOVE)
+	private Set<FavoriteVO> fVos;
 	@Id
 	@Column(name = "customer_id")
 	private Integer customerId;
@@ -32,19 +39,6 @@ public class CustomerVO implements java.io.Serializable{
 	private Byte customerStatus;
     public CustomerVO(){
 		
-	}
-	public CustomerVO(Integer customerId, String customerName, String customerEmail, String customerPassword,
-			String customerPhone, Date customerBirthday, String customerGender, String customerAddress,
-			Timestamp customerRegisterTime) {
-		setCustomerId(customerId);
-		setCustomerName(customerName);
-		setCustomerEmail(customerEmail);
-		setCustomerPassword(customerPassword);
-		setCustomerPhone(customerPhone);
-		setCustomerBirthday(customerBirthday);
-		setCustomerGender(customerGender);
-		setCustomerAddress(customerAddress);
-		setCustomerRegisterTime(customerRegisterTime);
 	}
 	public Integer getCustomerId() {
 		return customerId;
@@ -105,5 +99,11 @@ public class CustomerVO implements java.io.Serializable{
 	}
 	public void setCustomerStatus(Byte customerStatus){
 		this.customerStatus = customerStatus;
+	}
+	public Set<FavoriteVO> getfavorites(){
+		return fVos;
+	}
+	public void setFavorites(Set<FavoriteVO> fVos){
+		this.fVos = fVos;
 	}
 }

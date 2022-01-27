@@ -5,11 +5,12 @@ import java.sql.Date;
 import ProjectInterfaces.CustomerInterface;
 import web.Customer.dao.CustomerDAO;
 import web.Customer.vo.CustomerVO;
+import web.Hibernate.HibernateUtil;
 
 public class CustomerService {
     private CustomerInterface<CustomerVO> dao;
     public CustomerService() {
-        dao = new CustomerDAO();
+        dao = new CustomerDAO(HibernateUtil.getSessionfactory());
     }
     public CustomerVO addCustomer(String customerName, String customerEmail, String customerPassword,
             String customerPhone, Date customerBirthday, String customerGender, String customerAddress) {

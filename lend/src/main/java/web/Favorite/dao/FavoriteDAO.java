@@ -1,37 +1,52 @@
 package web.Favorite.dao;
 
-import java.sql.Connection;
+/* import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.SQLException; */
 import java.util.ArrayList;
 
-import javax.naming.Context;
+/* import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+import javax.naming.NamingException; */
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+/* import javax.sql.DataSource;
+
+import org.hibernate.Hibernate; */
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import ProjectInterfaces.FavoriteInterface;
 import web.Favorite.vo.FavoriteVO;
 
 public class FavoriteDAO implements FavoriteInterface<FavoriteVO>{
-    private static DataSource ds = null;
-    static{
-        try {
-            Context ctx = new InitialContext();
-            ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ProjectDB");
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
+    private SessionFactory sf;
+    public void Favorite(SessionFactory sf){
+        this.sf = sf;
     }
-    private static final String INSERT = "INSERT INTO `TEAM4`.`Favorite`"
+    public Session getSession(){
+        return this.sf.getCurrentSession();
+    }
+   /*  private static final String INSERT = "INSERT INTO `TEAM4`.`Favorite`"
     +"(`customer_id`,`product_id`)"
     +"VALUES"
     +"(?,?);";
     private static final String DELETE = "DELETE FROM `TEAM4`.`Favorite` WHERE `customer_id` = ? AND `product_id` = ?;";
-    private static final String GET_ALL_STM = "SELECT `Favorite`.`product_id` FROM `TEAM4`.`Favorite` WHERE `customer_id` = ?;";
+    private static final String GET_ALL_STM = "SELECT `Favorite`.`product_id` FROM `TEAM4`.`Favorite` WHERE `customer_id` = ?;"; */
     public void insert(FavoriteVO fVo){
-        try (Connection con = ds.getConnection();
+        // Hibernate
+        Session s = getSession();
+        if(fVo.getCustomerId() != null && fVo.getProductId() != null){
+            FavoriteVO newFvo = s.get(FavoriteVO.class, fVo.getFavoriteId());
+            if(newFvo == null){
+                s.save(newFvo);
+            }
+        }
+        // DateSource Jdbc
+        /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT)) {
             ps.setInt(1, fVo.getCustomerId());
             ps.setInt(2, fVo.getProductId());
@@ -39,10 +54,19 @@ public class FavoriteDAO implements FavoriteInterface<FavoriteVO>{
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
-        }
+        } */
     }
     public void delete(Integer customerId, Integer productId){
-        Connection con = null;
+        // JPA CriteriaQuery
+        Session s = getSession();
+        CriteriaBuilder cb = s.getCriteriaBuilder();
+        CriteriaDelete<FavoriteVO> cd = cb.createCriteriaDelete(FavoriteVO.class);
+        Root<FavoriteVO> root = cd.from(FavoriteVO.class);
+        cd = cd.where(cb.and(cb.equal(root.get("customer_id"), customerId), 
+                      cb.equal(root.get("product_id"), productId)));
+        s.createQuery(cd).executeUpdate();
+        // Datasource Jdbc
+        /* Connection con = null;
         PreparedStatement ps = null;
         try {
             con = ds.getConnection();
@@ -79,10 +103,24 @@ public class FavoriteDAO implements FavoriteInterface<FavoriteVO>{
                     e.printStackTrace(System.err);
                 }
             }
-        }
+        } */
     }
     public ArrayList<Integer> selectByCustomerId(Integer customerId){
-        ArrayList<Integer> list = new ArrayList<Integer>();
+    //  JPA CriteriaQuery
+        Session s = getSession();
+        CriteriaBuilder cb = s.getCriteriaBuilder();
+        CriteriaQuery<FavoriteVO> cq = cb.createQuery(FavoriteVO.class);
+        Root<FavoriteVO> root = cq.from(FavoriteVO.class);
+        cq = cq.where(cb.equal(root.get("customer_id"), customerId));
+        ArrayList<Integer> clist = new ArrayList<Integer>();
+        for(FavoriteVO sel : s.createQuery(cq).getResultList()){
+            clist.add(sel.getProductId());
+        }
+        return clist;
+
+
+    //  DataSoirce Jdbc
+    /*  ArrayList<Integer> list = new ArrayList<Integer>();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(GET_ALL_STM)) {
             ps.setInt(1, customerId);
@@ -95,5 +133,6 @@ public class FavoriteDAO implements FavoriteInterface<FavoriteVO>{
             + se.getMessage());
         }
         return list;
+    */
     }
 }

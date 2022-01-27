@@ -1,32 +1,38 @@
 package web.Customer.dao;
-
-import java.sql.Connection;
+/* import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-// import java.util.List;
+import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+import javax.naming.NamingException; */
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.Root;
+// import javax.sql.DataSource;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import ProjectInterfaces.CustomerInterface;
 import web.Customer.vo.CustomerVO;
 
 public class CustomerDAO implements CustomerInterface<CustomerVO>{
-    private static DataSource ds = null;
-    static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ProjectDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
-    private static final String INSERT_STMT = "INSERT INTO `TEAM4`.`Customer`"
+    private SessionFactory sf;
+    public CustomerDAO(SessionFactory sf){
+        this.sf = sf;
+    }
+   public Session getSession(){
+       return sf.getCurrentSession();
+   }
+    /* private static final String INSERT_STMT = "INSERT INTO `TEAM4`.`Customer`"
     +"(`customer_id`,`customer_name`,`customer_email`,`customer_password`,`customer_phone`,`customer_birthday`,`customer_gender`,`customer_address`,`customer_register_time`)"
     +"VALUES(?,?,?,?,?,?,?,?,?)";
-    // private static final String GET_ALL_STMT = "";
+    private static final String GET_ALL_STMT = "";
     private static final String GET_ONE_STMT = "SELECT * FROM TEAM4.Customer "
     +"WHERE `customer_email` = ? AND `customer_password` = ?;";
     private static final String DELETE = "DELETE FROM `TEAM4`.`Customer` WHERE `customer_id` = ?;";
@@ -36,26 +42,74 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     private static final String CUSTOMER_STATUS = "UPDATE `TEAM4`.`Customer`"
     +"SET"
     +"`customer_status` = ?"
-    +"WHERE `customer_id` = ?;";
+    +"WHERE `customer_id` = ?;"; */
+    
     public void insert(CustomerVO customerVo){
-        try (Connection con = ds.getConnection(); 
-            PreparedStatement ps = con.prepareStatement(INSERT_STMT)){
-            ps.setInt(1, customerVo.getCustomerId());
-            ps.setString(2, customerVo.getCustomerName());
-            ps.setString(3, customerVo.getCustomerEmail());
-            ps.setString(4, customerVo.getCustomerPassword());
-            ps.setString(5, customerVo.getCustomerPhone());
-            ps.setDate(6, customerVo.getCustomerBirthday());
-            ps.setString(7, customerVo.getCustomerGender());
-            ps.setString(8, customerVo.getCustomerAddress());
-            ps.setTimestamp(9, customerVo.getCustomerRegisterTime());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        // Hibernate
+            Session s = getSession();
+            if(customerVo != null && customerVo.getCustomerEmail() != null){
+                CustomerVO cVo = s.get(CustomerVO.class, customerVo.getCustomerEmail());
+                if(cVo == null){
+                    s.save(customerVo);
+                }
+            }
+       
+        // DateSource Jdbc
+        /* try (Connection con = ds.getConnection(); 
+             PreparedStatement ps = con.prepareStatement(INSERT_STMT)){
+             ps.setInt(1, customerVo.getCustomerId());
+             ps.setString(2, customerVo.getCustomerName());
+             ps.setString(3, customerVo.getCustomerEmail());
+             ps.setString(4, customerVo.getCustomerPassword());
+             ps.setString(5, customerVo.getCustomerPhone());
+             ps.setDate(6, customerVo.getCustomerBirthday());
+             ps.setString(7, customerVo.getCustomerGender());
+             ps.setString(8, customerVo.getCustomerAddress());
+             ps.setTimestamp(9, customerVo.getCustomerRegisterTime());
+             ps.executeUpdate();
+         } catch (SQLException e) {
+             e.printStackTrace();
+         } */
+        
     }
     public void update(CustomerVO customerVo){
-        try (Connection con = ds.getConnection();
+        //JPA CriterQuery
+        Session s = getSession();
+        CriteriaBuilder cb = s.getCriteriaBuilder();
+        CriteriaUpdate<CustomerVO> cu = cb.createCriteriaUpdate(CustomerVO.class);
+        Root<CustomerVO> root = cu.from(CustomerVO.class);
+        cu = cu.set(root.get("customer_id"),customerVo.getCustomerId())
+               .set(root.get("customer_name"),customerVo.getCustomerName())
+               .set(root.get("customer_email"),customerVo.getCustomerEmail())
+               .set(root.get("customer_password"),customerVo.getCustomerPassword())
+               .set(root.get("customer_phone"),customerVo.getCustomerPhone())
+               .set(root.get("customer_birthday"),customerVo.getCustomerBirthday())
+               .set(root.get("customer_gender"),customerVo.getCustomerGender())
+               .set(root.get("customer_address"),customerVo.getCustomerAddress())
+               .where(cb.equal(root.get("customer_id"), customerVo.getCustomerId()));
+          
+        s.createQuery(cu).executeUpdate();
+        
+        // Hibernate
+        /* 
+            CustomerVO cVo = getSession().get(CustomerVO.class, customerVo.getCustomerEmail());
+            if(cVo != null){
+                cVo.setCustomerId(customerVo.getCustomerId());
+                cVo.setCustomerName(customerVo.getCustomerName());
+                cVo.setCustomerEmail(customerVo.getCustomerEmail());
+                cVo.setCustomerPassword(customerVo.getCustomerPassword());
+                cVo.setCustomerPhone(customerVo.getCustomerPhone());
+                cVo.setCustomerBirthday(customerVo.getCustomerBirthday());
+                cVo.setCustomerGender(customerVo.getCustomerGender());
+                cVo.setCustomerAddress(customerVo.getCustomerAddress());
+                getSession().save(cVo);
+                return true;
+            }
+            return false;
+        */
+        
+        // DateSource Jdbc
+        /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(UPDATE)) {
             ps.setInt(1, customerVo.getCustomerId());
             ps.setString(2, customerVo.getCustomerName());
@@ -70,10 +124,33 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-        }
+        } */
+        
     }
     public void delete(Integer customerId){
-        Connection con = null;
+       // JPA CriterQurey
+        Session s = getSession();
+        CriteriaBuilder cb = s.getCriteriaBuilder();
+        CriteriaDelete<CustomerVO> cd = cb.createCriteriaDelete(CustomerVO.class);
+        Root<CustomerVO> root = cd.from(CustomerVO.class);
+        cd = cd.where(cb.equal(root.get("customer_id"),customerId));
+        s.createQuery(cd).executeUpdate();
+
+       // Hibernate
+       /* Session s = getSession();
+          if(customerId != null){ 
+             CustomerVO cVo = s.get(CustomerVO.class, customerId);
+             if(cVo != null) {
+                 s.delete(cVo);
+                 return true
+             }
+             return false;
+          }
+          return false;
+        */
+        
+        // DateSource Jdbc
+        /* Connection con = null;
         PreparedStatement ps = null;
         try {
             con = ds.getConnection();
@@ -109,10 +186,35 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
                     e.printStackTrace(System.err);
                 }
             }
-        }
+        } */
+         
     }
     public void changeStatus(Integer customerId ,Byte statusCode){
-        try (Connection con = ds.getConnection();
+        // JPA CriteriaQuery
+        Session s = getSession();
+        CriteriaBuilder cb = s.getCriteriaBuilder();
+        CriteriaUpdate<CustomerVO> cu = cb.createCriteriaUpdate(CustomerVO.class);
+        Root<CustomerVO> root = cu.from(CustomerVO.class);
+        cu = cu.set(root.get("customer_status"), statusCode)
+               .where(cb.equal(root.get("customer_id"), customerId));
+        s.createQuery(cu).executeUpdate();
+
+        // Hibernate
+        /* Session s = getSession();
+        if(customerId != null){
+            CustomerVO cVo = s.get(CustomerVO.class, customerId);
+            if(cVo != null){
+                cVo.setCustomerStatus(statusCode);
+                s.save(cVo);
+                return true;
+            }
+            return false;
+        }
+        return false;
+        */
+
+        // DateSource Jdbc
+        /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(CUSTOMER_STATUS)) {
             ps.setByte(1, statusCode);
             ps.setInt(2, customerId);
@@ -120,10 +222,22 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-        }
+        } */
     }
     public CustomerVO selectByUserEmailAndPassword(String customerEmail, String customerPassword){
-        CustomerVO cVo = new CustomerVO();
+        // JPA CriterQuery
+        Session s = getSession();
+        CriteriaBuilder cb = s.getCriteriaBuilder();
+        CriteriaQuery<CustomerVO> cq = cb.createQuery(CustomerVO.class);
+        Root<CustomerVO> root = cq.from(CustomerVO.class);
+        
+        cq = cq.where(cb.and(cb.equal(root.get("customer_email"), customerEmail), 
+                             cb.equal(root.get("customerPassword"), customerPassword)
+                            )
+                     );
+        return s.createQuery(cq).getSingleResult();
+        // DateSource Jdbc
+        /* CustomerVO cVo = new CustomerVO();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(GET_ONE_STMT)){
             ps.setString(1, customerEmail);
@@ -146,7 +260,7 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
         }
-        return cVo;
+        return cVo; */
     }
     // public List<CustomerVO> getAll(){
     //     return null;
