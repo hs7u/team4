@@ -14,8 +14,8 @@ import web.Favorite.vo.FavoriteVO;
 @Entity
 @Table(name = "Customer")
 public class CustomerVO implements java.io.Serializable{
-	@OneToMany(mappedBy = "Favorite",cascade = CascadeType.REMOVE)
-	private Set<FavoriteVO> fVos;
+//	@OneToMany(mappedBy = "Favorite",cascade = CascadeType.REMOVE)
+//	private Set<FavoriteVO> fVos;
 	@Id
 	@Column(name = "customer_id")
 	private Integer customerId;
@@ -35,7 +35,10 @@ public class CustomerVO implements java.io.Serializable{
     private String customerAddress;
 	@Column(name = "customer_register_time")
     private Timestamp customerRegisterTime;
-	@Column(name = "customer_status")
+	@Column(
+			name = "customer_status",
+			columnDefinition = "bit"
+			)
 	private Byte customerStatus;
     public CustomerVO(){
 		
@@ -100,10 +103,10 @@ public class CustomerVO implements java.io.Serializable{
 	public void setCustomerStatus(Byte customerStatus){
 		this.customerStatus = customerStatus;
 	}
-	public Set<FavoriteVO> getfavorites(){
-		return fVos;
-	}
-	public void setFavorites(Set<FavoriteVO> fVos){
-		this.fVos = fVos;
-	}
+//	public Set<FavoriteVO> getfavorites(){
+//		return fVos;
+//	}
+//	public void setFavorites(Set<FavoriteVO> fVos){
+//		this.fVos = fVos;
+//	}
 }

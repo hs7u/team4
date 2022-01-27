@@ -15,18 +15,18 @@ import web.Product.vo.ProductVO;
 @Entity
 @Table(name = "Favorite")
 public class FavoriteVO implements java.io.Serializable{
-	@ManyToOne
-	@JoinColumn(
-		name = "customer_id",
-		referencedColumnName = "customer_id"
-	)
-	private CustomerVO cVo;
-	@ManyToOne
-	@JoinColumn(
-		name = "product_id",
-		referencedColumnName = "product_id"
-	)
-	private ProductVO pVo;
+//	@ManyToOne
+//	@JoinColumn(
+//		name = "customer_id",
+//		referencedColumnName = "customer_id"
+//	)
+//	private CustomerVO cVo;
+//	@ManyToOne
+//	@JoinColumn(
+//		name = "product_id",
+//		referencedColumnName = "product_id"
+//	)
+//	private ProductVO pVo;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "favorite_id")
@@ -56,16 +56,16 @@ public class FavoriteVO implements java.io.Serializable{
 	public void setProductId(Integer productId) {
 		this.productId = productId;
 	}
-	public CustomerVO getCustomer(){
-		return cVo;
-	}
-	public void setCustomer(CustomerVO cVo){
-		this.cVo = cVo;
-	}
-	public ProductVO getProduct(){
-		return pVo;
-	}
-	public void setProduct(ProductVO pVo){
-		this.pVo = pVo;
-	}
+//	public CustomerVO getCustomer(){
+//		return cVo;
+//	}
+//	public void setCustomer(CustomerVO cVo){
+//		this.cVo = cVo;
+//	}
+//	public ProductVO getProduct(){
+//		return pVo;
+//	}
+//	public void setProduct(ProductVO pVo){
+//		this.pVo = pVo;
+//	}
 }

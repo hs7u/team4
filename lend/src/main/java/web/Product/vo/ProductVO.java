@@ -17,7 +17,10 @@ public class ProductVO implements java.io.Serializable{
 	private Integer productPrice;
 	@Column(name = "product_name")
 	private String productName;
-	@Column(name = "product_image")
+	@Column(
+			name = "product_image",
+			columnDefinition = "mediumblob"
+			)
 	private byte[] productImage;
 	@Column(name = "product_description")
 	private String productDescription;
@@ -27,11 +30,17 @@ public class ProductVO implements java.io.Serializable{
 	private Integer productSold;
 	@Column(name = "released_time")
 	private Timestamp releasedTime;
-	@Column(name = "customization")
+	@Column(
+			name = "customization",
+			columnDefinition = "bit"
+			)
 	private Byte customization;
 	@Column(name = "custom_product_price")
 	private Integer customerProductPrice;
-	@Column(name = "product_status")
+	@Column(
+			name = "product_status",
+			columnDefinition = "bit"
+			)
 	private Byte productStatus;
 	public ProductVO() {
 		super();
