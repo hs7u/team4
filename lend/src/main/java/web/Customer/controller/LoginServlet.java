@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Session;
+
 import web.Customer.service.CustomerService;
 import web.Customer.vo.CustomerVO;
 
@@ -26,7 +28,7 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		Integer account = (Integer)session.getAttribute("Customer.Id");
 	    if (account == null) {
-	    	CustomerService cs = new CustomerService();
+	    	CustomerService cs = new CustomerService((Session)req.getAttribute("session"));
 	    	CustomerVO cVo = cs.getOneCustomer(req.getParameter("email"), req.getParameter("password"));
 	    	if(cVo.getCustomerEmail() != null) {
 	    		account = cVo.getCustomerId();

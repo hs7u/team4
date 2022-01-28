@@ -13,15 +13,12 @@ import web.Hibernate.HibernateUtil;
 
 public class CustomerService {
     private CustomerInterface<CustomerVO> dao;
-    private SessionFactory sf;
-    private Session session;
-    public Session getSession() {
-		return session;
-	}
-	public CustomerService() {
-    	this.sf = HibernateUtil.getSessionfactory();
-    	this.session = this.sf.getCurrentSession();
-        dao = new CustomerDAO(this.session);
+    // private SessionFactory sf;
+    // private Session session;
+	public CustomerService(Session session) {
+    	// this.sf = HibernateUtil.getSessionfactory();
+    	// this.session = this.sf.getCurrentSession();
+        dao = new CustomerDAO(session);
     }
     public CustomerVO addCustomer(String customerName, String customerEmail, String customerPassword,
             String customerPhone, Date customerBirthday, String customerGender, String customerAddress) {

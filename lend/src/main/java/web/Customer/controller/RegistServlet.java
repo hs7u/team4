@@ -5,6 +5,8 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import org.hibernate.Session;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,8 +41,8 @@ public class RegistServlet extends HttpServlet{
 			isr.close();
 			is.close();
         }
-        CustomerService cs = new CustomerService();
-        cs.getSession().beginTransaction();
+        CustomerService cs = new CustomerService((Session)req.getAttribute("session"));
+        // cs.getSession().beginTransaction();
         CustomerVO check = cs.getOneCustomer(regist.get("email"), regist.get("password"));
         CustomerVO cVo = null;
         if(check == null) {
@@ -51,7 +53,7 @@ public class RegistServlet extends HttpServlet{
                                 java.sql.Date.valueOf(regist.get("birth")),
                                 regist.get("gender"),
                                 regist.get("address"));
-            cs.getSession().getTransaction().commit();
+            // cs.getSession().getTransaction().commit();
         }
         if (cVo != null) {
             out.println(cVo.getCustomerName()+"("+cVo.getCustomerId()+")"+"\t\t"+"regist success");
