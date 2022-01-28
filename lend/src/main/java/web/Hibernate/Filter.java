@@ -23,6 +23,7 @@ public class Filter implements javax.servlet.Filter{
             this.sessionFactory.getCurrentSession().beginTransaction();
             chain.doFilter(request, response);
             this.sessionFactory.getCurrentSession().getTransaction().commit();        
+            this.sessionFactory.getCurrentSession().close();        
         } catch (Exception e) {
             this.sessionFactory.getCurrentSession().getTransaction().rollback();
             e.printStackTrace();

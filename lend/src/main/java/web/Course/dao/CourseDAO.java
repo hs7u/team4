@@ -1,30 +1,28 @@
 package web.Course.dao;
 
-import java.sql.Connection;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.Root;
+
+/* import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.sql.DataSource; */
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
+import org.hibernate.Session;
 
 import ProjectInterfaces.CourseInterface;
 import web.Course.vo.CourseVO;
 
 public class CourseDAO implements CourseInterface<CourseVO> {
-    private static DataSource ds = null;
-    static{
-        try {
-            Context ctx = new InitialContext();
-            ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ProjectDB");
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
+    private Session s;
+    public CourseDAO(Session s){
+        this.s = s;
     }
-    private static final String INSERT = "INSERT INTO `TEAM4`.`Course`"
+    /* private static final String INSERT = "INSERT INTO `TEAM4`.`Course`"
     +"(`course_id`,`course_name`,`course_price`,`course_image`,`released_time`,`maxOfCourse`,`minOfCourse`,`course_location`,`signUp_startdate`,`signUp_deadline`,`course_describe`)"
     +"VALUES"
     +"(?,?,?,?,?,?,?,?,?,?,?);";
@@ -35,9 +33,17 @@ public class CourseDAO implements CourseInterface<CourseVO> {
     private static final String GET_ONE_STM = "SELECT * FROM TEAM4.Course WHERE `course_id` = ?;";
     private static final String CHANGE_STATE =  "UPDATE `TEAM4`.`Course`"
     +"`course_state` = ?"
-    +"WHERE `course_id` = ?;";
+    +"WHERE `course_id` = ?;"; */
     public void insert(CourseVO cVo){
-        try (Connection con = ds.getConnection();
+        // Hibernate
+        if(cVo != null && cVo.getCourseId() != null){
+            CourseVO newCource = this.s.get(CourseVO.class, cVo.getCourseId());
+            if(newCource == null){
+                this.s.save(cVo);
+            }
+        }
+        // DateSource Jdbc
+        /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT)) {
             ps.setInt(1, cVo.getCourseId());
             ps.setString(2, cVo.getCourseName());
@@ -54,10 +60,38 @@ public class CourseDAO implements CourseInterface<CourseVO> {
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
-        }
+        } */
     }
     public void update(CourseVO cVo){
-        try (Connection con = ds.getConnection();
+       // JPA CriterQuery
+       CriteriaBuilder cb = this.s.getCriteriaBuilder();
+       CriteriaUpdate<CourseVO> cu = cb.createCriteriaUpdate(CourseVO.class);
+       Root<CourseVO> root = cu.from(CourseVO.class);
+       cu = cu.set(root.get("course_id"), cVo.getCourseId())
+              .set(root.get("course_name"), cVo.getCourseName())
+              .set(root.get("course_price"), cVo.getCoursePrice())
+              .set(root.get("course_image"), cVo.getCourseImage())
+              .set(root.get("maxOfCourse"), cVo.getMaxOfCourse())
+              .set(root.get("minOfCourse"), cVo.getMinOfCourse())
+              .set(root.get("course_location"), cVo.getCourseLocation())
+              .set(root.get("course_describe"), cVo.getCourseDescribe());
+        this.s.createQuery(cu).executeUpdate();
+
+       // Hibernate
+       /* CourseVO courseVo = this.s.get(CourseVO.class, cVo.getCourseId());
+       if(courseVo != null){
+            courseVo.setCourseId(cVo.getCourseId());
+            courseVo.setCourseName(cVo.getCourseName());
+            courseVo.setCoursePrice(cVo.getCoursePrice());
+            courseVo.setCourseImage(cVo.getCourseImage());
+            courseVo.setMaxOfCourse(cVo.getMaxOfCourse());
+            courseVo.setMinOfCourse(cVo.getMinOfCourse());
+            courseVo.setCourseLocation(cVo.getCourseLocation());
+            courseVo.setCourseDescribe(cVo.getCourseDescribe());
+            this.s.save(courseVo);
+       } */ 
+       // DateSource Jdbc
+       /*  try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(UPDATE)) {
                 ps.setInt(1, cVo.getCourseId());
                 ps.setString(2, cVo.getCourseName());
@@ -74,10 +108,24 @@ public class CourseDAO implements CourseInterface<CourseVO> {
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
-        }
+        } */
     }
     public void delete(Integer courseId){
-        Connection con = null;
+        // JPA CriterQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaDelete<CourseVO> cd = cb.createCriteriaDelete(CourseVO.class);
+        Root<CourseVO> root = cd.from(CourseVO.class);
+        cd = cd.where(cb.equal(root.get("course_id"), courseId));
+        this.s.createQuery(cd).executeUpdate();
+        // Hibernate
+        /* if(courseId != null){
+            CourseVO cVo = this.s.get(CourseVO.class, courseId);
+            if(cVo != null){
+                this.s.delete(cVo);
+            }
+        } */
+        // DateSource Jdbc
+        /* Connection con = null;
         PreparedStatement ps = null;
         try {
             con = ds.getConnection();
@@ -113,10 +161,25 @@ public class CourseDAO implements CourseInterface<CourseVO> {
                     e.printStackTrace(System.err);
                 }
             }
-        }
+        } */
     }
     public void changeState(Integer courseId, Byte courseState){
-        try (Connection con = ds.getConnection();
+        // JPA CriterQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaUpdate<CourseVO> cu = cb.createCriteriaUpdate(CourseVO.class);
+        Root<CourseVO> root = cu.from(CourseVO.class);
+        cu = cu.set(root.get("course_status"), courseState)
+               .where(cb.equal(root.get("course_id"), courseId));
+        this.s.createQuery(cu).executeUpdate();
+
+        // Hibernate
+        /* CourseVO cVo = this.s.get(CourseVO.class, courseId);
+        if(cVo != null){
+            cVo.setCourseState(courseState);
+            this.s.save(cVo);
+        } */
+        // DateSource Jdbc
+        /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(CHANGE_STATE)) {
             ps.setByte(1, courseState);
             ps.setInt(2, courseId);
@@ -124,10 +187,25 @@ public class CourseDAO implements CourseInterface<CourseVO> {
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
-        }
+        } */
     }
     public CourseVO selectByCourseId(Integer courseId){
-        CourseVO cVo = new CourseVO();
+        // JPA CriterQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaQuery<CourseVO> cq = cb.createQuery(CourseVO.class);
+        Root<CourseVO> root = cq.from(CourseVO.class);
+        cq = cq.where(cb.equal(root.get("course_id"), courseId));
+        
+        try {
+			return this.s.createQuery(cq).getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+        // Hibernate
+        /* return this.s.get(CourseVO.class, courseId); */
+        // DateSource Jdbc
+        /* CourseVO cVo = new CourseVO();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(GET_ONE_STM)) {
             ps.setInt(1, courseId);
@@ -150,6 +228,6 @@ public class CourseDAO implements CourseInterface<CourseVO> {
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
         }
-        return cVo;
+        return cVo; */
     }
 }

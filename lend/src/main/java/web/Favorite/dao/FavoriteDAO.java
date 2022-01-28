@@ -17,18 +17,14 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Hibernate; */
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import ProjectInterfaces.FavoriteInterface;
 import web.Favorite.vo.FavoriteVO;
 
 public class FavoriteDAO implements FavoriteInterface<FavoriteVO>{
-    private SessionFactory sf;
-    public void Favorite(SessionFactory sf){
-        this.sf = sf;
-    }
-    public Session getSession(){
-        return this.sf.getCurrentSession();
+    private Session s;
+    public FavoriteDAO(Session s){
+        this.s = s;
     }
    /*  private static final String INSERT = "INSERT INTO `TEAM4`.`Favorite`"
     +"(`customer_id`,`product_id`)"
@@ -38,11 +34,10 @@ public class FavoriteDAO implements FavoriteInterface<FavoriteVO>{
     private static final String GET_ALL_STM = "SELECT `Favorite`.`product_id` FROM `TEAM4`.`Favorite` WHERE `customer_id` = ?;"; */
     public void insert(FavoriteVO fVo){
         // Hibernate
-        Session s = getSession();
         if(fVo.getCustomerId() != null && fVo.getProductId() != null){
-            FavoriteVO newFvo = s.get(FavoriteVO.class, fVo.getFavoriteId());
+            FavoriteVO newFvo = this.s.get(FavoriteVO.class, fVo.getFavoriteId());
             if(newFvo == null){
-                s.save(newFvo);
+                this.s.save(newFvo);
             }
         }
         // DateSource Jdbc
@@ -58,13 +53,12 @@ public class FavoriteDAO implements FavoriteInterface<FavoriteVO>{
     }
     public void delete(Integer customerId, Integer productId){
         // JPA CriteriaQuery
-        Session s = getSession();
-        CriteriaBuilder cb = s.getCriteriaBuilder();
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaDelete<FavoriteVO> cd = cb.createCriteriaDelete(FavoriteVO.class);
         Root<FavoriteVO> root = cd.from(FavoriteVO.class);
         cd = cd.where(cb.and(cb.equal(root.get("customer_id"), customerId), 
                       cb.equal(root.get("product_id"), productId)));
-        s.createQuery(cd).executeUpdate();
+        this.s.createQuery(cd).executeUpdate();
         // Datasource Jdbc
         /* Connection con = null;
         PreparedStatement ps = null;
@@ -107,13 +101,12 @@ public class FavoriteDAO implements FavoriteInterface<FavoriteVO>{
     }
     public ArrayList<Integer> selectByCustomerId(Integer customerId){
     //  JPA CriteriaQuery
-        Session s = getSession();
-        CriteriaBuilder cb = s.getCriteriaBuilder();
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaQuery<FavoriteVO> cq = cb.createQuery(FavoriteVO.class);
         Root<FavoriteVO> root = cq.from(FavoriteVO.class);
         cq = cq.where(cb.equal(root.get("customer_id"), customerId));
         ArrayList<Integer> clist = new ArrayList<Integer>();
-        for(FavoriteVO sel : s.createQuery(cq).getResultList()){
+        for(FavoriteVO sel : this.s.createQuery(cq).getResultList()){
             clist.add(sel.getProductId());
         }
         return clist;

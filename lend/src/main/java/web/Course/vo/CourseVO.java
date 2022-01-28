@@ -26,31 +26,12 @@ public class CourseVO implements java.io.Serializable{
     private Integer minOfCourse;
 	@Column(name = "course_location")
     private String courseLocation;
-	@Column(name = "signUp_startdate")
-    private Timestamp signUpStartdate;
-	@Column(name = "signUp_deadline")
-    private Timestamp signUpDeadline;
 	@Column(name = "course_describe")
     private String courseDescribe;
 	@Column(name = "course_status")
 	private Byte courseState;
     public CourseVO() {
 		super();
-	}
-    public CourseVO(Integer courseId, String courseName, Integer coursePrice, byte[] courseImage,
-			Timestamp releasedTime, Integer maxOfCourse, Integer minOfCourse, String courseLocation,
-			Timestamp signUpStartdate, Timestamp signUpDeadline, String courseDescribe) {
-		setCourseId(courseId);
-		setCourseName(courseName);
-		setCoursePrice(coursePrice);
-		setCourseImage(courseImage);
-		setReleasedTime(releasedTime);
-		setMaxOfCourse(maxOfCourse);
-		setMinOfCourse(minOfCourse);
-		setCourseLocation(courseLocation);
-		setSignUpStartdate(signUpStartdate);
-		setSignUpDeadline(signUpDeadline);
-		setCourseDescribe(courseDescribe);
 	}
 	public Integer getCourseId() {
 		return courseId;
@@ -99,18 +80,6 @@ public class CourseVO implements java.io.Serializable{
 	}
 	public void setCourseLocation(String courseLocation) {
 		this.courseLocation = courseLocation;
-	}
-	public Timestamp getSignUpStartdate() {
-		return signUpStartdate;
-	}
-	public void setSignUpStartdate(Timestamp signUpStartdate) {
-		this.signUpStartdate = signUpStartdate;
-	}
-	public Timestamp getSignUpDeadline() {
-		return signUpDeadline;
-	}
-	public void setSignUpDeadline(Timestamp signUpDeadline) {
-		this.signUpDeadline = signUpDeadline;
 	}
 	public String getCourseDescribe() {
 		return courseDescribe;

@@ -1,29 +1,31 @@
 package web.Product.dao;
 
-import java.sql.Connection;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
+
+/* import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.sql.DataSource;
+import javax.sql.DataSource; */
 
 import ProjectInterfaces.ProductInterface;
 import web.Product.vo.ProductVO;
 
 public class ProductDAO implements ProductInterface<ProductVO>{
-    private static DataSource ds = null;
-    static{
-        try {
-            Context ctx = new InitialContext();
-            ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ProjectDB");
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
+    private Session s;
+    public ProductDAO(Session s){
+        this.s = s;
     }
-    private static final String INSERT_STMT = "INSERT INTO `TEAM4`.`Product`"
+    /* private static final String INSERT_STMT = "INSERT INTO `TEAM4`.`Product`"
     +"(`product_id`,`product_category_code`,`product_price`,`product_name`,`product_image`,`product_description`,`product_inventory`,`product_sold`,`released_time`,`customization`,`custom_product_price`)"
     +"VALUES"
     +"(?,?,?,?,?,?,?,?,?,?,?);";
@@ -40,9 +42,17 @@ public class ProductDAO implements ProductInterface<ProductVO>{
     private static final String CHANGE_STATUS = "UPDATE `TEAM4`.`Product`"
     +"SET"
     +"`product_status` = ?"
-    +"WHERE `product_id` = ?;";
+    +"WHERE `product_id` = ?;"; */
     public void insert(ProductVO pVo){
-        try (Connection con = ds.getConnection();
+        // Hibernate
+        if(pVo != null){
+            ProductVO newProduct = this.s.get(ProductVO.class, pVo.getProductId());
+            if(newProduct == null){
+                this.s.save(newProduct);
+            }
+        }
+        // DateSource Jdbc
+        /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT_STMT)) {
             ps.setInt(1, pVo.getProductId());
             ps.setInt(2, pVo.getProductCategoryCode());
@@ -59,10 +69,44 @@ public class ProductDAO implements ProductInterface<ProductVO>{
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
-        }
+        } */
     }
     public void update(ProductVO pVo){
-        try (Connection con = ds.getConnection();
+        // JPA Criteria
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaUpdate<ProductVO> cu = cb.createCriteriaUpdate(ProductVO.class);
+        Root<ProductVO> root = cu.from(ProductVO.class);
+        cu = cu.set(root.get("product_id"), pVo.getProductId())
+               .set(root.get("product_category_code"), pVo.getProductCategoryCode())
+               .set(root.get("product_price"), pVo.getProductPrice())
+               .set(root.get("product_name"), pVo.getProductName())
+               .set(root.get("product_image"), pVo.getProductImage())
+               .set(root.get("product_description"), pVo.getProductDescription())
+               .set(root.get("product_inventory"), pVo.getProductInventory())
+               .set(root.get("product_sold"), pVo.getProductSold())
+               .set(root.get("released_time"), pVo.getReleasedTime())
+               .set(root.get("customization"), pVo.getCustomization())
+               .set(root.get("custom_product_price"), pVo.getCustomerProductPrice())
+               .set(root.get("product_status"), pVo.getProductStatus());
+        this.s.createQuery(cu).executeUpdate();
+        // Hibernate
+        /* ProductVO productVo = this.s.get(ProductVO.class, pVo.getProductId());
+        if(productVo != null){
+            productVo.setProductId(pVo.getProductId());
+            productVo.setProductCategoryCode(pVo.getProductCategoryCode());
+            productVo.setProductPrice(pVo.getProductPrice());
+            productVo.setProductName(pVo.getProductName());
+            productVo.setProductImage(pVo.getProductImage());
+            productVo.setProductDescription(pVo.getProductDescription());
+            productVo.setProductInventory(pVo.getProductInventory());
+            productVo.setProductSold(pVo.getProductSold());
+            productVo.setReleasedTime(pVo.getReleasedTime());
+            productVo.setCustomization(pVo.getCustomization());
+            productVo.setCustomerProductPrice(pVo.getCustomerProductPrice());
+            this.s.save(productVo);
+        } */
+        // DateSource Jdbc
+        /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(UPDATE)) {
             ps.setInt(1, pVo.getProductId());
             ps.setInt(2, pVo.getProductCategoryCode());
@@ -80,16 +124,28 @@ public class ProductDAO implements ProductInterface<ProductVO>{
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
-        }
+        } */
     }
-    public void delete(Integer producIid){
-        Connection con = null;
+    public void delete(Integer productId){
+        // JPA Criteria
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaDelete<ProductVO> cd = cb.createCriteriaDelete(ProductVO.class);
+        Root<ProductVO> root = cd.from(ProductVO.class);
+        cd = cd.where(cb.equal(root.get("product_id"), productId));
+        this.s.createQuery(cd).executeUpdate();
+        // Hibernate
+        ProductVO pVo = this.s.get(ProductVO.class, productId);
+        if(pVo != null){
+            this.s.delete(pVo);
+        }
+        // DateSource Jdbc
+        /* Connection con = null;
         PreparedStatement ps = null;
         try {
             con = ds.getConnection();
             con.setAutoCommit(false);
             ps = con.prepareStatement(DELETE);
-            ps.setInt(1, producIid);
+            ps.setInt(1, productId);
             ps.executeUpdate();
             con.commit();
             con.setAutoCommit(true);
@@ -119,10 +175,18 @@ public class ProductDAO implements ProductInterface<ProductVO>{
                     e.printStackTrace(System.err);
                 }
             }
-        }
+        } */
     }
     public void sold(Integer productId, Integer sold){
-        try (Connection con = ds.getConnection();
+        // JPA Criteria
+        // Hibernate
+        ProductVO pVo = this.s.get(ProductVO.class, productId);
+        if(pVo != null){
+            pVo.setProductSold(sold);
+            this.s.save(pVo);
+        }
+        // DateSource Jdbc
+        /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(PRODUCT_SOLD)) {
             ps.setInt(1, sold);
             ps.setInt(2, productId);
@@ -130,10 +194,26 @@ public class ProductDAO implements ProductInterface<ProductVO>{
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
-        }
+        } */
     }
     public void changeStatus(Integer productId, Byte statusCode){
-        try (Connection con = ds.getConnection();
+        // JPA Criteria
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaUpdate<ProductVO> cu = cb.createCriteriaUpdate(ProductVO.class);
+        Root<ProductVO> root = cu.from(ProductVO.class);
+        cu = cu.where(cb.and(cb.equal(root.get("product_id"), productId),
+                             cb.equal(root.get("product_status"), statusCode)
+                            )
+                     );
+        this.s.createQuery(cu).executeUpdate();
+        // Hibernate
+        /* ProductVO pVo = this.s.get(ProductVO.class, productId);
+        if(pVo != null){
+            pVo.setProductStatus(statusCode);
+            this.s.save(pVo);
+        } */
+        // DateSource Jdbc
+        /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(CHANGE_STATUS)) {
             ps.setByte(1, statusCode);
             ps.setInt(2, productId);
@@ -141,10 +221,24 @@ public class ProductDAO implements ProductInterface<ProductVO>{
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
-        }
+        } */
     }
     public ProductVO selectByProductName(String productName){
-        ProductVO pVo = new ProductVO();
+        // JPA Criteria
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaQuery<ProductVO> cq = cb.createQuery(ProductVO.class);
+        Root<ProductVO> root = cq.from(ProductVO.class);
+        
+        cq = cq.where(cb.like(root.get("product_name"), productName));
+        
+        try {
+			return this.s.createQuery(cq).getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+        // DateSource Jdbc
+        /* ProductVO pVo = new ProductVO();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(GET_ONE_STMT)) {
             ps.setString(1, productName);
@@ -167,6 +261,6 @@ public class ProductDAO implements ProductInterface<ProductVO>{
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
         }
-        return pVo;
+        return pVo; */
     }
 }

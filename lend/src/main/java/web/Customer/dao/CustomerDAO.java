@@ -43,12 +43,12 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     
     public void insert(CustomerVO customerVo){
         // Hibernate
-            if(customerVo != null && customerVo.getCustomerEmail() != null){
-                CustomerVO cVo = s.get(CustomerVO.class, customerVo.getCustomerId());
-                if(cVo == null){
-                    this.s.save(customerVo);
-                }
+        if(customerVo != null && customerVo.getCustomerEmail() != null){
+            CustomerVO cVo = this.s.get(CustomerVO.class, customerVo.getCustomerId());
+            if(cVo == null){
+                this.s.save(customerVo);
             }
+        }
        
         // DateSource Jdbc
         /* try (Connection con = ds.getConnection(); 
@@ -87,7 +87,7 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
         
         // Hibernate
         /* 
-            CustomerVO cVo = getSession().get(CustomerVO.class, customerVo.getCustomerEmail());
+            CustomerVO cVo = this.s.get(CustomerVO.class, customerVo.getCustomerEmail());
             if(cVo != null){
                 cVo.setCustomerId(customerVo.getCustomerId());
                 cVo.setCustomerName(customerVo.getCustomerName());
@@ -97,7 +97,7 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
                 cVo.setCustomerBirthday(customerVo.getCustomerBirthday());
                 cVo.setCustomerGender(customerVo.getCustomerGender());
                 cVo.setCustomerAddress(customerVo.getCustomerAddress());
-                getSession().save(cVo);
+                this.s.save(cVo);
                 return true;
             }
             return false;
@@ -131,11 +131,11 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
         this.s.createQuery(cd).executeUpdate();
 
        // Hibernate
-       /* Session s = getSession();
+       /* 
           if(customerId != null){ 
-             CustomerVO cVo = s.get(CustomerVO.class, customerId);
+             CustomerVO cVo = this.s.get(CustomerVO.class, customerId);
              if(cVo != null) {
-                 s.delete(cVo);
+                 this.s.delete(cVo);
                  return true
              }
              return false;
@@ -193,12 +193,12 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
         this.s.createQuery(cu).executeUpdate();
 
         // Hibernate
-        /* Session s = getSession();
+        /* 
         if(customerId != null){
-            CustomerVO cVo = s.get(CustomerVO.class, customerId);
+            CustomerVO cVo = this.s.get(CustomerVO.class, customerId);
             if(cVo != null){
                 cVo.setCustomerStatus(statusCode);
-                s.save(cVo);
+                this.s.save(cVo);
                 return true;
             }
             return false;
@@ -227,10 +227,8 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
                              cb.equal(root.get("customerPassword"), customerPassword)
                             )
                      );
-        CustomerVO cVo = null;
 		try {
-			cVo = this.s.createQuery(cq).getSingleResult();
-			return cVo;
+			return this.s.createQuery(cq).getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import org.hibernate.Session;
+
 import web.Product.service.ProductService;
 import web.Product.vo.ProductVO;
 
@@ -44,20 +46,23 @@ public class newProduct extends HttpServlet {
 			isr.close();
 			is.close();
         }
-        ProductService psc = new ProductService();
+        ProductService psc = new ProductService((Session)req.getAttribute("session"));
+        ProductVO check = psc.getOneProduct((String)poc.get("product_name"));
         ProductVO pVo = null;
-        pVo = psc.addProduct((Integer)poc.get("product_category_code"),
-                            (Integer)poc.get("product_price"),
-                            (String)poc.get("product_name"),
-                            (byte[])poc.get("product_image"),
-                            (String)poc.get("product_description"),
-                            (Integer)poc.get("product_inventory"),
-                            (Byte)poc.get("customization"),
-                            (Integer)poc.get("customer_product_price"));
+        if(check == null){
+            pVo = psc.addProduct((Integer)poc.get("product_category_code"),
+                                (Integer)poc.get("product_price"),
+                                (String)poc.get("product_name"),
+                                (byte[])poc.get("product_image"),
+                                (String)poc.get("product_description"),
+                                (Integer)poc.get("product_inventory"),
+                                (Byte)poc.get("customization"),
+                                (Integer)poc.get("customer_product_price"));
+        }
         if (pVo != null) {
             out.println(pVo.getProductName()+"\t\t"+"upload success");
         } else {
-            out.println("Upload fail");
+            out.println("upload fail");
         }
         out.close();
     }

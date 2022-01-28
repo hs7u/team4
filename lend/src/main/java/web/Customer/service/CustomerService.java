@@ -4,12 +4,10 @@ import java.sql.Date;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import ProjectInterfaces.CustomerInterface;
 import web.Customer.dao.CustomerDAO;
 import web.Customer.vo.CustomerVO;
-import web.Hibernate.HibernateUtil;
 
 public class CustomerService {
     private CustomerInterface<CustomerVO> dao;

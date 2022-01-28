@@ -1,18 +1,40 @@
 package web.CustomerOrders.vo;
 import java.sql.Timestamp;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Customer_Orders")
 public class CustomerOrdersVO implements java.io.Serializable{
+	@Id
+	@Column(name = "order_id")
 	private Integer orderId;
+	@Column(name = "customer_id")
 	private Integer customerId;
+	@Column(name = "shipping_method_code")
     private Integer shippingMethodCode;
+	@Column(name = "order_created_date")
     private Timestamp orderCreatedDate;
+	@Column(name = "order_delivery_charge")
     private Integer orderDeliveryCharge;
+	@Column(name = "order_shipping_date")
 	private Timestamp orderShippingDate;
+	@Column(name = "recipient")
 	private String recipient;
+	@Column(name = "senders_address")
 	private String sendersAddress;
+	@Column(name = "order_detials")
     private String orderDetails;
+	@Column(name = "order_status")
 	private Byte orderStatus;
+	@Column(name = "payment_status")
 	private Byte paymentStatus;
+	@Column(name = "shipping_status")
 	private Byte shippingStatus;
+	@Column(name = "return_status")
 	private Byte returnStatus;
 	public CustomerOrdersVO() {
 		super();

@@ -19,6 +19,10 @@ public class CourseTimeableVO implements java.io.Serializable{
     private Integer courseId;
 	@Column(name = "course_date")
     private Timestamp courseDate;
+	@Column(name = "signUp_startdate")
+    private Timestamp signUpStartdate;
+	@Column(name = "signUp_deadline")
+    private Timestamp signUpDeadline;
 	public CourseTimeableVO() {
 		super();
 	}
@@ -44,5 +48,17 @@ public class CourseTimeableVO implements java.io.Serializable{
 	}
 	public void setCourseDate(Timestamp courseDate) {
 		this.courseDate = courseDate;
+	}
+	public Timestamp getSignUpStartdate() {
+		return signUpStartdate;
+	}
+	public void setSignUpStartdate(Timestamp signUpStartdate) {
+		this.signUpStartdate = signUpStartdate;
+	}
+	public Timestamp getSignUpDeadline() {
+		return signUpDeadline;
+	}
+	public void setSignUpDeadline(Timestamp signUpDeadline) {
+		this.signUpDeadline = signUpDeadline;
 	}
 }

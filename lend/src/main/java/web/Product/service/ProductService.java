@@ -1,18 +1,20 @@
 package web.Product.service;
 
+import org.hibernate.Session;
+
 import ProjectInterfaces.ProductInterface;
 import web.Product.dao.ProductDAO;
 import web.Product.vo.ProductVO;
 
 public class ProductService {
     private ProductInterface<ProductVO> dao;
-    public ProductService(){
-        dao = new ProductDAO();
+    public ProductService(Session session){
+        dao = new ProductDAO(session);
     }
     public ProductVO addProduct(Integer productCategoryCode, Integer productPrice, String productName,byte[] productImage,
             String productDescription, Integer productInventory, Byte customization, Integer customerProductPrice){
             java.sql.Timestamp releasedTime = new java.sql.Timestamp(System.currentTimeMillis());
-            ProductVO pVo = new ProductVO();
+        ProductVO pVo = new ProductVO();
         pVo.setProductId(hashCode(productName, productDescription));
         pVo.setProductCategoryCode(productCategoryCode);
         pVo.setProductPrice(productPrice);
@@ -46,6 +48,9 @@ public class ProductService {
     }
     public void updateStatus(Integer productId, Byte statusCode) {
         dao.changeStatus(productId, statusCode);
+    }
+    public ProductVO getOneProduct(String productName){
+        return dao.selectByProductName(productName);
     }
     public int hashCode(String productName, String productDescription) {
         final int prime = 31;

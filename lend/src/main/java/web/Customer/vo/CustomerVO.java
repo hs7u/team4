@@ -1,16 +1,12 @@
 package web.Customer.vo;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import web.Favorite.vo.FavoriteVO;
 @Entity
 @Table(name = "Customer")
 public class CustomerVO implements java.io.Serializable{

@@ -2,14 +2,16 @@ package web.Favorite.service;
 
 import java.util.ArrayList;
 
+import org.hibernate.Session;
+
 import ProjectInterfaces.FavoriteInterface;
 import web.Favorite.dao.FavoriteDAO;
 import web.Favorite.vo.FavoriteVO;
 
 public class FavoriteService {
     private FavoriteInterface<FavoriteVO> dao;
-    public FavoriteService(){
-        dao = new FavoriteDAO();
+    public FavoriteService(Session session){
+        dao = new FavoriteDAO(session);
     }
     public FavoriteVO addFavorite(Integer customerId, Integer productId){
         FavoriteVO fVo = new FavoriteVO();
