@@ -1,6 +1,6 @@
 package web.Course.service;
 
-import java.sql.Timestamp;
+import org.hibernate.Session;
 
 import ProjectInterfaces.CourseInterface;
 import web.Course.dao.CourseDAO;
@@ -8,12 +8,11 @@ import web.Course.vo.CourseVO;
 
 public class CourseService {
     private CourseInterface<CourseVO> dao;
-    public CourseService() {
-        dao = new CourseDAO();
+    public CourseService(Session session) {
+        dao = new CourseDAO(session);
     }
     public CourseVO addCourse(String courseName, Integer coursePrice, byte[] courseImage,
-            Integer maxOfCourse, Integer minOfCourse, String courseLocation,
-            Timestamp signUpStartdate, Timestamp signUpDeadline, String courseDescribe) {
+            Integer maxOfCourse, Integer minOfCourse, String courseLocation, String courseDescribe) {
         java.sql.Timestamp releasedTime = new java.sql.Timestamp(System.currentTimeMillis());
         CourseVO cVo = new CourseVO();
         cVo.setCourseId(hashCode(courseName, courseLocation));
@@ -24,15 +23,12 @@ public class CourseService {
 		cVo.setMaxOfCourse(maxOfCourse);
 		cVo.setMinOfCourse(minOfCourse);
 		cVo.setCourseLocation(courseLocation);
-		cVo.setSignUpStartdate(signUpStartdate);
-		cVo.setSignUpDeadline(signUpDeadline);
 		cVo.setCourseDescribe(courseDescribe);
         dao.insert(cVo);
         return cVo;
     }
     public CourseVO update(Integer courseId, String courseName, Integer coursePrice, byte[] courseImage,
-            Integer maxOfCourse, Integer minOfCourse, String courseLocation,
-            Timestamp signUpStartdate, Timestamp signUpDeadline, String courseDescribe){
+            Integer maxOfCourse, Integer minOfCourse, String courseLocation, String courseDescribe){
         CourseVO cVo = new CourseVO();
         cVo.setCourseId(courseId);
 		cVo.setCourseName(courseName);
@@ -41,8 +37,6 @@ public class CourseService {
 		cVo.setMaxOfCourse(maxOfCourse);
 		cVo.setMinOfCourse(minOfCourse);
 		cVo.setCourseLocation(courseLocation);
-		cVo.setSignUpStartdate(signUpStartdate);
-		cVo.setSignUpDeadline(signUpDeadline);
 		cVo.setCourseDescribe(courseDescribe);
         dao.update(cVo);
         return cVo;

@@ -26,11 +26,6 @@ public class CourseTimeableVO implements java.io.Serializable{
 	public CourseTimeableVO() {
 		super();
 	}
-	public CourseTimeableVO(Integer courseId, Timestamp courseDate) {
-		super();
-		setCourseId(courseId);
-		setCourseDate(courseDate);
-	}
 	public Integer getCourseTimeableId() {
 		return courseTimeableId;
 	}

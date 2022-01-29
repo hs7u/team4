@@ -8,25 +8,19 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import org.hibernate.Session;
 
 import ProjectInterfaces.CourseTimeableInterface;
 import web.CourseTimeable.vo.CourseTimeableVO;
 
 public class CourseTimeableDAO implements CourseTimeableInterface<CourseTimeableVO>{
-    private static DataSource ds = null;
-    static{
-        try {
-            Context ctx = new InitialContext();
-            ds = (DataSource)ctx.lookup("java:comp/env/jdbc/ProjectDB");
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
+    private Session s;
+    public CourseTimeableDAO(Session s){
+        this.s = s;
     }
-    private static final String INSERT ="INSERT INTO `TEAM4`.`Course_Timeable`"
+    /* private static final String INSERT ="INSERT INTO `TEAM4`.`Course_Timeable`"
     +"(`course_id`,`course_date`)"
     +"VALUES"
     +"(?,?);";
@@ -35,9 +29,11 @@ public class CourseTimeableDAO implements CourseTimeableInterface<CourseTimeable
     +"`course_timeable_id` = ?,`course_id` = ?,`course_date` = ?"
     +"WHERE `course_timeable_id` = ?;";
     private static final String DELETE ="DELETE FROM `TEAM4`.`Course_Timeable` WHERE `course_timele_id` = ?;";
-    private static final String selectByCourseId ="SELECT `course_date` FROM TEAM4.Course_Timeable WHERE `course_id` = ?;";
+    private static final String selectByCourseId ="SELECT `course_date` FROM TEAM4.Course_Timeable WHERE `course_id` = ?;"; */
     public void insert(CourseTimeableVO ctvo){
-        try (Connection con = ds.getConnection();
+        // Hibernate
+        // DateSource Jdbc
+        /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT)) {
             ps.setInt(1, ctvo.getCourseId());
             ps.setTimestamp(2, ctvo.getCourseDate());
@@ -45,10 +41,12 @@ public class CourseTimeableDAO implements CourseTimeableInterface<CourseTimeable
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-        }
+        } */
     }        
     public void update(CourseTimeableVO ctvo){
-        try (Connection con = ds.getConnection();
+        // Hibernate
+        // DateSource Jdbc
+        /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(UPDATE)) {
             ps.setInt(1, ctvo.getCourseTimeableId());
             ps.setInt(2, ctvo.getCourseId());
@@ -58,10 +56,12 @@ public class CourseTimeableDAO implements CourseTimeableInterface<CourseTimeable
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-        }
+        } */
     }    
     public void delete(Integer courseTimeableId){
-        Connection con = null;
+        // Hibernate
+        // DateSource Jdbc
+        /* Connection con = null;
         PreparedStatement ps = null;
         try {
             con = ds.getConnection();
@@ -97,10 +97,12 @@ public class CourseTimeableDAO implements CourseTimeableInterface<CourseTimeable
                     e.printStackTrace(System.err);
                 }
             }
-        }
+        } */
     }    
     public ArrayList<Timestamp> selectByCourseId(Integer courseId){
-        ArrayList<Timestamp> list = new ArrayList<Timestamp>();
+        // Hibernate
+        // DateSource Jdbc
+        /* ArrayList<Timestamp> list = new ArrayList<Timestamp>();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(selectByCourseId)) {
             ps.setInt(1, courseId);
@@ -112,6 +114,6 @@ public class CourseTimeableDAO implements CourseTimeableInterface<CourseTimeable
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
         }
-        return list;
+        return list; */
     }
 }
