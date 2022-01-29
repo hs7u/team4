@@ -8,13 +8,8 @@ import web.Course.vo.CourseVO;
 
 public class CourseService {
     private CourseInterface<CourseVO> dao;
-<<<<<<< HEAD
-    public CourseService() {
-        dao = new CourseDAO(null);
-=======
     public CourseService(Session session) {
         dao = new CourseDAO(session);
->>>>>>> gg
     }
     public CourseVO addCourse(String courseName, Integer coursePrice, byte[] courseImage,
             Integer maxOfCourse, Integer minOfCourse, String courseLocation, String courseDescribe) {

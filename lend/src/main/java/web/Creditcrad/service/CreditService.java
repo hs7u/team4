@@ -1,13 +1,15 @@
 package web.Creditcrad.service;
 
+import org.hibernate.Session;
+
 import ProjectInterfaces.CreditcradInterface;
 import web.Creditcrad.dao.CreditcardDAO;
 import web.Creditcrad.vo.CreditcradVO;
 
 public class CreditService {
     private CreditcradInterface<CreditcradVO> dao;
-    public CreditService() {
-        dao = new CreditcardDAO();
+    public CreditService(Session session) {
+        dao = new CreditcardDAO(session);
     }
     public CreditcradVO addCreditcard(Integer creditcardNumber, Integer customerId, String cardholderName,
             String cvvCode,String expireMonth, String expireYear) {

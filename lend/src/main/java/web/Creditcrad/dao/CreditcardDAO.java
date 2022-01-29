@@ -1,6 +1,12 @@
 package web.Creditcrad.dao;
 
-import java.sql.Connection;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.Root;
+
+/* import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,22 +14,19 @@ import java.sql.SQLException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.sql.DataSource;
+import javax.sql.DataSource; */
+
+import org.hibernate.Session;
 
 import ProjectInterfaces.CreditcradInterface;
 import web.Creditcrad.vo.CreditcradVO;
 
 public class CreditcardDAO implements CreditcradInterface<CreditcradVO>{
-    private static DataSource ds = null;
-    static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ProjectDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
-    private static final String INSERT = "INSERT INTO `TEAM4`.`Creditcard_Info`"
+    private Session s;
+    public CreditcardDAO(Session s){
+        this.s = s;
+    }
+    /* private static final String INSERT = "INSERT INTO `TEAM4`.`Creditcard_Info`"
     +"(`creditcard_number`,`customer_id`,`cvv_code`,`expire_year`,`expire_month`,`cardholder_name`)"
     +"VALUES"
     +"(?,?,?,?,?,?);";
@@ -32,9 +35,17 @@ public class CreditcardDAO implements CreditcradInterface<CreditcradVO>{
     +"`creditcard_number` = ?,`customer_id` = ?,`cvv_code` = ?,`expire_year` = ?,`expire_month` = ?,`cardholder_name` = ?"
     +"WHERE `customer_id` = ?;";
     private static final String DELETE = "DELETE FROM `TEAM4`.`Creditcard_Info` WHERE `customer_id` = ?;";
-    private static final String GET_ONE_STM = "SELECT * FROM TEAM4.Creditcard_Info WHERE `customer_id` = ?;";
+    private static final String GET_ONE_STM = "SELECT * FROM TEAM4.Creditcard_Info WHERE `customer_id` = ?;"; */
     public void insert(CreditcradVO cVo){
-        try (Connection con = ds.getConnection();
+        // Hibernate
+        if(cVo != null){
+            CreditcradVO card = this.s.get(CreditcradVO.class, cVo.getCreditcardNumber());
+            if(card == null){
+                this.s.save(cVo);
+            }
+        }
+        // DateSource Jdbc
+        /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT)) {
             ps.setInt(1, cVo.getCreditcardNumber());
             ps.setInt(2, cVo.getCustomerId());
@@ -46,10 +57,33 @@ public class CreditcardDAO implements CreditcradInterface<CreditcradVO>{
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
-        }
+        } */
     }
     public void update(CreditcradVO cVo){
-        try (Connection con = ds.getConnection();
+        // JPA CriterQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaUpdate<CreditcradVO> cu = cb.createCriteriaUpdate(CreditcradVO.class);
+        Root<CreditcradVO> root = cu.from(CreditcradVO.class);
+        cu = cu.set(root.get("creditcard_number"), cVo.getCreditcardNumber())
+               .set(root.get("customer_id"), cVo.getCustomerId())
+               .set(root.get("cardholder_name"), cVo.getCvvCode())
+               .set(root.get("cvv_code"), cVo.getExpireYear())
+               .set(root.get("expire_month"), cVo.getExpireMonth())
+               .set(root.get("expire_year"), cVo.getCardholderName());
+        this.s.createQuery(cu).executeUpdate();
+        // Hibernate
+        /* CreditcradVO card = this.s.get(CreditcradVO.class, cVo.getCreditcardNumber());
+        if(card != null){
+            card.setCreditcardNumber(cVo.getCreditcardNumber());
+            card.setCustomerId(cVo.getCustomerId());
+            card.setCvvCode(cVo.getCvvCode());
+            card.setExpireYear(cVo.getExpireYear());
+            card.setExpireMonth(cVo.getExpireMonth());
+            card.setCardholderName(cVo.getCardholderName());
+            this.s.save(card);
+        } */
+        // DateSource Jdbc
+        /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(UPDATE)) {
             ps.setInt(1, cVo.getCreditcardNumber());
             ps.setInt(2, cVo.getCustomerId());
@@ -62,10 +96,24 @@ public class CreditcardDAO implements CreditcradInterface<CreditcradVO>{
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
-        }
+        } */
     }
     public void delete(Integer customerId){
-        Connection con = null;
+        // JPA CriterQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaDelete<CreditcradVO> cd = cb.createCriteriaDelete(CreditcradVO.class);
+        Root<CreditcradVO> root = cd.from(CreditcradVO.class);
+        cd = cd.where(cb.equal(root.get("customer_id"), customerId));
+        this.s.createQuery(cd).executeUpdate();
+        // Hibernate
+        /* if(customerId != null){
+            CreditcradVO cVo = this.s.get(CreditcradVO.class, customerId);
+            if(cVo != null){
+                this.s.delete(cVo);
+            }
+        } */
+        // DateSource Jdbc
+        /* Connection con = null;
         PreparedStatement ps = null;
         try {
             con = ds.getConnection();
@@ -101,10 +149,30 @@ public class CreditcardDAO implements CreditcradInterface<CreditcradVO>{
                     e.printStackTrace(System.err);
                 }
             }
-        }
+        } */
     }
     public CreditcradVO selectByCustomerId(Integer customerId){
-        CreditcradVO cVo = new CreditcradVO();
+        // JPA CriterQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaQuery<CreditcradVO> cq = cb.createQuery(CreditcradVO.class);
+        Root<CreditcradVO> root = cq.from(CreditcradVO.class);
+        cq = cq.where(cb.equal(root.get("customer_id"), customerId));
+        try {
+			return this.s.createQuery(cq).getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+        // Hibernate
+        /* if(customerId != null){
+            CreditcradVO cVo = this.s.get(CreditcradVO.class, customerId);
+            if(cVo != null){
+                return cVo;
+            }
+        }
+        return null; */
+        // DateSource Jdbc
+        /* CreditcradVO cVo = new CreditcradVO();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(GET_ONE_STM)) {
             ps.setInt(1, customerId);
@@ -121,6 +189,6 @@ public class CreditcardDAO implements CreditcradInterface<CreditcradVO>{
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
         }
-        return cVo;
+        return cVo; */
     }
 }
