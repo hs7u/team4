@@ -9,7 +9,7 @@ import web.Course.vo.CourseVO;
 public class CourseService {
     private CourseInterface<CourseVO> dao;
     public CourseService() {
-        dao = new CourseDAO();
+        dao = new CourseDAO(null);
     }
     public CourseVO addCourse(String courseName, Integer coursePrice, byte[] courseImage,
             Integer maxOfCourse, Integer minOfCourse, String courseLocation,
@@ -24,8 +24,6 @@ public class CourseService {
 		cVo.setMaxOfCourse(maxOfCourse);
 		cVo.setMinOfCourse(minOfCourse);
 		cVo.setCourseLocation(courseLocation);
-		cVo.setSignUpStartdate(signUpStartdate);
-		cVo.setSignUpDeadline(signUpDeadline);
 		cVo.setCourseDescribe(courseDescribe);
         dao.insert(cVo);
         return cVo;
@@ -41,8 +39,6 @@ public class CourseService {
 		cVo.setMaxOfCourse(maxOfCourse);
 		cVo.setMinOfCourse(minOfCourse);
 		cVo.setCourseLocation(courseLocation);
-		cVo.setSignUpStartdate(signUpStartdate);
-		cVo.setSignUpDeadline(signUpDeadline);
 		cVo.setCourseDescribe(courseDescribe);
         dao.update(cVo);
         return cVo;
