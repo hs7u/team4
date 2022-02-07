@@ -64,12 +64,12 @@ public class CreditcardDAO implements CreditcradInterface<CreditcradVO>{
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaUpdate<CreditcradVO> cu = cb.createCriteriaUpdate(CreditcradVO.class);
         Root<CreditcradVO> root = cu.from(CreditcradVO.class);
-        cu = cu.set(root.get("creditcard_number"), cVo.getCreditcardNumber())
-               .set(root.get("customer_id"), cVo.getCustomerId())
+        cu = cu.set(root.get("customer_id"), cVo.getCustomerId())
                .set(root.get("cardholder_name"), cVo.getCvvCode())
                .set(root.get("cvv_code"), cVo.getExpireYear())
                .set(root.get("expire_month"), cVo.getExpireMonth())
-               .set(root.get("expire_year"), cVo.getCardholderName());
+               .set(root.get("expire_year"), cVo.getCardholderName())
+               .where(cb.equal(root.get("creditcard_number"), cVo.getCreditcardNumber()));
         this.s.createQuery(cu).executeUpdate();
         // Hibernate
         /* CreditcradVO card = this.s.get(CreditcradVO.class, cVo.getCreditcardNumber());

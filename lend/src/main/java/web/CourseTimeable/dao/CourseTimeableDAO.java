@@ -59,11 +59,11 @@ public class CourseTimeableDAO implements CourseTimeableInterface<CourseTimeable
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaUpdate<CourseTimeableVO> cu = cb.createCriteriaUpdate(CourseTimeableVO.class);
         Root<CourseTimeableVO> root = cu.from(CourseTimeableVO.class);
-        cu = cu.set(root.get("course_timeable_id"), ctvo.getCourseTimeableId())
-               .set(root.get("course_id"), ctvo.getCourseId())
+        cu = cu.set(root.get("course_id"), ctvo.getCourseId())
                .set(root.get("course_date"), ctvo.getCourseDate())
                .set(root.get("signUp_startdate"), ctvo.getSignUpStartdate())
-               .set(root.get("signUp_deadline"), ctvo.getSignUpDeadline());
+               .set(root.get("signUp_deadline"), ctvo.getSignUpDeadline())
+               .where(cb.equal(root.get("course_timeable_id"), ctvo.getCourseTimeableId()));
         this.s.createQuery(cu).executeUpdate();
 
         // Hibernate

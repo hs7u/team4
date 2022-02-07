@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnDefault;
+
 @Entity
 @Table(name = "Customer_Orders")
 public class CustomerOrdersVO implements java.io.Serializable{
@@ -28,28 +30,32 @@ public class CustomerOrdersVO implements java.io.Serializable{
 	private String sendersAddress;
 	@Column(name = "order_detials")
     private String orderDetails;
-	@Column(name = "order_status")
+	@ColumnDefault(value = "0")
+	@Column(
+		name = "order_status",
+		columnDefinition = "bit"
+		)
 	private Byte orderStatus;
-	@Column(name = "payment_status")
+	@ColumnDefault(value = "0")
+	@Column(
+		name = "payment_status",
+		columnDefinition = "bit"
+		)
 	private Byte paymentStatus;
-	@Column(name = "shipping_status")
+	@ColumnDefault(value = "0")
+	@Column(
+		name = "shipping_status",
+		columnDefinition = "bit"
+		)
 	private Byte shippingStatus;
-	@Column(name = "return_status")
+	@ColumnDefault(value = "0")
+	@Column(
+		name = "return_status",
+		columnDefinition = "bit"
+		)
 	private Byte returnStatus;
 	public CustomerOrdersVO() {
 		super();
-	}
-	public CustomerOrdersVO(Integer orderId, Integer customerId, Integer shippingMethodCode,
-			Timestamp orderCreatedDate, Integer orderDeliveryCharge, Timestamp orderShippingDate, 
-			String recipient, String sendersAddress, String orderDetails) {
-			setOrderId(orderId);
-			setCustomerId(customerId);
-			setShippingMethodCode(shippingMethodCode);
-			setOrderCreatedDate(orderCreatedDate);
-			setOrderDeliveryCharge(orderDeliveryCharge);
-			setRecipient(recipient);
-			setSendersAddress(sendersAddress);
-			setOrderDetails(orderDetails);
 	}
 	public Integer getOrderId() {
 		return orderId;

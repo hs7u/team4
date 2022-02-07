@@ -2,14 +2,16 @@ package web.CustomerOrders.service;
 
 import java.sql.Timestamp;
 
+import org.hibernate.Session;
+
 import ProjectInterfaces.CustomerOrderInterface;
 import web.CustomerOrders.dao.CustomerOrderDAO;
 import web.CustomerOrders.vo.CustomerOrdersVO;
 
 public class CustomerOrdersService {
     private CustomerOrderInterface<CustomerOrdersVO> dao;
-    public CustomerOrdersService(){
-        dao = new CustomerOrderDAO();
+    public CustomerOrdersService(Session session){
+        dao = new CustomerOrderDAO(session);
     }
     public CustomerOrdersVO addOrder(Integer customerId, Integer shippingMethodCode,Integer orderDeliveryCharge, 
             Timestamp orderShippingDate,String recipient, String sendersAddress,String orderDetails){

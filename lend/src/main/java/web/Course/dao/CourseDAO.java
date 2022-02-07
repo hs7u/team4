@@ -67,14 +67,14 @@ public class CourseDAO implements CourseInterface<CourseVO> {
        CriteriaBuilder cb = this.s.getCriteriaBuilder();
        CriteriaUpdate<CourseVO> cu = cb.createCriteriaUpdate(CourseVO.class);
        Root<CourseVO> root = cu.from(CourseVO.class);
-       cu = cu.set(root.get("course_id"), cVo.getCourseId())
-              .set(root.get("course_name"), cVo.getCourseName())
+       cu = cu.set(root.get("course_name"), cVo.getCourseName())
               .set(root.get("course_price"), cVo.getCoursePrice())
               .set(root.get("course_image"), cVo.getCourseImage())
               .set(root.get("maxOfCourse"), cVo.getMaxOfCourse())
               .set(root.get("minOfCourse"), cVo.getMinOfCourse())
               .set(root.get("course_location"), cVo.getCourseLocation())
-              .set(root.get("course_describe"), cVo.getCourseDescribe());
+              .set(root.get("course_describe"), cVo.getCourseDescribe())
+              .where(cb.equal(root.get("course_id"), cVo.getCourseId()));
         this.s.createQuery(cu).executeUpdate();
 
        // Hibernate

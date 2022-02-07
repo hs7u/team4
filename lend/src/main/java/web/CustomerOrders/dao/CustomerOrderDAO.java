@@ -1,6 +1,12 @@
 package web.CustomerOrders.dao;
 
-import java.sql.Connection;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.Root;
+
+/* import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,22 +14,19 @@ import java.sql.SQLException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.sql.DataSource;
+import javax.sql.DataSource; */
+
+import org.hibernate.Session;
 
 import ProjectInterfaces.CustomerOrderInterface;
 import web.CustomerOrders.vo.CustomerOrdersVO;
 
 public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO>{
-    private static DataSource ds = null;
-    static{
-        try {
-            Context ctx = new InitialContext();
-            ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ProjectDB");
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
+    private Session s;
+    public CustomerOrderDAO(Session s){
+        this.s = s;
     }
-    private static final String INSERT_STMT = "INSERT INTO `TEAM4`.`Customer_Orders`"
+   /*  private static final String INSERT_STMT = "INSERT INTO `TEAM4`.`Customer_Orders`"
     +"(`order_id`,`customer_id`,`shipping_method_code`,`order_created_date`,`order_delivery_charge`,`order_shipping_date`,`recipient`,`senders_address`,`order_detials`)"
     +"VALUES"
     +"(?,?,?,?,?,?,?,?,?);";
@@ -48,9 +51,17 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
     private static final String RETURNORDER = "UPDATE `TEAM4`.`Customer_Orders`"
     +"SET"
     +"`return_status` = ?"
-    +"WHERE `order_id` = ?;";
+    +"WHERE `order_id` = ?;"; */
     public void insert(CustomerOrdersVO coVo){
-        try (Connection con = ds.getConnection();
+        // Hibernate
+        if(coVo != null){
+            CustomerOrdersVO newOrder = this.s.get(CustomerOrdersVO.class, coVo.getOrderId());
+            if(newOrder == null){
+                this.s.save(coVo);
+            }
+        }
+        // Datasource
+        /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT_STMT)) {
             ps.setInt(1, coVo.getOrderId());
             ps.setInt(2, coVo.getCustomerId());
@@ -64,10 +75,39 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } */
     }
     public void update(CustomerOrdersVO coVo){
-        try (Connection con = ds.getConnection();
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaUpdate<CustomerOrdersVO> cu = cb.createCriteriaUpdate(CustomerOrdersVO.class);
+        Root<CustomerOrdersVO> root = cu.from(CustomerOrdersVO.class);
+        cu = cu.set(root.get("order_id"), coVo.getOrderId())
+               .set(root.get("customer_id"), coVo.getCustomerId())
+               .set(root.get("shipping_method_code"), coVo.getShippingMethodCode())
+               .set(root.get("order_delivery_charge"), coVo.getOrderDeliveryCharge())
+               .set(root.get("order_shipping_date"), coVo.getOrderShippingDate())
+               .set(root.get("recipient"), coVo.getRecipint())
+               .set(root.get("senders_address"), coVo.getSendersAddress())
+               .set(root.get("order_detials"), coVo.getOrderDetails());
+        this.s.createQuery(cu).executeUpdate();
+        // Hibernate
+        /* if(coVo != null){
+            CustomerOrdersVO order = this.s.get(CustomerOrdersVO.class, coVo.getOrderId());
+            if(order != null){
+                order.setOrderId(coVo.getOrderId());
+                order.setCustomerId(coVo.getCustomerId());
+                order.setShippingMethodCode(coVo.getShippingMethodCode());
+                order.setOrderDeliveryCharge(coVo.getOrderDeliveryCharge());
+                order.setOrderShippingDate(coVo.getOrderShippingDate());
+                order.setRecipient(coVo.getRecipint());
+                order.setSendersAddress(coVo.getSendersAddress());
+                order.setOrderDetails(coVo.getOrderDetails());
+                this.s.save(order);
+            }
+        } */
+        // Datasource
+        /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(UPDATE)) {
             ps.setInt(1, coVo.getOrderId());
             ps.setInt(2, coVo.getCustomerId());
@@ -82,10 +122,24 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-        }
+        } */
     }
     public void delete(Integer orderId){
-        Connection con = null;
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaDelete<CustomerOrdersVO> cd = cb.createCriteriaDelete(CustomerOrdersVO.class);
+        Root<CustomerOrdersVO> root = cd.from(CustomerOrdersVO.class);
+        cd = cd.where(cb.equal(root.get("order_id"), orderId));
+        this.s.createQuery(cd).executeUpdate();
+        // Hibernate
+       /*  if(orderId != null){
+            CustomerOrdersVO newOrder = this.s.get(CustomerOrdersVO.class, orderId);
+            if(newOrder != null){
+                this.s.delete(newOrder);
+            }
+        } */
+       // Datasource
+       /*  Connection con = null;
         PreparedStatement ps = null;
         try {
             con = ds.getConnection();
@@ -121,10 +175,41 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
                     e.printStackTrace(System.err);
                 }
             }
-        }
+        } */
     }
     public void updateStatus(String statusName, Integer orderId, Byte statusCode) {
-        String sql = null;
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaUpdate<CustomerOrdersVO> cu = cb.createCriteriaUpdate(CustomerOrdersVO.class);
+        Root<CustomerOrdersVO> root = cu.from(CustomerOrdersVO.class);
+        cu = cu.set(root.get(statusName), statusCode)
+               .where(cb.equal(root.get("order_id"), orderId));
+        this.s.createQuery(cu).executeUpdate();
+        // Hibernate
+        /* if(orderId != null){
+            CustomerOrdersVO coVo = this.s.get(CustomerOrdersVO.class, orderId);
+            if(coVo != null){
+                switch (statusName) {
+                    case "order_status":
+                        coVo.setOrderStatus(statusCode);
+                        break;
+                    case "payment_status":
+                        coVo.setPaymentStatus(statusCode);
+                        break;
+                    case "shipping_status":
+                        coVo.setShippingStatus(statusCode);
+                        break;
+                    case "return_status":
+                        coVo.setReturnStatus(statusCode);
+                        break;
+                    default:
+                        break;
+                }
+                this.s.save(coVo);
+            }
+        } */
+        // Datasource
+        /* String sql = null;
         switch (statusName) {
             case "order_status":
                 sql = UPDATEORDERSTATUS;
@@ -149,10 +234,22 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
             + se.getMessage());
-        }
+        } */
     }
     public CustomerOrdersVO selectByOrderId(Integer orderId){
-        CustomerOrdersVO coVo = new CustomerOrdersVO();
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaQuery<CustomerOrdersVO> cq = cb.createQuery(CustomerOrdersVO.class);
+        Root<CustomerOrdersVO> root = cq.from(CustomerOrdersVO.class);
+        cq = cq.where(cb.equal(root.get("order_id"), orderId));
+        return this.s.createQuery(cq).getSingleResult();
+        // Hibernate
+        /* if(orderId != null){
+            return this.s.get(CustomerOrdersVO.class, orderId);
+        }
+        return null; */
+        // Datasource
+        /* CustomerOrdersVO coVo = new CustomerOrdersVO();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(GET_ONE_STMT)) {
             ps.setInt(1, orderId);
@@ -176,6 +273,6 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
         }
-        return coVo;
+        return coVo; */
     }
 }

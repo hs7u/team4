@@ -1,13 +1,15 @@
 package web.CustomerService.service;
 
+import org.hibernate.Session;
+
 import ProjectInterfaces.CustomerServiceInterface;
 import web.CustomerService.dao.CustomerServiceDAO;
 import web.CustomerService.vo.CustomerServiceVO;
 
 public class CSService {
     private CustomerServiceInterface<CustomerServiceVO> dao;
-    public CSService() {
-        dao = new CustomerServiceDAO();
+    public CSService(Session session) {
+        dao = new CustomerServiceDAO(session);
     }
     public CustomerServiceVO addProblem(Integer cusotmerId, String messageTitle, String messageContext) {
         java.sql.Timestamp messageTime = new java.sql.Timestamp(System.currentTimeMillis());
