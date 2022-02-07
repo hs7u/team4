@@ -1,5 +1,7 @@
 package web.Product.dao;
 
+import java.util.ArrayList;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
@@ -262,5 +264,17 @@ public class ProductDAO implements ProductInterface<ProductVO>{
             + se.getMessage());
         }
         return pVo; */
+    }
+    public ArrayList<ProductVO> getAllProduct(){
+        // JPA CtiteriaQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaQuery<ProductVO> cq = cb.createQuery(ProductVO.class);
+        Root<ProductVO> root = cq.from(ProductVO.class);
+        cq = cq.where(cb.isNotNull(root.get("product_id")));
+        ArrayList<ProductVO> list = new ArrayList<ProductVO>();
+        for(ProductVO pVo : this.s.createQuery(cq).getResultList()){
+            list.add(pVo);
+        }
+        return list;
     }
 }

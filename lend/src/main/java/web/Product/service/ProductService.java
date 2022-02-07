@@ -1,5 +1,7 @@
 package web.Product.service;
 
+import java.util.ArrayList;
+
 import org.hibernate.Session;
 
 import ProjectInterfaces.ProductInterface;
@@ -51,6 +53,9 @@ public class ProductService {
     }
     public ProductVO getOneProduct(String productName){
         return dao.selectByProductName(productName);
+    }
+    public ArrayList<ProductVO> getAll() {
+        return dao.getAllProduct();
     }
     public int hashCode(String productName, String productDescription) {
         final int prime = 31;
