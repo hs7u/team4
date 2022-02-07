@@ -1,13 +1,15 @@
 package web.Qa.service;
 
+import org.hibernate.Session;
+
 import ProjectInterfaces.QAInterface;
 import web.Qa.dao.QADAO;
 import web.Qa.vo.QAVO;
 
 public class QAService {
     private QAInterface<QAVO> dao;
-    public QAService() {
-        dao = new QADAO();
+    public QAService(Session session) {
+        dao = new QADAO(session);
     }
     public QAVO addQA(String answer, String quession) {
         QAVO qavo = new QAVO();

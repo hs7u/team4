@@ -1,6 +1,12 @@
 package web.Qa.dao;
 
-import java.sql.Connection;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.Root;
+
+/* import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,22 +14,19 @@ import java.sql.SQLException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.sql.DataSource;
+import javax.sql.DataSource; */
+
+import org.hibernate.Session;
 
 import ProjectInterfaces.QAInterface;
 import web.Qa.vo.QAVO;
 
 public class QADAO implements QAInterface<QAVO>{
-    private static DataSource ds = null;
-    static{
-        try {
-            Context ctx = new InitialContext();
-            ds = (DataSource)ctx.lookup("java:comp/env/jdbc/ProjectDB");
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
+    private Session s;
+    public QADAO(Session s){
+        this.s = s;
     }
-    private static final String INSERT = "INSERT INTO `TEAM4`.`QA`"
+    /* private static final String INSERT = "INSERT INTO `TEAM4`.`QA`"
     +"(`answer`,`quession`)"
     +"VALUES"
     +"(?,?);";
@@ -32,9 +35,17 @@ public class QADAO implements QAInterface<QAVO>{
     +"`qa_id` = ?,`answer` = ?,`quession` = ?"
     +"WHERE `qa_id` = ?;";
     private static final String DELETE = "DELETE FROM `TEAM4`.`QA` WHERE `qa_id` = ?;";
-    private static final String SELECT_BY_QAID = "SELECT * FROM TEAM4.QA WHERE `qa_id` = ?";
+    private static final String SELECT_BY_QAID = "SELECT * FROM TEAM4.QA WHERE `qa_id` = ?"; */
     public void insert(QAVO qavo){
-        try (Connection con = ds.getConnection();
+        // Hibernate
+        if(qavo != null){
+			QAVO check = this.s.get(QAVO.class, qavo.getQaId());
+			if(check == null){
+				this.s.save(qavo);
+			}
+		}
+        // DataSource Jdbc
+        /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT)) {
             ps.setString(1, qavo.getQuession());
             ps.setString(2, qavo.getAnswer());
@@ -42,10 +53,28 @@ public class QADAO implements QAInterface<QAVO>{
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-        }
+        } */
     } 
     public void update(QAVO qavo){
-        try (Connection con = ds.getConnection();
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaUpdate<QAVO> cu = cb.createCriteriaUpdate(QAVO.class);
+        Root<QAVO> root = cu.from(QAVO.class); 
+        cu = cu.set(root.get("quession"), qavo.getQuession())
+               .set(root.get("reply"), qavo.getReply())
+               .where(cb.equal(root.get("qa_id"), qavo.getQaId()));
+        this.s.createQuery(cu).executeUpdate();
+        // Hibernate
+        /* if(qavo != null){
+            QAVO update = this.s.get(QAVO.class, qavo.getQaId());
+            if(update != null){
+                update.setQuession(qavo.getQuession());
+                update.setAnswer(qavo.getAnswer());
+                this.s.save(update);
+            }
+        } */
+        // DataSource Jdbc
+        /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(UPDATE)) {
             ps.setInt(1, qavo.getQaId());
             ps.setString(2, qavo.getQuession());
@@ -55,10 +84,24 @@ public class QADAO implements QAInterface<QAVO>{
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-        }
+        } */
     }      
     public void delete(Integer qaId){
-        Connection con = null;
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaDelete<QAVO> cd = cb.createCriteriaDelete(QAVO.class);
+        Root<QAVO> root = cd.from(QAVO.class);
+        cd = cd.where(cb.equal(root.get("qa_id"), qaId));
+        this.s.createQuery(cd).executeUpdate();
+        // Hibernate
+        /* if(qaId != null){
+			QAVO check = this.s.get(QAVO.class, qaId);
+			if(check != null){
+				this.s.delete(check);
+			}
+		} */
+        // DataSource Jdbc
+        /* Connection con = null;
         PreparedStatement ps = null;
         try {
             con = ds.getConnection();
@@ -94,10 +137,22 @@ public class QADAO implements QAInterface<QAVO>{
                     e.printStackTrace(System.err);
                 }
             }
-        }
+        } */
     }      
     public QAVO selectByQAId(Integer qaId){
-        QAVO qa = new QAVO();
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaQuery<QAVO> cq = cb.createQuery(QAVO.class);
+        Root<QAVO> root = cq.from(QAVO.class);
+        cq = cq.where(cb.equal(root.get("qa_id"), qaId));
+        return this.s.createQuery(cq).getSingleResult();
+        // Hibernate
+        /* if(qaId != null){
+            return this.s.get(QAVO.class, qaId);
+        }
+        return null; */
+        // DataSource Jdbc
+       /*  QAVO qa = new QAVO();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(SELECT_BY_QAID)) {
             ps.setInt(1, qaId);
@@ -111,6 +166,6 @@ public class QADAO implements QAInterface<QAVO>{
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
         }
-        return qa;
+        return qa; */
     }
 }

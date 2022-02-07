@@ -2,14 +2,16 @@ package web.RefProductTag.service;
 
 import java.util.ArrayList;
 
+import org.hibernate.Session;
+
 import ProjectInterfaces.RefProductTagInterface;
 import web.RefProductTag.dao.RefProductTagDAO;
 import web.RefProductTag.vo.RefProductTagVO;
 
 public class RefProductTagService {
     private RefProductTagInterface<RefProductTagVO> dao;
-    public RefProductTagService(){
-        dao = new RefProductTagDAO();
+    public RefProductTagService(Session session){
+        dao = new RefProductTagDAO(session);
     }
     public RefProductTagVO addTagRef(Integer productCategoryCode, Integer productId){
         RefProductTagVO rVo = new RefProductTagVO();

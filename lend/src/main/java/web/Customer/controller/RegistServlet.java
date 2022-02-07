@@ -53,7 +53,6 @@ public class RegistServlet extends HttpServlet{
                                 java.sql.Date.valueOf(regist.get("birth")),
                                 regist.get("gender"),
                                 regist.get("address"));
-            // cs.getSession().getTransaction().commit();
         }
         if (cVo != null) {
             out.println(cVo.getCustomerName()+"("+cVo.getCustomerId()+")"+"\t\t"+"regist success");

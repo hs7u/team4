@@ -14,17 +14,12 @@ public class QAVO implements java.io.Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "qa_id")
 	private Integer qaId;
-	@Column(name = "answer")
-    private String answer;
+	@Column(name = "reply")
+    private String reply;
 	@Column(name = "quession")
     private String quession;
 	public QAVO() {
 		super();
-	}
-	public QAVO(Integer qaId, String answer, String quession) {
-		setQaId(qaId);
-		setAnswer(answer);
-		setQuession(quession);
 	}
 	public Integer getQaId() {
 		return qaId;
@@ -32,11 +27,11 @@ public class QAVO implements java.io.Serializable{
 	public void setQaId(Integer qaId) {
 		this.qaId = qaId;
 	}
-	public String getAnswer() {
-		return answer;
+	public String getReply() {
+		return reply;
 	}
-	public void setAnswer(String answer) {
-		this.answer = answer;
+	public void setReply(String reply) {
+		this.reply = reply;
 	}
 	public String getQuession() {
 		return quession;

@@ -1,18 +1,27 @@
 package web.Admin.vo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Admin")
 public class AdminVO implements java.io.Serializable{
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "admin_id")
     private Integer adminId;
+	@Column(name = "admin_account")
     private String adminAccount;
+	@Column(name = "admin_password")
     private String adminPassword;
+	@Column(name = "permission")
     private String permission;
 	public AdminVO() {
 		super();
-	}
-	public AdminVO(Integer adminId, String adminAccount, String adminPassword, String permission) {
-		setAdminId(adminId);
-		setAdminAccount(adminAccount);
-		setAdminPassword(adminPassword);
-		setPermission(permission);
 	}
 	public Integer getAdminId() {
 		return adminId;

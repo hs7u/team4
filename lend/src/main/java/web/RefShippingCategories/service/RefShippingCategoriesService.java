@@ -1,13 +1,15 @@
 package web.RefShippingCategories.service;
 
+import org.hibernate.Session;
+
 import ProjectInterfaces.RefShippingCategoriesInterface;
 import web.RefShippingCategories.dao.RefShippingCategoriesDAO;
 import web.RefShippingCategories.vo.RefShippingCategoriesVO;
 
 public class RefShippingCategoriesService {
 	private RefShippingCategoriesInterface<RefShippingCategoriesVO> dao;
-	public RefShippingCategoriesService() {
-		dao = new RefShippingCategoriesDAO();
+	public RefShippingCategoriesService(Session session) {
+		dao = new RefShippingCategoriesDAO(session);
 	}
 	 public RefShippingCategoriesVO addRefShippingCategories(Integer shippingMethodCode, String shippingCategoryDescription) {
 		 RefShippingCategoriesVO rvo = new RefShippingCategoriesVO();

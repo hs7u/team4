@@ -21,11 +21,6 @@ public class RefProductTagVO implements java.io.Serializable{
 	public RefProductTagVO() {
 		super();
 	}
-	public RefProductTagVO(Integer serialNumber, Integer productCategoryCode, Integer productId) {
-		setSerialNumber(serialNumber);
-		setProductCategoryCode(productCategoryCode);
-		setProductId(productId);
-	}
 	public Integer getSerialNumber() {
 		return serialNumber;
 	}
