@@ -2,14 +2,16 @@ package web.CourseRegistraion.service;
 
 import java.util.ArrayList;
 
+import org.hibernate.Session;
+
 import ProjectInterfaces.CourseRegistraionInterface;
 import web.CourseRegistraion.dao.CourseRegistraionDAO;
 import web.CourseRegistraion.vo.CourseRegistraionVO;
 
 public class CourseRegistraionService {
     private CourseRegistraionInterface<CourseRegistraionVO> dao;
-    public CourseRegistraionService(){
-        dao = new CourseRegistraionDAO();
+    public CourseRegistraionService(Session session){
+        dao = new CourseRegistraionDAO(session);
     }
     public CourseRegistraionVO registCourse(Integer customerId, Integer courseId,
     Integer courseTimeableId, Integer numOfPeople){

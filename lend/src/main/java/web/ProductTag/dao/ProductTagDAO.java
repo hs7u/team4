@@ -36,7 +36,7 @@ public class ProductTagDAO implements ProductTagInterface<ProductTagVO>{
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT)) {
             ps.setInt(1, pVo.getProductCategoryCode());
-            ps.setString(2, pVo.getProductLabelName());
+            ps.setString(2, pVo.getProductTagName());
             ps.executeUpdate();
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
@@ -47,7 +47,7 @@ public class ProductTagDAO implements ProductTagInterface<ProductTagVO>{
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(UPDATE)) {
             ps.setInt(1, pVo.getProductCategoryCode());
-            ps.setString(2, pVo.getProductLabelName());
+            ps.setString(2, pVo.getProductTagName());
             ps.setInt(3, pVo.getProductCategoryCode());
             ps.executeUpdate();
         } catch (SQLException se) {
@@ -64,7 +64,7 @@ public class ProductTagDAO implements ProductTagInterface<ProductTagVO>{
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 pVo.setProductCategoryCode(rs.getInt("product_category_code"));
-                pVo.setProductLabelName(rs.getString("product_label_name"));
+                pVo.setProductTagName(rs.getString("product_tag_name"));
             }
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "

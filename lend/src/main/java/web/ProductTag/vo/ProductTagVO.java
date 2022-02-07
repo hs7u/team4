@@ -11,14 +11,10 @@ public class ProductTagVO implements java.io.Serializable{
     @Id
 	@Column(name = "product_category_code")
 	private Integer productCategoryCode;
-	@Column(name = "product_label_name")
-    private String productLabelName;
+	@Column(name = "product_tag_name")
+    private String productTagName;
 	public ProductTagVO() {
 		super();
-	}
-	public ProductTagVO(Integer productCategoryCode, String productLabelName) {
-		setProductCategoryCode(productCategoryCode);
-		setProductLabelName(productLabelName);
 	}
 	public Integer getProductCategoryCode() {
 		return productCategoryCode;
@@ -26,10 +22,10 @@ public class ProductTagVO implements java.io.Serializable{
 	public void setProductCategoryCode(Integer productCategoryCode) {
 		this.productCategoryCode = productCategoryCode;
 	}
-	public String getProductLabelName() {
-		return productLabelName;
+	public String getProductTagName() {
+		return productTagName;
 	}
-	public void setProductLabelName(String productLabelName) {
-		this.productLabelName = productLabelName;
+	public void setProductTagName(String productTagName) {
+		this.productTagName = productTagName;
 	}
 }

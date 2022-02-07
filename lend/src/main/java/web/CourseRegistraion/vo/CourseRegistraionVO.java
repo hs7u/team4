@@ -22,14 +22,6 @@ public class CourseRegistraionVO implements java.io.Serializable{
 	public CourseRegistraionVO() {
 		super();
 	}
-	public CourseRegistraionVO(Integer registrationId, Integer customerId, Integer courseId,
-			Integer courseTimeableId, Integer numOfPeople) {
-		setRegistrationId(registrationId);
-		setCustomerId(customerId);
-		setCourseId(courseId);
-		setCourseTimeableId(courseTimeableId);
-		setNumOfPeople(numOfPeople);
-	}
 	public Integer getRegistrationId() {
 		return registrationId;
 	}

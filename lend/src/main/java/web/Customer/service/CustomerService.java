@@ -21,7 +21,6 @@ public class CustomerService {
     public CustomerVO addCustomer(String customerName, String customerEmail, String customerPassword,
             String customerPhone, Date customerBirthday, String customerGender, String customerAddress) {
         java.sql.Timestamp customerRegisterTime = new java.sql.Timestamp(System.currentTimeMillis());
-        byte state = 0;
         CustomerVO cVo = new CustomerVO();
         cVo.setCustomerId(hashCode(customerName, customerEmail));
         cVo.setCustomerName(customerName);
@@ -31,7 +30,6 @@ public class CustomerService {
         cVo.setCustomerBirthday(customerBirthday);
         cVo.setCustomerGender(customerGender);
         cVo.setCustomerAddress(customerAddress);
-        cVo.setCustomerStatus(state);
         cVo.setCustomerRegisterTime(customerRegisterTime);
         dao.insert(cVo);
         return cVo;

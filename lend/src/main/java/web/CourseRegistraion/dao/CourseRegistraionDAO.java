@@ -1,30 +1,30 @@
 package web.CourseRegistraion.dao;
 
-import java.sql.Connection;
+/* import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.SQLException; */
 import java.util.ArrayList;
 
-import javax.naming.Context;
+/* import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+import javax.naming.NamingException; */
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+// import javax.sql.DataSource;
+
+import org.hibernate.Session;
 
 import ProjectInterfaces.CourseRegistraionInterface;
 import web.CourseRegistraion.vo.CourseRegistraionVO;
 
 public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRegistraionVO> {
-    private static DataSource ds;
-    static{
-        try {
-            Context ctx = new InitialContext();
-            ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ProjectDB");
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
+    private Session s;
+    public CourseRegistraionDAO(Session s){
+        this.s = s;
     }
-    private static final String INSERT = "INSERT INTO `TEAM4`.`Course_Registraion`"
+    /* private static final String INSERT = "INSERT INTO `TEAM4`.`Course_Registraion`"
     +"(`registration_id`,`customer_id`,`course_id`,`course_timeble_id`,`numOfPeople`)"
     +"VALUES"
     +"(?,?,?,?,?);";
@@ -32,9 +32,17 @@ public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRe
     private static final String DELETE = "DELETE FROM `TEAM4`.`Course_Registraion` WHERE `registration_id` = ?;";
     private static final String GET_ONE_STM = "SELECT * FROM TEAM4.Course_Registraion WHERE `customer_id` = ? AND `course_timeble_id` = ?;";
     private static final String GET_ALL_CU = "SELECT * FROM TEAM4.Course_Registraion WHERE `customer_id` = ?;";
-    private static final String GET_ALL_TI = "SELECT * FROM TEAM4.Course_Registraion WHERE `course_timeble_id` = ?;";
+    private static final String GET_ALL_TI = "SELECT * FROM TEAM4.Course_Registraion WHERE `course_timeble_id` = ?;"; */
     public void insert(CourseRegistraionVO crVo){
-        try (Connection con = ds.getConnection();
+        // Hibernate
+        if(crVo != null){
+            CourseRegistraionVO newCr = this.s.get(CourseRegistraionVO.class, crVo.getCourseId());
+            if(newCr == null){
+                this.s.save(crVo);
+            }
+        }
+        // DateSource Jdbc
+        /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT)) {
             ps.setInt(1, crVo.getRegistrationId());
             ps.setInt(2, crVo.getCustomerId());
@@ -45,7 +53,7 @@ public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRe
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-        }        
+        }         */
     }
     // public void update(CourseRegistraionVO crVo){
     //     try (Connection con = ds.getConnection();
@@ -57,7 +65,15 @@ public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRe
     //     }        
     // }
     public void delete(Integer registrationId){
-        Connection con = null;
+        // Hibernate
+        if(registrationId != null){
+            CourseRegistraionVO newCr = this.s.get(CourseRegistraionVO.class, registrationId);
+            if(newCr != null){
+                this.s.delete(newCr);;
+            }
+        }
+        // DateSource Jdbc
+        /* Connection con = null;
         PreparedStatement ps = null;
         try {
             con = ds.getConnection();
@@ -93,10 +109,21 @@ public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRe
                     e.printStackTrace(System.err);
                 }
             }
-        }
+        } */
     }
     public CourseRegistraionVO selectByCustomerId(Integer customerId, Integer courseTimeableId){
-        CourseRegistraionVO crVo = new CourseRegistraionVO();
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaQuery<CourseRegistraionVO> cq = cb.createQuery(CourseRegistraionVO.class);
+        Root<CourseRegistraionVO> root = cq.from(CourseRegistraionVO.class);
+        cq = cq.where(cb.and(
+                            cb.equal(root.get("customer_id"), customerId),
+                            cb.equal(root.get("course_timeable_id"), courseTimeableId)
+                            )
+                    );
+        return this.s.createQuery(cq).getSingleResult();
+        // DateSource Jdbc
+        /* CourseRegistraionVO crVo = new CourseRegistraionVO();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(GET_ONE_STM)) {
             ps.setInt(1, customerId);
@@ -113,10 +140,21 @@ public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRe
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
         }            
-        return crVo;
+        return crVo; */
     }
     public ArrayList<CourseRegistraionVO> selectAllCustomerRegister(Integer customerId){
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaQuery<CourseRegistraionVO> cq = cb.createQuery(CourseRegistraionVO.class);
+        Root<CourseRegistraionVO> root = cq.from(CourseRegistraionVO.class);
+        cq = cq.where(cb.equal(root.get("customer_id"), customerId));
         ArrayList<CourseRegistraionVO> list = new ArrayList<CourseRegistraionVO>();
+        for(CourseRegistraionVO crVo : this.s.createQuery(cq).getResultList()){
+            list.add(crVo);
+        }
+        return list;
+        // DateSource Jdbc
+        /* ArrayList<CourseRegistraionVO> list = new ArrayList<CourseRegistraionVO>();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(GET_ALL_CU)) {
             ps.setInt(1, customerId);
@@ -134,10 +172,21 @@ public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRe
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
         }            
-        return list;
+        return list; */
     }
     public ArrayList<CourseRegistraionVO> selectByTimeableId(Integer courseTimeableId){
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaQuery<CourseRegistraionVO> cq = cb.createQuery(CourseRegistraionVO.class);
+        Root<CourseRegistraionVO> root = cq.from(CourseRegistraionVO.class);
+        cq = cq.where(cb.equal(root.get("course_timeable_id"), courseTimeableId));
         ArrayList<CourseRegistraionVO> list = new ArrayList<CourseRegistraionVO>();
+        for(CourseRegistraionVO crVo : this.s.createQuery(cq).getResultList()){
+            list.add(crVo);
+        }
+        return list;
+        // DateSource Jdbc
+        /* ArrayList<CourseRegistraionVO> list = new ArrayList<CourseRegistraionVO>();
         try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(GET_ALL_TI)) {
             ps.setInt(1, courseTimeableId);
@@ -155,6 +204,6 @@ public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRe
             throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
         }            
-        return list;
+        return list; */
     }
 }

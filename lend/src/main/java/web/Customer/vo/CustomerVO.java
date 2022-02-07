@@ -7,8 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+
 @Entity
 @Table(name = "Customer")
+@DynamicInsert
 public class CustomerVO implements java.io.Serializable{
 //	@OneToMany(mappedBy = "Favorite",cascade = CascadeType.REMOVE)
 //	private Set<FavoriteVO> fVos;
@@ -31,6 +35,7 @@ public class CustomerVO implements java.io.Serializable{
     private String customerAddress;
 	@Column(name = "customer_register_time")
     private Timestamp customerRegisterTime;
+	@ColumnDefault(value = "0")
 	@Column(
 			name = "customer_status",
 			columnDefinition = "bit"

@@ -9,17 +9,17 @@ public class ProductTagService {
     public ProductTagService(){
         dao = new ProductTagDAO();
     }
-    public ProductTagVO addTag(Integer productCategoryCode, String productLabelName){
+    public ProductTagVO addTag(Integer productCategoryCode, String productTagName){
         ProductTagVO pVo = new ProductTagVO();
         pVo.setProductCategoryCode(productCategoryCode);
-        pVo.setProductLabelName(productLabelName);
+        pVo.setProductTagName(productTagName);
         dao.insert(pVo);
         return pVo;
     }
-    public ProductTagVO updateTag(Integer productCategoryCode, String productLabelName){
+    public ProductTagVO updateTag(Integer productCategoryCode, String productTagName){
         ProductTagVO pVo = new ProductTagVO();
         pVo.setProductCategoryCode(productCategoryCode);
-        pVo.setProductLabelName(productLabelName);
+        pVo.setProductTagName(productTagName);
         dao.update(pVo);
         return pVo;
     }
