@@ -139,70 +139,74 @@
 				</ul>
 			</c:if>
 
-			<FORM METHOD="post" ACTION="product.do" name="form1">
+			<FORM METHOD="post" ACTION="../addNewProduct" name="form1" enctype="multipart/form-data">
 				<table>
 
 
 					<tr>
 						<td>商品標籤</td>
-						<td><input type="radio" name="productCategoryCode" size="45"
+						<td><input type="radio" name="product_category_code" size="45"
 							value="<%= (productVO==null)? "11" : productVO.getProductCategoryCode()%>" />
-							<label for="productCategoryCode">瓷畫</label> 
-							<input type="radio"name="productCategoryCode" size="45"
+							<label for="product_category_code">瓷畫</label> 
+							<input type="radio"name="product_category_code" size="45"
 							value="<%= (productVO==null)? "22" : productVO.getProductCategoryCode()%>" />
-							<label for="productCategoryCode">電烙</label> 
-							<input type="radio" name="productCategoryCode" size="45"
+							<label for="product_category_code">電烙</label> 
+							<input type="radio" name="product_category_code" size="45"
 							value="<%= (productVO==null)? "33" : productVO.getProductCategoryCode()%>" />
-							<label for="productCategoryCode">燒陶</label>
-							<input type="radio" name="productCategoryCode" size="45"
+							<label for="product_category_code">燒陶</label>
+							<input type="radio" name="product_category_code" size="45"
 							value="<%= (productVO==null)? "44" : productVO.getProductCategoryCode()%>" />
-							<label for="productCategoryCode">色鉛筆</label>
-							<input type="radio" name="productCategoryCode" size="45"
+							<label for="product_category_code">色鉛筆</label>
+							<input type="radio" name="product_category_code" size="45"
 							value="<%= (productVO==null)? "55" : productVO.getProductCategoryCode()%>" />
-							<label for="productCategoryCode">水彩</label>
-							<input type="radio" name="productCategoryCode" size="45"
+							<label for="product_category_code">水彩</label>
+							<input type="radio" name="product_category_code" size="45"
 							value="<%= (productVO==null)? "66" : productVO.getProductCategoryCode()%>" />
-							<label for="productCategoryCode">壓克力彩繪</label>
+							<label for="product_category_code">壓克力彩繪</label>
 						</td>
 					</tr>
 					<tr>
 						<td>商品名稱</td>
-						<td><input type="TEXT" name="productName" size="45"
+						<td><input type="TEXT" name="product_name" size="45"
 							value="<%= (productVO==null)? "可客製｜色鉛筆｜手繪卡通人像" : productVO.getProductName()%>" /></td>
 					</tr>
 					<tr>
 						<td>商品描述</td>
-						<td><input type="TEXT" name="productDescription" size="45"
+						<td><input type="TEXT" name="product_description" size="45"
 							value="<%= (productVO==null)? "尺寸 : 長方形 6吋 10.2*15.2 cm 材質 : 寶虹水彩紙(完成後會噴上專用防霉噴漆)、Mijello水彩顏料" : productVO.getProductDescription()%>" /></td>
 					</tr>
 					<tr>
 						<td>商品價格</td>
-						<td><input type="TEXT" name="productPrice" size="45"
+						<td><input type="TEXT" name="product_price" size="45"
 							value="<%= (productVO==null)? "2500" : productVO.getProductPrice()%>" /></td>
 					</tr>
 					<tr>
+					
+					
 						<td>商品圖片</td>
-						<td><input type="image" name="productImage" size="45"
-							value="<%= (productVO==null)? " " : productVO.getProductImage()%>" /></td>
+						<td><input type="file" name="product_image" id=""></td>
+							
+							
+							
 					</tr>
 					<tr>
 						<td>商品庫存</td>
-						<td><input type="TEXT" name="productInventory" size="45"
+						<td><input type="TEXT" name="product_inventory" size="45"
 							value="<%= (productVO==null)? "3" : productVO.getProductInventory()%>" /></td>
 					</tr>
 					<tr>
 						<td>是否可客製化</td>
 						<td><input type="radio" name="customization" size="20"
-							value="<%= (productVO==null)? "true" : productVO.getCustomization()%>" />
+							value="<%= (productVO==null)? "1" : productVO.getCustomization()%>" />
 							<label for="customization">是</label> 
 							<input type="radio"name="customization" size="45"
-							value="<%= (productVO==null)? "false" : productVO.getCustomization()%>" />
+							value="<%= (productVO==null)? "0" : productVO.getCustomization()%>" />
 							<label for="customization">否</label>
 						</td>
 					</tr>
 					<tr>
 						<td>客製商品價格</td>
-						<td><input type="TEXT" name="customerProductPrice" size="45"
+						<td><input type="TEXT" name="customer_product_price" size="45"
 							value="<%= (productVO==null)? "2500" : productVO.getCustomerProductPrice()%>" /></td>
 					</tr>
 

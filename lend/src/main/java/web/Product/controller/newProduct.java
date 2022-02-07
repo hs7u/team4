@@ -47,18 +47,18 @@ public class newProduct extends HttpServlet {
 			is.close();
         }
         ProductService psc = new ProductService((Session)req.getAttribute("session"));
-        ProductVO check = psc.getOneProduct((String)poc.get("product_name"));
+//        ProductVO check = psc.getOneProduct((String)poc.get("product_name"));
         ProductVO pVo = null;
-        if(check == null){
-            pVo = psc.addProduct((Integer)poc.get("product_category_code"),
-                                (Integer)poc.get("product_price"),
+//        if(check == null){
+            pVo = psc.addProduct( Integer.valueOf((String)poc.get("product_category_code")),
+                                Integer.valueOf((String)poc.get("product_price")),
                                 (String)poc.get("product_name"),
                                 (byte[])poc.get("product_image"),
                                 (String)poc.get("product_description"),
-                                (Integer)poc.get("product_inventory"),
-                                (Byte)poc.get("customization"),
-                                (Integer)poc.get("customer_product_price"));
-        }
+                                Integer.valueOf((String)poc.get("product_inventory")),
+                                Byte.valueOf((String)poc.get("customization")),
+                                Integer.valueOf((String)poc.get("customer_product_price")));
+//        }
         if (pVo != null) {
             out.println(pVo.getProductName()+"\t\t"+"upload success");
         } else {

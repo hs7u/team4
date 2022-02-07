@@ -5,8 +5,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 @Entity
 @Table(name = "Product")
+@DynamicInsert
 public class ProductVO implements java.io.Serializable{
 	@Id
 	@Column(name = "product_id")
@@ -30,13 +34,16 @@ public class ProductVO implements java.io.Serializable{
 	private Integer productSold;
 	@Column(name = "released_time")
 	private Timestamp releasedTime;
+	@ColumnDefault(value = "0")
 	@Column(
 			name = "customization",
 			columnDefinition = "bit"
 			)
 	private Byte customization;
+	@ColumnDefault(value = "0")
 	@Column(name = "custom_product_price")
 	private Integer customerProductPrice;
+	@ColumnDefault(value = "0")
 	@Column(
 			name = "product_status",
 			columnDefinition = "bit"

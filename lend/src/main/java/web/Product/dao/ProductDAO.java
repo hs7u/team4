@@ -48,7 +48,7 @@ public class ProductDAO implements ProductInterface<ProductVO>{
         if(pVo != null){
             ProductVO newProduct = this.s.get(ProductVO.class, pVo.getProductId());
             if(newProduct == null){
-                this.s.save(newProduct);
+                this.s.save(pVo);
             }
         }
         // DateSource Jdbc
