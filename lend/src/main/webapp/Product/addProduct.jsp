@@ -74,27 +74,27 @@
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href=""><span class="las la-igloo"></span>
+                    <a href="" class=""><span class="las la-igloo"></span>
                     <span>Dashboard</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-users"></span>
+                    <a href="" class=""><span class="las la-users"></span>
                     <span>客戶管理</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-clipboard-list"></span>
+                    <a href="" class=""><span class="las la-clipboard-list"></span>
                     <span>課程管理</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-shopping-bag"></span>
+                    <a href="" class=""><span class="las la-shopping-bag"></span>
                     <span>訂單列表</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-receipt"></span>
+                    <a href="" class=""><span class="las la-receipt"></span>
                     <span>商品管理</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-user-circle"></span>
+                    <a href="" class=""><span class="las la-user-circle"></span>
                     <span>帳號管理</span></a>
                 </li>
                 <li>

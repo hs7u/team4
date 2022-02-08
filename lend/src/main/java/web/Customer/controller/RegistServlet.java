@@ -42,7 +42,6 @@ public class RegistServlet extends HttpServlet{
 			is.close();
         }
         CustomerService cs = new CustomerService((Session)req.getAttribute("session"));
-        // cs.getSession().beginTransaction();
         CustomerVO check = cs.getOneCustomer(regist.get("email"), regist.get("password"));
         CustomerVO cVo = null;
         if(check == null) {

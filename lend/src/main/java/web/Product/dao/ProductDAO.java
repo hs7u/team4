@@ -270,7 +270,7 @@ public class ProductDAO implements ProductInterface<ProductVO>{
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaQuery<ProductVO> cq = cb.createQuery(ProductVO.class);
         Root<ProductVO> root = cq.from(ProductVO.class);
-        cq = cq.where(root.get("product_id").isNotNull());
+        cq = cq.select(root);
         ArrayList<ProductVO> list = new ArrayList<ProductVO>();
         for(ProductVO pVo : this.s.createQuery(cq).getResultList()){
             list.add(pVo);
