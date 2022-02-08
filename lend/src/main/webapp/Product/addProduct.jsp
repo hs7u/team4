@@ -90,7 +90,7 @@
                     <span>訂單列表</span></a>
                 </li>
                 <li>
-                    <a href="" class=""><span class="las la-receipt"></span>
+                    <a href="./listAllProduct.jsp" class=""><span class="las la-receipt"></span>
                     <span>商品管理</span></a>
                 </li>
                 <li>
@@ -98,7 +98,7 @@
                     <span>帳號管理</span></a>
                 </li>
                 <li>
-                    <a href="" class="active"><span class="las la-clipboard-list"></span>
+                    <a href="./addProduct.jsp" class="active"><span class="las la-clipboard-list"></span>
                     <span>新增商品</span></a>
                 </li>
             </ul>
