@@ -231,7 +231,7 @@ public class ProductDAO implements ProductInterface<ProductVO>{
         CriteriaQuery<ProductVO> cq = cb.createQuery(ProductVO.class);
         Root<ProductVO> root = cq.from(ProductVO.class);
         
-        cq = cq.where(cb.like(root.get("product_name"), productName));
+        cq = cq.where(cb.like(root.get("product_name"), "%"+productName+"%"));
         
         try {
 			return this.s.createQuery(cq).getSingleResult();

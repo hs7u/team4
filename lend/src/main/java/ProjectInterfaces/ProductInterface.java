@@ -7,7 +7,7 @@ public interface ProductInterface<ProductVO> {
     public void update(ProductVO pVo);
     public void delete(Integer productId);
     public void sold(Integer productId, Integer sold);
-    public void changeStatus(Integer productId, Byte status_code);
-    public ProductVO selectByProductName(String product_name);
+    public void changeStatus(Integer productId, Byte statusCode);
+    public ProductVO selectByProductName(String productName);
     public ArrayList<ProductVO> getAllProduct();
 }

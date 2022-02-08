@@ -15,7 +15,7 @@ public class ProductService {
     }
     public ProductVO addProduct(Integer productCategoryCode, Integer productPrice, String productName,byte[] productImage,
             String productDescription, Integer productInventory, Byte customization, Integer customerProductPrice){
-            java.sql.Timestamp releasedTime = new java.sql.Timestamp(System.currentTimeMillis());
+        java.sql.Timestamp releasedTime = new java.sql.Timestamp(System.currentTimeMillis());
         ProductVO pVo = new ProductVO();
         pVo.setProductId(hashCode(productName, productDescription));
         pVo.setProductCategoryCode(productCategoryCode);
