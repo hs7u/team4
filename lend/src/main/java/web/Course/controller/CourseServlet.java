@@ -10,7 +10,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import web.Hibernate.HibernateUtil;
+import web.Course.service.CourseService;
+
 public class CourseServlet extends HttpServlet {
+	
+//	private SessionFactory sessionFacrtory;
+//	
+//	public CourseServlet(SessionFactory sessionFacrtory) {
+//		this.sessionFacrtory = sessionFacrtory;
+//	}
+//	public Session getSession() {
+//		return sessionFacrtory.getCurrentSession();
+//	}
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
@@ -56,7 +72,7 @@ public class CourseServlet extends HttpServlet {
 				}
 				
 				
-//				Byte courseImage[] = null;
+				Byte courseImage[] = null;
 //				try {
 //					req.getInputStream();
 //					courseImage[] = Byte.valueOf(req.getParameter("courseImage"));
@@ -84,20 +100,6 @@ public class CourseServlet extends HttpServlet {
 				}
 				
 
-//				Double sal = null;
-//				try {
-//					sal = new Double(req.getParameter("sal").trim());
-//				} catch (NumberFormatException e) {
-//					errorMsgs.put("sal", "薪水請填數字");
-//				}
-//
-//				Double comm = null;
-//				try {
-//					comm = new Double(req.getParameter("comm").trim());
-//				} catch (NumberFormatException e) {
-//					errorMsgs.put("comm", "獎金請填數字");
-//				}
-
 //				Integer deptno = new Integer(req.getParameter("deptno").trim());
 
 				// Send the use back to the form, if there were errors
@@ -108,18 +110,22 @@ public class CourseServlet extends HttpServlet {
 				}
 
 				/*************************** 2.開始新增資料 ***************************************/
-//				EmpService empSvc = new EmpService();
+//				SessionFactory sessionFactory = HibernateUtil.getSessionfactory();
+//				Session session = sessionFactory.getCurrentSession();
+//				Transaction transaction = session.beginTransaction();
+				
+//				CourseService courseSvc = new CourseService(session);
 //				empSvc.addEmp(ename, job, hiredate, sal, comm, deptno);
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/emp/listAllEmp.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
-				successView.forward(req, res);
+//				String url = "/404.html";
+//				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+//				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.put("Exception", e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/Course/addCourse.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/404.html");
 				failureView.forward(req, res);
 			}
 		}

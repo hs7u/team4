@@ -143,12 +143,12 @@
 				</ul>
 			</c:if>
 
-			<FORM METHOD="post" ACTION="course.do" name="form1">
+			<FORM id="myForm" METHOD="POST" ACTION="course.do" name="form1">
 				<table>
 					<tr>
 						<td>課程名稱</td>
 						<td><input type="TEXT" name="courseName" size="45"
-							value="<%= (courseVO==null)? "水彩繪杯墊" : courseVO.getCourseName()%>" /></td>
+							value="${param.courseName}" /></td>
 					</tr>
 					<tr>
 						<td>課程描述</td>
@@ -162,7 +162,7 @@
 					</tr>
 					<tr>
 						<td>課程圖片</td>
-						<td><input type="image" name="courseImage" size="45"
+						<td><input type="file" name="courseImage"  accept="image/png, image/jpeg"
 							value="<%= (courseVO==null)? " " : courseVO.getCourseImage()%>" /></td>
 					</tr>
 					<tr>

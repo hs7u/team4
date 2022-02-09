@@ -1,5 +1,7 @@
 package web.Course.service;
 
+import java.util.List;
+
 import org.hibernate.Session;
 
 import ProjectInterfaces.CourseInterface;
@@ -58,4 +60,9 @@ public class CourseService {
         
 		return result;
     }
+    
+    public List<CourseVO> getALL(){
+    	return dao.getAll();
+    }
+    
 }
