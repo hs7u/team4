@@ -47,16 +47,16 @@ public class newProduct extends HttpServlet {
 			isr.close();
 			is.close();
         }
-        Iterator<String> key = poc.keySet().iterator(); 
-        int check = 0;
-        while(key.hasNext()){
-            if(poc.containsValue(poc.get(key.next()))){
-                check++;
-            }
-        }
+//        Iterator<String> key = poc.keySet().iterator(); 
+//        int check = 0;
+//        while(key.hasNext()){
+//            if(poc.containsValue(poc.get(key.next()))){
+//                check++;
+//            }
+//        }
         ProductService psc = new ProductService((Session)req.getAttribute("session"));
         ProductVO pVo = null;
-        if(check == 0){
+//        if(check == 0){
             pVo = psc.addProduct( 
                                 Integer.valueOf((String)poc.get("product_category_code")),
                                 Integer.valueOf((String)poc.get("product_price")),
@@ -67,7 +67,7 @@ public class newProduct extends HttpServlet {
                                 Byte.valueOf((String)poc.get("customization")),
                                 Integer.valueOf((String)poc.get("customer_product_price"))
                                 );
-        }
+//        }
         if (pVo != null) {
             out.println(pVo.getProductName()+"\t\t"+"upload success");
         } else {
