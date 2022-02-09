@@ -28,13 +28,19 @@ public class updateProduct extends HttpServlet{
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         req.setCharacterEncoding("UTF-8");
         res.setContentType("text/html; charset=UTF-8");
-        System.out.print(req.getParameter("action"));
-         if(req.getParameter("action") == null) {
-             update(req, res);       
-         }
-         else{        
-             transform(req, res);
-         }
+        System.out.println("action = "+ req.getParameter("action"));
+            switch (req.getParameter("action")) {
+                case "update":
+                    update(req, res);       
+                    break;
+                case "delete":
+                    delete(req, res,Integer.valueOf(req.getParameter("productId")));
+                    break;
+                default:
+                    transform(req, res);
+                    break;
+            }
+         
     }
     private void transform(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         ProductService psc = new ProductService((Session)req.getAttribute("session"));
@@ -88,5 +94,10 @@ public class updateProduct extends HttpServlet{
             out.println("update fail");
         }
         out.close();    
+    }
+    private void delete(HttpServletRequest req, HttpServletResponse res,Integer productId) throws ServletException, IOException{
+        ProductService psc = new ProductService((Session)req.getAttribute("session"));
+        System.out.println(productId);
+        psc.deleteProduct(productId);
     }
 }

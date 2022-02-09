@@ -79,12 +79,13 @@
 			<td>${pVo.customerProductPrice}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Product/updateProduct" style="margin-bottom: 0px;">
-			     <input type="hidden" name="action"  value="${pVo.productName}">
+			     <input type="hidden" name="action"  value="update">
 			     <input type="submit" value="修改">
                 </FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/404.html" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Product/updateProduct" style="margin-bottom: 0px;">
+			     <input type="hidden" name="action"  value="delete">
 			     <input type="hidden" name="productId"  value="${pVo.productId}">
 			     <input type="submit" value="刪除">
                 </FORM>

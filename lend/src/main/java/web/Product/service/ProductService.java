@@ -57,6 +57,9 @@ public class ProductService {
     public ArrayList<ProductVO> getAll() {
         return dao.getAllProduct();
     }
+    public void deleteProduct(Integer productId){
+        dao.delete(productId);
+    }
     public int hashCode(String productName, String productDescription) {
         final int prime = 31;
 		int result = 1;
