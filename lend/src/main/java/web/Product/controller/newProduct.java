@@ -1,8 +1,8 @@
 package web.Product.controller;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -28,35 +28,39 @@ public class newProduct extends HttpServlet {
         res.setContentType("text/html; charset=UTF-8");
         PrintWriter out = res.getWriter();
         HashMap<String, Object> poc = new HashMap<String, Object>();
+        ArrayList<String> errorMsg = new ArrayList<>();
         for(Part part : req.getParts()) {
 			InputStream is = part.getInputStream();
 			InputStreamReader isr = new InputStreamReader(is);
 			BufferedReader br = new BufferedReader(isr); 		
 			String val;
             if(part.getName().equals("product_image")){
-                byte[] buf = new byte[is.available()];
-                is.read(buf);
-                poc.put(part.getName(), buf);
+                if(is.available() <= 0){
+                    errorMsg.add(part.getName()+" can't empty");
+                }else{
+                    byte[] buf = new byte[is.available()];
+                    is.read(buf);
+                    poc.put(part.getName(), buf);
+                }
             }
 			else{ 
                 if ((val = br.readLine()) != null) {
                     poc.put(part.getName(), val);
+                    String str;
+                    if((str = addError(part.getName(), val)) != null)
+                        errorMsg.add(str);
+                } else {
+                    errorMsg.add(part.getName()+" can't empty");
                 }
 			}
 			br.close();
 			isr.close();
 			is.close();
         }
-//        Iterator<String> key = poc.keySet().iterator(); 
-//        int check = 0;
-//        while(key.hasNext()){
-//            if(poc.containsValue(poc.get(key.next()))){
-//                check++;
-//            }
-//        }
+        
         ProductService psc = new ProductService((Session)req.getAttribute("session"));
         ProductVO pVo = null;
-//        if(check == 0){
+        if(errorMsg.size() <= 0){  
             pVo = psc.addProduct( 
                                 Integer.valueOf((String)poc.get("product_category_code")),
                                 Integer.valueOf((String)poc.get("product_price")),
@@ -67,12 +71,37 @@ public class newProduct extends HttpServlet {
                                 Byte.valueOf((String)poc.get("customization")),
                                 Integer.valueOf((String)poc.get("customer_product_price"))
                                 );
-//        }
+        
+        }
         if (pVo != null) {
             out.println(pVo.getProductName()+"\t\t"+"upload success");
         } else {
-            out.println("upload fail");
+            for (String erStr : errorMsg) {
+                out.println(erStr);
+            }
         }
         out.close();
+    }
+    public String addError(String name,String val){
+        StringBuilder msg = new StringBuilder();
+        switch (name) {
+            case "product_category_code":
+            case "product_price":
+            case "product_inventory":
+            case "customer_product_price":
+                if(!isInteger(val)){
+                    msg.append(name + " must be number");
+                }
+                break;
+        }
+        return msg.toString();
+    }
+    private boolean isInteger(String string) {
+        try {
+            Integer.valueOf(string);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
