@@ -1,8 +1,11 @@
 package web.Product.controller;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -16,18 +19,34 @@ import org.hibernate.Session;
 
 import web.Product.service.ProductService;
 import web.Product.vo.ProductVO;
-
-@WebServlet("/addNewProduct")
+@WebServlet("/Product/updateProduct")
 @MultipartConfig
-public class newProduct extends HttpServlet {
+public class updateProduct extends HttpServlet{
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         doPost(req,res);
     }
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         req.setCharacterEncoding("UTF-8");
         res.setContentType("text/html; charset=UTF-8");
+        System.out.print(req.getParameter("action"));
+         if(req.getParameter("action") == null) {
+             update(req, res);       
+         }
+         else{        
+             transform(req, res);
+         }
+    }
+    private void transform(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+        ProductService psc = new ProductService((Session)req.getAttribute("session"));
+        System.out.print(req.getParameter("action"));
+        req.setAttribute("currentProduct", psc.getOneProduct((String)req.getParameter("action")));
+ 
+        String url = req.getContextPath()+"/Product/update_product_input.jsp";
+        req.getRequestDispatcher(url).forward(req, res);
+    }
+    private void update(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         PrintWriter out = res.getWriter();
-        HashMap<String, Object> poc = new HashMap<String, Object>();
+        HashMap poc = new HashMap();
         for(Part part : req.getParts()) {
 			InputStream is = part.getInputStream();
 			InputStreamReader isr = new InputStreamReader(is);
@@ -47,17 +66,12 @@ public class newProduct extends HttpServlet {
 			isr.close();
 			is.close();
         }
-        Iterator<String> key = poc.keySet().iterator(); 
-        int check = 0;
-        while(key.hasNext()){
-            if(poc.containsValue(poc.get(key.next()))){
-                check++;
-            }
-        }
         ProductService psc = new ProductService((Session)req.getAttribute("session"));
+        ProductVO check = psc.getOneProduct((String)poc.get("product_name"));
         ProductVO pVo = null;
-        if(check == 0){
-            pVo = psc.addProduct( 
+        if(check != null){
+            pVo = psc.updateProduct(
+                                Integer.valueOf((String)poc.get("product_id")),
                                 Integer.valueOf((String)poc.get("product_category_code")),
                                 Integer.valueOf((String)poc.get("product_price")),
                                 (String)poc.get("product_name"),
@@ -69,10 +83,10 @@ public class newProduct extends HttpServlet {
                                 );
         }
         if (pVo != null) {
-            out.println(pVo.getProductName()+"\t\t"+"upload success");
+            out.println(pVo.getProductName()+"\t\t"+"update success");
         } else {
-            out.println("upload fail");
+            out.println("update fail");
         }
-        out.close();
+        out.close();    
     }
 }
