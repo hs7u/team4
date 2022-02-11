@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="web.Product.service.ProductService"%>
@@ -53,6 +53,7 @@
 		<th>商品庫存</th>
 		<th>是否可客製化</th>
 		<th>客製商品價格</th>
+		<th>狀態</th>
 		<th>修改</th>
 		<th>刪除</th>
 	</tr>
@@ -67,6 +68,7 @@
 			<td>${pVo.productInventory}</td> 
 			<td>${pVo.customization eq 0 ? "否": "是"}</td>
 			<td>${pVo.customerProductPrice}</td>
+			<td>${pVo.productStatus eq 0 ? "下架中": "上架中"}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Product/updateProduct" style="margin-bottom: 0px;">
 			     <input type="hidden" name="action"  value="transform">
