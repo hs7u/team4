@@ -4,7 +4,7 @@
 <%@ page import="web.Course.vo.*"%>
 
 <%
-  CourseVO courseVO = (CourseVO) request.getAttribute("courseVO");
+//   CourseVO courseVO = (CourseVO) request.getAttribute("courseVO");
 %>
 
 <html>
@@ -12,6 +12,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>新增課程資料 - addCourse.jsp</title>
 <link rel="stylesheet" href="css/addCourse.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Course/css/addCourse.css" />
 <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 
 <style>
@@ -86,7 +87,7 @@
                     <span>客戶管理</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-clipboard-list"></span>
+                    <a href="" class="active"><span class="las la-clipboard-list"></span>
                     <span>課程管理</span></a>
                 </li>
                 <li>
@@ -102,7 +103,7 @@
                     <span>帳號管理</span></a>
                 </li>
                 <li>
-                    <a href="" class="active"><span class="las la-clipboard-list"></span>
+                    <a href="" ><span class="las la-clipboard-list"></span>
                     <span>新增商品</span></a>
                 </li>
             </ul>
@@ -122,7 +123,7 @@
                 <input type="search" placeholder="Search here">
             </div>
             <div class="user-wrapper">
-                <img src="image/cat.jpg" width="40px" height="40px" alt="">
+                <img src="<%=request.getContextPath()%>/Course/image/cat.jpg" width="40px" height="40px" alt="">
                 <div>
                     <h4>doge</h4>
                     <small>toor</small>
@@ -143,51 +144,87 @@
 				</ul>
 			</c:if>
 
-			<FORM id="myForm" METHOD="POST" ACTION="course.do" name="form1">
+			<form  name="form1" method="POST" action="<%=request.getContextPath() %>/course.do"  enctype="multipart/form-data" >
 				<table>
 					<tr>
 						<td>課程名稱</td>
 						<td><input type="TEXT" name="courseName" size="45"
-							value="${param.courseName}" /></td>
+							placeholder="Ex:/ 水彩繪杯墊"></td>
 					</tr>
 					<tr>
 						<td>課程描述</td>
 						<td><input type="TEXT" name="courseDescription" size="45"
-							value="<%= (courseVO==null)? "可學習自行繪製杯墊" : courseVO.getCourseDescribe()%>" /></td>
+							placeholder="Ex:/ 可學習自行繪製杯墊"/></td>
 					</tr>
 					<tr>
 						<td>課程價格</td>
-						<td><input type="TEXT" name="coursPrice" size="45"
-							value="<%= (courseVO==null)? "1500" : courseVO.getCoursePrice()%>" /></td>
+						<td><input type="TEXT" name="coursePrice" size="45"
+							placeholder="Ex:/ 1500"/></td>
 					</tr>
 					<tr>
 						<td>課程圖片</td>
-						<td><input type="file" name="courseImage"  accept="image/png, image/jpeg"
-							value="<%= (courseVO==null)? " " : courseVO.getCourseImage()%>" /></td>
+						<td><input type="file" name="courseImage" size="45"
+							/></td>
 					</tr>
 					<tr>
 						<td>開課人數</td>
 						<td><input type="TEXT" name="minOfCourse" size="45"
-							value="<%= (courseVO==null)? "10" : courseVO.getMinOfCourse()%>" /></td>
+							placeholder="Ex:/ 10"/></td>
 					</tr>
 					<tr>
 					<tr>
 						<td>額滿人數</td>
 						<td><input type="TEXT" name="maxOfCourse" size="45"
-							value="<%= (courseVO==null)? "30" : courseVO.getMaxOfCourse()%>" /></td>
+							placeholder="Ex:/ 30"/></td>
 					</tr>
 					<tr>
 						<td>上課地點</td>
-						<td><input type="TEXT" name=courseLocation size="45"
-							value="<%= (courseVO==null)? "台南市新營區民治路36號" : courseVO.getCourseLocation()%>" /></td>
+						<td><input type="TEXT" name="courseLocation" size="45"
+							placeholder="Ex:/ 台南市新營區民治路36號"/></td>
 					</tr>
+					
+<!-- 					<tr> -->
+<!--                         <td>課程日期</td> -->
+<!--                         <td><input type="date" name="courseDate"></td> -->
+<!--                     </tr> -->
+<!--                     <tr> -->
+<!--                         <td>開始報名</td> -->
+<!--                         <td><input type="date" name="signUpStartdate"></td> -->
+<!--                     </tr> -->
+<!--                     <tr> -->
+<!--                         <td>截止報名</td> -->
+<!--                         <td><input type="date" name="signUpDeadline"></td> -->
+<!--                     </tr> -->
 					
 				
 				</table>
 				<br> <input type="hidden" name="action" value="insert">
-				<input type="submit"  class="las" value="送出新增">
+				<input type="submit"  id="insert" class="las" value="送出新增">
                 
-			</FORM>
+			</form>
 		</main>
+
+<!--     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script> -->
+<!--     <script> -->
+<!-- //       $(document).ready(function(){ -->
+<!-- //         $("#insert").click(function(){ -->
+
+<!-- //           $.ajax({ -->
+<!-- //             type: "POST", -->
+<!-- //             url: "/CourseServlet.do", -->
+<!-- //             data: $("#myForm").serialize(), -->
+<!-- //             dataType: "json", -->
+<!-- //             success:function(response){ -->
+<!-- //               alert("新增成功"); -->
+<!-- //             }, -->
+<!-- //             error: function (xhr, ajaxOptions, thrownError) { -->
+<!-- //                         alert(xhr.status + "\n" + thrownError); -->
+<!-- //                     } -->
+
+<!-- //           }); -->
+
+<!-- //         }); -->
+<!-- //       }); -->
+<!--     </script> -->
 </body>
 </html>
