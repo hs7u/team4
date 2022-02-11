@@ -6,6 +6,7 @@
 <%@ page import ="web.Product.vo.ProductVO"%>
 <%@ page import="ProjectInterfaces.ProductInterface"%>
 
+
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
@@ -14,31 +15,46 @@
     pageContext.setAttribute("list",list);
 %>
 
+
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display-swap');
+  
   table {
-	height: 30px;
-	width: 670px;
+  border-radius: 10px;
+	height: 80px;
+	width: 850px;
 	background-color: white;
-	
-	margin-top: 2px;
-	margin-bottom: 2px;
   }
+  
   table, th {
-  height: 50px;
-  font-size:  1rem;
+  height: 90px;
+  
   }
   
   table, th, td {
-    border: 1px solid #ccc ;
+    border: 0.1px solid white;
   }
  
   th, td {
     text-align: center;
-    font-size:  0.3rem;
+    padding: .2rem 1rem;
+    font-size:  0.1rem;
+    height: 40px;
+   
   }
+  
+   input {
+    border-radius: 15px;
+    padding: .5rem;
+    border: none;
+    outline: none;
+  }
+  
+
 </style>
 
-</head>
+
+
 
 <body bgcolor='#f1f5f9'>
     <h3>所有商品資料</h3>	
@@ -50,9 +66,9 @@
 		<th>商品描述</th>
 		<th>商品價格</th>
 		<th>商品圖片</th>
-		<th>商品庫存</th>
-		<th>是否可客製化</th>
-		<th>客製商品價格</th>
+		<th>庫存</th>
+		<th>客製化</th>
+		<th>客製價格</th>
 		<th>狀態</th>
 		<th>修改</th>
 		<th>刪除</th>
@@ -72,7 +88,7 @@
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Product/updateProduct" style="margin-bottom: 0px;">
 			     <input type="hidden" name="action"  value="transform">
-                 <input type="hidden" name="productId" value="${pVo.productId}">
+                 <input type="hidden" name="productId" value="${pVo.productId}">  
 			     <input type="submit" value="修改">
                 </FORM>
 			</td>

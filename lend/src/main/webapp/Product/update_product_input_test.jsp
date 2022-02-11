@@ -7,41 +7,56 @@
 %>
 <title>商品資料修改 - update_product_input.jsp</title>
 
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-</style>
+<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 
 <style>
-  table {
-	width: 450px;
-	background-color: white;
-	margin-top: 1px;
+ table {
+	width: 850px;
+	margin-top: 0.1px;
 	margin-bottom: 1px;
   }
   table, th, td {
     border: 0px solid #CCCCFF;
+   
+    
   }
   th, td {
+    margin
     padding: 1px;
   }
+  
+  label{
+    height: 100%;
+    padding: .5rem;
+    border: none;
+    outline: none;
+  }
+  
+  input {
+    border-radius: 15px;
+    padding: .5rem;
+    border: none;
+    outline: none;
+  }
+ 
+  div {
+  overflow-x:hidden;
+  overflow-y:hidden;
+}
+div:hover {
+  overflow: auto;
+}
+ 
 </style>
 
 </head>
 <body bgcolor='#f1f5f9'>
 
-	<h3>資料修改:</h3>
+	<h3>商品資料修改</h3>
 
 	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Product/updateProduct" enctype="multipart/form-data">
 		<table>
+		
 			<tr>
 				<td>商品標籤</td>
 				<td><input type="radio" name="product_category_code" size="45"
@@ -106,6 +121,7 @@
 					value="<%= (productVO.getCustomerProductPrice() == null) ? "0" : productVO.getCustomerProductPrice()%>" /></td>
 			</tr>
 			<tr>
+				<td>商品上架狀態</td>
 				<td><input type="radio" name="product_status" size="45"
 					value="1" checked="<%= (productVO.getProductStatus() == 1) ? true : false %>" />
 					<label for="product_status">上架</label>
@@ -119,5 +135,6 @@
 	<input type="hidden" name="action" value="update">
 	<input type="submit" value="送出修改"></FORM>
 </body>
+
 
 </html>
