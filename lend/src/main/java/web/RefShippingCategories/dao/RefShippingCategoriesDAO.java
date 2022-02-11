@@ -59,8 +59,8 @@ public class RefShippingCategoriesDAO implements RefShippingCategoriesInterface<
 		CriteriaBuilder cb = this.s.getCriteriaBuilder();
 		CriteriaUpdate<RefShippingCategoriesVO> cu = cb.createCriteriaUpdate(RefShippingCategoriesVO.class);
 		Root<RefShippingCategoriesVO> root = cu.from(RefShippingCategoriesVO.class);
-		cu = cu.set(root.get("delivery_category_description"), rVo.getShippingCategoryDescription())
-			   .where(cb.equal(root.get("delivery_method_code"), rVo.getShippingMethodCode()));
+		cu = cu.set(root.get("shippingCategoryDescription"), rVo.getShippingCategoryDescription())
+			   .where(cb.equal(root.get("shippingMethodCode"), rVo.getShippingMethodCode()));
 		this.s.createQuery(cu).executeUpdate();
 		// Hibernate
 		/* if(rVo != null){
@@ -86,7 +86,7 @@ public class RefShippingCategoriesDAO implements RefShippingCategoriesInterface<
 		CriteriaBuilder cb = this.s.getCriteriaBuilder();
 		CriteriaQuery<RefShippingCategoriesVO> cq = cb.createQuery(RefShippingCategoriesVO.class);
 		Root<RefShippingCategoriesVO> root = cq.from(RefShippingCategoriesVO.class);
-		cq = cq.where(cb.equal(root.get("delivery_method_code"), shippingMethodCode));
+		cq = cq.where(cb.equal(root.get("shippingMethodCode"), shippingMethodCode));
 		return this.s.createQuery(cq).getSingleResult();
 		// Hibernate
 		/* if(shippingMethodCode != null){

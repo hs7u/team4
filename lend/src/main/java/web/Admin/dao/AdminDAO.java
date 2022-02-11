@@ -34,10 +34,10 @@ public class AdminDAO implements AdminInterface<AdminVO>{
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaUpdate<AdminVO> cu = cb.createCriteriaUpdate(AdminVO.class);
         Root<AdminVO> root = cu.from(AdminVO.class);
-        cu = cu.set(root.get("admin_account"), aVo.getAdminAccount())
-               .set(root.get("admin_password"), aVo.getAdminPassword())
+        cu = cu.set(root.get("adminAccount"), aVo.getAdminAccount())
+               .set(root.get("adminPassword"), aVo.getAdminPassword())
                .set(root.get("permission"), aVo.getPermission())
-               .where(cb.equal(root.get("admin_id"), aVo.getAdminId()));
+               .where(cb.equal(root.get("adminId"), aVo.getAdminId()));
         this.s.createQuery(cu).getSingleResult();
         // Hibernate
         /* if(aVo != null){
@@ -56,7 +56,7 @@ public class AdminDAO implements AdminInterface<AdminVO>{
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaDelete<AdminVO> cd = cb.createCriteriaDelete(AdminVO.class);
         Root<AdminVO> root = cd.from(AdminVO.class);
-        cd = cd.where(cb.equal(root.get("admin_id"), adminId));
+        cd = cd.where(cb.equal(root.get("adminId"), adminId));
         this.s.createQuery(cd).executeUpdate();
         // Hibernate
         /* if(adminId != null){
@@ -72,7 +72,7 @@ public class AdminDAO implements AdminInterface<AdminVO>{
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaQuery<AdminVO> cq = cb.createQuery(AdminVO.class);
         Root<AdminVO> root = cq.from(AdminVO.class);
-        cq = cq.where(cb.isNotNull(root.get("admin_id")));
+        cq = cq.where(cb.isNotNull(root.get("adminId")));
         ArrayList<AdminVO> list = new ArrayList<AdminVO>();
         for(AdminVO result : this.s.createQuery(cq).getResultList()){
             list.add(result);

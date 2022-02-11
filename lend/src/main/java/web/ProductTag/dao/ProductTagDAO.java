@@ -58,8 +58,8 @@ public class ProductTagDAO implements ProductTagInterface<ProductTagVO>{
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaUpdate<ProductTagVO> cu = cb.createCriteriaUpdate(ProductTagVO.class);
         Root<ProductTagVO> root = cu.from(ProductTagVO.class);
-        cu = cu.set(root.get("product_tag_name"), pVo.getProductTagName())
-               .where(cb.equal(root.get("product_category_code"), pVo.getProductCategoryCode()));
+        cu = cu.set(root.get("productTagName"), pVo.getProductTagName())
+               .where(cb.equal(root.get("productCategoryCode"), pVo.getProductCategoryCode()));
         this.s.createQuery(cu).executeUpdate();
         // Hibernate
         /* if(pVo != null){
@@ -86,7 +86,7 @@ public class ProductTagDAO implements ProductTagInterface<ProductTagVO>{
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaQuery<ProductTagVO> cq = cb.createQuery(ProductTagVO.class);
         Root<ProductTagVO> root = cq.from(ProductTagVO.class);
-        cq = cq.where(cb.equal(root.get("product_category_code"), productCategoryCode));
+        cq = cq.where(cb.equal(root.get("productCategoryCode"), productCategoryCode));
         return this.s.createQuery(cq).getSingleResult();
         // Hibernate
         /* if(productCategoryCode != null){

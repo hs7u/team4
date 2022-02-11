@@ -62,7 +62,7 @@ public class QADAO implements QAInterface<QAVO>{
         Root<QAVO> root = cu.from(QAVO.class); 
         cu = cu.set(root.get("quession"), qavo.getQuession())
                .set(root.get("reply"), qavo.getReply())
-               .where(cb.equal(root.get("qa_id"), qavo.getQaId()));
+               .where(cb.equal(root.get("qaId"), qavo.getQaId()));
         this.s.createQuery(cu).executeUpdate();
         // Hibernate
         /* if(qavo != null){
@@ -91,7 +91,7 @@ public class QADAO implements QAInterface<QAVO>{
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaDelete<QAVO> cd = cb.createCriteriaDelete(QAVO.class);
         Root<QAVO> root = cd.from(QAVO.class);
-        cd = cd.where(cb.equal(root.get("qa_id"), qaId));
+        cd = cd.where(cb.equal(root.get("qaId"), qaId));
         this.s.createQuery(cd).executeUpdate();
         // Hibernate
         /* if(qaId != null){
@@ -144,7 +144,7 @@ public class QADAO implements QAInterface<QAVO>{
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaQuery<QAVO> cq = cb.createQuery(QAVO.class);
         Root<QAVO> root = cq.from(QAVO.class);
-        cq = cq.where(cb.equal(root.get("qa_id"), qaId));
+        cq = cq.where(cb.equal(root.get("qaId"), qaId));
         return this.s.createQuery(cq).getSingleResult();
         // Hibernate
         /* if(qaId != null){

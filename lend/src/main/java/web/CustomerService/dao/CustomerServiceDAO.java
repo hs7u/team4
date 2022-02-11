@@ -60,10 +60,10 @@ public class CustomerServiceDAO implements CustomerServiceInterface<CustomerServ
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaUpdate<CustomerServiceVO> cu = cb.createCriteriaUpdate(CustomerServiceVO.class);
         Root<CustomerServiceVO> root = cu.from(CustomerServiceVO.class);
-        cu = cu.set(root.get("message_title"), csVO.getMessageTitle())
-               .set(root.get("message_context"), csVO.getMessageContext())
-               .set(root.get("reply_context"), csVO.getReplyContext())
-               .where(cb.equal(root.get("message_id"), csVO.getMessageId()));
+        cu = cu.set(root.get("messageTitle"), csVO.getMessageTitle())
+               .set(root.get("messageContext"), csVO.getMessageContext())
+               .set(root.get("replyContext"), csVO.getReplyContext())
+               .where(cb.equal(root.get("messageId"), csVO.getMessageId()));
         this.s.createQuery(cu).executeUpdate();
         // Hibernate
         /* if(csVO != null){
@@ -95,7 +95,7 @@ public class CustomerServiceDAO implements CustomerServiceInterface<CustomerServ
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaQuery<CustomerServiceVO> cq = cb.createQuery(CustomerServiceVO.class);
         Root<CustomerServiceVO> root = cq.from(CustomerServiceVO.class);
-        cq = cq.where(cb.equal(root.get("message_id"), messageId));
+        cq = cq.where(cb.equal(root.get("messageId"), messageId));
         return this.s.createQuery(cq).getSingleResult();
         // Hibernate
         /* if(messageId != null){

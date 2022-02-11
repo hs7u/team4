@@ -73,15 +73,15 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaUpdate<CustomerVO> cu = cb.createCriteriaUpdate(CustomerVO.class);
         Root<CustomerVO> root = cu.from(CustomerVO.class);
-        cu = cu.set(root.get("customer_id"),customerVo.getCustomerId())
-               .set(root.get("customer_name"),customerVo.getCustomerName())
-               .set(root.get("customer_email"),customerVo.getCustomerEmail())
-               .set(root.get("customer_password"),customerVo.getCustomerPassword())
-               .set(root.get("customer_phone"),customerVo.getCustomerPhone())
-               .set(root.get("customer_birthday"),customerVo.getCustomerBirthday())
-               .set(root.get("customer_gender"),customerVo.getCustomerGender())
-               .set(root.get("customer_address"),customerVo.getCustomerAddress())
-               .where(cb.equal(root.get("customer_id"), customerVo.getCustomerId()));
+        cu = cu.set(root.get("customerId"),customerVo.getCustomerId())
+               .set(root.get("customerName"),customerVo.getCustomerName())
+               .set(root.get("customerEmail"),customerVo.getCustomerEmail())
+               .set(root.get("customerPassword"),customerVo.getCustomerPassword())
+               .set(root.get("customerPhone"),customerVo.getCustomerPhone())
+               .set(root.get("customerBirthday"),customerVo.getCustomerBirthday())
+               .set(root.get("customerGender"),customerVo.getCustomerGender())
+               .set(root.get("customerAddress"),customerVo.getCustomerAddress())
+               .where(cb.equal(root.get("customerId"), customerVo.getCustomerId()));
           
         this.s.createQuery(cu).executeUpdate();
         
@@ -127,7 +127,7 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaDelete<CustomerVO> cd = cb.createCriteriaDelete(CustomerVO.class);
         Root<CustomerVO> root = cd.from(CustomerVO.class);
-        cd = cd.where(cb.equal(root.get("customer_id"),customerId));
+        cd = cd.where(cb.equal(root.get("customerId"),customerId));
         this.s.createQuery(cd).executeUpdate();
 
        // Hibernate
@@ -188,8 +188,8 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaUpdate<CustomerVO> cu = cb.createCriteriaUpdate(CustomerVO.class);
         Root<CustomerVO> root = cu.from(CustomerVO.class);
-        cu = cu.set(root.get("customer_status"), statusCode)
-               .where(cb.equal(root.get("customer_id"), customerId));
+        cu = cu.set(root.get("customerStatus"), statusCode)
+               .where(cb.equal(root.get("customerId"), customerId));
         this.s.createQuery(cu).executeUpdate();
 
         // Hibernate

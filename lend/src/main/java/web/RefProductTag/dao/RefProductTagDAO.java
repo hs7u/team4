@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -54,15 +55,23 @@ public class RefProductTagDAO implements RefProductTagInterface<RefProductTagVO>
         } */
     }
     public void update(RefProductTagVO rVo){
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaUpdate<RefProductTagVO> cu = cb.createCriteriaUpdate(RefProductTagVO.class);
+        Root<RefProductTagVO> root = cu.from(RefProductTagVO.class);
+        cu = cu.set(root.get("productCategoryCode"), rVo.getProductCategoryCode())
+               .set(root.get("productId"), rVo.getProductId())
+               .where(cb.equal(root.get("serialNumber"), rVo.getSerialNumber()));
+        this.s.createQuery(cu).executeUpdate();
         // Hibernate
-        if(rVo != null){
+        /* if(rVo != null){
             RefProductTagVO check = this.s.get(RefProductTagVO.class, rVo.getSerialNumber());
             if(check != null){
                 check.setProductCategoryCode(rVo.getProductCategoryCode());
                 check.setProductId(rVo.getProductId());
                 this.s.save(check);
             }
-        }
+        } */
         // DataSource Jdbc
         /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(UPDATE)) {
@@ -81,7 +90,7 @@ public class RefProductTagDAO implements RefProductTagInterface<RefProductTagVO>
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaQuery<RefProductTagVO> cq = cb.createQuery(RefProductTagVO.class);
         Root<RefProductTagVO> root = cq.from(RefProductTagVO.class);
-        cq = cq.where(cb.equal(root.get("product_id"), productId));
+        cq = cq.where(cb.equal(root.get("productId"), productId));
         ArrayList<Integer> list = new ArrayList<Integer>();
         for(RefProductTagVO rVo : this.s.createQuery(cq).getResultList()){
             list.add(rVo.getProductCategoryCode());

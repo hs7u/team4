@@ -56,8 +56,8 @@ public class FavoriteDAO implements FavoriteInterface<FavoriteVO>{
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaDelete<FavoriteVO> cd = cb.createCriteriaDelete(FavoriteVO.class);
         Root<FavoriteVO> root = cd.from(FavoriteVO.class);
-        cd = cd.where(cb.and(cb.equal(root.get("customer_id"), customerId), 
-                      cb.equal(root.get("product_id"), productId)));
+        cd = cd.where(cb.and(cb.equal(root.get("customerId"), customerId), 
+                      cb.equal(root.get("productId"), productId)));
         this.s.createQuery(cd).executeUpdate();
         // Datasource Jdbc
         /* Connection con = null;
@@ -104,7 +104,7 @@ public class FavoriteDAO implements FavoriteInterface<FavoriteVO>{
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaQuery<FavoriteVO> cq = cb.createQuery(FavoriteVO.class);
         Root<FavoriteVO> root = cq.from(FavoriteVO.class);
-        cq = cq.where(cb.equal(root.get("customer_id"), customerId));
+        cq = cq.where(cb.equal(root.get("customerId"), customerId));
         ArrayList<Integer> clist = new ArrayList<Integer>();
         for(FavoriteVO sel : this.s.createQuery(cq).getResultList()){
             clist.add(sel.getProductId());

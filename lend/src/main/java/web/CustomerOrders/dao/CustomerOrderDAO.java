@@ -82,14 +82,14 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaUpdate<CustomerOrdersVO> cu = cb.createCriteriaUpdate(CustomerOrdersVO.class);
         Root<CustomerOrdersVO> root = cu.from(CustomerOrdersVO.class);
-        cu = cu.set(root.get("order_id"), coVo.getOrderId())
-               .set(root.get("customer_id"), coVo.getCustomerId())
-               .set(root.get("shipping_method_code"), coVo.getShippingMethodCode())
-               .set(root.get("order_delivery_charge"), coVo.getOrderDeliveryCharge())
-               .set(root.get("order_shipping_date"), coVo.getOrderShippingDate())
+        cu = cu.set(root.get("orderId"), coVo.getOrderId())
+               .set(root.get("customerId"), coVo.getCustomerId())
+               .set(root.get("shippingMethodCode"), coVo.getShippingMethodCode())
+               .set(root.get("orderDeliveryCharge"), coVo.getOrderDeliveryCharge())
+               .set(root.get("orderShippingDate"), coVo.getOrderShippingDate())
                .set(root.get("recipient"), coVo.getRecipint())
-               .set(root.get("senders_address"), coVo.getSendersAddress())
-               .set(root.get("order_detials"), coVo.getOrderDetails());
+               .set(root.get("sendersAddress"), coVo.getSendersAddress())
+               .set(root.get("orderDetials"), coVo.getOrderDetails());
         this.s.createQuery(cu).executeUpdate();
         // Hibernate
         /* if(coVo != null){
@@ -129,7 +129,7 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaDelete<CustomerOrdersVO> cd = cb.createCriteriaDelete(CustomerOrdersVO.class);
         Root<CustomerOrdersVO> root = cd.from(CustomerOrdersVO.class);
-        cd = cd.where(cb.equal(root.get("order_id"), orderId));
+        cd = cd.where(cb.equal(root.get("orderId"), orderId));
         this.s.createQuery(cd).executeUpdate();
         // Hibernate
        /*  if(orderId != null){
@@ -183,7 +183,7 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
         CriteriaUpdate<CustomerOrdersVO> cu = cb.createCriteriaUpdate(CustomerOrdersVO.class);
         Root<CustomerOrdersVO> root = cu.from(CustomerOrdersVO.class);
         cu = cu.set(root.get(statusName), statusCode)
-               .where(cb.equal(root.get("order_id"), orderId));
+               .where(cb.equal(root.get("orderId"), orderId));
         this.s.createQuery(cu).executeUpdate();
         // Hibernate
         /* if(orderId != null){
@@ -241,7 +241,7 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaQuery<CustomerOrdersVO> cq = cb.createQuery(CustomerOrdersVO.class);
         Root<CustomerOrdersVO> root = cq.from(CustomerOrdersVO.class);
-        cq = cq.where(cb.equal(root.get("order_id"), orderId));
+        cq = cq.where(cb.equal(root.get("orderId"), orderId));
         return this.s.createQuery(cq).getSingleResult();
         // Hibernate
         /* if(orderId != null){
