@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ColumnDefault;
 @Entity
 @Table(name = "Course")
 public class CourseVO implements java.io.Serializable{
@@ -31,6 +33,7 @@ public class CourseVO implements java.io.Serializable{
     private String courseLocation;
 	@Column(name = "course_describe")
     private String courseDescribe;
+	@ColumnDefault(value = "0")
 	@Column(name = "course_status")
 	private Byte courseState;
     public CourseVO() {

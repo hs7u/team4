@@ -46,9 +46,10 @@ public class newProduct extends HttpServlet {
 			else{ 
                 if ((val = br.readLine()) != null) {
                     poc.put(part.getName(), val);
-                    String str = addError(part.getName(), val);
-                    if(str != null && str != "")
-                        errorMsg.add(str);
+                    String check = addError(part.getName(), val);
+                    if(check != "" && check != null) {
+                        errorMsg.add(check);
+                    }
                 } else {
                     errorMsg.add(part.getName()+" can't empty");
                 }
@@ -83,22 +84,20 @@ public class newProduct extends HttpServlet {
         out.close();
     }
     public String addError(String name,String val){
-        StringBuilder msg = new StringBuilder();
+        String msg = null;
         switch (name) {
             case "product_category_code":
             case "product_price":
             case "product_inventory":
             case "customer_product_price":
                 if(!isInteger(val)){
-                    msg.append(name + " must be number");
-                }else {
-                	return null;
+                    msg = name + " must be number";
                 }
                 break;
             default:
             	return null;
         }
-        return msg.toString();
+        return msg;
     }
     private boolean isInteger(String string) {
         try {
