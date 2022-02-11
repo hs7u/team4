@@ -38,14 +38,9 @@
 </head>
 <body bgcolor='#f1f5f9'>
 
-	<table id="table-1">
-		<tr><td>
-			<h3>商品資料修改 - update_product_input.jsp</h3>
-		</td></tr>
-	</table>
 	<h3>資料修改:</h3>
 
-	<FORM METHOD="post" ACTION="./updateProduct" enctype="multipart/form-data">
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Product/updateProduct" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>商品標籤</td>
@@ -86,7 +81,8 @@
 			</tr>	
 			<tr>
 				<td>商品圖片</td>
-				<td><input type="file" name="product_image" id=""></td>	
+				<td><input type="file" name="product_image" id="" 
+					value="<%= (productVO.getProductImage() == null) ? "0" : productVO.getProductImage()%>" /></td>	
 			</tr>
 		
 			<tr>
@@ -109,9 +105,17 @@
 				<td><input type="TEXT" name="customer_product_price" size="45"
 					value="<%= (productVO.getCustomerProductPrice() == null) ? "0" : productVO.getCustomerProductPrice()%>" /></td>
 			</tr>
+			<tr>
+				<td><input type="radio" name="product_status" size="45"
+					value="1" checked="<%= (productVO.getProductStatus() == 1) ? true : false %>" />
+					<label for="product_status">上架</label>
+					<input type="radio" name="product_status" size="45"
+					value="0" checked="<%= (productVO.getProductStatus() == 0) ? true : false %>" />
+					<label for="product_status">下架</label></td>
+			</tr>
 		</table>
 	<br>
-	<input type="hidden" name="productd_id" value="<%=productVO.getProductId()%>">
+	<input type="hidden" name="product_id" value="<%=productVO.getProductId()%>">
 	<input type="hidden" name="action" value="update">
 	<input type="submit" value="送出修改"></FORM>
 </body>

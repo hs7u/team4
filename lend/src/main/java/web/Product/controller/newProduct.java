@@ -46,8 +46,8 @@ public class newProduct extends HttpServlet {
 			else{ 
                 if ((val = br.readLine()) != null) {
                     poc.put(part.getName(), val);
-                    String str;
-                    if((str = addError(part.getName(), val)) != null)
+                    String str = addError(part.getName(), val);
+                    if(str != null && str != "")
                         errorMsg.add(str);
                 } else {
                     errorMsg.add(part.getName()+" can't empty");
@@ -91,8 +91,12 @@ public class newProduct extends HttpServlet {
             case "customer_product_price":
                 if(!isInteger(val)){
                     msg.append(name + " must be number");
+                }else {
+                	return null;
                 }
                 break;
+            default:
+            	return null;
         }
         return msg.toString();
     }

@@ -85,10 +85,8 @@ public class ProductDAO implements ProductInterface<ProductVO>{
                .set(root.get("productImage"), pVo.getProductImage())
                .set(root.get("productDescription"), pVo.getProductDescription())
                .set(root.get("productInventory"), pVo.getProductInventory())
-               .set(root.get("productSold"), pVo.getProductSold())
-               .set(root.get("releasedTime"), pVo.getReleasedTime())
                .set(root.get("customization"), pVo.getCustomization())
-               .set(root.get("customProductPrice"), pVo.getCustomerProductPrice())
+               .set(root.get("customerProductPrice"), pVo.getCustomerProductPrice())
                .set(root.get("productStatus"), pVo.getProductStatus())
                .where(cb.equal(root.get("productId"), pVo.getProductId()));
         this.s.createQuery(cu).executeUpdate();
