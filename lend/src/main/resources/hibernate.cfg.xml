@@ -16,5 +16,6 @@
     	<mapping class="web.Customer.vo.CustomerVO"/>
     	<mapping class="web.Product.vo.ProductVO"/>
     	<mapping class="web.Favorite.vo.FavoriteVO"/>
+    	<mapping class="web.Course.vo.CourseVO"/>
     </session-factory>
 </hibernate-configuration>
