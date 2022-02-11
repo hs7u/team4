@@ -1,7 +1,5 @@
 package web.Course.dao;
 
-import java.util.List;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
@@ -69,14 +67,14 @@ public class CourseDAO implements CourseInterface<CourseVO> {
        CriteriaBuilder cb = this.s.getCriteriaBuilder();
        CriteriaUpdate<CourseVO> cu = cb.createCriteriaUpdate(CourseVO.class);
        Root<CourseVO> root = cu.from(CourseVO.class);
-       cu = cu.set(root.get("courseName"), cVo.getCourseName())
-              .set(root.get("coursePrice"), cVo.getCoursePrice())
-              .set(root.get("courseImage"), cVo.getCourseImage())
+       cu = cu.set(root.get("course_name"), cVo.getCourseName())
+              .set(root.get("course_price"), cVo.getCoursePrice())
+              .set(root.get("course_image"), cVo.getCourseImage())
               .set(root.get("maxOfCourse"), cVo.getMaxOfCourse())
               .set(root.get("minOfCourse"), cVo.getMinOfCourse())
-              .set(root.get("courseLocation"), cVo.getCourseLocation())
-              .set(root.get("courseDescribe"), cVo.getCourseDescribe())
-              .where(cb.equal(root.get("courseId"), cVo.getCourseId()));
+              .set(root.get("course_location"), cVo.getCourseLocation())
+              .set(root.get("course_describe"), cVo.getCourseDescribe())
+              .where(cb.equal(root.get("course_id"), cVo.getCourseId()));
         this.s.createQuery(cu).executeUpdate();
 
        // Hibernate
@@ -117,7 +115,7 @@ public class CourseDAO implements CourseInterface<CourseVO> {
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaDelete<CourseVO> cd = cb.createCriteriaDelete(CourseVO.class);
         Root<CourseVO> root = cd.from(CourseVO.class);
-        cd = cd.where(cb.equal(root.get("courseId"), courseId));
+        cd = cd.where(cb.equal(root.get("course_id"), courseId));
         this.s.createQuery(cd).executeUpdate();
         // Hibernate
         /* if(courseId != null){
@@ -170,8 +168,8 @@ public class CourseDAO implements CourseInterface<CourseVO> {
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaUpdate<CourseVO> cu = cb.createCriteriaUpdate(CourseVO.class);
         Root<CourseVO> root = cu.from(CourseVO.class);
-        cu = cu.set(root.get("courseStatus"), courseState)
-               .where(cb.equal(root.get("courseId"), courseId));
+        cu = cu.set(root.get("course_status"), courseState)
+               .where(cb.equal(root.get("course_id"), courseId));
         this.s.createQuery(cu).executeUpdate();
 
         // Hibernate
@@ -196,7 +194,7 @@ public class CourseDAO implements CourseInterface<CourseVO> {
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaQuery<CourseVO> cq = cb.createQuery(CourseVO.class);
         Root<CourseVO> root = cq.from(CourseVO.class);
-        cq = cq.where(cb.equal(root.get("courseId"), courseId));
+        cq = cq.where(cb.equal(root.get("course_id"), courseId));
         
         try {
 			return this.s.createQuery(cq).getSingleResult();
@@ -231,13 +229,5 @@ public class CourseDAO implements CourseInterface<CourseVO> {
             + se.getMessage());
         }
         return cVo; */
-    }
-    public List<CourseVO> getAll(){
-         // JPA CtiteriaQuery
-         CriteriaBuilder cb = this.s.getCriteriaBuilder();
-         CriteriaQuery<CourseVO> cq = cb.createQuery(CourseVO.class);
-         Root<CourseVO> root = cq.from(CourseVO.class);
-         cq = cq.select(root);
-         return this.s.createQuery(cq).getResultList();
     }
 }
