@@ -78,18 +78,19 @@ public class ProductDAO implements ProductInterface<ProductVO>{
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaUpdate<ProductVO> cu = cb.createCriteriaUpdate(ProductVO.class);
         Root<ProductVO> root = cu.from(ProductVO.class);
-        cu = cu.set(root.get("product_id"), pVo.getProductId())
-               .set(root.get("product_category_code"), pVo.getProductCategoryCode())
-               .set(root.get("product_price"), pVo.getProductPrice())
-               .set(root.get("product_name"), pVo.getProductName())
-               .set(root.get("product_image"), pVo.getProductImage())
-               .set(root.get("product_description"), pVo.getProductDescription())
-               .set(root.get("product_inventory"), pVo.getProductInventory())
-               .set(root.get("product_sold"), pVo.getProductSold())
-               .set(root.get("released_time"), pVo.getReleasedTime())
+        cu = cu.set(root.get("productId"), pVo.getProductId())
+               .set(root.get("productCategoryCode"), pVo.getProductCategoryCode())
+               .set(root.get("productPrice"), pVo.getProductPrice())
+               .set(root.get("productName"), pVo.getProductName())
+               .set(root.get("productImage"), pVo.getProductImage())
+               .set(root.get("productDescription"), pVo.getProductDescription())
+               .set(root.get("productInventory"), pVo.getProductInventory())
+               .set(root.get("productSold"), pVo.getProductSold())
+               .set(root.get("releasedTime"), pVo.getReleasedTime())
                .set(root.get("customization"), pVo.getCustomization())
-               .set(root.get("custom_product_price"), pVo.getCustomerProductPrice())
-               .set(root.get("product_status"), pVo.getProductStatus());
+               .set(root.get("customProductPrice"), pVo.getCustomerProductPrice())
+               .set(root.get("productStatus"), pVo.getProductStatus())
+               .where(cb.equal(root.get("productId"), pVo.getProductId()));
         this.s.createQuery(cu).executeUpdate();
         // Hibernate
         /* ProductVO productVo = this.s.get(ProductVO.class, pVo.getProductId());
@@ -133,13 +134,13 @@ public class ProductDAO implements ProductInterface<ProductVO>{
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaDelete<ProductVO> cd = cb.createCriteriaDelete(ProductVO.class);
         Root<ProductVO> root = cd.from(ProductVO.class);
-        cd = cd.where(cb.equal(root.get("product_id"), productId));
+        cd = cd.where(cb.equal(root.get("productId"), productId));
         this.s.createQuery(cd).executeUpdate();
         // Hibernate
-        ProductVO pVo = this.s.get(ProductVO.class, productId);
+        /* ProductVO pVo = this.s.get(ProductVO.class, productId);
         if(pVo != null){
             this.s.delete(pVo);
-        }
+        } */
         // DateSource Jdbc
         /* Connection con = null;
         PreparedStatement ps = null;
@@ -181,12 +182,17 @@ public class ProductDAO implements ProductInterface<ProductVO>{
     }
     public void sold(Integer productId, Integer sold){
         // JPA Criteria
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaUpdate<ProductVO> cu = cb.createCriteriaUpdate(ProductVO.class);
+        Root<ProductVO> root = cu.from(ProductVO.class);
+        cu = cu.where(cb.equal(root.get("productId"), productId))
+               .set(root.get("productSold"), sold);
         // Hibernate
-        ProductVO pVo = this.s.get(ProductVO.class, productId);
+        /* ProductVO pVo = this.s.get(ProductVO.class, productId);
         if(pVo != null){
             pVo.setProductSold(sold);
             this.s.save(pVo);
-        }
+        } */
         // DateSource Jdbc
         /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(PRODUCT_SOLD)) {
@@ -203,8 +209,8 @@ public class ProductDAO implements ProductInterface<ProductVO>{
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaUpdate<ProductVO> cu = cb.createCriteriaUpdate(ProductVO.class);
         Root<ProductVO> root = cu.from(ProductVO.class);
-        cu = cu.where(cb.and(cb.equal(root.get("product_id"), productId),
-                             cb.equal(root.get("product_status"), statusCode)
+        cu = cu.where(cb.and(cb.equal(root.get("productId"), productId),
+                             cb.equal(root.get("productStatus"), statusCode)
                             )
                      );
         this.s.createQuery(cu).executeUpdate();
@@ -225,20 +231,20 @@ public class ProductDAO implements ProductInterface<ProductVO>{
             + se.getMessage());
         } */
     }
-    public ProductVO selectByProductName(String productName){
+    public ProductVO selectByProductId(Integer productId){
         // JPA Criteria
         CriteriaBuilder cb = this.s.getCriteriaBuilder();
         CriteriaQuery<ProductVO> cq = cb.createQuery(ProductVO.class);
         Root<ProductVO> root = cq.from(ProductVO.class);
         
-        cq = cq.where(cb.like(root.get("product_name"), "%"+productName+"%"));
+        cq = cq.select(root).where(cb.equal(root.get("productId"), productId));
         
         try {
-			return this.s.createQuery(cq).getSingleResult();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+            return this.s.createQuery(cq).getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
         // DateSource Jdbc
         /* ProductVO pVo = new ProductVO();
         try (Connection con = ds.getConnection();
@@ -264,6 +270,21 @@ public class ProductDAO implements ProductInterface<ProductVO>{
             + se.getMessage());
         }
         return pVo; */
+    }
+    public byte[] selectPhotoByProductId(Integer productId){
+         // JPA Criteria
+         CriteriaBuilder cb = this.s.getCriteriaBuilder();
+         CriteriaQuery<byte[]> cq = cb.createQuery(byte[].class);
+         Root<ProductVO> root = cq.from(ProductVO.class);
+         
+         cq = cq.select(root.get("productImage")).where(cb.equal(root.get("productId"), productId));
+         
+         try {
+             return this.s.createQuery(cq).getSingleResult();
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+         return null;
     }
     public ArrayList<ProductVO> getAllProduct(){
         // JPA CtiteriaQuery

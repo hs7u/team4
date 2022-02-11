@@ -28,31 +28,30 @@ public class updateProduct extends HttpServlet{
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         req.setCharacterEncoding("UTF-8");
         res.setContentType("text/html; charset=UTF-8");
-        System.out.println("action = "+ req.getParameter("action"));
-            switch (req.getParameter("action")) {
-                case "update":
-                    update(req, res);       
-                    break;
-                case "delete":
-                    delete(req, res,Integer.valueOf(req.getParameter("productId")));
-                    break;
-                default:
-                    transform(req, res);
-                    break;
-            }
+        switch (req.getParameter("action")) {
+            case "update":
+                update(req, res);       
+                break;
+            case "delete":
+                delete(req, res);
+                break;
+            case "transform":
+                transform(req, res);
+                break;
+        }
          
     }
     private void transform(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         ProductService psc = new ProductService((Session)req.getAttribute("session"));
-        System.out.print(req.getParameter("action"));
-        req.setAttribute("currentProduct", psc.getOneProduct((String)req.getParameter("action")));
- 
-        String url = req.getContextPath()+"/Product/update_product_input.jsp";
+        Integer productId = Integer.valueOf(req.getParameter("productId"));
+        ProductVO vo = psc.getOneProduct(productId);
+        req.setAttribute("currentProduct", vo);
+        String url = "/Product/update_product_input_test.jsp";
         req.getRequestDispatcher(url).forward(req, res);
     }
     private void update(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         PrintWriter out = res.getWriter();
-        HashMap poc = new HashMap();
+        HashMap<String, Object> poc = new HashMap<String, Object>();
         for(Part part : req.getParts()) {
 			InputStream is = part.getInputStream();
 			InputStreamReader isr = new InputStreamReader(is);
@@ -73,7 +72,7 @@ public class updateProduct extends HttpServlet{
 			is.close();
         }
         ProductService psc = new ProductService((Session)req.getAttribute("session"));
-        ProductVO check = psc.getOneProduct((String)poc.get("product_name"));
+        ProductVO check = psc.getOneProduct(Integer.valueOf((String)poc.get("product_id")));
         ProductVO pVo = null;
         if(check != null){
             pVo = psc.updateProduct(
@@ -95,9 +94,9 @@ public class updateProduct extends HttpServlet{
         }
         out.close();    
     }
-    private void delete(HttpServletRequest req, HttpServletResponse res,Integer productId) throws ServletException, IOException{
+    private void delete(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         ProductService psc = new ProductService((Session)req.getAttribute("session"));
-        System.out.println(productId);
+        Integer productId = Integer.valueOf(req.getParameter("productId"));
         psc.deleteProduct(productId);
     }
 }

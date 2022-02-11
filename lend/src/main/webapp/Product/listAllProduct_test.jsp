@@ -17,14 +17,14 @@
 <style>
   table {
 	height: 30px;
-	width: 875px;
+	width: 670px;
 	background-color: white;
 	
 	margin-top: 2px;
 	margin-bottom: 2px;
   }
   table, th {
-  height: 60px;
+  height: 50px;
   font-size:  1rem;
   }
   
@@ -42,16 +42,6 @@
 
 <body bgcolor='#f1f5f9'>
     <h3>所有商品資料</h3>	
-
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
 
 <table>
 	<tr>
@@ -73,13 +63,14 @@
 			<td>${pVo.productName}</td>
 			<td>${pVo.productDescription}</td>
 			<td>${pVo.productPrice}</td>
-			<td><img src="${pVo.productImage}" alt=""></td>
+			<td><img src="<%=request.getContextPath()%>/Product/Image?img=${pVo.productId}" alt="" width="60px" height="50px"></td>
 			<td>${pVo.productInventory}</td> 
-			<td>${pVo.customization}</td>
+			<td>${pVo.customization eq 0 ? "否": "是"}</td>
 			<td>${pVo.customerProductPrice}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Product/updateProduct" style="margin-bottom: 0px;">
-			     <input type="hidden" name="action"  value="update">
+			     <input type="hidden" name="action"  value="transform">
+                 <input type="hidden" name="productId" value="${pVo.productId}">
 			     <input type="submit" value="修改">
                 </FORM>
 			</td>

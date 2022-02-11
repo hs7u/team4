@@ -8,6 +8,7 @@ public interface ProductInterface<ProductVO> {
     public void delete(Integer productId);
     public void sold(Integer productId, Integer sold);
     public void changeStatus(Integer productId, Byte statusCode);
-    public ProductVO selectByProductName(String productName);
+    public ProductVO selectByProductId(Integer productId);
+    public byte[] selectPhotoByProductId(Integer productId);
     public ArrayList<ProductVO> getAllProduct();
 }

@@ -51,14 +51,17 @@ public class ProductService {
     public void updateStatus(Integer productId, Byte statusCode) {
         dao.changeStatus(productId, statusCode);
     }
-    public ProductVO getOneProduct(String productName){
-        return dao.selectByProductName(productName);
+    public ProductVO getOneProduct(Integer productId){
+        return dao.selectByProductId(productId);
     }
     public ArrayList<ProductVO> getAll() {
         return dao.getAllProduct();
     }
     public void deleteProduct(Integer productId){
         dao.delete(productId);
+    }
+    public byte[] getImage(Integer productId) {
+        return dao.selectPhotoByProductId(productId);
     }
     public int hashCode(String productName, String productDescription) {
         final int prime = 31;
