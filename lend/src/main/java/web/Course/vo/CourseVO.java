@@ -16,7 +16,10 @@ public class CourseVO implements java.io.Serializable{
     private String courseName;
 	@Column(name = "course_price")
     private Integer coursePrice;
-	@Column(name = "course_image")
+	@Column(
+			name = "course_image",
+			columnDefinition = "mediumblob"
+			)
     private byte[] courseImage;
 	@Column(name = "released_time")
     private Timestamp releasedTime;
