@@ -31,7 +31,7 @@ public class ProductService {
         return pVo;
     }
     public ProductVO updateProduct(Integer ProductId, Integer productCategoryCode, Integer productPrice, String productName,byte[] productImage,
-            String productDescription, Integer productInventory, Byte customization, Integer customerProductPrice, Byte productStatus) {
+            String productDescription, Integer productInventory, Byte customization, Integer customerProductPrice) {
         ProductVO pVo = new ProductVO();
         pVo.setProductId(ProductId);
         pVo.setProductCategoryCode(productCategoryCode);
@@ -42,7 +42,6 @@ public class ProductService {
         pVo.setProductInventory(productInventory);
         pVo.setCustomization(customization);
         pVo.setCustomerProductPrice(customerProductPrice);
-        pVo.setProductStatus(productStatus);
         dao.update(pVo);
         return pVo;    
     }

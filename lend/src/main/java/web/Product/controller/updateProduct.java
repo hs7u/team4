@@ -84,8 +84,7 @@ public class updateProduct extends HttpServlet{
                                 (String)poc.get("product_description"),
                                 Integer.valueOf((String)poc.get("product_inventory")),
                                 Byte.valueOf((String)poc.get("customization")),
-                                Integer.valueOf((String)poc.get("customer_product_price")),
-                                Byte.valueOf((String)poc.get("product_status"))
+                                Integer.valueOf((String)poc.get("customer_product_price"))
                                 );
         }
         if (pVo != null) {

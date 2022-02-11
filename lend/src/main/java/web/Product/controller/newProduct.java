@@ -94,8 +94,6 @@ public class newProduct extends HttpServlet {
                     msg = name + " must be number";
                 }
                 break;
-            default:
-            	return null;
         }
         return msg;
     }
