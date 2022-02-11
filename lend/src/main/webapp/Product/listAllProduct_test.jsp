@@ -14,33 +14,37 @@
     ArrayList<ProductVO> list = psc.getAll();
     pageContext.setAttribute("list",list);
 %>
-
+<html>
+<head>
+<title>所有商品資料 - listAllProduct.jsp</title>
+<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display-swap');
+  
   
   table {
-  border-radius: 10px;
-	height: 80px;
-	width: 850px;
-	background-color: white;
+   background-color: white;
+    border-radius: 10px;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+	
   }
   
-  table, th {
-  height: 90px;
-  
+  th {
+  font-size: 4vmin;
+  text-align: center;
   }
   
-  table, th, td {
+  table, td {
     border: 0.1px solid white;
-  }
+   }
  
   th, td {
     text-align: center;
-    padding: .2rem 1rem;
-    font-size:  0.1rem;
-    height: 40px;
-   
+    padding: .0.3rem 0.2rem;
+    font-size:  0.01rem;
+    height: 80px;
+    border-bottom: 0.5px solid #f0f0f0;
+
   }
   
    input {
@@ -49,10 +53,10 @@
     border: none;
     outline: none;
   }
-  
+ 
 
 </style>
-
+</head>
 
 
 
@@ -65,7 +69,7 @@
 		<th>商品名稱</th>
 		<th>商品描述</th>
 		<th>商品價格</th>
-		<th>商品圖片</th>
+		<th>圖片</th>
 		<th>庫存</th>
 		<th>客製化</th>
 		<th>客製價格</th>
@@ -96,7 +100,7 @@
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Product/updateProduct" style="margin-bottom: 0px;">
 			     <input type="hidden" name="action"  value="delete">
 			     <input type="hidden" name="productId"  value="${pVo.productId}">
-			     <input type="submit" value="刪除">
+			     <input type="submit"  value="刪除">
                 </FORM>
 			</td>
 		</tr>
