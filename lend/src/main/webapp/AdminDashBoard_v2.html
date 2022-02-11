@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="./css/AdminDashBoard.css">
     <link rel="stylesheet" href="./css/Product.css">
     <link rel="stylesheet" href="./css/Course.css">
-    <link rel="stylesheet" href="./css/lightBox.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <style>
         main.tab.dis{
@@ -249,7 +248,7 @@
 					</tr>
 					<tr>
 						<td>課程價格</td>
-						<td><input type="TEXT" name="coursPrice" size="45"
+						<td><input type="TEXT" name="coursePrice" size="45"
 							placeholder="Ex:/ 1500"/></td>
 					</tr>
 					<tr>
@@ -270,7 +269,7 @@
 					</tr>
 					<tr>
 						<td>上課地點</td>
-						<td><input type="TEXT" name=courseLocation size="45"
+						<td><input type="TEXT" name="courseLocation" size="45"
 							placeholder="Ex:/ 台南市新營區民治路36號"/></td>
 					</tr>
                     <tr>
@@ -419,7 +418,7 @@
                 e.preventDefault();
                 xhr = new XMLHttpRequest();
                 xhr.addEventListener('readystatechange',callState);
-                let urlSource = '../lend/course.do';
+                let urlSource = '../lend/Course/addNewCourse';
                 xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
                 xhr.send(fdate);
             })
@@ -456,6 +455,7 @@
         }
         function init(){
             productInsert();
+            courseInsert();
         }
         window.addEventListener('load',init);
     </script>
