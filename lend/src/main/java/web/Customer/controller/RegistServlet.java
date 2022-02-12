@@ -54,7 +54,7 @@ public class RegistServlet extends HttpServlet{
                                 regist.get("address"));
         }
         if (cVo != null) {
-            out.println(cVo.getCustomerName()+"("+cVo.getCustomerId()+")"+"\t\t"+"regist success");
+            out.println(cVo.getCustomerName()+"("+cVo.getCustomerId()+")"+"\t\t"+"Regist Success");
         } else {
             out.println("Regist fail or Account already exists");
         }

@@ -11,7 +11,7 @@
 
 <style>
  table {
-	width: 850px;
+	width: 650px;
 	margin-top: 0.1px;
 	margin-bottom: 1px;
   }
