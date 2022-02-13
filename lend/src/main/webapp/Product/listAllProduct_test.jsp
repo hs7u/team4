@@ -19,40 +19,45 @@
 <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 
 <style>
-
-  table {
-   background-color: white;
-    border-radius: 10px;
+* {
+	font-family: 'Poppins', sans-serif;	
+}
+table {
+	background-color: white;
+	border-radius: 10px;
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+th {
+	text-align: center;
+}
+
+table, td {
+	border: 0.1px solid white;
+}
+
+th, td {
+	text-align: center;
+	padding: .0 .3rem 0.2rem;
+	font-size: 0.01rem;
+	height: 80px;
+	border-bottom: 0.5px solid #f0f0f0;
+}
+
+input {
+	border-radius: 15px;
+	padding: .5rem;
+	border: none;
+	outline: none;
+	font-size: 6px;
+}
+
+input.las:hover {
+	cursor: pointer;
+	background-color: #666666;
+	color: white;
 	
-  }
-  
-  th {
-  font-size: 4vmin;
-  text-align: center;
-  }
-  
-  table, td {
-    border: 0.1px solid white;
-   }
- 
-  th, td {
-    text-align: center;
-    padding: .0.3rem 0.2rem;
-    font-size:  0.01rem;
-    height: 80px;
-    border-bottom: 0.5px solid #f0f0f0;
-
-  }
-  
-   input {
-    border-radius: 15px;
-    padding: .5rem;
-    border: none;
-    outline: none;
-  }
- 
-
+}
 </style>
 </head>
 
@@ -69,7 +74,7 @@
 		<th>商品價格</th>
 		<th>圖片</th>
 		<th>庫存</th>
-		<th>客製化</th>
+		<th>客製</th>
 		<th>客製價格</th>
 		<th>狀態</th>
 		<th>修改</th>
@@ -93,14 +98,14 @@
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Product/updateProduct" style="margin-bottom: 0px;">
 			     <input type="hidden" name="action"  value="transform">
                  <input type="hidden" name="productId" value="${pVo.productId}">  
-			     <input type="submit" value="修改">
+			     <input type="submit" class="las" value="修改">
                 </FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Product/updateProduct" style="margin-bottom: 0px;">
 			     <input type="hidden" name="action"  value="delete">
 			     <input type="hidden" name="productId"  value="${pVo.productId}">
-			     <input type="submit"  value="刪除">
+			     <input type="submit"  class="las" value="刪除">
                 </FORM>
 			</td>
 		</tr>
