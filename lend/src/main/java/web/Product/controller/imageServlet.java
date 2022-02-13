@@ -15,7 +15,7 @@ import org.hibernate.Session;
 
 import web.Product.service.ProductService;
 
-@WebServlet("/Product/Image")
+@WebServlet("/disable/Image")
 public class imageServlet extends HttpServlet{
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         doPost(req, res);

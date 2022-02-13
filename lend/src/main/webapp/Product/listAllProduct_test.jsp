@@ -6,7 +6,6 @@
 <%@ page import ="web.Product.vo.ProductVO"%>
 <%@ page import="ProjectInterfaces.ProductInterface"%>
 
-
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
@@ -20,8 +19,7 @@
 <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 
 <style>
-  
-  
+
   table {
    background-color: white;
     border-radius: 10px;
@@ -78,13 +76,15 @@
 		<th>刪除</th>
 	</tr>
 	<%@ include file="page1.file" %> 
-	<c:forEach var="pVo" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">		
+	<c:forEach var="pVo" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >		
 		<tr>
 			<td>${pVo.productId}</td>
 			<td>${pVo.productName}</td>
 			<td>${pVo.productDescription}</td>
 			<td>${pVo.productPrice}</td>
-			<td><img src="<%=request.getContextPath()%>/Product/Image?img=${pVo.productId}" alt="" width="60px" height="50px"></td>
+			<%-- <td><img src="<%=request.getContextPath()%>/Product/Image?img=${pVo.productId}" alt="" width="60px" height="50px"></td> --%>
+			<c:set var="image" scope="page" value="${pVo.productImage}" />
+			<td><img src="data:image/png;base64,<%=Base64.getEncoder().encodeToString(((byte[])pageContext.getAttribute("image"))) %>" width="60px" height="50px"/></td>
 			<td>${pVo.productInventory}</td> 
 			<td>${pVo.customization eq 0 ? "否": "是"}</td>
 			<td>${pVo.customerProductPrice}</td>
@@ -107,3 +107,4 @@
 	</c:forEach>
 </table>
 <%@ include file="page2.file" %>
+
