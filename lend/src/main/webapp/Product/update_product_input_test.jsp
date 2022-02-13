@@ -39,6 +39,11 @@
     outline: none;
   }
  
+ input.las:hover{
+  cursor: pointer;
+  background-color: #666666;
+  color: white;
+}
   div {
   overflow-x:hidden;
   overflow-y:hidden;
@@ -129,12 +134,19 @@ div:hover {
 					value="0" checked="<%= (productVO.getProductStatus() == 0) ? true : false %>" />
 					<label for="product_status">下架</label></td>
 			</tr>
-		</table>
-	<br>
-	<input type="hidden" name="product_id" value="<%=productVO.getProductId()%>">
-	<input type="hidden" name="action" value="update">
-	<input type="submit" value="送出修改"></FORM>
+		
+			<tr>
+				<td>
+					   <input type="hidden" name="product_id" value="<%=productVO.getProductId()%>">
+						<input type="hidden" name="action" value="update">
+						<input type="submit" class="las" value="送出修改">
+			   </td>
+
+				<td>
+                 <input type="button"  class="las" class="button_active" value="取消修改" onclick="location.href='./listAllProduct_test.jsp';" />
+			</td>
+		</tr>
+			</table>
+	</FORM>
 </body>
-
-
 </html>
