@@ -36,7 +36,7 @@ public class newProduct extends HttpServlet {
 			String val;
             if(part.getName().equals("product_image")){
                 if(is.available() <= 0){
-                    errorMsg.add(part.getName()+" can't empty");
+                    errorMsg.add("商品圖片  請勿空白");
                 }else{
                     byte[] buf = new byte[is.available()];
                     is.read(buf);
@@ -46,12 +46,15 @@ public class newProduct extends HttpServlet {
 			else{ 
                 if ((val = br.readLine()) != null) {
                     poc.put(part.getName(), val);
-                    String check = addError(part.getName(), val);
-                    if(check != "" && check != null) {
-                        errorMsg.add(check);
+                    String checkNo = addErrorNo(part.getName(), val);
+                    if(checkNo != "" && checkNo != null) {
+                        errorMsg.add(checkNo);
                     }
                 } else {
-                    errorMsg.add(part.getName()+" can't empty");
+                	 String checkNu = addErrorNu(part.getName(), val);
+                	 if(checkNu != "" && checkNu != null) {
+                         errorMsg.add(checkNu);
+                     }
                 }
 			}
 			br.close();
@@ -75,7 +78,7 @@ public class newProduct extends HttpServlet {
         
         }
         if (pVo != null) {
-            out.println(pVo.getProductName()+"\t\t"+"upload success");
+            out.println(pVo.getProductName()+"\t\t"+"上傳成功");
         } else {
             for (String erStr : errorMsg) {
                 out.println(erStr);
@@ -83,22 +86,64 @@ public class newProduct extends HttpServlet {
         }
         out.close();
     }
-    public String addError(String name,String val){
+    public String addErrorNo(String name,String val){
         String msg = null;
+        String hint =  "  必須是數字";
         switch (name) {
-            case "product_category_code":
             case "product_price":
+            	 if(!isInteger(val)){
+                     msg = "商品價格 " + hint;
+                 }
+                 break;
             case "product_inventory":
+            	 if(!isInteger(val)){
+                     msg = "商品庫存" + hint;
+                 }
+                 break;
             case "customer_product_price":
                 if(!isInteger(val)){
-                    msg = name + " must be number";
+                    msg = "客製產品價格" + hint;
                 }
                 break;
+            
             default:
             	return null;
         }
         return msg;
     }
+    public String addErrorNu(String name,String val){
+    	String msg = null;
+    	String hint = "  請勿空白";
+	    switch (name) {
+          case "product_description":
+        	  if(val == null){
+        		  msg = "商品描述"+hint;;
+        	  }
+        	  break;
+          case "product_name":
+        	  if(val == null){
+        		  msg = "商品名稱"+hint;
+        	  }
+        	  break;
+          case "product_price":
+        	  if(val == null){
+                  msg = "商品價格 " + hint;
+              }
+              break;
+         case "product_inventory":
+        	 if(val == null){
+                  msg = "商品庫存" + hint;
+              }
+              break;
+         case "customer_product_price":
+        	 if(val == null){
+                 msg = "客製產品價格" + hint;
+             }
+             break;
+      	}
+    	return msg;
+    }
+    
     private boolean isInteger(String string) {
         try {
             Integer.valueOf(string);
