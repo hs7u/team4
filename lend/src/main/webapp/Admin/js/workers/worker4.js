@@ -1,8 +1,5 @@
-function subData() {
-    let data = {
-            action: "income"
-        }
-    return JSON.stringify(data);
+let data = {
+    action: "income"
 }
 function callState(){
     if(xhr.readyState == 4){    //readyState: 0 -> 1 -> 2 -> 3 -> 4
@@ -13,7 +10,7 @@ function callState(){
     }   
 }
 setInterval(function(){
-        let fdate = subData();
+        let fdate = JSON.stringify(data);
         xhr = new XMLHttpRequest();
         xhr.addEventListener('readystatechange',callState);
         let urlSource = '../../dashBoard';

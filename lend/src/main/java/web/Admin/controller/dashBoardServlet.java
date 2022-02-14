@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.hibernate.Session;
 
@@ -19,6 +20,7 @@ import web.Admin.service.AdminService;
 
 @WebServlet("/Admin/dashBoard")
 public class dashBoardServlet extends HttpServlet{
+	private int i = 1;
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req,res);
 	}
@@ -28,37 +30,41 @@ public class dashBoardServlet extends HttpServlet{
 		PrintWriter out = res.getWriter();
 		BufferedReader reader = req.getReader();
 		Gson gson = new Gson();
-		out.println(gson.fromJson(reader, Object.class));
-//		Session session = (Session)req.getAttribute("session");
-//		switch ((String)gson.fromJson(reader, Object.class)) {
-//			case "cusotmer":
-//				out.print(getCustomerount(session));
-//				break;
-//			case "course":
-//				out.print(getCourseCount(session));
-//				break;
-//			case "order":
-//				out.print(getOrderCount(session));
-//				break;
-//			case "income":
-//				out.print(getIncomeCount(session));
-//				break;
-//		}    
+		JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
+		Session session = (Session)req.getAttribute("session");
+		switch (jsonObject.get("action").getAsString()) {
+			case "customer":
+				out.print(getCustomerount(session));
+				break;
+			case "course":
+				out.print(getCourseCount(session));
+				break;
+			case "order":
+				out.print(getOrderCount(session));
+				break;
+			case "income":
+				out.print(getIncomeCount(session));
+				break;
+		}    
     }
-	private Integer getCustomerount(Session session) {
+	private int getCustomerount(Session session) {
 		// AdminService as = new AdminService(session);
-		return 1;
+		this.i++;
+		return i;
 	}
-	private Integer getCourseCount(Session session) {
+	private int getCourseCount(Session session) {
 		// AdminService as = new AdminService(session);
-		return 2;
+		this.i+=2;
+		return i;
 	}
-	private Integer getOrderCount(Session session) {
+	private int getOrderCount(Session session) {
 		// AdminService as = new AdminService(session);
-		return 3;
+		this.i+=3;
+		return i;
 	}
-	private Integer getIncomeCount(Session session) {
+	private int getIncomeCount(Session session) {
 		// AdminService as = new AdminService(session);
-		return 4;
+		this.i+=4;
+		return i;
 	}
 }
