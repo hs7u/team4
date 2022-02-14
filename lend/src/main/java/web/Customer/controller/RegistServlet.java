@@ -17,7 +17,7 @@ import java.util.HashMap;
 import web.Customer.service.CustomerService;
 import web.Customer.vo.CustomerVO;
 
-@WebServlet("/MemberRegist")
+@WebServlet("/Customer/regist")
 @MultipartConfig
 public class RegistServlet extends HttpServlet{
 	 protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{

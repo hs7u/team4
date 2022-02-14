@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet("/member/logout")
+@WebServlet("/Customer/logout")
 public class LogoutServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -22,15 +22,14 @@ public class LogoutServlet extends HttpServlet {
 		res.setContentType("text/html; charset=UTF-8");
 	    PrintWriter out = res.getWriter();
 		HttpSession session = req.getSession();
-		Integer account = (Integer)session.getAttribute("Customer.Id");
+		Integer account = (Integer)session.getAttribute("customerId");
 	    if (session.isNew() && account != null) {
 	    	session.invalidate();  
-//	    		req.setAttribute("message", cVo.getCustomer_name()+"Login Success");
     		out.println("Logout Success");
     	}else {
     		req.getRequestDispatcher(req.getRequestURI()).forward(req, res);
     	}
-//		req.getRequestDispatcher("/Home.html").forward(req, res);
+		req.getRequestDispatcher("/Home.html").forward(req, res);
 	}
 
 }

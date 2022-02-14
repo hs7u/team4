@@ -1,37 +1,28 @@
-function subData() {
-    let data = document.querySelectorAll("#myForm > input");
-    let form_data = {
-            customerEmail: data[0].value,
-            customerPassword: data[1].value,
-        }
-    return JSON.stringify(form_data);
-}
 function dofirst(){
     const form = document.getElementById("myForm");
     document.getElementById('btn_sub').addEventListener('click',function(e){
-        let fdate = subData();
-        console.log(fdate);
+        let fdate = new FormData(form);
         e.preventDefault();
-        xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         xhr.addEventListener('readystatechange',callState);
-        let urlSource = '../lend/Customer/login';
+        let urlSource = '../Customer/regist';
         xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
         xhr.send(fdate);
     })
    
 }
 function callState(){
-    $.fn.alloy = function(){           
+    $.fn.fail = function(){           
         this.fadeIn();
         $("button.btn_modal_close").on("click", function(){
             $("div.overlay").fadeOut();
         });
     };
-    $.fn.denied = function(){ 
+    $.fn.success = function(){ 
         this.fadeIn();          
         $("button.btn_modal_close").on("click", function(){
             $("div.overlay").fadeOut("done", function(){
-                window.location.assign("./Registration.html");
+                window.location.assign("./index.html");
             });
         });
     };
@@ -41,14 +32,12 @@ function callState(){
             let text = `${xhr.responseText}`;
             t.innerText = text;
             if(text.match(/Success/) != null){
-                $("div.overlay").alloy();
-            
+                $("div.overlay").success();
             }else{
-                $("div.overlay").denied();
+                $("div.overlay").fail();
             }
-            
         }else{
-            t.innerText = `${xhr.status}: ${xhr.statusText}`;                   
+            t.innerText = `${xhr.status}: ${xhr.statusText}`;                    
         }
     }   
 }
