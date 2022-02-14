@@ -1,28 +1,37 @@
+function subData() {
+    let data = document.querySelectorAll("#myForm > input");
+    let form_data = {
+            customerEmail: data[0].value,
+            customerPassword: data[1].value,
+        }
+    return JSON.stringify(form_data);
+}
 function dofirst(){
     const form = document.getElementById("myForm");
     document.getElementById('btn_sub').addEventListener('click',function(e){
-        let fdate = new FormData(form);
+        let fdate = subData();
+        console.log(fdate);
         e.preventDefault();
-        let xhr = new XMLHttpRequest();
+        xhr = new XMLHttpRequest();
         xhr.addEventListener('readystatechange',callState);
-        let urlSource = './MemberRegist';
+        let urlSource = '../Customer/login';
         xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
         xhr.send(fdate);
     })
    
 }
 function callState(){
-    $.fn.fail = function(){           
+    $.fn.alloy = function(){           
         this.fadeIn();
         $("button.btn_modal_close").on("click", function(){
             $("div.overlay").fadeOut();
         });
     };
-    $.fn.success = function(){ 
+    $.fn.denied = function(){ 
         this.fadeIn();          
         $("button.btn_modal_close").on("click", function(){
             $("div.overlay").fadeOut("done", function(){
-                window.location.assign("./index.html");
+                window.location.assign("./Registration.html");
             });
         });
     };
@@ -32,12 +41,14 @@ function callState(){
             let text = `${xhr.responseText}`;
             t.innerText = text;
             if(text.match(/Success/) != null){
-                $("div.overlay").success();
+                $("div.overlay").alloy();
+            
             }else{
-                $("div.overlay").fail();
+                $("div.overlay").denied();
             }
+            
         }else{
-            t.innerText = `${xhr.status}: ${xhr.statusText}`;                    
+            t.innerText = `${xhr.status}: ${xhr.statusText}`;                   
         }
     }   
 }

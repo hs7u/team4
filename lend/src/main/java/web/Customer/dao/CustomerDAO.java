@@ -8,6 +8,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException; */
 
+import java.util.List;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
@@ -259,7 +261,12 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
         }
         return cVo; */
     }
-    // public List<CustomerVO> getAll(){
-    //     return null;
-    // }
+    public List<CustomerVO> getAll(){
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaQuery<CustomerVO> cq = cb.createQuery(CustomerVO.class);
+        Root<CustomerVO> root = cq.from(CustomerVO.class);
+        cq = cq.select(root);
+        return this.s.createQuery(cq).getResultList();
+    }
 }

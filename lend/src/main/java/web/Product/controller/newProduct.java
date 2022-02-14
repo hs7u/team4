@@ -17,7 +17,7 @@ import org.hibernate.Session;
 import web.Product.service.ProductService;
 import web.Product.vo.ProductVO;
 
-@WebServlet("/addNewProduct")
+@WebServlet("/Product/addNewProduct")
 @MultipartConfig
 public class newProduct extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{

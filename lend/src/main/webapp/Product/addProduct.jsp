@@ -139,7 +139,7 @@
 				</ul>
 			</c:if>
 
-			<FORM METHOD="post" ACTION="../addNewProduct" name="form1" enctype="multipart/form-data">
+			<FORM METHOD="post" ACTION="../Product/addNewProduct" name="form1" enctype="multipart/form-data">
 				<table>
 
 

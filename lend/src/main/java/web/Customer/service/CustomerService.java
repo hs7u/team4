@@ -1,6 +1,7 @@
 package web.Customer.service;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -63,6 +64,9 @@ public class CustomerService {
 			e.printStackTrace();
 		}
     	return null;
+    }
+    public List<CustomerVO> getAllCustomer() {
+        return dao.getAll();
     }
     public int hashCode(String customerName,String customerEmail) {
         final int prime = 31;

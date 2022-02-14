@@ -42,10 +42,10 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        }
-     
- 
+        }    
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./js/dashBoard.js"></script>
 </head>
 <body>
     <input type="checkbox" id="nav-toggle">
@@ -100,7 +100,7 @@
                 <input type="search" placeholder="Ex:/ Search here">
             </div>
             <div class="user-wrapper">
-                <img src="cat.jpg" width="40px" height="40px" alt="">
+                <img src="./icon/cat.jpg" width="40px" height="40px" alt="">
                 <div>
                     <h4>doge</h4>
                     <small>toor</small>
@@ -111,7 +111,7 @@
             <div class="cards">
                 <div class="cards-single">
                     <div>
-                        <h1>999</h1>
+                        <h1 id="cusotmerCount">999</h1>
                         <span>Customers</span>
                     </div>
                     <div>
@@ -120,7 +120,7 @@
                 </div>
                 <div class="cards-single">
                     <div>
-                        <h1>999</h1>
+                        <h1 id="courseCount">999</h1>
                         <span>Course</span>
                     </div>
                     <div>
@@ -129,7 +129,7 @@
                 </div>
                 <div class="cards-single">
                     <div>
-                        <h1>999</h1>
+                        <h1 id="orderCount">999</h1>
                         <span>Orders</span>
                     </div>
                     <div>
@@ -138,7 +138,7 @@
                 </div>
                 <div class="cards-single">
                     <div>
-                        <h1>$70k</h1>
+                        <h1 id="incomeCount">$999</h1>
                         <span>Income</span>
                     </div>
                     <div>
@@ -214,7 +214,7 @@
                         <div class="card-body">
                             <div class="customer">
                                 <div class="info">
-                                    <img src="cat.jpg" width="40px" height="40px" alt="">
+                                    <img src="./icon/cat.jpg" width="40px" height="40px" alt="">
                                     <div>
                                         <h4>Ge Ku~~~~ </h4>
                                         <small>How dare you come Ice Bird</small>
@@ -298,7 +298,7 @@
 						<td><input type="radio" name="product_category_code" size="45"
 							value="11"/>
 							<label for="product_category_code">瓷畫</label> 
-							<input type="radio"name="product_category_code" size="45"
+							<input type="radio" name="product_category_code" size="45"
 							value="22"/>
 							<label for="product_category_code">電烙</label> 
 							<input type="radio" name="product_category_code" size="45"
@@ -344,7 +344,7 @@
 						<td><input type="radio" name="customization" size="20"
 							value="1"/>
 							<label for="customization">是</label> 
-							<input type="radio"name="customization" size="45"
+							<input type="radio" name="customization" size="45"
 							value="0"/>
 							<label for="customization">否</label>
 						</td>
@@ -362,7 +362,7 @@
 			</FORM>
         </main>
         <main class="tab product dis" id="productList">
-            <iframe class="innerWindow" src="./Product/listAllProduct_test.jsp" ></iframe>
+            <iframe class="innerWindow" src="../Product/listAllProduct_test.jsp" ></iframe>
         </main>
         <main class="tab order dis">
 
@@ -383,7 +383,7 @@
             <button type="button" class="btn_modal_close">關閉</button>
         </article>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
     <script>
       // 第二步：函式
       $(function(){
@@ -413,55 +413,6 @@
       window.addEventListener("popstate", function(){
 
       });
-    </script>
-    <script>
-        function courseInsert(){
-            const form = document.getElementById("courseForm");
-            document.getElementById('btn_course').addEventListener('click',function(e){
-                let fdate = new FormData(form);
-                e.preventDefault();
-                xhr = new XMLHttpRequest();
-                xhr.addEventListener('readystatechange',callState);
-                let urlSource = '../lend/Course/addNewCourse';
-                xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
-                xhr.send(fdate);
-            })
-           
-        }
-        function productInsert(){
-            const form = document.getElementById("productForm");
-            document.getElementById('btn_product').addEventListener('click',function(e){
-                let fdate = new FormData(form);
-                e.preventDefault();
-                xhr = new XMLHttpRequest();
-                xhr.addEventListener('readystatechange',callState);
-                let urlSource = '../lend/addNewProduct';
-                xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
-                xhr.send(fdate);
-            })
-           
-        }
-        function callState(){
-            $(function(){           
-                $("button.btn_modal_close").on("click", function(){
-                    $("div.overlay").fadeOut();
-                });
-            });
-            if(xhr.readyState == 4){    //readyState: 0 -> 1 -> 2 -> 3 -> 4
-                let t = document.getElementById("target");
-                if(xhr.status == 200){
-                    t.innerText = `${xhr.responseText}`;
-                }else{
-                    t.innerText = `${xhr.status}: ${xhr.statusText}`
-                }
-                $("div.overlay").fadeIn();
-            }   
-        }
-        function init(){
-            productInsert();
-            courseInsert();
-        }
-        window.addEventListener('load',init);
     </script>
 </body>
 </html>
