@@ -1,26 +1,26 @@
 function openWorker() {
     if(window.Worker){
         // 建立一個 Dedicated Worker
-        let cusotmerCount = document.getElementById("cusotmerCount");
+        let customerCount = document.getElementById("customerCount");
         let worker1 = new Worker("./js/workers/worker1.js");
         worker1.onmessage = function(e) {
-            cusotmerCount.innerText = `${e.data}`;
+            customerCount.innerText = `${e.data}`;
         };
-        // let courseCount = document.getElementById("courseCount");
-        // let worker2 = new Worker("./js/workers/worker2.js");
-        // worker2.onmessage = function(e) {
-        //     courseCount.innerText = `${e.data}`;
-        // };
-        // let orderCount = document.getElementById("orderCount");
-        // let worker3 = new Worker("./js/workers/worker3.js");
-        // worker3.onmessage = function(e) {
-        //     orderCount.innerText = `${e.data}`;
-        // };
-        // let incomeCount = document.getElementById("incomeCount");
-        // let worker4 = new Worker("./js/workers/worker4.js");
-        // worker4.onmessage = function(e) {
-        //     incomeCount.innerText = `${e.data}`;
-        // };
+        let courseCount = document.getElementById("courseCount");
+        let worker2 = new Worker("./js/workers/worker2.js");
+        worker2.onmessage = function(e) {
+            courseCount.innerText = `${e.data}`;
+        };
+        let orderCount = document.getElementById("orderCount");
+        let worker3 = new Worker("./js/workers/worker3.js");
+        worker3.onmessage = function(e) {
+            orderCount.innerText = `${e.data}`;
+        };
+        let incomeCount = document.getElementById("incomeCount");
+        let worker4 = new Worker("./js/workers/worker4.js");
+        worker4.onmessage = function(e) {
+            incomeCount.innerText = `$${e.data}`;
+        };
     }
 }
 function courseInsert(){

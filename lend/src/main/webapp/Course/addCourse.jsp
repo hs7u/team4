@@ -144,7 +144,7 @@
 				</ul>
 			</c:if>
 
-			<form  name="form1" method="POST" action="<%=request.getContextPath() %>/course.do"  enctype="multipart/form-data" >
+			<form  name="form1" method="POST" action="<%=request.getContextPath() %>/addCourse"  enctype="multipart/form-data" >
 				<table>
 					<tr>
 						<td>課程名稱</td>
@@ -153,7 +153,7 @@
 					</tr>
 					<tr>
 						<td>課程描述</td>
-						<td><input type="TEXT" name="courseDescription" size="45"
+						<td><input type="TEXT" name="courseDescribe" size="45"
 							placeholder="Ex:/ 可學習自行繪製杯墊"/></td>
 					</tr>
 					<tr>
@@ -163,7 +163,7 @@
 					</tr>
 					<tr>
 						<td>課程圖片</td>
-						<td><input type="file" name="courseImage" size="45"
+						<td><input type="file" name="courseImage" 
 							/></td>
 					</tr>
 					<tr>
@@ -204,27 +204,27 @@
 			</form>
 		</main>
 
-<!--     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script> -->
-<!--     <script> -->
-<!-- //       $(document).ready(function(){ -->
-<!-- //         $("#insert").click(function(){ -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <!-- <script>
+      $(document).ready(function(){
+        $("#insert").click(function(){
 
-<!-- //           $.ajax({ -->
-<!-- //             type: "POST", -->
-<!-- //             url: "/CourseServlet.do", -->
-<!-- //             data: $("#myForm").serialize(), -->
-<!-- //             dataType: "json", -->
-<!-- //             success:function(response){ -->
-<!-- //               alert("新增成功"); -->
-<!-- //             }, -->
-<!-- //             error: function (xhr, ajaxOptions, thrownError) { -->
-<!-- //                         alert(xhr.status + "\n" + thrownError); -->
-<!-- //                     } -->
+          $.ajax({
+            type: "POST",
+            url: "/course.do",
+            data: $("#myForm").serialize(),
+            dataType: "json",
+            success:function(response){
+              alert("新增成功");
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status + "\n" + thrownError);
+                    }
 
-<!-- //           }); -->
+          });
 
-<!-- //         }); -->
-<!-- //       }); -->
-<!--     </script> -->
+        });
+      });
+    </script>  -->
 </body>
 </html>
