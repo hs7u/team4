@@ -8,8 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 @Entity
 @Table(name = "Course")
+@DynamicInsert
 public class CourseVO implements java.io.Serializable{
 	@Id
 	@Column(name = "course_id")
@@ -25,17 +27,20 @@ public class CourseVO implements java.io.Serializable{
     private byte[] courseImage;
 	@Column(name = "released_time")
     private Timestamp releasedTime;
-	@Column(name = "maximun_ofCourse")
+	@Column(name = "maxOfCourse")
     private Integer maxOfCourse;
-	@Column(name = "minimun_ofCourse")
+	@Column(name = "minOfCourse")
     private Integer minOfCourse;
 	@Column(name = "course_location")
     private String courseLocation;
 	@Column(name = "course_describe")
     private String courseDescribe;
 	@ColumnDefault(value = "0")
-	@Column(name = "course_status")
-	private Byte courseState;
+	@Column(
+			name = "course_status",
+			columnDefinition = "bit"
+			)
+	private Byte courseStatus;
     public CourseVO() {
 		super();
 	}
@@ -94,9 +99,9 @@ public class CourseVO implements java.io.Serializable{
 		this.courseDescribe = courseDescribe;
 	} 
 	public Byte getCourseState(){
-		return this.courseState;
+		return this.courseStatus;
 	}
-	public void setCourseState(Byte courseState){
-		this.courseState = courseState;
+	public void setCourseStatus(Byte courseStatus){
+		this.courseStatus = courseStatus;
 	}
 }
