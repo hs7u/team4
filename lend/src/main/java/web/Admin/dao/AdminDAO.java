@@ -21,12 +21,7 @@ public class AdminDAO implements AdminInterface<AdminVO>{
     @Override
     public void insert(AdminVO aVo) {
         // Hibernate
-        if(aVo != null){
-            AdminVO check = this.s.get(AdminVO.class, aVo.getAdminId());
-            if(check == null){
-                this.s.save(aVo);
-            }
-        }
+        this.s.save(aVo);
     }
     @Override
     public void update(AdminVO aVo) {
@@ -75,7 +70,12 @@ public class AdminDAO implements AdminInterface<AdminVO>{
                                           cb.equal(root.get("adminPassword"), adminPassword)
                                         )
                                     );
-        return this.s.createQuery(cq).getSingleResult();
+        try {
+            return this.s.createQuery(cq).getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     @Override
     public ArrayList<AdminVO> allManager() {

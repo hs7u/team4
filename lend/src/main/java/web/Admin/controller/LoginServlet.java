@@ -33,20 +33,14 @@ public class LoginServlet extends HttpServlet{
 
         PrintWriter out = res.getWriter();
 		HttpSession session = req.getSession();
-		Integer account = (Integer)session.getAttribute("adminId");
-	    if (account == null) {
-	    	AdminService as = new AdminService((Session)req.getAttribute("session"));
-	    	AdminVO aVo = as.getOneManager(login.getAdminAccount(), login.getAdminPassword());
-	    	if(aVo.getAdminAccount() != null) {
-	    		account = aVo.getAdminId();
-	    		session.setAttribute("adminId", account);
-	    		out.println("Login Success");
-	    	} else {
-    			out.println("Account or Password incorrect");
-     		}
-    		
-	    }else{
-			res.sendRedirect("/Admin/AdminDashBoard_v2.html");
+
+		AdminService as = new AdminService((Session)req.getAttribute("session"));
+		AdminVO aVo = as.getOneManager(login.getAdminAccount(), login.getAdminPassword());
+		if(aVo.getAdminAccount() != null) {
+			session.setAttribute("account", aVo.getAdminAccount());
+			out.println("Login Success");
+		} else {
+			out.println("Account or Password incorrect");
 		}
     }
 }

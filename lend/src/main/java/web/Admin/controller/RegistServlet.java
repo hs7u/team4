@@ -33,7 +33,7 @@ public class RegistServlet extends HttpServlet{
 		AdminVO regist = gson.fromJson(reader, AdminVO.class);
         PrintWriter out = res.getWriter();
 		HttpSession session = req.getSession();
-		Integer account = (Integer)session.getAttribute("adminId");
+		String account = (String)session.getAttribute("account");
 	    if (account == null) {
             AdminService as = new AdminService((Session)req.getAttribute("session"));
             AdminVO aVo = as.getOneManager(regist.getAdminAccount(), regist.getAdminPassword());
