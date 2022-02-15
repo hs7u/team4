@@ -15,7 +15,9 @@ $.fn.denied = function(){
     });
 };
 function dofirst(){
-    const form = document.getElementById("myForm");
+    document.getElementById('regist').addEventListener('click', function(){
+        window.location.assign("./Registration.html");
+    })
     document.getElementById('btn_sub').addEventListener('click',function(e){
         let data = document.querySelectorAll("#myForm > input");
         let form_data = {

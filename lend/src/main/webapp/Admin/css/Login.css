@@ -11,6 +11,10 @@ button{
     margin: 0 auto;
     display: block;
 }
+#regist{
+    margin-top: 3rem;
+    border: none;
+}
 div.overlay{
     position: fixed;
     top: 0;
