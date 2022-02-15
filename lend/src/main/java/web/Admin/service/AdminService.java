@@ -13,11 +13,7 @@ public class AdminService {
     public AdminService(Session session){
         dao = new AdminDAO(session);
     }
-    public void newManager(String adminAccount, String adminPassword, String permission){
-        AdminVO aVo = new AdminVO();
-        aVo.setAdminAccount(adminAccount);
-        aVo.setAdminPassword(adminPassword);
-        aVo.setPermission(permission);
+    public void newManager(AdminVO aVo){
         dao.insert(aVo);
     }
     public void updateManager(Integer adminId, String adminAccount, String adminPassword, String permission){
@@ -30,6 +26,9 @@ public class AdminService {
     }
     public void deleteManager(Integer adminId){
         dao.delete(adminId);
+    }
+    public AdminVO getOneManager(String adminAccount, String adminPassword) {
+        return dao.getOneManager(adminAccount, adminPassword);
     }
     public ArrayList<AdminVO> allManager(){
         return dao.allManager();

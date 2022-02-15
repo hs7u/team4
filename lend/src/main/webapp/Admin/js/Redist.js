@@ -1,44 +1,43 @@
+$.fn.alloy = function(){           
+    this.fadeIn();
+    $("button.btn_modal_close").on("click", function(){
+        $("div.overlay").fadeOut("done", function(){
+            window.location.assign("./login.html");
+        });
+    });
+};
+$.fn.denied = function(){ 
+    this.fadeIn();          
+    $("button.btn_modal_close").on("click", function(){
+        $("div.overlay").fadeOut("done", function(){
+            window.location.assign("./Registration.html");
+        });
+    });
+};
 function dofirst(){
     const form = document.getElementById("myForm");
     document.getElementById('btn_sub').addEventListener('click',function(e){
-        let fdate = new FormData(form);
-        e.preventDefault();
-        let xhr = new XMLHttpRequest();
-        xhr.addEventListener('readystatechange',callState);
-        let urlSource = '../Customer/regist';
-        xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
-        xhr.send(fdate);
-    })
-   
-}
-function callState(){
-    $.fn.fail = function(){           
-        this.fadeIn();
-        $("button.btn_modal_close").on("click", function(){
-            $("div.overlay").fadeOut();
-        });
-    };
-    $.fn.success = function(){ 
-        this.fadeIn();          
-        $("button.btn_modal_close").on("click", function(){
-            $("div.overlay").fadeOut("done", function(){
-                window.location.assign("./index.html");
-            });
-        });
-    };
-    if(xhr.readyState == 4){    //readyState: 0 -> 1 -> 2 -> 3 -> 4
-        let t = document.getElementById("target");
-        if(xhr.status == 200){
-            let text = `${xhr.responseText}`;
-            t.innerText = text;
-            if(text.match(/Success/) != null){
-                $("div.overlay").success();
-            }else{
-                $("div.overlay").fail();
-            }
-        }else{
-            t.innerText = `${xhr.status}: ${xhr.statusText}`;                    
+        let data = document.querySelectorAll("#myForm > input");
+        let form_data = {
+            adminAccount: data[0].value,
+            adminPassword: data[1].value,
         }
-    }   
+        let fdate = JSON.stringify(form_data);
+        axios({
+              method: "post",
+              url: "../Admin/regist",
+              data: fdate,
+              headers: { "Content-Type": "application/json" },
+            }).then(res=>{
+                let t = document.getElementById("target");
+                let text = res.data;
+                t.innerText = text;
+                if(text.match(/Success/) != null){
+                    $("div.overlay").alloy();
+                }else{
+                    $("div.overlay").denied();
+                }
+            })
+    })
 }
 window.addEventListener('load',dofirst);

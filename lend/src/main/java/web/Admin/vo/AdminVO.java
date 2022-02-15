@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnDefault;
+
 @Entity
 @Table(name = "Admin")
 public class AdminVO implements java.io.Serializable{
@@ -18,6 +20,7 @@ public class AdminVO implements java.io.Serializable{
     private String adminAccount;
 	@Column(name = "admin_password")
     private String adminPassword;
+	@ColumnDefault(value = "default")
 	@Column(name = "permission")
     private String permission;
 	public AdminVO() {

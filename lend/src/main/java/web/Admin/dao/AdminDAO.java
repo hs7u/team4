@@ -66,6 +66,17 @@ public class AdminDAO implements AdminInterface<AdminVO>{
             }
         } */
     }
+    public AdminVO getOneManager(String adminAccount, String adminPassword) {
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaQuery<AdminVO> cq = cb.createQuery(AdminVO.class);
+        Root<AdminVO> root = cq.from(AdminVO.class);
+        cq = cq.select(root).where(cb.and(cb.equal(root.get("adminAccount"), adminAccount),
+                                          cb.equal(root.get("adminPassword"), adminPassword)
+                                        )
+                                    );
+        return this.s.createQuery(cq).getSingleResult();
+    }
     @Override
     public ArrayList<AdminVO> allManager() {
         // JPA CriteriaQuery

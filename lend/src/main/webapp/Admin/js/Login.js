@@ -1,55 +1,43 @@
-function subData() {
-    let data = document.querySelectorAll("#myForm > input");
-    let form_data = {
-            customerEmail: data[0].value,
-            customerPassword: data[1].value,
-        }
-    return JSON.stringify(form_data);
-}
+$.fn.alloy = function(){           
+    this.fadeIn();
+    $("button.btn_modal_close").on("click", function(){
+        $("div.overlay").fadeOut("done", function(){
+            window.location.assign("./AdminDashBoard_v2.html");
+        });
+    });
+};
+$.fn.denied = function(){ 
+    this.fadeIn();          
+    $("button.btn_modal_close").on("click", function(){
+        $("div.overlay").fadeOut("done", function(){
+            window.location.assign("./Registration.html");
+        });
+    });
+};
 function dofirst(){
     const form = document.getElementById("myForm");
     document.getElementById('btn_sub').addEventListener('click',function(e){
-        let fdate = subData();
-        console.log(fdate);
-        e.preventDefault();
-        xhr = new XMLHttpRequest();
-        xhr.addEventListener('readystatechange',callState);
-        let urlSource = '../Customer/login';
-        xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
-        xhr.send(fdate);
-    })
-   
-}
-function callState(){
-    $.fn.alloy = function(){           
-        this.fadeIn();
-        $("button.btn_modal_close").on("click", function(){
-            $("div.overlay").fadeOut();
-        });
-    };
-    $.fn.denied = function(){ 
-        this.fadeIn();          
-        $("button.btn_modal_close").on("click", function(){
-            $("div.overlay").fadeOut("done", function(){
-                window.location.assign("./Registration.html");
-            });
-        });
-    };
-    if(xhr.readyState == 4){    //readyState: 0 -> 1 -> 2 -> 3 -> 4
-        let t = document.getElementById("target");
-        if(xhr.status == 200){
-            let text = `${xhr.responseText}`;
-            t.innerText = text;
-            if(text.match(/Success/) != null){
-                $("div.overlay").alloy();
-            
-            }else{
-                $("div.overlay").denied();
-            }
-            
-        }else{
-            t.innerText = `${xhr.status}: ${xhr.statusText}`;                   
+        let data = document.querySelectorAll("#myForm > input");
+        let form_data = {
+            adminAccount: data[0].value,
+            adminPassword: data[1].value,
         }
-    }   
+        let fdate = JSON.stringify(form_data);
+        axios({
+              method: "post",
+              url: "../Admin/login",
+              data: fdate,
+              headers: { "Content-Type": "application/json" },
+            }).then(res=>{
+                let t = document.getElementById("target");
+                let text = res.data;
+                t.innerText = text;
+                if(text.match(/Success/) != null){
+                    $("div.overlay").alloy();
+                }else{
+                    $("div.overlay").denied();
+                }
+            })
+    })
 }
 window.addEventListener('load',dofirst);

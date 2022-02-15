@@ -10,19 +10,9 @@
 <body bgcolor="#f1f5f9">
     <label for="myForm" class="title centerControl">Regist</label>
     <div class="box centerControl">
-        <form id="myForm" method="post" enctype="multipart/form-data">    
-            <input type="text" class="line" name="cname" placeholder="Name"><br>
-            <input type="text" class="line" name="email" placeholder="Email"><br>
-            <input type="text" class="line" name="password" placeholder="Password"><br>
-            <input type="text" class="line" name="Phone" placeholder="Phone"><br>
-            <label for="birth" class="hint centerControl">BirthDay</label>
-            <input type="date" class="line" name="birth"><br>
-            <label for="gender" class="hint">Man</label>
-            <input type="radio" name="gender" value="m">
-            <label for="gender" class="hint">Female</label>
-            <input type="radio" name="gender" value="f">
-            <br>
-            <input type="text" class="line" name="address" placeholder="Address"><br>
+        <form id="myForm" method="post" enctype="application/json">    
+            <input type="text" class="line" name="adminAccount" placeholder="Account"><br>
+            <input type="text" class="line" name="adminPassword" placeholder="Password"><br>
             <input type="button" class="line" id="btn_sub" value="Regist">
         </form>
     </div>
