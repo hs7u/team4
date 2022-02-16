@@ -51,7 +51,7 @@ public class updateProduct extends HttpServlet{
     }
     private void update(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         PrintWriter out = res.getWriter();
-        HashMap<String, Object> poc = new HashMap<String, Object>();
+    	HashMap<String, Object> poc = new HashMap<String, Object>();
         for(Part part : req.getParts()) {
 			InputStream is = part.getInputStream();
 			InputStreamReader isr = new InputStreamReader(is);
@@ -89,11 +89,11 @@ public class updateProduct extends HttpServlet{
                                 );
         }
         if (pVo != null) {
+            req.removeAttribute("currentProduct");
             out.println(pVo.getProductName()+"\t\t"+"update success");
         } else {
             out.println("update fail");
         }
-        out.close();    
     }
     private void delete(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         ProductService psc = new ProductService((Session)req.getAttribute("session"));

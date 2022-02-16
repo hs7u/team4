@@ -23,6 +23,22 @@ function openWorker() {
         };
     }
 }
+$.fn.pUploaded = function(){           
+    this.fadeIn();
+    $("button.btn_modal_close").on("click", function(){
+        $("div.overlay").fadeOut("done", function(){
+            window.location.assign("./AdminDashBoard_v2.html#product");
+        });
+    });
+};
+$.fn.pUpfail = function(){ 
+    this.fadeIn();          
+    $("button.btn_modal_close").on("click", function(){
+        $("div.overlay").fadeOut("done", function(){
+            window.location.assign("./AdminDashBoard_v2.html#addProduct");
+        });
+    });
+};
 function courseInsert(){
     const form = document.getElementById("courseForm");
     document.getElementById('btn_course').addEventListener('click',function(e){
@@ -58,7 +74,13 @@ function callState(){
     if(xhr.readyState == 4){    //readyState: 0 -> 1 -> 2 -> 3 -> 4
         let t = document.getElementById("target");
         if(xhr.status == 200){
-            t.innerText = `${xhr.responseText}`;
+            let text = `${xhr.responseText}`
+            t.innerText = text;
+            if(text.match(/成功/) != null){
+                $("div.overlay").pUploaded();
+            }else{
+                $("div.overlay").pUpfail();
+            }
         }else{
             t.innerText = `${xhr.status}: ${xhr.statusText}`
         }

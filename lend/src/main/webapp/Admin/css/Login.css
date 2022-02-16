@@ -53,6 +53,7 @@ th, td {
 }
 
 input {
+    text-align: center;
     margin: .2rem;
     border-radius: 15px;
     padding: .5rem;

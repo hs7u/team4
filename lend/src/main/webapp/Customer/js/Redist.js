@@ -3,7 +3,7 @@ function dofirst(){
     document.getElementById('btn_sub').addEventListener('click',function(e){
         let fdate = new FormData(form);
         e.preventDefault();
-        let xhr = new XMLHttpRequest();
+        xhr = new XMLHttpRequest();
         xhr.addEventListener('readystatechange',callState);
         let urlSource = '../Customer/regist';
         xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步

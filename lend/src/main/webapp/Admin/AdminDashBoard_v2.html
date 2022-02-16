@@ -43,6 +43,11 @@
         left: 50%;
         transform: translate(-50%, -50%);
         }    
+        .centerControl{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./js/dashBoard.js"></script>
@@ -84,7 +89,6 @@
                     <span>新增商品</span></a>
                 </li>
                 <li>
-                    <!-- <a href="#" class="tab " data-target="logout" headerName="登出"><span class="las la-sign-out-alt"></span> -->
                     <a href="./Admin/logout" class="move "><span class="las la-sign-out-alt"></span>
                     <span>登出</span></a>
                 </li>
@@ -384,39 +388,73 @@
 
     <div class="overlay">
         <article>
-            <p id="target"></p>
+            <p id="target" class="centerControl"></p>
             <button type="button" class="btn_modal_close">關閉</button>
         </article>
     </div>
     
     <script>
+        function tab_active(){
+            let target_tab;
+            switch(location.hash){
+                case "#main":
+                    target_tab = "main";
+                    break;
+                case "#customer":
+                    target_tab = "customer";
+                    break;
+                case "#course":
+                    target_tab = "course";
+                    break;
+                case "#order":
+                    target_tab = "order";
+                    break;
+                case "#product":
+                    target_tab = "product";
+                    break;
+                case "#account":
+                    target_tab = "account";
+                    break;
+                case "#addProduct":
+                    target_tab = "addProduct";
+                    break;
+                default:
+                    target_tab = "main";
+            }
+            $("a.tab").removeClass("active");
+            $("a.tab[data-target=" + target_tab + "]").addClass("active");
+
+            $("main.tab").addClass("dis");
+            $("main.tab." + target_tab).removeClass("dis");
+        }
       // 第二步：函式
-      $(function(){
+        $(function(){
 
-        //console.log(location);
-        //console.log(location.hash);
-        // 第三步
-        //tab_active();
-        $("a.tab").on("click", function(e){
-          e.preventDefault();
+            //console.log(location);
+            //console.log(location.hash);
+            // 第三步
+            tab_active();
+            $("a.tab").on("click", function(e){
+            e.preventDefault();
 
-          /* 將頁籤列表移除所有 -on，再將指定的加上 -on */
-          $(this).closest("ul").find("a.tab").removeClass("active");
-          $(this).addClass("active");
-          $("span.headerName").text($(this).attr("headerName"));
+            /* 將頁籤列表移除所有 -on，再將指定的加上 -on */
+            $(this).closest("ul").find("a.tab").removeClass("active");
+            $(this).addClass("active");
+            $("span.headerName").text($(this).attr("headerName"));
 
-          /* 找到對應的頁籤內容，加上 -on 來顯示 */
-          $("main.tab").addClass("dis");
-          $("main.tab." + $(this).attr("data-target")).removeClass("dis");
-          // 第一步         
+            /* 找到對應的頁籤內容，加上 -on 來顯示 */
+            $("main.tab").addClass("dis");
+            $("main.tab." + $(this).attr("data-target")).removeClass("dis");
+            // 第一步
+            history.pushState(null, null, "#" + $(this).attr("data-target"));         
+            });
         });
-      });
       // 第二步
       //window.onpopstate = function(){        
       //};
       // 或以下這樣寫
       window.addEventListener("popstate", function(){
-
+        tab_active();
       });
     </script>
 </body>
