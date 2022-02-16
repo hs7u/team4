@@ -13,7 +13,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-@WebFilter(value = {"/Admin/AdminDashBoard_v2.html"})
+@WebFilter(value = {"/Admin/AdminDashBoard_v2.html",
+					"/Product/listAllProduct_test.jsp",
+					"/Product/update_product_input_test.jsp"})
 public class AdminLoginFilter implements javax.servlet.Filter{
     public void init(FilterConfig filterConfig) throws ServletException{}
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {

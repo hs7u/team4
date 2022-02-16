@@ -3,6 +3,7 @@ package web.Admin.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +16,9 @@ import com.google.gson.JsonObject;
 
 import org.hibernate.Session;
 
-import web.Admin.service.AdminService;
+import web.Admin.vo.AdminVO;
+import web.Customer.service.CustomerService;
+import web.Customer.vo.CustomerVO;
 
 
 @WebServlet("/Admin/dashBoard")
@@ -45,6 +48,12 @@ public class dashBoardServlet extends HttpServlet{
 			case "income":
 				out.print(getIncomeCount(session));
 				break;
+			case "accountInfo":
+				out.print(getAccountInfo((AdminVO)req.getSession().getAttribute("info")));
+				break;
+			case "customerList":
+				out.print(getCustomerList(session));
+				break;
 		}    
     }
 	private int getCustomerount(Session session) {
@@ -66,5 +75,16 @@ public class dashBoardServlet extends HttpServlet{
 		// AdminService as = new AdminService(session);
 		this.i+=4;
 		return i;
+	}
+	private String getAccountInfo(AdminVO aVo) {
+		Gson gson = new Gson();	
+		aVo.setAdminPassword("********");	
+		return gson.toJson(aVo);
+	}
+	private String getCustomerList(Session session) {
+		CustomerService cs = new CustomerService(session);
+		List<CustomerVO> list =  cs.getAllCustomer();
+		Gson gson = new Gson();		
+		return gson.toJson(list);
 	}
 }
