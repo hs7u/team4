@@ -1,3 +1,35 @@
+function getCustomers() {
+    let data = {
+        action: "customerList"
+    }
+    let fdate = JSON.stringify(data);
+    axios({
+        method: "post",
+        url: "../Admin/dashBoard",
+        data: fdate,
+        headers: { "Content-Type": "application/json" },
+      }).then(res=>{
+          console.log(res.data);
+          
+         
+      })
+}
+function getAccountInfo() {
+    let data = {
+        action: "accountInfo"
+    }
+    let fdate = JSON.stringify(data);
+    axios({
+        method: "post",
+        url: "../Admin/dashBoard",
+        data: fdate,
+        headers: { "Content-Type": "application/json" },
+      }).then(res=>{
+          console.log(res.data);
+          
+         
+      })
+}
 function openWorker() {
     if(window.Worker){
         // 建立一個 Dedicated Worker
@@ -88,6 +120,8 @@ function callState(){
     }   
 }
 function init(){
+    getAccountInfo();
+    getCustomers();
     openWorker();
     productInsert();
     courseInsert();

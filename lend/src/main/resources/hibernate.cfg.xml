@@ -8,7 +8,6 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.show_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">validate</property>
         
         
         
@@ -17,5 +16,6 @@
     	<mapping class="web.Product.vo.ProductVO"/>
     	<mapping class="web.Favorite.vo.FavoriteVO"/>
     	<mapping class="web.Course.vo.CourseVO"/>
+    	<mapping class="web.Admin.vo.AdminVO"/>
     </session-factory>
 </hibernate-configuration>

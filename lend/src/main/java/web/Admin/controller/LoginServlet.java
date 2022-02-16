@@ -38,6 +38,7 @@ public class LoginServlet extends HttpServlet{
 		AdminVO aVo = as.getOneManager(login.getAdminAccount(), login.getAdminPassword());
 		if(aVo.getAdminAccount() != null) {
 			session.setAttribute("account", aVo.getAdminAccount());
+			session.setAttribute("info", aVo);
 			out.println("Login Success");
 		} else {
 			out.println("Account or Password incorrect");

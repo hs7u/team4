@@ -8,10 +8,10 @@ ProductVO productVO = (ProductVO) request.getAttribute("currentProduct");
 %>
 <title>商品資料修改 - update_product_input.jsp</title>
 
-<link rel="stylesheet"
-	href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display-swap');
 * {
 	font-family: 'Poppins', sans-serif;
 	font-size: 12px;
@@ -101,6 +101,43 @@ button {
 	cursor: pointer;
 	border-radius: 15px;
 }
+button.btn_modal_close{
+    height: 2.5rem;
+    width: 10rem;
+    cursor: pointer;
+    border-radius: 15px;
+    margin: 0 auto;
+    display: block;
+}
+div.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: hsla(0, 0%, 0%, .5);
+    
+    display: none;
+}
+
+/* 元素 article 置中及基本樣式 */
+div.overlay > article{
+    background-color: white;
+    width: 90%;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(255, 0, 0);
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.centerControl{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 </style>
 
 </head>
@@ -109,7 +146,7 @@ button {
 		<div class="view">
 			<h3>商品資料修改</h3>
 
-			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Product/updateProduct" enctype="multipart/form-data">
+			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Product/updateProduct" enctype="multipart/form-data" id="myForm">
 				<table>
 					<tr>
 						<td class="hint">商品標籤</td>
@@ -209,16 +246,15 @@ button {
 							<br>
 							<input type="hidden" name="product_id" value="<%=productVO.getProductId()%>">
 							<input type="hidden" name="action" value="update">
-							<input type="submit" class="las" value="送出修改">
+							<input type="button" class="las" id="btn_sub" value="送出修改">
 							<br>
 						</td>
 						<td>
 							<br>
-							<input type="button" class="las" class="button_active" value="取消修改" onclick="location.href='./listAllProduct_test.jsp';" />
+							<input type="button" class="button_active las" value="取消修改" onclick="location.href='./listAllProduct_test.jsp'" />
 							<br>
 						</td>
 					</tr>
-					
 				</table>
 			</FORM>
 		</div>
@@ -228,8 +264,60 @@ button {
 			<br><br>
 			<img src="data:image/png;base64,<%=Base64.getEncoder().encodeToString(productVO.getProductImage())%>" width="300px" height="100%" />
 		</div>
-		
+	
 	</main>
+	<div class="overlay" style="border: none">
+		<article>
+			<p id="target" class="centerControl"></p>
+			<button type="button" class="btn_modal_close">關閉</button>
+		</article>
+	</div>
 </body>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+	function dofirst(){
+		const form = document.getElementById("myForm");
+		document.getElementById('btn_sub').addEventListener('click',function(e){
+			let fdate = new FormData(form);
+			e.preventDefault();
+			xhr = new XMLHttpRequest();
+			xhr.addEventListener('readystatechange',callState);
+			let urlSource = './updateProduct';
+			xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
+			xhr.send(fdate);
+		})
+   
+	}
+	function callState(){
+		$.fn.fail = function(){           
+			this.fadeIn();
+			$("button.btn_modal_close").on("click", function(){
+				$("div.overlay").fadeOut();
+			});
+		};
+		$.fn.success = function(){ 
+			this.fadeIn();          
+			$("button.btn_modal_close").on("click", function(){
+				$("div.overlay").fadeOut("done", function(){
+					window.location.assign("./listAllProduct_test.jsp");
+				});
+			});
+		};
+		if(xhr.readyState == 4){    //readyState: 0 -> 1 -> 2 -> 3 -> 4
+			let t = document.getElementById("target");
+			if(xhr.status == 200){
+				let text = xhr.responseText;
+				t.innerHTML = text;
+				if(text.match(/success/) != null){
+					$("div.overlay").success();
+				}else{
+					$("div.overlay").fail();
+				}
+			}else{
+				t.innerText = `${xhr.status}: ${xhr.statusText}`;                    
+			}
+		}   
+	}
+	window.addEventListener('load',dofirst);
+</script>
 </html>

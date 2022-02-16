@@ -1,4 +1,4 @@
-package web.Customer.controller;
+package web.Admin.controller;
 
 import java.io.IOException;
 
@@ -9,25 +9,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-@WebServlet("/Customer/logout")
+@WebServlet("/Admin/logout")
 public class LogoutServlet extends HttpServlet {
-	
-	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req,res);
 	}
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("text/html; charset=UTF-8");
 		HttpSession session = req.getSession();
-		Integer account = (Integer)session.getAttribute("customerId");
+		String account = (String)session.getAttribute("account");
 	    if (session.isNew() && account != null) {
-			session.removeAttribute("customerId");
+			session.removeAttribute("account");
+			session.removeAttribute("info");
 	    	session.invalidate();
-			req.getRequestDispatcher("/index.html").forward(req, res);  
+			req.getRequestDispatcher(req.getContextPath()+"/Admin/login.html").forward(req, res);  
     	}else {
-    		req.getRequestDispatcher(req.getRequestURI()).forward(req, res);
+    		req.getRequestDispatcher("/Admin/login.html").forward(req, res);
     	}
 	}
-
 }
