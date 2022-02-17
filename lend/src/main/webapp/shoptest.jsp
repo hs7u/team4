@@ -25,7 +25,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.webp">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/web title logo 6.png">
 
     <!-- CSS
 	============================================ -->
@@ -211,7 +211,39 @@
 
     </div>
     <!-- Header Section End -->
-
+      <!-- Slider main container Start -->
+      <div class="section">
+          <div class="container">
+              <div class="home4-slider swiper-container">
+                  <div class="swiper-wrapper">
+                      <div class="home4-slide-item swiper-slide" data-swiper-autoplay="5000">
+                          <div class="home4-slide-image"><img src="assets/images/slider/home4/slide-1_plant.png" alt="Home 4 Slider Image"></div>
+                          <div class="home4-slide-content">
+                             <!-- <div class="link"><a href="shop.html" class="btn btn-black btn-outline-hover-black">shop now</a></div>-->
+                          </div>
+                      </div>
+                      <div class="home4-slide-item swiper-slide" data-swiper-autoplay="5000">
+                          <div class="home4-slide-image"><img src="assets/images/slider/home4/slide-1_woodburn.PNG" alt="Home 4 Slider Image"></div>
+                          <div class="home4-slide-content">
+                              <!-- <div class="link"><a href="shop.html" class="btn btn-black btn-outline-hover-black">shop now</a></div>-->
+                          </div>
+                      </div>
+                      <div class="home4-slide-item swiper-slide" data-swiper-autoplay="5000">
+                          <div class="home4-slide-image"><img src="assets/images/slider/home4/slide-3.webp" alt="Home 4 Slider Image"></div>
+                          <div class="home4-slide-content">
+                              <span class="category">HOME DECOR</span>
+                              <h2 class="title">Handmade Wooden<br> Rounded Bowl</h2>
+                             <!--  <div class="link"><a href="shop.html" class="btn btn-black btn-outline-hover-black">shop now</a></div> -->
+                          </div>
+                      </div>
+                  </div>
+                  <div class="home4-slider-prev swiper-button-prev"><i class="ti-angle-left"></i></div>
+                  <div class="home4-slider-next swiper-button-next"><i class="ti-angle-right"></i></div>
+                  <div class="home4-slider-pagination swiper-pagination"></div>
+              </div>
+          </div>
+      </div>
+      <!-- Slider main container End -->
     <!-- Header Section Start -->
     <div class="sticky-header section bg-white section-fluid d-none d-xl-block">
         <div class="container">
@@ -220,7 +252,7 @@
                 <!-- Header Logo Start -->
                 <div class="col-xl-auto col">
                     <div class="header-logo">
-                        <a href="index.html"><img src="assets/images/logo/logo-2.webp" alt="Learts Logo"></a>
+                        <a href="index.html"><img src="./assets/images/web logo1.png" alt="studio4art Logo"></a>
                     </div>
                 </div>
                 <!-- Header Logo End -->
@@ -456,7 +488,7 @@
                 <!-- Header Logo Start -->
                 <div class="col">
                     <div class="header-logo">
-                        <a href="index.html"><img src="assets/images/logo/logo-2.webp" alt="Learts Logo"></a>
+                        <a href="index.html"><img src="./assets/images/web logo1.png" alt="studio4art Logo"></a>
                     </div>
                 </div>
                 <!-- Header Logo End -->
@@ -502,7 +534,7 @@
                 <!-- Header Logo Start -->
                 <div class="col">
                     <div class="header-logo">
-                        <a href="index.html"><img src="assets/images/logo/logo-2.webp" alt="Learts Logo"></a>
+                        <a href="index.html"><img src="./assets/images/web logo1.png" alt="studio4art Logo"></a>
                     </div>
                 </div>
                 <!-- Header Logo End -->
@@ -1022,7 +1054,7 @@
                             <div class="product-info">
                                 <h6 class="title"><a href="product-details.html">${p.productName}</a></h6>
                                 <span class="price">
-                                    ${p.productPrice}
+                                   $  ${p.productPrice}
                                 </span>
                                 <div class="product-buttons">
                                     <a href="#quickViewModal" data-bs-toggle="modal" class="product-button hintT-top" data-hint="Quick View"><i class="fal fa-search"></i></a>
@@ -1043,7 +1075,7 @@
 
                 <div class="col-lg-6 learts-mb-40">
                     <div class="widget-about">
-                        <img src="assets/images/logo/logo-2.webp" alt="">
+                        <img src="assets/images/web_logo3.png" alt="">
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod itaque recusandae commodi mollitia facere iure nisi, laudantium quis quas perferendis a minus dolores.</p>
                     </div>
                 </div>
@@ -1098,17 +1130,8 @@
                     <div class="col-lg-6 col-12 learts-mb-30">
                         <div class="product-images">
                             <div class="product-gallery-slider-quickview">
-                                <div class="product-zoom" data-image="assets/images/product/single/1/product-zoom-1.webp">
+                                <div class="product-zoom">
                                     <img src="assets/images/product/single/1/product-1.webp" alt="">
-                                </div>
-                                <div class="product-zoom" data-image="assets/images/product/single/1/product-zoom-2.webp">
-                                    <img src="assets/images/product/single/1/product-2.webp" alt="">
-                                </div>
-                                <div class="product-zoom" data-image="assets/images/product/single/1/product-zoom-3.webp">
-                                    <img src="assets/images/product/single/1/product-3.webp" alt="">
-                                </div>
-                                <div class="product-zoom" data-image="assets/images/product/single/1/product-zoom-4.webp">
-                                    <img src="assets/images/product/single/1/product-4.webp" alt="">
                                 </div>
                             </div>
                         </div>
