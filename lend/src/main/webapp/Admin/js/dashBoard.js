@@ -1,3 +1,5 @@
+
+
 function getCustomers() {
     let data = {
         action: "customerList"
@@ -9,9 +11,21 @@ function getCustomers() {
         data: fdate,
         headers: { "Content-Type": "application/json" },
       }).then(res=>{
-          console.log(res.data);
-          
-         
+          for(let i = 0 ; i< 3; i++){
+            let add = `<div class="info">
+                            <span class="las la-user-plus" style="font-size: 2.5rem;"></span>
+                            <div>
+                                <h4>Ge ${res.data[i].customerName} </h4>
+                                <small>${res.data[i].customerEmail}</small>
+                            </div>
+                            <div class="contact">
+                                <span class="las la-user-circle"></span>
+                                <span class="las la-comment"></span>
+                                <span class="las la-phone"></span>
+                            </div>
+                        </div>`;
+            $("div.newCustomer").after(add);
+          }
       })
 }
 function getAccountInfo() {
@@ -25,9 +39,8 @@ function getAccountInfo() {
         data: fdate,
         headers: { "Content-Type": "application/json" },
       }).then(res=>{
-          console.log(res.data);
-          
-         
+          $("#currentAccount").find("h4").text(res.data.adminAccount);
+          $("#currentAccount").find("small").text(res.data.permission);
       })
 }
 function openWorker() {
