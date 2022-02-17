@@ -10,7 +10,7 @@ $.fn.denied = function(){
     this.fadeIn();          
     $("button.btn_modal_close").on("click", function(){
         $("div.overlay").fadeOut("done", function(){
-            window.location.assign("./Registration.html");
+            window.location.reload();
         });
     });
 };

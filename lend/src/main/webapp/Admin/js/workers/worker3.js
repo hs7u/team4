@@ -16,5 +16,5 @@ setInterval(function(){
         let urlSource = '../../dashBoard';
         xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
         xhr.send(fdate);
-}, 1000);
+}, 5000);
 
