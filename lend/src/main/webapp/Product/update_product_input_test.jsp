@@ -258,8 +258,7 @@ div.overlay > article{
 		</div>
 
 		<div class="preview">
-			<h3>原商品圖預覽</h3>
-			<br><br>
+			<h3>原商品圖預覽</h3>	
 			<img src="data:image/png;base64,<%=Base64.getEncoder().encodeToString(productVO.getProductImage())%>" width="300px" height="100%" />
 		</div>
 	

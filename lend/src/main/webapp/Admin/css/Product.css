@@ -1,3 +1,7 @@
+* {
+	font-family: 'Poppins', sans-serif;	
+}
+
 main.tab.product div.addNewProduct table {
     width: 880px;
     margin-top: 0.1px;
@@ -24,5 +28,6 @@ main.tab.product div.addNewProduct input {
 }
 main.tab.product div.addNewProduct input.las:hover{
   cursor: pointer;
-  background-color: rgb(197, 238, 169);
+  background-color: #666666;
+  color: white;
 }

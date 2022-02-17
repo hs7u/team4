@@ -18,6 +18,7 @@
 <title>所有商品資料 - listAllProduct.jsp</title>
 <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 
+
 <style>
 * {
 	font-family: 'Poppins', sans-serif;	
@@ -33,7 +34,6 @@ th {
 }
 
 table, td {
-	width : 55rem;
 	border: 0.1px solid white;
 }
 
@@ -59,6 +59,7 @@ input.las:hover {
 	color: white;
 	
 }
+
 </style>
 </head>
 
@@ -87,9 +88,9 @@ input.las:hover {
 			<td>${pVo.productName}</td>
 			<td>${pVo.productDescription}</td>
 			<td>${pVo.productPrice}</td>
-			<%-- <td><img src="<%=request.getContextPath()%>/Product/Image?img=${pVo.productId}" alt="" width="60px" height="50px"></td> --%>
+			<%-- <td><img src="<%=request.getContextPath()%>/Product/Image?img=${pVo.productId}" alt="" width="50px" height="50px"></td> --%>
 			<c:set var="image" scope="page" value="${pVo.productImage}" />
-			<td><img src="data:image/png;base64,<%=Base64.getEncoder().encodeToString(((byte[])pageContext.getAttribute("image"))) %>" width="60px" height="50px"/></td>
+			<td><img src="data:image/png;base64,<%=Base64.getEncoder().encodeToString(((byte[])pageContext.getAttribute("image"))) %>" width="50px" height="50px"/></td>
 			<td>${pVo.productInventory}</td> 
 			<td>${pVo.customization eq 0 ? "否": "是"}</td>
 			<td>${pVo.customerProductPrice}</td>
