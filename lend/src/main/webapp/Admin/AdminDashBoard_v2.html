@@ -341,7 +341,7 @@
             </div>
         </main>
         <main class="tab addProduct dis">
-            <iframe class="innerWindow" src="../Product/listAllProduct_test.jsp" ></iframe>
+            
         </main>
         <main class="tab product dis" id="productList">
             <div class="innerProduct listProduct">
@@ -466,6 +466,7 @@
                 console.log($(this).attr("inner-target"));
                 $("main.tab.product").find("div.innerProduct").addClass("inner-dis");
                 $("main.tab.product").find("div.innerProduct." + $(this).attr("inner-target")).removeClass("inner-dis");
+                history.pushState(null, null, "#product/" + $(this).attr("inner-target"));
             })
         });
         function tab_active(){

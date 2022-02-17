@@ -2,6 +2,7 @@ package web.Course.controller;
 
 import java.io.*;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -35,11 +36,11 @@ public class CourseServlet extends HttpServlet {
 		 * 0.對Post中文參數進行解碼
 		 ***************************************/
 
-		req.setCharacterEncoding("UTF8");
+		req.setCharacterEncoding("UTF-8");
 
 		PrintWriter out = res.getWriter();
-		String action = req.getParameter("action");
-		if ("insert".equals(action)) { // 新增
+		// String action = req.getParameter("action");
+		// if ("insert".equals(action)) { // 新增
 
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -54,16 +55,16 @@ public class CourseServlet extends HttpServlet {
 				errorMsgs.put("courseName", "課程名稱: 只能是中、英文字母、數字和_ , 且長度必需在4到10之間");
 			}
 
-			String courseDescribe = req.getParameter("courseDescribe").trim();
+			String courseDescribe = req.getParameter("courseDescription").trim();
 			if (courseDescribe == null || courseDescribe.trim().length() == 0) {
-				errorMsgs.put("courseDescription", "課程描述請勿空白");
+				errorMsgs.put("courseDescription", "課程描述: 請勿空白");
 			}
 
 			Integer coursePrice = null;
 			try {
 				coursePrice = Integer.valueOf(req.getParameter("coursePrice").trim());
 			} catch (NumberFormatException e) {
-				errorMsgs.put("coursPrice", "課程價格請填數字");
+				errorMsgs.put("coursPrice", "課程價格: 請填數字");
 			}
 
 			Part part = req.getPart("courseImage");
@@ -83,19 +84,19 @@ public class CourseServlet extends HttpServlet {
 			try {
 				minOfCourse = Integer.valueOf(req.getParameter("minOfCourse").trim());
 			} catch (NumberFormatException e) {
-				errorMsgs.put("minOfCourse", "開課人數請填數字");
+				errorMsgs.put("minOfCourse", "開課人數: 請填數字");
 			}
 
 			Integer maxOfCourse = null;
 			try {
 				maxOfCourse = Integer.valueOf(req.getParameter("maxOfCourse").trim());
 			} catch (NumberFormatException e) {
-				errorMsgs.put("maxOfCourse", "額滿人數請填數字");
+				errorMsgs.put("maxOfCourse", "額滿人數: 請填數字");
 			}
 
 			String courseLocation = req.getParameter("courseLocation").trim();
 			if (courseLocation == null || courseLocation.trim().length() == 0) {
-				errorMsgs.put("courseLocation", "上課地點請勿空白");
+				errorMsgs.put("courseLocation", "上課地點: 請勿空白");
 			}
 
 //			System.out.println(courseName);
@@ -110,21 +111,27 @@ public class CourseServlet extends HttpServlet {
 			/*************************** 2.開始新增資料 ***************************************/
 
 			if (!errorMsgs.isEmpty()) {
-				String url = "/Course/addCourse.jsp";
-				RequestDispatcher failureView = req.getRequestDispatcher(url);
-				failureView.forward(req, res);
-
+//				String url = "/Course/addCourse.jsp";
+//				RequestDispatcher failureView = req.getRequestDispatcher(url);
+//				failureView.forward(req, res);
+				Iterator<String> set = errorMsgs.keySet().iterator();
+				while(set.hasNext()) {
+	                out.println(errorMsgs.get(set.next()));
+	            }
 				return;
 			} else {
 				CourseService csc = new CourseService((Session) req.getAttribute("session"));
+				CourseVO check = csc.selectByCourseId(csc.hashCode(courseNameReg, courseLocation));
 				CourseVO cvo = null;
-				cvo = csc.addCourse(courseName, coursePrice, imgData,
-						maxOfCourse, minOfCourse, courseLocation, courseDescribe);
+				if(check == null) {
+					cvo = csc.addCourse(courseName, coursePrice, imgData,
+							maxOfCourse, minOfCourse, courseLocation, courseDescribe);
+				}
 				if (cvo != null) {
-					out.println(cvo.getCourseName() + "\t\t" + "upload success");
+					out.println(cvo.getCourseName() + "\t\t" + "新增成功");
 				}
 			}
-		}
+		
 
 		out.close();
 		

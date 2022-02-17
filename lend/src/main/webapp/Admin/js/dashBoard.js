@@ -78,7 +78,7 @@ $.fn.pUpfail = function(){
     this.fadeIn();          
     $("button.btn_modal_close").on("click", function(){
         $("div.overlay").fadeOut("done", function(){
-            window.location.assign("./AdminDashBoard_v2.html#addProduct");
+            window.location.assign("./AdminDashBoard_v2.html#product");
         });
     });
 };
@@ -89,7 +89,7 @@ function courseInsert(){
         e.preventDefault();
         xhr = new XMLHttpRequest();
         xhr.addEventListener('readystatechange',callState);
-        let urlSource = '../lend/Course/addNewCourse';
+        let urlSource = '../addCourse';
         xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
         xhr.send(fdate);
     })

@@ -19,13 +19,14 @@ public class LogoutServlet extends HttpServlet {
 		res.setContentType("text/html; charset=UTF-8");
 		HttpSession session = req.getSession();
 		String account = (String)session.getAttribute("account");
-	    if (session.isNew() && account != null) {
+	    if (!session.isNew() && account != null) {
+	    	System.out.println("logout");
 			session.removeAttribute("account");
 			session.removeAttribute("info");
 	    	session.invalidate();
 			req.getRequestDispatcher(req.getContextPath()+"/Admin/login.html").forward(req, res);  
     	}else {
-    		req.getRequestDispatcher("/Admin/login.html").forward(req, res);
+    		res.sendRedirect("/Admin/login.html");
     	}
 	}
 }

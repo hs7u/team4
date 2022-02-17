@@ -33,6 +33,7 @@ th {
 }
 
 table, td {
+	width : 55rem;
 	border: 0.1px solid white;
 }
 
