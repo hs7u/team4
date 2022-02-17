@@ -40,7 +40,7 @@ th, td {
 	text-align: center;
 	padding: .0 .3rem 0.2rem;
 	font-size: 0.01rem;
-	height: 80px;
+	height: 70px;
 	border-bottom: 0.5px solid #f0f0f0;
 }
 
@@ -64,7 +64,6 @@ input.las:hover {
 
 
 <body bgcolor='#f1f5f9'>
-    <h3>所有商品資料</h3>	
 
 <table>
 	<tr>

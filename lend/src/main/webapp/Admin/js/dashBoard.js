@@ -1,5 +1,3 @@
-
-
 function getCustomers() {
     let data = {
         action: "customerList"

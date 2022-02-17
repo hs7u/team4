@@ -144,8 +144,6 @@ div.overlay > article{
 <body bgcolor='#f1f5f9'>
 	<main class="box">
 		<div class="view">
-			<h3>商品資料修改</h3>
-
 			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Product/updateProduct" enctype="multipart/form-data" id="myForm">
 				<table>
 					<tr>
