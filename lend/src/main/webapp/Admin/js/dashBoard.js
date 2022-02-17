@@ -23,6 +23,7 @@ function getCourses() {
         data: fdate,
         headers: { "Content-Type": "application/json" },
       }).then(res=>{
+        $("tbody.dynamicsC").empty();
         for(let i = 0 ; i < res.data.length; i++){
             let state = res.data[i].courseStatus == 0 ? '未開課' : res.data[i].courseStatus == 1 ? "開課中" : "報名中" ;
             let light = res.data[i].courseStatus == 0 ? 'red' : res.data[i].courseStatus == 1 ? "green" : "yello" ;
@@ -39,7 +40,7 @@ function getCourses() {
                             <td><input type="submit" class="las" value="修改"></td>
                             <td><input type="submit" class="las" value="刪除"></td>
                         </tr>`;
-            $(".dynamicsC").after();
+                
             $(table).appendTo("tbody.dynamicsC");
         } 
       })
