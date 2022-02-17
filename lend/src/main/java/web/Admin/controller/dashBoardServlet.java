@@ -17,6 +17,8 @@ import com.google.gson.JsonObject;
 import org.hibernate.Session;
 
 import web.Admin.vo.AdminVO;
+import web.Course.service.CourseService;
+import web.Course.vo.CourseVO;
 import web.Customer.service.CustomerService;
 import web.Customer.vo.CustomerVO;
 
@@ -54,6 +56,9 @@ public class dashBoardServlet extends HttpServlet{
 			case "customerList":
 				out.print(getCustomerList(session));
 				break;
+			case "courseList":
+				out.print(getCourseList(session));
+				break;
 		}    
     }
 	private int getCustomerount(Session session) {
@@ -84,6 +89,12 @@ public class dashBoardServlet extends HttpServlet{
 	private String getCustomerList(Session session) {
 		CustomerService cs = new CustomerService(session);
 		List<CustomerVO> list =  cs.getAllCustomer();
+		Gson gson = new Gson();		
+		return gson.toJson(list);
+	}
+	private String getCourseList(Session session){
+		CourseService cs = new CourseService(session);
+		List<CourseVO> list = cs.getALL();
 		Gson gson = new Gson();		
 		return gson.toJson(list);
 	}

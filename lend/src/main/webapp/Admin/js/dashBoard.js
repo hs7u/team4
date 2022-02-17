@@ -1,3 +1,49 @@
+function Uint8ToString(u8a){
+    var CHUNK_SZ = 0x8000;
+    var c = [];
+    for (var i=0; i < u8a.length; i+=CHUNK_SZ) {
+      c.push(String.fromCharCode.apply(null, u8a.subarray(i, i+CHUNK_SZ)));
+    }
+    return c.join("");
+  }
+function logout(e) {
+    e.preventDefault();
+    axios.get("./logout").then(res => {
+        console.log(res.data)
+    })
+}
+function getCourses() {
+    let data = {
+        action: "courseList"
+    }
+    let fdate = JSON.stringify(data);
+    axios({
+        method: "post",
+        url: "../Admin/dashBoard",
+        data: fdate,
+        headers: { "Content-Type": "application/json" },
+      }).then(res=>{
+        for(let i = 0 ; i < res.data.length; i++){
+            let state = res.data[i].courseStatus == 0 ? '未開課' : res.data[i].courseStatus == 1 ? "開課中" : "報名中" ;
+            let light = res.data[i].courseStatus == 0 ? 'red' : res.data[i].courseStatus == 1 ? "green" : "yello" ;
+            // let data = new Uint8Array(res.data[i].courseImage);
+            var u8 = new Uint8Array(res.data[i].courseImage)
+            var b64encoded = btoa(Uint8ToString(u8));
+            let table = `<tr>
+                            <td>${res.data[i].courseName}</td>
+                            <td><img src="data:image/png;base64,${b64encoded}" width="60" height="40""/></td>
+                            <td>
+                                <span class="status ${light}"></span>
+                                ${state}
+                            </td>
+                            <td><input type="submit" class="las" value="修改"></td>
+                            <td><input type="submit" class="las" value="刪除"></td>
+                        </tr>`;
+            $(".dynamicsC").after();
+            $(table).appendTo("tbody.dynamicsC");
+        } 
+      })
+}
 function getCustomers() {
     let data = {
         action: "customerList"
@@ -13,7 +59,7 @@ function getCustomers() {
             let add = `<div class="info">
                             <span class="las la-user-plus" style="font-size: 2.5rem;"></span>
                             <div>
-                                <h4>Ge ${res.data[i].customerName} </h4>
+                                <h4>${res.data[i].customerName}</h4>
                                 <small>${res.data[i].customerEmail}</small>
                             </div>
                             <div class="contact">
@@ -22,7 +68,7 @@ function getCustomers() {
                                 <span class="las la-phone"></span>
                             </div>
                         </div>`;
-            $("div.newCustomer").after(add);
+            $(add).appendTo("div.newCustomer");
           }
       })
 }
@@ -66,6 +112,22 @@ function openWorker() {
         };
     }
 }
+$.fn.cUploaded = function(){           
+    this.fadeIn();
+    $("button.btn_modal_close").on("click", function(){
+        $("div.overlay").fadeOut("done", function(){
+            window.location.assign("./AdminDashBoard_v2.html#course");
+        });
+    });
+};
+$.fn.cUpfail = function(){ 
+    this.fadeIn();          
+    $("button.btn_modal_close").on("click", function(){
+        $("div.overlay").fadeOut("done", function(){
+            window.location.assign("./AdminDashBoard_v2.html#course");
+        });
+    });
+};
 $.fn.pUploaded = function(){           
     this.fadeIn();
     $("button.btn_modal_close").on("click", function(){
@@ -88,7 +150,7 @@ function courseInsert(){
         let fdate = new FormData(form);
         e.preventDefault();
         xhr = new XMLHttpRequest();
-        xhr.addEventListener('readystatechange',callState);
+        xhr.addEventListener('readystatechange',callStateC);
         let urlSource = '../addCourse';
         xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
         xhr.send(fdate);
@@ -101,14 +163,35 @@ function productInsert(){
         let fdate = new FormData(form);
         e.preventDefault();
         xhr = new XMLHttpRequest();
-        xhr.addEventListener('readystatechange',callState);
+        xhr.addEventListener('readystatechange',callStateP);
         let urlSource = '../Product/addNewProduct';
         xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
         xhr.send(fdate);
     })
-   
 }
-function callState(){
+function callStateC(){
+    $(function(){           
+        $("button.btn_modal_close").on("click", function(){
+            $("div.overlay").fadeOut();
+        });
+    });
+    if(xhr.readyState == 4){    //readyState: 0 -> 1 -> 2 -> 3 -> 4
+        let t = document.getElementById("target");
+        if(xhr.status == 200){
+            let text = `${xhr.responseText}`
+            t.innerText = text;
+            if(text.match(/成功/) != null){
+                $("div.overlay").cUploaded();
+            }else{
+                $("div.overlay").cUpfail();
+            }
+        }else{
+            t.innerText = `${xhr.status}: ${xhr.statusText}`
+        }
+        $("div.overlay").fadeIn();
+    }   
+}
+function callStateP(){
     $(function(){           
         $("button.btn_modal_close").on("click", function(){
             $("div.overlay").fadeOut();
@@ -133,6 +216,7 @@ function callState(){
 function init(){
     getAccountInfo();
     getCustomers();
+    getCourses();
     openWorker();
     productInsert();
     courseInsert();

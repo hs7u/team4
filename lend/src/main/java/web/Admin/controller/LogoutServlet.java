@@ -1,6 +1,7 @@
 package web.Admin.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,13 +21,14 @@ public class LogoutServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		String account = (String)session.getAttribute("account");
 	    if (!session.isNew() && account != null) {
-	    	System.out.println("logout");
+	    	PrintWriter out = res.getWriter();
+	    	out.println("logout");
 			session.removeAttribute("account");
 			session.removeAttribute("info");
-	    	session.invalidate();
-			req.getRequestDispatcher(req.getContextPath()+"/Admin/login.html").forward(req, res);  
+	    	// session.invalidate();
+			res.sendRedirect(req.getContextPath()+"/Admin/login.html");  
     	}else {
-    		res.sendRedirect("/Admin/login.html");
+    		res.sendRedirect(req.getContextPath()+"/login.html");
     	}
 	}
 }
