@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/Product.css">
     <link rel="stylesheet" href="./css/Course.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link href='//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css' rel='stylesheet'></link>
     <style>
         main.tab.dis{
           display: none;
@@ -58,6 +59,7 @@
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src='//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js'></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./js/dashBoard.js"></script>
 </head>
@@ -74,7 +76,7 @@
                     <span>Dashboard</span></a>
                 </li>
                 <li>
-                    <a href="#" class="tab " data-target="customer" headerName="客戶管理"><span class="las la-users"></span>
+                    <a href="#" class="tab " data-target="customers" headerName="客戶管理"><span class="las la-users"></span>
                     <span>客戶管理</span></a>
                 </li>
                 <li>
@@ -92,10 +94,6 @@
                 <li>
                     <a href="#" class="tab " data-target="account" headerName="帳號管理"><span class="las la-user-circle"></span>
                     <span>帳號管理</span></a>
-                </li>
-                <li>
-                    <a href="#" class="tab " data-target="addProduct" headerName="新增商品"><span class="las la-clipboard-list"></span>
-                    <span>新增商品</span></a>
                 </li>
                 <li>
                     <a href="./logout" onclick="logout(e);" class="move "><span class="las la-sign-out-alt"></span>
@@ -252,7 +250,7 @@
 
         </main>
         <main class="tab course dis">
-            <div class="innerCourse listCourse table-responsive">
+            <div class="innerCourse listCourse">
                 <div class="card">
                     <div class="card-header">
                         <h3>課程列表</h3>
@@ -260,29 +258,29 @@
                     </div>
                     <div class="card-body">
                        <div class="table-responsive">
-                        <table width="100%">
-                            <thead>
-                                <tr>
-                                    <td>課程名稱</td>
-                                    <td>圖片</td>
-                                    <td>狀態</td>
-                                    <td>修改</td>
-		                            <td>刪除</td>
-                                </tr>
-                            </thead>
-                            <tbody class="dynamicsC">
-                                <!-- <tr>
-                                    <td>Servlet</td>
-                                    <td>David</td>
-                                    <td>
-                                        <span class="status red"></span>
-                                        未開課 
-                                    </td>
-                                    <td><input type="submit" class="las" value="修改"></td>
-                                    <td><input type="submit" class="las" value="刪除"></td>
-                                </tr> -->
-                            </tbody>
-                        </table>
+                            <table width="100%" id="courseTable">
+                                <thead>
+                                    <tr>
+                                        <td>課程名稱</td>
+                                        <td>圖片</td>
+                                        <td>狀態</td>
+                                        <td>修改</td>
+                                        <td>刪除</td>
+                                    </tr>
+                                </thead>
+                                <tbody class="dynamicsC">
+                                    <!-- <tr>
+                                        <td>Servlet</td>
+                                        <td>David</td>
+                                        <td>
+                                            <span class="status red"></span>
+                                            未開課 
+                                        </td>
+                                        <td><input type="button" class="las" value="修改"></td>
+                                        <td><input type="button" class="las" value="刪除"></td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
                        </div>
                     </div>
                 </div>
@@ -339,9 +337,6 @@
                     <input type="button"  class="las" id="btn_course" value="送出新增">         
                 </FORM>
             </div>
-        </main>
-        <main class="tab addProduct dis">
-            
         </main>
         <main class="tab product dis" id="productList">
             <div class="innerProduct listProduct">
@@ -437,8 +432,40 @@
         <main class="tab account dis">
 
         </main>
-        <main class="tab customer dis">
-
+        <main class="tab customers dis">
+            <div class="innerCustomer">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>客戶列表</h3>
+                    </div>
+                    <div class="card-body">
+                       <div class="table-responsive">
+                            <table width="100%" id="customerTable">
+                                <thead>
+                                    <tr>
+                                        <td>客戶名稱</td>
+                                        <td>Email</td>
+                                        <td>狀態</td>
+                                        <td>詳細</td>
+                                        <td>評價</td>
+                                        <td>電話</td>
+                                    </tr>
+                                </thead>
+                                <tbody class="cuList">
+                                    <!-- <tr>
+                                        <td><h4>Ge Ku~~~~ </h4></td>
+                                        <td><small>How dare you come Ice Bird</small></td>
+                                        <td><span class="status red"></span>未開通</td>
+                                        <td><span class="las la-user-circle"></span></td>
+                                        <td><span class="las la-comment"></span></td>
+                                        <td><span class="las la-phone"></span></td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                       </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 
@@ -478,8 +505,8 @@
                 case "#main":
                     target_tab = "main";
                     break;
-                case "#customer":
-                    target_tab = "customer";
+                case "#customers":
+                    target_tab = "customers";
                     break;
                 case "#course":
                     target_tab = "course";

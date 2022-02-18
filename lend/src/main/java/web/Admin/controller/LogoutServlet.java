@@ -25,7 +25,7 @@ public class LogoutServlet extends HttpServlet {
 	    	out.println("logout");
 			session.removeAttribute("account");
 			session.removeAttribute("info");
-	    	// session.invalidate();
+	    	session.invalidate();
 			res.sendRedirect(req.getContextPath()+"/Admin/login.html");  
     	}else {
     		res.sendRedirect(req.getContextPath()+"/login.html");

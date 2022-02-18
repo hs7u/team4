@@ -53,6 +53,5 @@ main.tab.course div.table-responsive input {
 main.tab.course div.table-responsive input.las:hover {
 	cursor: pointer;
 	background-color: #666666;
-	color: white;
-	
+	color: white;	
 }

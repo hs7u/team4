@@ -37,12 +37,16 @@ function getCourses() {
                                 <span class="status ${light}"></span>
                                 ${state}
                             </td>
-                            <td><input type="submit" class="las" value="修改"></td>
-                            <td><input type="submit" class="las" value="刪除"></td>
+                            <td><input type="button" class="las" value="修改"></td>
+                            <td><input type="button" class="las" value="刪除"></td>
                         </tr>`;
                 
             $(table).appendTo("tbody.dynamicsC");
-        } 
+        }
+        $('#courseTable').DataTable({
+            "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
+            "pageLength":'5'
+        }); 
       })
 }
 function getCustomers() {
@@ -56,8 +60,10 @@ function getCustomers() {
         data: fdate,
         headers: { "Content-Type": "application/json" },
       }).then(res=>{
-          for(let i = 0 ; i< 3; i++){
-            let add = `<div class="info">
+        for(let i = 0 ; i < res.data.length; i++){
+            let cstate = res.data[i].customerStatus == 0 ? '未開通' : res.data[i].customerStatus == 1 ? "已開通" : "等驗證" ;
+            let light = res.data[i].customerStatus == 0 ? 'red' : res.data[i].customerStatus == 1 ? "green" : "yello" ;
+            let mainAdd = `<div class="info">
                             <span class="las la-user-plus" style="font-size: 2.5rem;"></span>
                             <div>
                                 <h4>${res.data[i].customerName}</h4>
@@ -69,8 +75,23 @@ function getCustomers() {
                                 <span class="las la-phone"></span>
                             </div>
                         </div>`;
-            $(add).appendTo("div.newCustomer");
-          }
+            let list = `<tr>
+                            <td><h4>${res.data[i].customerName}</h4></td>
+                            <td><small>${res.data[i].customerEmail}</small></td>
+                            <td><span class="status ${light}"></span>${cstate}</td>
+                            <td><span class="las la-user-circle"></span></td>
+                            <td><span class="las la-comment"></span></td>
+                            <td><span class="las la-phone">${res.data[i].customerPhone}</span></td>
+                        </tr>`;
+            $(list).appendTo("tbody.cuList");
+            if(i <= 2){
+                $(mainAdd).appendTo("div.newCustomer");            
+            }
+        }
+        $('#customerTable').DataTable({
+            "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
+            "pageLength":'5'
+        });    
       })
 }
 function getAccountInfo() {
