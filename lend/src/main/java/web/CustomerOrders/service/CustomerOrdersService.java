@@ -3,16 +3,21 @@ package web.CustomerOrders.service;
 import java.sql.Timestamp;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ProjectInterfaces.CustomerOrderInterface;
 import web.CustomerOrders.dao.CustomerOrderDAO;
 import web.CustomerOrders.vo.CustomerOrdersVO;
 
+@Service
 public class CustomerOrdersService {
-    private CustomerOrderInterface<CustomerOrdersVO> dao;
-    public CustomerOrdersService(Session session){
-        dao = new CustomerOrderDAO(session);
-    }
+    @Autowired
+    private CustomerOrderDAO dao;
+//     private CustomerOrderInterface<CustomerOrdersVO> dao;
+//     public CustomerOrdersService(Session session){
+//         dao = new CustomerOrderDAO(session);
+//     }
     public CustomerOrdersVO addOrder(Integer customerId, Integer shippingMethodCode,Integer orderDeliveryCharge, 
             Timestamp orderShippingDate,String recipient, String sendersAddress,String orderDetails){
         java.sql.Timestamp orderCreatedDate = new java.sql.Timestamp(System.currentTimeMillis());

@@ -16,15 +16,24 @@ import javax.naming.NamingException;
 import javax.sql.DataSource; */
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import ProjectInterfaces.CustomerServiceInterface;
 import web.CustomerService.vo.CustomerServiceVO;
 
+@Repository
 public class CustomerServiceDAO implements CustomerServiceInterface<CustomerServiceVO>{
-    private Session s;
-    public CustomerServiceDAO(Session s){
-        this.s = s;
-    }
+    @Autowired
+    private SessionFactory sf;
+    public Session getSession() {
+		return sf.getCurrentSession();
+	}
+    // private Session s;
+    // public CustomerServiceDAO(Session s){
+    //     this.s = s;
+    // }
     /* private static final String INSERT = "INSERT INTO `TEAM4`.`Customer_Service`"
     +"(`cusotmer_id`,`message_time`,`message_title`,`message_context`)"
     +"VALUES"
@@ -37,9 +46,9 @@ public class CustomerServiceDAO implements CustomerServiceInterface<CustomerServ
     public void insert(CustomerServiceVO csVO){
        // Hibernate
        if(csVO != null){
-           CustomerServiceVO check = this.s.get(CustomerServiceVO.class, csVO.getMessageId());
+           CustomerServiceVO check = getSession().get(CustomerServiceVO.class, csVO.getMessageId());
            if(check == null){
-               this.s.save(csVO);
+               getSession().save(csVO);
            }
        }
        // Datasource Jdbc
@@ -57,22 +66,22 @@ public class CustomerServiceDAO implements CustomerServiceInterface<CustomerServ
     }
     public void update(CustomerServiceVO csVO){
         // JPA CriteriaQuety
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaUpdate<CustomerServiceVO> cu = cb.createCriteriaUpdate(CustomerServiceVO.class);
         Root<CustomerServiceVO> root = cu.from(CustomerServiceVO.class);
         cu = cu.set(root.get("messageTitle"), csVO.getMessageTitle())
                .set(root.get("messageContext"), csVO.getMessageContext())
                .set(root.get("replyContext"), csVO.getReplyContext())
                .where(cb.equal(root.get("messageId"), csVO.getMessageId()));
-        this.s.createQuery(cu).executeUpdate();
+        getSession().createQuery(cu).executeUpdate();
         // Hibernate
         /* if(csVO != null){
-            CustomerServiceVO update = this.s.get(CustomerServiceVO.class, csVO.getMessageId());
+            CustomerServiceVO update = getSession().get(CustomerServiceVO.class, csVO.getMessageId());
             if(update != null){
                 update.setMessageTitle(csVO.getMessageTitle());
                 update.setMessageContext(csVO.getMessageContext());
                 update.setReplyContext(csVO.getReplyContext());
-                this.s.save(update);    
+                getSession().save(update);    
             }
         } */
         // Datasource Jdbc
@@ -92,14 +101,14 @@ public class CustomerServiceDAO implements CustomerServiceInterface<CustomerServ
     }
     public CustomerServiceVO selectByMessageId(Integer messageId){
         // JPA CriteriaQuety
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaQuery<CustomerServiceVO> cq = cb.createQuery(CustomerServiceVO.class);
         Root<CustomerServiceVO> root = cq.from(CustomerServiceVO.class);
         cq = cq.where(cb.equal(root.get("messageId"), messageId));
-        return this.s.createQuery(cq).getSingleResult();
+        return getSession().createQuery(cq).getSingleResult();
         // Hibernate
         /* if(messageId != null){
-            return this.s.get(CustomerServiceVO.class, messageId);
+            return getSession().get(CustomerServiceVO.class, messageId);
         }
         return null; */
         // Datasource Jdbc

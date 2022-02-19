@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import org.hibernate.Session;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
 
 import web.Product.service.ProductService;
 import web.Product.vo.ProductVO;
@@ -62,7 +65,10 @@ public class newProduct extends HttpServlet {
 			is.close();
         }
         
-        ProductService psc = new ProductService((Session)req.getAttribute("session"));
+        // ProductService psc = new ProductService((Session)req.getAttribute("session"));
+        ServletContext application = this.getServletContext();
+        ApplicationContext context = (ApplicationContext)application.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+        ProductService psc = (ProductService)context.getBean("productService");
         ProductVO pVo = null;
         if(errorMsg.size() <= 0){  
             pVo = psc.addProduct( 

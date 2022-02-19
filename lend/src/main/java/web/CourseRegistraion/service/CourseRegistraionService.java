@@ -3,16 +3,21 @@ package web.CourseRegistraion.service;
 import java.util.ArrayList;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ProjectInterfaces.CourseRegistraionInterface;
 import web.CourseRegistraion.dao.CourseRegistraionDAO;
 import web.CourseRegistraion.vo.CourseRegistraionVO;
 
+@Service
 public class CourseRegistraionService {
-    private CourseRegistraionInterface<CourseRegistraionVO> dao;
-    public CourseRegistraionService(Session session){
-        dao = new CourseRegistraionDAO(session);
-    }
+    @Autowired
+    private CourseRegistraionDAO dao;
+    // private CourseRegistraionInterface<CourseRegistraionVO> dao;
+    // public CourseRegistraionService(Session session){
+    //     dao = new CourseRegistraionDAO(session);
+    // }
     public CourseRegistraionVO registCourse(Integer customerId, Integer courseId,
     Integer courseTimeableId, Integer numOfPeople){
         CourseRegistraionVO crVo = new CourseRegistraionVO();

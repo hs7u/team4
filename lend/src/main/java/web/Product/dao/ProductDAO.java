@@ -9,6 +9,9 @@ import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /* import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,11 +25,17 @@ import javax.sql.DataSource; */
 import ProjectInterfaces.ProductInterface;
 import web.Product.vo.ProductVO;
 
+@Repository
 public class ProductDAO implements ProductInterface<ProductVO>{
-    private Session s;
-    public ProductDAO(Session s){
-        this.s = s;
-    }
+    @Autowired
+    private SessionFactory sf;
+    public Session getSession() {
+		return sf.getCurrentSession();
+	}
+    // private Session s;
+    // public ProductDAO(Session s){
+    //     getSession() = s;
+    // }
     /* private static final String INSERT_STMT = "INSERT INTO `TEAM4`.`Product`"
     +"(`product_id`,`product_category_code`,`product_price`,`product_name`,`product_image`,`product_description`,`product_inventory`,`product_sold`,`released_time`,`customization`,`custom_product_price`)"
     +"VALUES"
@@ -48,9 +57,9 @@ public class ProductDAO implements ProductInterface<ProductVO>{
     public void insert(ProductVO pVo){
         // Hibernate
         if(pVo != null){
-            ProductVO newProduct = this.s.get(ProductVO.class, pVo.getProductId());
+            ProductVO newProduct = getSession().get(ProductVO.class, pVo.getProductId());
             if(newProduct == null){
-                this.s.save(pVo);
+                getSession().save(pVo);
             }
         }
         // DateSource Jdbc
@@ -75,7 +84,7 @@ public class ProductDAO implements ProductInterface<ProductVO>{
     }
     public void update(ProductVO pVo){
         // JPA Criteria
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaUpdate<ProductVO> cu = cb.createCriteriaUpdate(ProductVO.class);
         Root<ProductVO> root = cu.from(ProductVO.class);
         cu = cu.set(root.get("productId"), pVo.getProductId())
@@ -89,9 +98,9 @@ public class ProductDAO implements ProductInterface<ProductVO>{
                .set(root.get("customerProductPrice"), pVo.getCustomerProductPrice())
                .set(root.get("productStatus"), pVo.getProductStatus())
                .where(cb.equal(root.get("productId"), pVo.getProductId()));
-        this.s.createQuery(cu).executeUpdate();
+        getSession().createQuery(cu).executeUpdate();
         // Hibernate
-        /* ProductVO productVo = this.s.get(ProductVO.class, pVo.getProductId());
+        /* ProductVO productVo = getSession().get(ProductVO.class, pVo.getProductId());
         if(productVo != null){
             productVo.setProductId(pVo.getProductId());
             productVo.setProductCategoryCode(pVo.getProductCategoryCode());
@@ -104,7 +113,7 @@ public class ProductDAO implements ProductInterface<ProductVO>{
             productVo.setReleasedTime(pVo.getReleasedTime());
             productVo.setCustomization(pVo.getCustomization());
             productVo.setCustomerProductPrice(pVo.getCustomerProductPrice());
-            this.s.save(productVo);
+            getSession().save(productVo);
         } */
         // DateSource Jdbc
         /* try (Connection con = ds.getConnection();
@@ -129,15 +138,15 @@ public class ProductDAO implements ProductInterface<ProductVO>{
     }
     public void delete(Integer productId){
         // JPA Criteria
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaDelete<ProductVO> cd = cb.createCriteriaDelete(ProductVO.class);
         Root<ProductVO> root = cd.from(ProductVO.class);
         cd = cd.where(cb.equal(root.get("productId"), productId));
-        this.s.createQuery(cd).executeUpdate();
+        getSession().createQuery(cd).executeUpdate();
         // Hibernate
-        /* ProductVO pVo = this.s.get(ProductVO.class, productId);
+        /* ProductVO pVo = getSession().get(ProductVO.class, productId);
         if(pVo != null){
-            this.s.delete(pVo);
+            getSession().delete(pVo);
         } */
         // DateSource Jdbc
         /* Connection con = null;
@@ -180,16 +189,16 @@ public class ProductDAO implements ProductInterface<ProductVO>{
     }
     public void sold(Integer productId, Integer sold){
         // JPA Criteria
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaUpdate<ProductVO> cu = cb.createCriteriaUpdate(ProductVO.class);
         Root<ProductVO> root = cu.from(ProductVO.class);
         cu = cu.where(cb.equal(root.get("productId"), productId))
                .set(root.get("productSold"), sold);
         // Hibernate
-        /* ProductVO pVo = this.s.get(ProductVO.class, productId);
+        /* ProductVO pVo = getSession().get(ProductVO.class, productId);
         if(pVo != null){
             pVo.setProductSold(sold);
-            this.s.save(pVo);
+            getSession().save(pVo);
         } */
         // DateSource Jdbc
         /* try (Connection con = ds.getConnection();
@@ -204,19 +213,19 @@ public class ProductDAO implements ProductInterface<ProductVO>{
     }
     public void changeStatus(Integer productId, Byte statusCode){
         // JPA Criteria
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaUpdate<ProductVO> cu = cb.createCriteriaUpdate(ProductVO.class);
         Root<ProductVO> root = cu.from(ProductVO.class);
         cu = cu.where(cb.and(cb.equal(root.get("productId"), productId),
                              cb.equal(root.get("productStatus"), statusCode)
                             )
                      );
-        this.s.createQuery(cu).executeUpdate();
+        getSession().createQuery(cu).executeUpdate();
         // Hibernate
-        /* ProductVO pVo = this.s.get(ProductVO.class, productId);
+        /* ProductVO pVo = getSession().get(ProductVO.class, productId);
         if(pVo != null){
             pVo.setProductStatus(statusCode);
-            this.s.save(pVo);
+            getSession().save(pVo);
         } */
         // DateSource Jdbc
         /* try (Connection con = ds.getConnection();
@@ -231,14 +240,14 @@ public class ProductDAO implements ProductInterface<ProductVO>{
     }
     public ProductVO selectByProductId(Integer productId){
         // JPA Criteria
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaQuery<ProductVO> cq = cb.createQuery(ProductVO.class);
         Root<ProductVO> root = cq.from(ProductVO.class);
         
         cq = cq.select(root).where(cb.equal(root.get("productId"), productId));
         
         try {
-            return this.s.createQuery(cq).getSingleResult();
+            return getSession().createQuery(cq).getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -271,14 +280,14 @@ public class ProductDAO implements ProductInterface<ProductVO>{
     }
     public byte[] selectPhotoByProductId(Integer productId){
          // JPA Criteria
-         CriteriaBuilder cb = this.s.getCriteriaBuilder();
+         CriteriaBuilder cb = getSession().getCriteriaBuilder();
          CriteriaQuery<byte[]> cq = cb.createQuery(byte[].class);
          Root<ProductVO> root = cq.from(ProductVO.class);
          
          cq = cq.select(root.get("productImage")).where(cb.equal(root.get("productId"), productId));
          
          try {
-             return this.s.createQuery(cq).getSingleResult();
+             return getSession().createQuery(cq).getSingleResult();
          } catch (Exception e) {
              e.printStackTrace();
          }
@@ -286,12 +295,12 @@ public class ProductDAO implements ProductInterface<ProductVO>{
     }
     public ArrayList<ProductVO> getAllProduct(){
         // JPA CtiteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaQuery<ProductVO> cq = cb.createQuery(ProductVO.class);
         Root<ProductVO> root = cq.from(ProductVO.class);
         cq = cq.select(root);
         ArrayList<ProductVO> list = new ArrayList<ProductVO>();
-        for(ProductVO pVo : this.s.createQuery(cq).getResultList()){
+        for(ProductVO pVo : getSession().createQuery(cq).getResultList()){
             list.add(pVo);
         }
         return list;

@@ -1,16 +1,21 @@
 package web.Creditcrad.service;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ProjectInterfaces.CreditcradInterface;
 import web.Creditcrad.dao.CreditcardDAO;
 import web.Creditcrad.vo.CreditcradVO;
 
+@Service
 public class CreditService {
-    private CreditcradInterface<CreditcradVO> dao;
-    public CreditService(Session session) {
-        dao = new CreditcardDAO(session);
-    }
+    @Autowired
+    private CreditcardDAO dao;
+    // private CreditcradInterface<CreditcradVO> dao;
+    // public CreditService(Session session) {
+    //     dao = new CreditcardDAO(session);
+    // }
     public CreditcradVO addCreditcard(Integer creditcardNumber, Integer customerId, String cardholderName,
             String cvvCode,String expireMonth, String expireYear) {
         CreditcradVO cVo = new CreditcradVO();

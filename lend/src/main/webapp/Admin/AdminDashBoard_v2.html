@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LLL</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src='//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js'></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./js/dashBoard.js"></script>
     <link rel="stylesheet" href="./css/AdminDashBoard.css">
     <link rel="stylesheet" href="./css/Product.css">
     <link rel="stylesheet" href="./css/Course.css">
@@ -58,10 +62,6 @@
             justify-content: center;
         }
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src='//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js'></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="./js/dashBoard.js"></script>
 </head>
 <body>
     <input type="checkbox" id="nav-toggle">
@@ -224,7 +224,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3>New Customers</h3>
-                            <button onclick="location.href='#customer'">See All <span class="las la-arrow-right"></span></button>
+                            <button onclick="location.href='#customers'">See All <span class="las la-arrow-right"></span></button>
                         </div>
 
                         <div class="card-body">

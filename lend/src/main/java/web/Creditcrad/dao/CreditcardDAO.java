@@ -17,15 +17,24 @@ import javax.naming.NamingException;
 import javax.sql.DataSource; */
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import ProjectInterfaces.CreditcradInterface;
 import web.Creditcrad.vo.CreditcradVO;
 
+@Repository
 public class CreditcardDAO implements CreditcradInterface<CreditcradVO>{
-    private Session s;
-    public CreditcardDAO(Session s){
-        this.s = s;
-    }
+    @Autowired
+    private SessionFactory sf;
+    public Session getSession() {
+		return sf.getCurrentSession();
+	}
+    // private Session s;
+    // public CreditcardDAO(Session s){
+    //     this.s = s;
+    // }
     /* private static final String INSERT = "INSERT INTO `TEAM4`.`Creditcard_Info`"
     +"(`creditcard_number`,`customer_id`,`cvv_code`,`expire_year`,`expire_month`,`cardholder_name`)"
     +"VALUES"
@@ -39,9 +48,9 @@ public class CreditcardDAO implements CreditcradInterface<CreditcradVO>{
     public void insert(CreditcradVO cVo){
         // Hibernate
         if(cVo != null){
-            CreditcradVO card = this.s.get(CreditcradVO.class, cVo.getCreditcardNumber());
+            CreditcradVO card = getSession().get(CreditcradVO.class, cVo.getCreditcardNumber());
             if(card == null){
-                this.s.save(cVo);
+                getSession().save(cVo);
             }
         }
         // DateSource Jdbc
@@ -61,7 +70,7 @@ public class CreditcardDAO implements CreditcradInterface<CreditcradVO>{
     }
     public void update(CreditcradVO cVo){
         // JPA CriterQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaUpdate<CreditcradVO> cu = cb.createCriteriaUpdate(CreditcradVO.class);
         Root<CreditcradVO> root = cu.from(CreditcradVO.class);
         cu = cu.set(root.get("customer_id"), cVo.getCustomerId())
@@ -70,9 +79,9 @@ public class CreditcardDAO implements CreditcradInterface<CreditcradVO>{
                .set(root.get("expire_month"), cVo.getExpireMonth())
                .set(root.get("expire_year"), cVo.getCardholderName())
                .where(cb.equal(root.get("creditcard_number"), cVo.getCreditcardNumber()));
-        this.s.createQuery(cu).executeUpdate();
+        getSession().createQuery(cu).executeUpdate();
         // Hibernate
-        /* CreditcradVO card = this.s.get(CreditcradVO.class, cVo.getCreditcardNumber());
+        /* CreditcradVO card = getSession().get(CreditcradVO.class, cVo.getCreditcardNumber());
         if(card != null){
             card.setCreditcardNumber(cVo.getCreditcardNumber());
             card.setCustomerId(cVo.getCustomerId());
@@ -80,7 +89,7 @@ public class CreditcardDAO implements CreditcradInterface<CreditcradVO>{
             card.setExpireYear(cVo.getExpireYear());
             card.setExpireMonth(cVo.getExpireMonth());
             card.setCardholderName(cVo.getCardholderName());
-            this.s.save(card);
+            getSession().save(card);
         } */
         // DateSource Jdbc
         /* try (Connection con = ds.getConnection();
@@ -100,16 +109,16 @@ public class CreditcardDAO implements CreditcradInterface<CreditcradVO>{
     }
     public void delete(Integer customerId){
         // JPA CriterQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaDelete<CreditcradVO> cd = cb.createCriteriaDelete(CreditcradVO.class);
         Root<CreditcradVO> root = cd.from(CreditcradVO.class);
         cd = cd.where(cb.equal(root.get("customer_id"), customerId));
-        this.s.createQuery(cd).executeUpdate();
+        getSession().createQuery(cd).executeUpdate();
         // Hibernate
         /* if(customerId != null){
-            CreditcradVO cVo = this.s.get(CreditcradVO.class, customerId);
+            CreditcradVO cVo = getSession().get(CreditcradVO.class, customerId);
             if(cVo != null){
-                this.s.delete(cVo);
+                getSession().delete(cVo);
             }
         } */
         // DateSource Jdbc
@@ -153,19 +162,19 @@ public class CreditcardDAO implements CreditcradInterface<CreditcradVO>{
     }
     public CreditcradVO selectByCustomerId(Integer customerId){
         // JPA CriterQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaQuery<CreditcradVO> cq = cb.createQuery(CreditcradVO.class);
         Root<CreditcradVO> root = cq.from(CreditcradVO.class);
         cq = cq.where(cb.equal(root.get("customer_id"), customerId));
         try {
-			return this.s.createQuery(cq).getSingleResult();
+			return getSession().createQuery(cq).getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
         // Hibernate
         /* if(customerId != null){
-            CreditcradVO cVo = this.s.get(CreditcradVO.class, customerId);
+            CreditcradVO cVo = getSession().get(CreditcradVO.class, customerId);
             if(cVo != null){
                 return cVo;
             }

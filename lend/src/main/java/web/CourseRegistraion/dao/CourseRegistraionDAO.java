@@ -16,15 +16,24 @@ import javax.persistence.criteria.Root;
 // import javax.sql.DataSource;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import ProjectInterfaces.CourseRegistraionInterface;
 import web.CourseRegistraion.vo.CourseRegistraionVO;
 
+@Repository
 public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRegistraionVO> {
-    private Session s;
-    public CourseRegistraionDAO(Session s){
-        this.s = s;
-    }
+    @Autowired
+    private SessionFactory sf;
+    public Session getSession() {
+		return sf.getCurrentSession();
+	}
+    // private Session s;
+    // public CourseRegistraionDAO(Session s){
+    //     this.s = s;
+    // }
     /* private static final String INSERT = "INSERT INTO `TEAM4`.`Course_Registraion`"
     +"(`registration_id`,`customer_id`,`course_id`,`course_timeble_id`,`numOfPeople`)"
     +"VALUES"
@@ -37,9 +46,9 @@ public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRe
     public void insert(CourseRegistraionVO crVo){
         // Hibernate
         if(crVo != null){
-            CourseRegistraionVO newCr = this.s.get(CourseRegistraionVO.class, crVo.getCourseId());
+            CourseRegistraionVO newCr = getSession().get(CourseRegistraionVO.class, crVo.getCourseId());
             if(newCr == null){
-                this.s.save(crVo);
+                getSession().save(crVo);
             }
         }
         // DateSource Jdbc
@@ -67,16 +76,16 @@ public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRe
     // }
     public void delete(Integer registrationId){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaDelete<CourseRegistraionVO> cd = cb.createCriteriaDelete(CourseRegistraionVO.class);
         Root<CourseRegistraionVO> root = cd.from(CourseRegistraionVO.class);
         cd = cd.where(cb.equal(root.get("registrationId"), registrationId));
-        this.s.createQuery(cd).executeUpdate();
+        getSession().createQuery(cd).executeUpdate();
         // Hibernate
         /* if(registrationId != null){
-            CourseRegistraionVO newCr = this.s.get(CourseRegistraionVO.class, registrationId);
+            CourseRegistraionVO newCr = getSession().get(CourseRegistraionVO.class, registrationId);
             if(newCr != null){
-                this.s.delete(newCr);;
+                getSession().delete(newCr);;
             }
         } */
         // DateSource Jdbc
@@ -120,7 +129,7 @@ public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRe
     }
     public CourseRegistraionVO selectByCustomerId(Integer customerId, Integer courseTimeableId){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaQuery<CourseRegistraionVO> cq = cb.createQuery(CourseRegistraionVO.class);
         Root<CourseRegistraionVO> root = cq.from(CourseRegistraionVO.class);
         cq = cq.where(cb.and(
@@ -128,7 +137,7 @@ public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRe
                             cb.equal(root.get("courseTimeableId"), courseTimeableId)
                             )
                     );
-        return this.s.createQuery(cq).getSingleResult();
+        return getSession().createQuery(cq).getSingleResult();
         // DateSource Jdbc
         /* CourseRegistraionVO crVo = new CourseRegistraionVO();
         try (Connection con = ds.getConnection();
@@ -151,12 +160,12 @@ public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRe
     }
     public ArrayList<CourseRegistraionVO> selectAllCustomerRegister(Integer customerId){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaQuery<CourseRegistraionVO> cq = cb.createQuery(CourseRegistraionVO.class);
         Root<CourseRegistraionVO> root = cq.from(CourseRegistraionVO.class);
         cq = cq.where(cb.equal(root.get("customerId"), customerId));
         ArrayList<CourseRegistraionVO> list = new ArrayList<CourseRegistraionVO>();
-        for(CourseRegistraionVO crVo : this.s.createQuery(cq).getResultList()){
+        for(CourseRegistraionVO crVo : getSession().createQuery(cq).getResultList()){
             list.add(crVo);
         }
         return list;
@@ -183,12 +192,12 @@ public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRe
     }
     public ArrayList<CourseRegistraionVO> selectByTimeableId(Integer courseTimeableId){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaQuery<CourseRegistraionVO> cq = cb.createQuery(CourseRegistraionVO.class);
         Root<CourseRegistraionVO> root = cq.from(CourseRegistraionVO.class);
         cq = cq.where(cb.equal(root.get("courseTimeableId"), courseTimeableId));
         ArrayList<CourseRegistraionVO> list = new ArrayList<CourseRegistraionVO>();
-        for(CourseRegistraionVO crVo : this.s.createQuery(cq).getResultList()){
+        for(CourseRegistraionVO crVo : getSession().createQuery(cq).getResultList()){
             list.add(crVo);
         }
         return list;

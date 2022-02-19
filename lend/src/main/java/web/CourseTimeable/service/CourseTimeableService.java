@@ -4,16 +4,21 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ProjectInterfaces.CourseTimeableInterface;
 import web.CourseTimeable.dao.CourseTimeableDAO;
 import web.CourseTimeable.vo.CourseTimeableVO;
 
+@Service
 public class CourseTimeableService {
-    private CourseTimeableInterface<CourseTimeableVO> dao;
-    public CourseTimeableService(Session session) {
-        dao = new CourseTimeableDAO(session);
-    }
+    @Autowired
+    private CourseTimeableDAO dao;
+    // private CourseTimeableInterface<CourseTimeableVO> dao;
+    // public CourseTimeableService(Session session) {
+    //     dao = new CourseTimeableDAO(session);
+    // }
     public CourseTimeableVO addCourseTimeable(Integer courseId, Timestamp courseDate,Timestamp signUpStartdate, Timestamp signUpDeadline) {
         CourseTimeableVO ctvo = new CourseTimeableVO();
         ctvo.setCourseId(courseId);

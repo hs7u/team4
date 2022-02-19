@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -16,12 +17,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import org.hibernate.Session;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
 
 import web.Product.service.ProductService;
 import web.Product.vo.ProductVO;
 @WebServlet("/Product/updateProduct")
 @MultipartConfig
 public class updateProduct extends HttpServlet{
+    private ProductService psc;
+    public void init() throws ServletException{
+        ServletContext application = this.getServletContext();
+        ApplicationContext context = (ApplicationContext)application.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+        psc = (ProductService)context.getBean("productService");
+    }
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         doPost(req,res);
     }
@@ -42,7 +51,7 @@ public class updateProduct extends HttpServlet{
          
     }
     private void transform(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-        ProductService psc = new ProductService((Session)req.getAttribute("session"));
+        // ProductService psc = new ProductService((Session)req.getAttribute("session"));
         Integer productId = Integer.valueOf(req.getParameter("productId"));
         ProductVO vo = psc.getOneProduct(productId);
         req.setAttribute("currentProduct", vo);
@@ -71,7 +80,7 @@ public class updateProduct extends HttpServlet{
 			isr.close();
 			is.close();
         }
-        ProductService psc = new ProductService((Session)req.getAttribute("session"));
+        // ProductService psc = new ProductService((Session)req.getAttribute("session"));
         ProductVO check = psc.getOneProduct(Integer.valueOf((String)poc.get("product_id")));
         ProductVO pVo = null;
         if(check != null){
@@ -96,7 +105,7 @@ public class updateProduct extends HttpServlet{
         }
     }
     private void delete(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-        ProductService psc = new ProductService((Session)req.getAttribute("session"));
+        // ProductService psc = new ProductService((Session)req.getAttribute("session"));
         Integer productId = Integer.valueOf(req.getParameter("productId"));
         psc.deleteProduct(productId);
     }

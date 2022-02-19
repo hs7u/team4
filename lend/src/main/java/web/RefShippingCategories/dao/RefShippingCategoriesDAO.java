@@ -16,16 +16,24 @@ import javax.naming.NamingException;
 import javax.sql.DataSource; */
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import ProjectInterfaces.RefShippingCategoriesInterface;
 import web.RefShippingCategories.vo.RefShippingCategoriesVO;
 
-
+@Repository
 public class RefShippingCategoriesDAO implements RefShippingCategoriesInterface<RefShippingCategoriesVO> {
-	private Session s;
-	public RefShippingCategoriesDAO(Session s){
-		this.s = s;
+	@Autowired
+	private SessionFactory sf;
+	public Session getSession() {
+		return sf.getCurrentSession();
 	}
+	// private Session s;
+	// public RefShippingCategoriesDAO(Session s){
+	// 	getSession() = s;
+	// }
 	/* private static final String INSERT = "INSERT INTO `TEAM4`.`Ref_Shipping_Categories`" 
 			+"(`delivery_method_code`,`delivery_category_description`)" 
 			+"VALUES" 
@@ -38,9 +46,9 @@ public class RefShippingCategoriesDAO implements RefShippingCategoriesInterface<
 	public void insert(RefShippingCategoriesVO rVo){
 		// Hibernate
 		if(rVo != null){
-			RefShippingCategoriesVO check = this.s.get(RefShippingCategoriesVO.class, rVo.getShippingMethodCode());
+			RefShippingCategoriesVO check = getSession().get(RefShippingCategoriesVO.class, rVo.getShippingMethodCode());
 			if(check == null){
-				this.s.save(rVo);
+				getSession().save(rVo);
 			}
 		}
 		// DataSource Jdbc
@@ -56,18 +64,18 @@ public class RefShippingCategoriesDAO implements RefShippingCategoriesInterface<
 	}
 	public void update(RefShippingCategoriesVO rVo){
 		// JPA CriteriaQuery
-		CriteriaBuilder cb = this.s.getCriteriaBuilder();
+		CriteriaBuilder cb = getSession().getCriteriaBuilder();
 		CriteriaUpdate<RefShippingCategoriesVO> cu = cb.createCriteriaUpdate(RefShippingCategoriesVO.class);
 		Root<RefShippingCategoriesVO> root = cu.from(RefShippingCategoriesVO.class);
 		cu = cu.set(root.get("shippingCategoryDescription"), rVo.getShippingCategoryDescription())
 			   .where(cb.equal(root.get("shippingMethodCode"), rVo.getShippingMethodCode()));
-		this.s.createQuery(cu).executeUpdate();
+		getSession().createQuery(cu).executeUpdate();
 		// Hibernate
 		/* if(rVo != null){
-			RefShippingCategoriesVO update = this.s.get(RefShippingCategoriesVO.class, rVo.getShippingMethodCode());
+			RefShippingCategoriesVO update = getSession().get(RefShippingCategoriesVO.class, rVo.getShippingMethodCode());
 			if(update != null){
 				update.setShippingCategoryDescription(rVo.getShippingCategoryDescription());
-				this.s.save(update);
+				getSession().save(update);
 			}
 		} */
 		// DataSource Jdbc
@@ -83,14 +91,14 @@ public class RefShippingCategoriesDAO implements RefShippingCategoriesInterface<
 	}
 	public RefShippingCategoriesVO selectByShippingMethodCode(Integer shippingMethodCode) {
 		// JPA CriteriaQuery
-		CriteriaBuilder cb = this.s.getCriteriaBuilder();
+		CriteriaBuilder cb = getSession().getCriteriaBuilder();
 		CriteriaQuery<RefShippingCategoriesVO> cq = cb.createQuery(RefShippingCategoriesVO.class);
 		Root<RefShippingCategoriesVO> root = cq.from(RefShippingCategoriesVO.class);
 		cq = cq.where(cb.equal(root.get("shippingMethodCode"), shippingMethodCode));
-		return this.s.createQuery(cq).getSingleResult();
+		return getSession().createQuery(cq).getSingleResult();
 		// Hibernate
 		/* if(shippingMethodCode != null){
-			return this.s.get(RefShippingCategoriesVO.class, shippingMethodCode);
+			return getSession().get(RefShippingCategoriesVO.class, shippingMethodCode);
 		}
 		return null; */
 		// DataSource Jdbc

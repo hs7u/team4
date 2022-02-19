@@ -5,11 +5,14 @@
 <%@ page import ="org.hibernate.Session"%>
 <%@ page import ="web.Product.vo.ProductVO"%>
 <%@ page import="ProjectInterfaces.ProductInterface"%>
+<%@ page import="org.springframework.context.ApplicationContext"%>
+<%@ page import="org.springframework.web.context.WebApplicationContext"%>
 
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
-	ProductService psc = new ProductService((Session)request.getAttribute("session"));
+	ApplicationContext context = (ApplicationContext)request.getServletContext().getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+	ProductService psc = (ProductService)context.getBean("productService");
     ArrayList<ProductVO> list = psc.getAll();
     pageContext.setAttribute("list",list);
 %>

@@ -3,16 +3,21 @@ package web.Course.service;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ProjectInterfaces.CourseInterface;
 import web.Course.dao.CourseDAO;
 import web.Course.vo.CourseVO;
 
+@Service
 public class CourseService {
-    private CourseInterface<CourseVO> dao;
-    public CourseService(Session session) {
-        dao = new CourseDAO(session);
-    }
+    @Autowired
+    private CourseDAO dao;
+    // private CourseInterface<CourseVO> dao;
+    // public CourseService(Session session) {
+    //     dao = new CourseDAO(session);
+    // }
     public CourseVO addCourse(String courseName, Integer coursePrice, byte[] courseImage,
             Integer maxOfCourse, Integer minOfCourse, String courseLocation, String courseDescribe) {
         java.sql.Timestamp releasedTime = new java.sql.Timestamp(System.currentTimeMillis());

@@ -17,15 +17,24 @@ import javax.naming.NamingException;
 import javax.sql.DataSource; */
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import ProjectInterfaces.CustomerOrderInterface;
 import web.CustomerOrders.vo.CustomerOrdersVO;
 
+@Repository
 public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO>{
-    private Session s;
-    public CustomerOrderDAO(Session s){
-        this.s = s;
-    }
+    @Autowired
+    private SessionFactory sf;
+    public Session getSession() {
+		return sf.getCurrentSession();
+	}
+    // private Session s;
+    // public CustomerOrderDAO(Session s){
+    //     this.s = s;
+    // }
    /*  private static final String INSERT_STMT = "INSERT INTO `TEAM4`.`Customer_Orders`"
     +"(`order_id`,`customer_id`,`shipping_method_code`,`order_created_date`,`order_delivery_charge`,`order_shipping_date`,`recipient`,`senders_address`,`order_detials`)"
     +"VALUES"
@@ -55,9 +64,9 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
     public void insert(CustomerOrdersVO coVo){
         // Hibernate
         if(coVo != null){
-            CustomerOrdersVO newOrder = this.s.get(CustomerOrdersVO.class, coVo.getOrderId());
+            CustomerOrdersVO newOrder = getSession().get(CustomerOrdersVO.class, coVo.getOrderId());
             if(newOrder == null){
-                this.s.save(coVo);
+                getSession().save(coVo);
             }
         }
         // Datasource
@@ -79,7 +88,7 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
     }
     public void update(CustomerOrdersVO coVo){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaUpdate<CustomerOrdersVO> cu = cb.createCriteriaUpdate(CustomerOrdersVO.class);
         Root<CustomerOrdersVO> root = cu.from(CustomerOrdersVO.class);
         cu = cu.set(root.get("orderId"), coVo.getOrderId())
@@ -90,10 +99,10 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
                .set(root.get("recipient"), coVo.getRecipint())
                .set(root.get("sendersAddress"), coVo.getSendersAddress())
                .set(root.get("orderDetials"), coVo.getOrderDetails());
-        this.s.createQuery(cu).executeUpdate();
+        getSession().createQuery(cu).executeUpdate();
         // Hibernate
         /* if(coVo != null){
-            CustomerOrdersVO order = this.s.get(CustomerOrdersVO.class, coVo.getOrderId());
+            CustomerOrdersVO order = getSession().get(CustomerOrdersVO.class, coVo.getOrderId());
             if(order != null){
                 order.setOrderId(coVo.getOrderId());
                 order.setCustomerId(coVo.getCustomerId());
@@ -103,7 +112,7 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
                 order.setRecipient(coVo.getRecipint());
                 order.setSendersAddress(coVo.getSendersAddress());
                 order.setOrderDetails(coVo.getOrderDetails());
-                this.s.save(order);
+                getSession().save(order);
             }
         } */
         // Datasource
@@ -126,16 +135,16 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
     }
     public void delete(Integer orderId){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaDelete<CustomerOrdersVO> cd = cb.createCriteriaDelete(CustomerOrdersVO.class);
         Root<CustomerOrdersVO> root = cd.from(CustomerOrdersVO.class);
         cd = cd.where(cb.equal(root.get("orderId"), orderId));
-        this.s.createQuery(cd).executeUpdate();
+        getSession().createQuery(cd).executeUpdate();
         // Hibernate
        /*  if(orderId != null){
-            CustomerOrdersVO newOrder = this.s.get(CustomerOrdersVO.class, orderId);
+            CustomerOrdersVO newOrder = getSession().get(CustomerOrdersVO.class, orderId);
             if(newOrder != null){
-                this.s.delete(newOrder);
+                getSession().delete(newOrder);
             }
         } */
        // Datasource
@@ -179,15 +188,15 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
     }
     public void updateStatus(String statusName, Integer orderId, Byte statusCode) {
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaUpdate<CustomerOrdersVO> cu = cb.createCriteriaUpdate(CustomerOrdersVO.class);
         Root<CustomerOrdersVO> root = cu.from(CustomerOrdersVO.class);
         cu = cu.set(root.get(statusName), statusCode)
                .where(cb.equal(root.get("orderId"), orderId));
-        this.s.createQuery(cu).executeUpdate();
+        getSession().createQuery(cu).executeUpdate();
         // Hibernate
         /* if(orderId != null){
-            CustomerOrdersVO coVo = this.s.get(CustomerOrdersVO.class, orderId);
+            CustomerOrdersVO coVo = getSession().get(CustomerOrdersVO.class, orderId);
             if(coVo != null){
                 switch (statusName) {
                     case "order_status":
@@ -205,7 +214,7 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
                     default:
                         break;
                 }
-                this.s.save(coVo);
+                getSession().save(coVo);
             }
         } */
         // Datasource
@@ -238,14 +247,14 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
     }
     public CustomerOrdersVO selectByOrderId(Integer orderId){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaQuery<CustomerOrdersVO> cq = cb.createQuery(CustomerOrdersVO.class);
         Root<CustomerOrdersVO> root = cq.from(CustomerOrdersVO.class);
         cq = cq.where(cb.equal(root.get("orderId"), orderId));
-        return this.s.createQuery(cq).getSingleResult();
+        return getSession().createQuery(cq).getSingleResult();
         // Hibernate
         /* if(orderId != null){
-            return this.s.get(CustomerOrdersVO.class, orderId);
+            return getSession().get(CustomerOrdersVO.class, orderId);
         }
         return null; */
         // Datasource

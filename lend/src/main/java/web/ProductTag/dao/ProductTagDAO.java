@@ -16,15 +16,24 @@ import javax.naming.NamingException;
 import javax.sql.DataSource; */
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import ProjectInterfaces.ProductTagInterface;
 import web.ProductTag.vo.ProductTagVO;
 
+@Repository
 public class ProductTagDAO implements ProductTagInterface<ProductTagVO>{
-    private Session s;
-    public ProductTagDAO(Session s){
-        this.s = s;
-    }
+    @Autowired
+    private SessionFactory sf;
+    public Session getSession() {
+		return sf.getCurrentSession();
+	}
+    // private Session s;
+    // public ProductTagDAO(Session s){
+    //     this.s = s;
+    // }
     /* private static final String INSERT = "INSERT INTO `TEAM4`.`Product_Tag`"
     +"(`product_category_code`,`product_label_name`)"
     +"VALUES"
@@ -37,9 +46,9 @@ public class ProductTagDAO implements ProductTagInterface<ProductTagVO>{
     public void insert(ProductTagVO pVo){
         // Hibernate
         if(pVo != null){
-            ProductTagVO check = this.s.get(ProductTagVO.class, pVo.getProductCategoryCode());
+            ProductTagVO check = getSession().get(ProductTagVO.class, pVo.getProductCategoryCode());
             if(check == null){
-                this.s.save(pVo);
+                getSession().save(pVo);
             }
         }
         // DataSource Jdbc
@@ -55,18 +64,18 @@ public class ProductTagDAO implements ProductTagInterface<ProductTagVO>{
     }
     public void update(ProductTagVO pVo){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaUpdate<ProductTagVO> cu = cb.createCriteriaUpdate(ProductTagVO.class);
         Root<ProductTagVO> root = cu.from(ProductTagVO.class);
         cu = cu.set(root.get("productTagName"), pVo.getProductTagName())
                .where(cb.equal(root.get("productCategoryCode"), pVo.getProductCategoryCode()));
-        this.s.createQuery(cu).executeUpdate();
+        getSession().createQuery(cu).executeUpdate();
         // Hibernate
         /* if(pVo != null){
-            ProductTagVO check = this.s.get(ProductTagVO.class, pVo.getProductCategoryCode());
+            ProductTagVO check = getSession().get(ProductTagVO.class, pVo.getProductCategoryCode());
             if(check != null){
                 check.setProductTagName(pVo.getProductTagName());
-                this.s.save(check);
+                getSession().save(check);
             }
         } */
         // DataSource Jdbc
@@ -83,14 +92,14 @@ public class ProductTagDAO implements ProductTagInterface<ProductTagVO>{
     }
     public ProductTagVO selectOneTag(Integer productCategoryCode){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaQuery<ProductTagVO> cq = cb.createQuery(ProductTagVO.class);
         Root<ProductTagVO> root = cq.from(ProductTagVO.class);
         cq = cq.where(cb.equal(root.get("productCategoryCode"), productCategoryCode));
-        return this.s.createQuery(cq).getSingleResult();
+        return getSession().createQuery(cq).getSingleResult();
         // Hibernate
         /* if(productCategoryCode != null){
-            return this.s.get(ProductTagVO.class, productCategoryCode);
+            return getSession().get(ProductTagVO.class, productCategoryCode);
         }
         return null; */
         // DataSource Jdbc

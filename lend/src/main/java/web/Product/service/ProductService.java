@@ -3,16 +3,21 @@ package web.Product.service;
 import java.util.ArrayList;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ProjectInterfaces.ProductInterface;
 import web.Product.dao.ProductDAO;
 import web.Product.vo.ProductVO;
 
+@Service
 public class ProductService {
-    private ProductInterface<ProductVO> dao;
-    public ProductService(Session session){
-        dao = new ProductDAO(session);
-    }
+    @Autowired
+    private ProductDAO dao;
+    // private ProductInterface<ProductVO> dao;
+    // public ProductService(Session session){
+    //     dao = new ProductDAO(session);
+    // }
     public ProductVO addProduct(Integer productCategoryCode, Integer productPrice, String productName,byte[] productImage,
             String productDescription, Integer productInventory, Byte customization, Integer customerProductPrice){
         java.sql.Timestamp releasedTime = new java.sql.Timestamp(System.currentTimeMillis());

@@ -2,13 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="web.Course.*"%>
-<%@ page import ="org.hibernate.Session"%>
+<%@ page import="org.hibernate.Session"%>
 <%@ page import="ProjectInterfaces.CourseInterface"%>
 <%@ page import="web.Course.service.CourseService"%>
-<%@ page import ="web.Course.vo.CourseVO"%>
+<%@ page import="web.Course.vo.CourseVO"%>
+<%@ page import="org.springframework.context.ApplicationContext"%>
+<%@ page import="org.springframework.web.context.WebApplicationContext"%>
 
 <%
-	CourseService csc = new CourseService((Session)request.getAttribute("session"));
+    ApplicationContext context = (ApplicationContext)request.getServletContext().getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+    CourseService csc = (CourseService) context.getBean("courseService");
 	List<CourseVO> list = csc.getALL();
 	pageContext.setAttribute("list",list);
 %>

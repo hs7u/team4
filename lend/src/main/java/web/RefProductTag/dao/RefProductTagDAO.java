@@ -17,15 +17,24 @@ import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import ProjectInterfaces.RefProductTagInterface;
 import web.RefProductTag.vo.RefProductTagVO;
 
+@Repository
 public class RefProductTagDAO implements RefProductTagInterface<RefProductTagVO>{
-    private Session s;
-    public RefProductTagDAO(Session s){
-        this.s = s;
-    }
+    @Autowired
+    private SessionFactory sf;
+    public Session getSession() {
+		return sf.getCurrentSession();
+	}
+    // private Session s;
+    // public RefProductTagDAO(Session s){
+    //     getSession() = s;
+    // }
     /* private static final String INSERT = "INSERT INTO `TEAM4`.`Ref_Product_Tag`"
     +"(`product_category_code`,`product_id`)"
     +"VALUES"
@@ -38,9 +47,9 @@ public class RefProductTagDAO implements RefProductTagInterface<RefProductTagVO>
     public void insert(RefProductTagVO rVo){
         // Hibernate
         if(rVo != null){
-            RefProductTagVO check = this.s.get(RefProductTagVO.class, rVo.getSerialNumber());
+            RefProductTagVO check = getSession().get(RefProductTagVO.class, rVo.getSerialNumber());
             if(check == null){
-                this.s.save(rVo);
+                getSession().save(rVo);
             }
         }
         // DataSource Jdbc
@@ -56,20 +65,20 @@ public class RefProductTagDAO implements RefProductTagInterface<RefProductTagVO>
     }
     public void update(RefProductTagVO rVo){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaUpdate<RefProductTagVO> cu = cb.createCriteriaUpdate(RefProductTagVO.class);
         Root<RefProductTagVO> root = cu.from(RefProductTagVO.class);
         cu = cu.set(root.get("productCategoryCode"), rVo.getProductCategoryCode())
                .set(root.get("productId"), rVo.getProductId())
                .where(cb.equal(root.get("serialNumber"), rVo.getSerialNumber()));
-        this.s.createQuery(cu).executeUpdate();
+        getSession().createQuery(cu).executeUpdate();
         // Hibernate
         /* if(rVo != null){
-            RefProductTagVO check = this.s.get(RefProductTagVO.class, rVo.getSerialNumber());
+            RefProductTagVO check = getSession().get(RefProductTagVO.class, rVo.getSerialNumber());
             if(check != null){
                 check.setProductCategoryCode(rVo.getProductCategoryCode());
                 check.setProductId(rVo.getProductId());
-                this.s.save(check);
+                getSession().save(check);
             }
         } */
         // DataSource Jdbc
@@ -87,12 +96,12 @@ public class RefProductTagDAO implements RefProductTagInterface<RefProductTagVO>
     }
     public ArrayList<Integer> selectByProductId(Integer productId){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaQuery<RefProductTagVO> cq = cb.createQuery(RefProductTagVO.class);
         Root<RefProductTagVO> root = cq.from(RefProductTagVO.class);
         cq = cq.where(cb.equal(root.get("productId"), productId));
         ArrayList<Integer> list = new ArrayList<Integer>();
-        for(RefProductTagVO rVo : this.s.createQuery(cq).getResultList()){
+        for(RefProductTagVO rVo : getSession().createQuery(cq).getResultList()){
             list.add(rVo.getProductCategoryCode());
         }
         return list;

@@ -18,15 +18,24 @@ import javax.persistence.criteria.Root;
 // import javax.sql.DataSource;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import ProjectInterfaces.CustomerInterface;
 import web.Customer.vo.CustomerVO;
 
+@Repository
 public class CustomerDAO implements CustomerInterface<CustomerVO>{
-    private Session s;
-    public CustomerDAO(Session s){
-        this.s = s;
-    }
+    @Autowired
+    private SessionFactory sf;
+    public Session getSession() {
+		return sf.getCurrentSession();
+	}
+    // private Session s;
+    // public CustomerDAO(Session s){
+    //      getSession() = s;
+    // }
    
     /* private static final String INSERT_STMT = "INSERT INTO `TEAM4`.`Customer`"
     +"(`customer_id`,`customer_name`,`customer_email`,`customer_password`,`customer_phone`,`customer_birthday`,`customer_gender`,`customer_address`,`customer_register_time`)"
@@ -46,9 +55,9 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     public void insert(CustomerVO customerVo){
         // Hibernate
         if(customerVo != null && customerVo.getCustomerEmail() != null){
-            CustomerVO cVo = this.s.get(CustomerVO.class, customerVo.getCustomerId());
+            CustomerVO cVo =  getSession().get(CustomerVO.class, customerVo.getCustomerId());
             if(cVo == null){
-                this.s.save(customerVo);
+                 getSession().save(customerVo);
             }
         }
        
@@ -72,7 +81,7 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     }
     public void update(CustomerVO customerVo){
         //JPA CriterQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb =  getSession().getCriteriaBuilder();
         CriteriaUpdate<CustomerVO> cu = cb.createCriteriaUpdate(CustomerVO.class);
         Root<CustomerVO> root = cu.from(CustomerVO.class);
         cu = cu.set(root.get("customerId"),customerVo.getCustomerId())
@@ -85,11 +94,11 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
                .set(root.get("customerAddress"),customerVo.getCustomerAddress())
                .where(cb.equal(root.get("customerId"), customerVo.getCustomerId()));
           
-        this.s.createQuery(cu).executeUpdate();
+         getSession().createQuery(cu).executeUpdate();
         
         // Hibernate
         /* 
-            CustomerVO cVo = this.s.get(CustomerVO.class, customerVo.getCustomerEmail());
+            CustomerVO cVo =  getSession().get(CustomerVO.class, customerVo.getCustomerEmail());
             if(cVo != null){
                 cVo.setCustomerId(customerVo.getCustomerId());
                 cVo.setCustomerName(customerVo.getCustomerName());
@@ -99,7 +108,7 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
                 cVo.setCustomerBirthday(customerVo.getCustomerBirthday());
                 cVo.setCustomerGender(customerVo.getCustomerGender());
                 cVo.setCustomerAddress(customerVo.getCustomerAddress());
-                this.s.save(cVo);
+                 getSession().save(cVo);
                 return true;
             }
             return false;
@@ -126,18 +135,18 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     }
     public void delete(Integer customerId){
        // JPA CriterQurey
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb =  getSession().getCriteriaBuilder();
         CriteriaDelete<CustomerVO> cd = cb.createCriteriaDelete(CustomerVO.class);
         Root<CustomerVO> root = cd.from(CustomerVO.class);
         cd = cd.where(cb.equal(root.get("customerId"),customerId));
-        this.s.createQuery(cd).executeUpdate();
+         getSession().createQuery(cd).executeUpdate();
 
        // Hibernate
        /* 
           if(customerId != null){ 
-             CustomerVO cVo = this.s.get(CustomerVO.class, customerId);
+             CustomerVO cVo =  getSession().get(CustomerVO.class, customerId);
              if(cVo != null) {
-                 this.s.delete(cVo);
+                  getSession().delete(cVo);
                  return true
              }
              return false;
@@ -187,20 +196,20 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     }
     public void changeStatus(Integer customerId ,Byte statusCode){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb =  getSession().getCriteriaBuilder();
         CriteriaUpdate<CustomerVO> cu = cb.createCriteriaUpdate(CustomerVO.class);
         Root<CustomerVO> root = cu.from(CustomerVO.class);
         cu = cu.set(root.get("customerStatus"), statusCode)
                .where(cb.equal(root.get("customerId"), customerId));
-        this.s.createQuery(cu).executeUpdate();
+         getSession().createQuery(cu).executeUpdate();
 
         // Hibernate
         /* 
         if(customerId != null){
-            CustomerVO cVo = this.s.get(CustomerVO.class, customerId);
+            CustomerVO cVo =  getSession().get(CustomerVO.class, customerId);
             if(cVo != null){
                 cVo.setCustomerStatus(statusCode);
-                this.s.save(cVo);
+                 getSession().save(cVo);
                 return true;
             }
             return false;
@@ -221,7 +230,7 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     }
     public CustomerVO selectByUserEmailAndPassword(String customerEmail, String customerPassword){
         // JPA CriterQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb =  getSession().getCriteriaBuilder();
         CriteriaQuery<CustomerVO> cq = cb.createQuery(CustomerVO.class);
         Root<CustomerVO> root = cq.from(CustomerVO.class);
         
@@ -230,7 +239,7 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
                             )
                      );
 		try {
-			return this.s.createQuery(cq).getSingleResult();
+			return  getSession().createQuery(cq).getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -263,10 +272,10 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     }
     public List<CustomerVO> getAll(){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb =  getSession().getCriteriaBuilder();
         CriteriaQuery<CustomerVO> cq = cb.createQuery(CustomerVO.class);
         Root<CustomerVO> root = cq.from(CustomerVO.class);
         cq = cq.select(root);
-        return this.s.createQuery(cq).getResultList();
+        return  getSession().createQuery(cq).getResultList();
     }
 }

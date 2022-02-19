@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.google.gson.Gson;
 
@@ -38,7 +41,11 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		Integer account = (Integer)session.getAttribute("customerId");
 	    if (account == null) {
-	    	CustomerService cs = new CustomerService((Session)req.getAttribute("session"));
+	    	// CustomerService cs = new CustomerService((Session)req.getAttribute("session"));
+			ServletContext application = this.getServletContext();
+			ApplicationContext context = (ApplicationContext)application.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+
+			CustomerService cs = (CustomerService) context.getBean("customerService");
 	    	CustomerVO cVo = cs.getOneCustomer(login.getCustomerEmail(),login.getCustomerPassword());
 	    	if(cVo.getCustomerEmail() != null) {
 	    		account = cVo.getCustomerId();

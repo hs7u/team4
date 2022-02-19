@@ -17,15 +17,24 @@ import javax.naming.NamingException;
 import javax.sql.DataSource; */
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import ProjectInterfaces.QAInterface;
 import web.Qa.vo.QAVO;
 
+@Repository
 public class QADAO implements QAInterface<QAVO>{
-    private Session s;
-    public QADAO(Session s){
-        this.s = s;
-    }
+    @Autowired
+    private SessionFactory sf;
+    public Session getSession() {
+		return sf.getCurrentSession();
+	}
+    // private Session s;
+    // public QADAO(Session s){
+    //     this.s = s;
+    // }
     /* private static final String INSERT = "INSERT INTO `TEAM4`.`QA`"
     +"(`answer`,`quession`)"
     +"VALUES"
@@ -39,9 +48,9 @@ public class QADAO implements QAInterface<QAVO>{
     public void insert(QAVO qavo){
         // Hibernate
         if(qavo != null){
-			QAVO check = this.s.get(QAVO.class, qavo.getQaId());
+			QAVO check = getSession().get(QAVO.class, qavo.getQaId());
 			if(check == null){
-				this.s.save(qavo);
+				getSession().save(qavo);
 			}
 		}
         // DataSource Jdbc
@@ -57,20 +66,20 @@ public class QADAO implements QAInterface<QAVO>{
     } 
     public void update(QAVO qavo){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaUpdate<QAVO> cu = cb.createCriteriaUpdate(QAVO.class);
         Root<QAVO> root = cu.from(QAVO.class); 
         cu = cu.set(root.get("quession"), qavo.getQuession())
                .set(root.get("reply"), qavo.getReply())
                .where(cb.equal(root.get("qaId"), qavo.getQaId()));
-        this.s.createQuery(cu).executeUpdate();
+        getSession().createQuery(cu).executeUpdate();
         // Hibernate
         /* if(qavo != null){
-            QAVO update = this.s.get(QAVO.class, qavo.getQaId());
+            QAVO update = getSession().get(QAVO.class, qavo.getQaId());
             if(update != null){
                 update.setQuession(qavo.getQuession());
                 update.setAnswer(qavo.getAnswer());
-                this.s.save(update);
+                getSession().save(update);
             }
         } */
         // DataSource Jdbc
@@ -88,16 +97,16 @@ public class QADAO implements QAInterface<QAVO>{
     }      
     public void delete(Integer qaId){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaDelete<QAVO> cd = cb.createCriteriaDelete(QAVO.class);
         Root<QAVO> root = cd.from(QAVO.class);
         cd = cd.where(cb.equal(root.get("qaId"), qaId));
-        this.s.createQuery(cd).executeUpdate();
+        getSession().createQuery(cd).executeUpdate();
         // Hibernate
         /* if(qaId != null){
-			QAVO check = this.s.get(QAVO.class, qaId);
+			QAVO check = getSession().get(QAVO.class, qaId);
 			if(check != null){
-				this.s.delete(check);
+				getSession().delete(check);
 			}
 		} */
         // DataSource Jdbc
@@ -141,14 +150,14 @@ public class QADAO implements QAInterface<QAVO>{
     }      
     public QAVO selectByQAId(Integer qaId){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaQuery<QAVO> cq = cb.createQuery(QAVO.class);
         Root<QAVO> root = cq.from(QAVO.class);
         cq = cq.where(cb.equal(root.get("qaId"), qaId));
-        return this.s.createQuery(cq).getSingleResult();
+        return getSession().createQuery(cq).getSingleResult();
         // Hibernate
         /* if(qaId != null){
-            return this.s.get(QAVO.class, qaId);
+            return getSession().get(QAVO.class, qaId);
         }
         return null; */
         // DataSource Jdbc

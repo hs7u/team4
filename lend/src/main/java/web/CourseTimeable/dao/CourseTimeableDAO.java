@@ -16,15 +16,24 @@ import javax.persistence.criteria.Root;
 // import javax.sql.DataSource;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import ProjectInterfaces.CourseTimeableInterface;
 import web.CourseTimeable.vo.CourseTimeableVO;
 
+@Repository
 public class CourseTimeableDAO implements CourseTimeableInterface<CourseTimeableVO>{
-    private Session s;
-    public CourseTimeableDAO(Session s){
-        this.s = s;
-    }
+    @Autowired
+    private SessionFactory sf;
+    public Session getSession() {
+		return sf.getCurrentSession();
+	}
+    // private Session s;
+    // public CourseTimeableDAO(Session s){
+    //     this.s = s;
+    // }
     /* private static final String INSERT ="INSERT INTO `TEAM4`.`Course_Timeable`"
     +"(`course_id`,`course_date`)"
     +"VALUES"
@@ -38,9 +47,9 @@ public class CourseTimeableDAO implements CourseTimeableInterface<CourseTimeable
     public void insert(CourseTimeableVO ctvo){
         // Hibernate
         if(ctvo != null && ctvo.getCourseTimeableId() != null){
-            CourseTimeableVO schedule = this.s.get(CourseTimeableVO.class, ctvo.getCourseTimeableId());
+            CourseTimeableVO schedule = getSession().get(CourseTimeableVO.class, ctvo.getCourseTimeableId());
             if(schedule == null){
-                this.s.save(ctvo);
+                getSession().save(ctvo);
             }
         }
         // DateSource Jdbc
@@ -56,7 +65,7 @@ public class CourseTimeableDAO implements CourseTimeableInterface<CourseTimeable
     }        
     public void update(CourseTimeableVO ctvo){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaUpdate<CourseTimeableVO> cu = cb.createCriteriaUpdate(CourseTimeableVO.class);
         Root<CourseTimeableVO> root = cu.from(CourseTimeableVO.class);
         cu = cu.set(root.get("courseId"), ctvo.getCourseId())
@@ -64,17 +73,17 @@ public class CourseTimeableDAO implements CourseTimeableInterface<CourseTimeable
                .set(root.get("signUpStartdate"), ctvo.getSignUpStartdate())
                .set(root.get("signUpDeadline"), ctvo.getSignUpDeadline())
                .where(cb.equal(root.get("courseTimeableId"), ctvo.getCourseTimeableId()));
-        this.s.createQuery(cu).executeUpdate();
+        getSession().createQuery(cu).executeUpdate();
 
         // Hibernate
-        /* CourseTimeableVO schedule = this.s.get(CourseTimeableVO.class, ctvo.getCourseTimeableId());
+        /* CourseTimeableVO schedule = getSession().get(CourseTimeableVO.class, ctvo.getCourseTimeableId());
         if(schedule != null){
             schedule.setCourseTimeableId(ctvo.getCourseTimeableId());
             schedule.setCourseId(ctvo.getCourseId());
             schedule.setCourseDate(ctvo.getCourseDate());
             schedule.setSignUpStartdate(ctvo.getSignUpStartdate());
             schedule.setSignUpDeadline(ctvo.getSignUpDeadline());
-            this.s.save(schedule);
+            getSession().save(schedule);
         } */
         // DateSource Jdbc
         /* try (Connection con = ds.getConnection();
@@ -91,15 +100,15 @@ public class CourseTimeableDAO implements CourseTimeableInterface<CourseTimeable
     }    
     public void delete(Integer courseTimeableId){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaDelete<CourseTimeableVO> cd = cb.createCriteriaDelete(CourseTimeableVO.class);
         Root<CourseTimeableVO> root = cd.from(CourseTimeableVO.class);
         cd = cd.where(cb.equal(root.get("courseTimeableId"), courseTimeableId));
-        this.s.createQuery(cd).executeUpdate();
+        getSession().createQuery(cd).executeUpdate();
         // Hibernate
-       /*  CourseTimeableVO ctvo = this.s.get(CourseTimeableVO.class, courseTimeableId);
+       /*  CourseTimeableVO ctvo = getSession().get(CourseTimeableVO.class, courseTimeableId);
         if(ctvo != null){
-            this.s.delete(ctvo);
+            getSession().delete(ctvo);
         } */
         // DateSource Jdbc
         /* Connection con = null;
@@ -142,14 +151,14 @@ public class CourseTimeableDAO implements CourseTimeableInterface<CourseTimeable
     }    
     public ArrayList<Timestamp> selectByCourseId(Integer courseId){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = this.s.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaQuery<Timestamp> cq = cb.createQuery(Timestamp.class);
         Root<Timestamp> root = cq.from(Timestamp.class);
         cq = cq.where(cb.equal(root.get("courseId"), courseId)).select(root.get("course_id"));
-        return new ArrayList<Timestamp>(this.s.createQuery(cq).getResultList());
+        return new ArrayList<Timestamp>(getSession().createQuery(cq).getResultList());
         // Hibernate HQL
         /* if(courseId != null){
-            List<Timestamp> result = this.s.createQuery("select course_date from Course_Timeable where course_id = :id", Timestamp.class)
+            List<Timestamp> result = getSession().createQuery("select course_date from Course_Timeable where course_id = :id", Timestamp.class)
                                                         .setParameter("id", courseId).list();
             return new ArrayList<Timestamp>(result);
         }

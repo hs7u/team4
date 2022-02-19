@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 
 import org.hibernate.Session;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
 
 import web.Admin.service.AdminService;
 import web.Admin.vo.AdminVO;
@@ -43,7 +46,10 @@ public class RegistServlet extends HttpServlet{
 		String account = (String)session.getAttribute("account");
 	    if (account == null) {
 			if (errorMsg.size() <= 0){
-				AdminService as = new AdminService((Session)req.getAttribute("session"));
+				// AdminService as = new AdminService((Session)req.getAttribute("session"));
+				ServletContext application = req.getServletContext();
+				ApplicationContext context = (ApplicationContext)application.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+				AdminService as = (AdminService)context.getBean("adminService");
 				AdminVO check = as.getOneManager(regist.getAdminAccount(), regist.getAdminPassword());
 				if(check == null){
 					as.newManager(regist);

@@ -5,20 +5,25 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ProjectInterfaces.CustomerInterface;
 import web.Customer.dao.CustomerDAO;
 import web.Customer.vo.CustomerVO;
 
+@Service
 public class CustomerService {
-    private CustomerInterface<CustomerVO> dao;
+    @Autowired
+    private CustomerDAO dao;
+    // private CustomerInterface<CustomerVO> dao;
     // private SessionFactory sf;
     // private Session session;
-	public CustomerService(Session session) {
+	// public CustomerService(Session session) {
     	// this.sf = HibernateUtil.getSessionfactory();
     	// this.session = this.sf.getCurrentSession();
-        dao = new CustomerDAO(session);
-    }
+    //     dao = new CustomerDAO(session);
+    // }
     public CustomerVO addCustomer(String customerName, String customerEmail, String customerPassword,
             String customerPhone, Date customerBirthday, String customerGender, String customerAddress) {
         java.sql.Timestamp customerRegisterTime = new java.sql.Timestamp(System.currentTimeMillis());

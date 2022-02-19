@@ -1,16 +1,21 @@
 package web.CustomerService.service;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ProjectInterfaces.CustomerServiceInterface;
 import web.CustomerService.dao.CustomerServiceDAO;
 import web.CustomerService.vo.CustomerServiceVO;
 
+@Service
 public class CSService {
-    private CustomerServiceInterface<CustomerServiceVO> dao;
-    public CSService(Session session) {
-        dao = new CustomerServiceDAO(session);
-    }
+    @Autowired
+    private CustomerServiceDAO dao;
+    // private CustomerServiceInterface<CustomerServiceVO> dao;
+    // public CSService(Session session) {
+    //     dao = new CustomerServiceDAO(session);
+    // }
     public CustomerServiceVO addProblem(Integer cusotmerId, String messageTitle, String messageContext) {
         java.sql.Timestamp messageTime = new java.sql.Timestamp(System.currentTimeMillis());
         CustomerServiceVO csVO = new CustomerServiceVO();

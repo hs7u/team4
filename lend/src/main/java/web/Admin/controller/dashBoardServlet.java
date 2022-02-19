@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +16,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import org.hibernate.Session;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
 
 import web.Admin.vo.AdminVO;
 import web.Course.service.CourseService;
@@ -26,6 +29,14 @@ import web.Customer.vo.CustomerVO;
 @WebServlet("/Admin/dashBoard")
 public class dashBoardServlet extends HttpServlet{
 	private int i = 1;
+	private CustomerService cs;
+	private CourseService csc;
+	public void init() throws ServletException {
+		ServletContext application = this.getServletContext();
+		ApplicationContext context = (ApplicationContext)application.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+		csc = (CourseService) context.getBean("courseService");
+		cs = (CustomerService) context.getBean("customerService");
+	}
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req,res);
 	}
@@ -87,14 +98,14 @@ public class dashBoardServlet extends HttpServlet{
 		return gson.toJson(aVo);
 	}
 	private String getCustomerList(Session session) {
-		CustomerService cs = new CustomerService(session);
+		// CustomerService cs = new CustomerService(session);
 		List<CustomerVO> list =  cs.getAllCustomer();
 		Gson gson = new Gson();		
 		return gson.toJson(list);
 	}
 	private String getCourseList(Session session){
-		CourseService cs = new CourseService(session);
-		List<CourseVO> list = cs.getALL();
+		// CourseService cs = new CourseService(session);
+		List<CourseVO> list = csc.getALL();
 		Gson gson = new Gson();		
 		return gson.toJson(list);
 	}

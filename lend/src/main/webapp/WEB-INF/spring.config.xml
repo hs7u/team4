@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<context:annotation-config></context:annotation-config>
+	<context:component-scan base-package="web"></context:component-scan>
+	<tx:annotation-driven />
+	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	
+	<bean id="sessionFactory" destroy-method="destroy"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="annotatedClasses">
+			<array>
+				<value>web.Admin.vo.AdminVO</value>
+				<value>web.Product.vo.ProductVO</value>
+				<value>web.Customer.vo.CustomerVO</value>
+				<value>web.Course.vo.CourseVO</value>
+			</array>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+        		<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+		<constructor-arg>
+			<bean class="com.zaxxer.hikari.HikariConfig">
+				<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+				<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/team4?serverTimezone=Asia/Taipei"></property>
+				<property name="username" value="root"></property>
+				<property name="password" value="password"></property>
+				<property name="dataSourceProperties">
+					<props>
+						<prop key="cachePrepStmts">true</prop>
+						<prop key="prepStmtCacheSize">250</prop>
+						<prop key="prepStmtCacheSqlLimit">2048</prop>
+					</props>
+				</property>
+			</bean>
+		</constructor-arg>
+	</bean>
+
+</beans>
