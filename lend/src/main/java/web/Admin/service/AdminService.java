@@ -2,21 +2,19 @@ package web.Admin.service;
 
 import java.util.ArrayList;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ProjectInterfaces.AdminInterface;
-import web.Admin.dao.AdminDAO;
 import web.Admin.vo.AdminVO;
 
 @Service
 @Transactional
 public class AdminService {
     @Autowired
-    private AdminDAO dao;
-    // private AdminInterface<AdminVO> dao;
+    private AdminInterface<AdminVO> dao;
+    // private AdminDAO dao;
     // public AdminService(Session session){
     //     dao = new AdminDAO(session);
     // }

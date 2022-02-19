@@ -1,21 +1,18 @@
 package web.ProductTag.service;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ProjectInterfaces.ProductTagInterface;
-import web.ProductTag.dao.ProductTagDAO;
 import web.ProductTag.vo.ProductTagVO;
 
 @Service
 @Transactional
 public class ProductTagService {
     @Autowired
-    private ProductTagDAO dao;
-    // private ProductTagInterface<ProductTagVO> dao;
+    private ProductTagInterface<ProductTagVO> dao;
+    // private ProductTagDAO dao;
     // public ProductTagService(Session session){
     //     dao = new ProductTagDAO(session);
     // }

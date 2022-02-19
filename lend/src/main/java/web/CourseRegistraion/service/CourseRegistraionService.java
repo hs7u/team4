@@ -2,21 +2,19 @@ package web.CourseRegistraion.service;
 
 import java.util.ArrayList;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ProjectInterfaces.CourseRegistraionInterface;
-import web.CourseRegistraion.dao.CourseRegistraionDAO;
 import web.CourseRegistraion.vo.CourseRegistraionVO;
 
 @Service
 @Transactional
 public class CourseRegistraionService {
     @Autowired
-    private CourseRegistraionDAO dao;
-    // private CourseRegistraionInterface<CourseRegistraionVO> dao;
+    private CourseRegistraionInterface<CourseRegistraionVO> dao;
+    // private CourseRegistraionDAO dao;
     // public CourseRegistraionService(Session session){
     //     dao = new CourseRegistraionDAO(session);
     // }

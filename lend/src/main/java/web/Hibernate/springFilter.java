@@ -13,7 +13,6 @@ import javax.servlet.annotation.WebFilter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.context.WebApplicationContext;
 
 @WebFilter(value = {"/*"})

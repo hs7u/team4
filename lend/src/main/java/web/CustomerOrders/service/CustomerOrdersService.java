@@ -2,21 +2,19 @@ package web.CustomerOrders.service;
 
 import java.sql.Timestamp;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ProjectInterfaces.CustomerOrderInterface;
-import web.CustomerOrders.dao.CustomerOrderDAO;
 import web.CustomerOrders.vo.CustomerOrdersVO;
 
 @Service
 @Transactional
 public class CustomerOrdersService {
     @Autowired
-    private CustomerOrderDAO dao;
-//     private CustomerOrderInterface<CustomerOrdersVO> dao;
+    private CustomerOrderInterface<CustomerOrdersVO> dao;
+    // private CustomerOrderDAO dao;
 //     public CustomerOrdersService(Session session){
 //         dao = new CustomerOrderDAO(session);
 //     }

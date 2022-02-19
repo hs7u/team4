@@ -2,21 +2,19 @@ package web.RefProductTag.service;
 
 import java.util.ArrayList;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ProjectInterfaces.RefProductTagInterface;
-import web.RefProductTag.dao.RefProductTagDAO;
 import web.RefProductTag.vo.RefProductTagVO;
 
 @Service
 @Transactional
 public class RefProductTagService {
     @Autowired
-    private RefProductTagDAO dao;
-    // private RefProductTagInterface<RefProductTagVO> dao;
+    private RefProductTagInterface<RefProductTagVO> dao;
+    // private RefProductTagDAO dao;
     // public RefProductTagService(Session session){
     //     dao = new RefProductTagDAO(session);
     // }

@@ -1,20 +1,18 @@
 package web.RefShippingCategories.service;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ProjectInterfaces.RefShippingCategoriesInterface;
-import web.RefShippingCategories.dao.RefShippingCategoriesDAO;
 import web.RefShippingCategories.vo.RefShippingCategoriesVO;
 
 @Service
 @Transactional
 public class RefShippingCategoriesService {
 	@Autowired
-	private RefShippingCategoriesDAO dao;
-	// private RefShippingCategoriesInterface<RefShippingCategoriesVO> dao;
+	private RefShippingCategoriesInterface<RefShippingCategoriesVO> dao;
+	// private RefShippingCategoriesDAO dao;
 	// public RefShippingCategoriesService(Session session) {
 	// 	dao = new RefShippingCategoriesDAO(session);
 	// }

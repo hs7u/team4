@@ -13,7 +13,7 @@ main.tab.course div.addNewCourse h4 {
     display: inline;
 }
 main.tab.course div.addNewCourse table {
-    width: 880px;
+    width: 500px;
     margin-top: 0.1px;
     margin-bottom: 1px;
 }
@@ -22,7 +22,7 @@ main.tab.course div.addNewCourse table, th, td {
 }
 main.tab.course div.addNewCourse th, td {
     margin : 0.4rem;
-    padding: 1px;
+    padding: 0.3rem;
 }
 main.tab.course div.addNewCourse label{
     height: 100%;

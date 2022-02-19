@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
-import org.hibernate.Session;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.WebApplicationContext;
 

@@ -1,20 +1,18 @@
 package web.Qa.service;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ProjectInterfaces.QAInterface;
-import web.Qa.dao.QADAO;
 import web.Qa.vo.QAVO;
 
 @Service
 @Transactional
 public class QAService {
     @Autowired
-    private QADAO dao;
-    // private QAInterface<QAVO> dao;
+    private QAInterface<QAVO> dao;
+    // private QADAO dao;
     // public QAService(Session session) {
     //     dao = new QADAO(session);
     // }

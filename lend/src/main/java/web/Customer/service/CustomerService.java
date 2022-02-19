@@ -4,21 +4,19 @@ import java.sql.Date;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ProjectInterfaces.CustomerInterface;
-import web.Customer.dao.CustomerDAO;
 import web.Customer.vo.CustomerVO;
 
 @Service
 @Transactional
 public class CustomerService {
     @Autowired
-    private CustomerDAO dao;
-    // private CustomerInterface<CustomerVO> dao;
+    private CustomerInterface<CustomerVO> dao;
+    // private CustomerDAO dao;
     // private SessionFactory sf;
     // private Session session;
 	// public CustomerService(Session session) {

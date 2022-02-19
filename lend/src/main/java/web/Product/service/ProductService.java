@@ -2,21 +2,19 @@ package web.Product.service;
 
 import java.util.ArrayList;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ProjectInterfaces.ProductInterface;
-import web.Product.dao.ProductDAO;
 import web.Product.vo.ProductVO;
 
 @Service
 @Transactional
 public class ProductService {
     @Autowired
-    private ProductDAO dao;
-    // private ProductInterface<ProductVO> dao;
+    private ProductInterface<ProductVO> dao;
+    // private ProductDAO dao;
     // public ProductService(Session session){
     //     dao = new ProductDAO(session);
     // }

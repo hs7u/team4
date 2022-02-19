@@ -2,21 +2,19 @@ package web.Course.service;
 
 import java.util.List;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ProjectInterfaces.CourseInterface;
-import web.Course.dao.CourseDAO;
 import web.Course.vo.CourseVO;
 
 @Service
 @Transactional
 public class CourseService {
     @Autowired
-    private CourseDAO dao;
-    // private CourseInterface<CourseVO> dao;
+    private CourseInterface<CourseVO> dao;
+    // private CourseDAO dao;
     // public CourseService(Session session) {
     //     dao = new CourseDAO(session);
     // }

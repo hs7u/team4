@@ -17,8 +17,6 @@ import javax.persistence.criteria.Root;
 // import javax.sql.DataSource;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ProjectInterfaces.CourseRegistraionInterface;
