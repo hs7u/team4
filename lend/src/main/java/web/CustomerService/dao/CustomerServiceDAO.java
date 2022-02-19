@@ -1,5 +1,6 @@
 package web.CustomerService.dao;
 
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
@@ -25,12 +26,14 @@ import web.CustomerService.vo.CustomerServiceVO;
 
 @Repository
 public class CustomerServiceDAO implements CustomerServiceInterface<CustomerServiceVO>{
-    @Autowired
-    private SessionFactory sf;
+    // @Autowired
+    // private SessionFactory sf;
+    @PersistenceContext
+    private Session s;
     public Session getSession() {
-		return sf.getCurrentSession();
+		// return sf.getCurrentSession();
+		return s;
 	}
-    // private Session s;
     // public CustomerServiceDAO(Session s){
     //     this.s = s;
     // }

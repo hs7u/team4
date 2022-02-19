@@ -265,7 +265,7 @@ td .status{
     margin-right: 1rem;
 }
 
-tr td:last-child {
+#mainTable tr td:last-child {
     display: flex;
     align-items: center;
 }

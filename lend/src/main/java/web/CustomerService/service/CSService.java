@@ -3,12 +3,14 @@ package web.CustomerService.service;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ProjectInterfaces.CustomerServiceInterface;
 import web.CustomerService.dao.CustomerServiceDAO;
 import web.CustomerService.vo.CustomerServiceVO;
 
 @Service
+@Transactional
 public class CSService {
     @Autowired
     private CustomerServiceDAO dao;

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException; */
 import java.util.ArrayList;
 
+import javax.persistence.PersistenceContext;
 /* import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException; */
@@ -26,12 +27,14 @@ import web.Favorite.vo.FavoriteVO;
 
 @Repository
 public class FavoriteDAO implements FavoriteInterface<FavoriteVO>{
-    @Autowired
-    private SessionFactory sf;
+    // @Autowired
+    // private SessionFactory sf;
+    @PersistenceContext
+    private Session s;
     public Session getSession() {
-		return sf.getCurrentSession();
+		// return sf.getCurrentSession();
+		return s;
 	}
-    // private Session s;
     // public FavoriteDAO(Session s){
     //     this.s = s;
     // }

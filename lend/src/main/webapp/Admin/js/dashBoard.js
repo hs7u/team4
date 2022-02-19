@@ -42,11 +42,7 @@ function getCourses() {
                         </tr>`;
                 
             $(table).appendTo("tbody.dynamicsC");
-        }
-        $('#courseTable').DataTable({
-            "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
-            "pageLength":'5'
-        }); 
+        }        
       })
 }
 function getCustomers() {
@@ -88,10 +84,6 @@ function getCustomers() {
                 $(mainAdd).appendTo("div.newCustomer");            
             }
         }
-        $('#customerTable').DataTable({
-            "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
-            "pageLength":'5'
-        });    
       })
 }
 function getAccountInfo() {
@@ -235,12 +227,22 @@ function callStateP(){
         $("div.overlay").fadeIn();
     }   
 }
-function init(){
-    getAccountInfo();
-    getCustomers();
-    getCourses();
+function init(){  
     openWorker();
     productInsert();
     courseInsert();
+    $('#customerTable').DataTable({
+        "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
+        "pageLength":'5'
+    });
+    $('#courseTable').DataTable({
+        "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
+        "pageLength":'5'
+    });  
 }
+$(document).ready(function () {
+    getAccountInfo();
+    getCustomers();
+    getCourses();
+})
 window.addEventListener('load',init);

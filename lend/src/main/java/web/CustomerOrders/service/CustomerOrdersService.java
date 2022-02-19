@@ -5,12 +5,14 @@ import java.sql.Timestamp;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ProjectInterfaces.CustomerOrderInterface;
 import web.CustomerOrders.dao.CustomerOrderDAO;
 import web.CustomerOrders.vo.CustomerOrdersVO;
 
 @Service
+@Transactional
 public class CustomerOrdersService {
     @Autowired
     private CustomerOrderDAO dao;

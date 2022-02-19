@@ -3,12 +3,14 @@ package web.Creditcrad.service;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ProjectInterfaces.CreditcradInterface;
 import web.Creditcrad.dao.CreditcardDAO;
 import web.Creditcrad.vo.CreditcradVO;
 
 @Service
+@Transactional
 public class CreditService {
     @Autowired
     private CreditcardDAO dao;

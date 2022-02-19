@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -21,13 +22,21 @@ public class springFilter implements Filter {
 	public void destroy() {}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		Session session = null;
 		try {
-            this.sessionFactory.getCurrentSession().beginTransaction();
+			session = this.sessionFactory.openSession();
+		} catch (Exception e) {
+			session = this.sessionFactory.getCurrentSession();
+			e.printStackTrace();
+		}
+		try {
+            session.beginTransaction();
             chain.doFilter(request, response);
-            this.sessionFactory.getCurrentSession().getTransaction().commit();        
-            this.sessionFactory.getCurrentSession().close();        
+            session.getTransaction().commit();        
+            session.close();        
         } catch (Exception e) {
-            this.sessionFactory.getCurrentSession().getTransaction().rollback();
+            session.getTransaction().rollback();
+			session.close();
             e.printStackTrace();
         }
 	}

@@ -1,5 +1,6 @@
 package web.ProductTag.dao;
 
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
@@ -25,12 +26,14 @@ import web.ProductTag.vo.ProductTagVO;
 
 @Repository
 public class ProductTagDAO implements ProductTagInterface<ProductTagVO>{
-    @Autowired
-    private SessionFactory sf;
+    // @Autowired
+    // private SessionFactory sf;
+    @PersistenceContext
+    private Session s;
     public Session getSession() {
-		return sf.getCurrentSession();
+		// return sf.getCurrentSession();
+		return s;
 	}
-    // private Session s;
     // public ProductTagDAO(Session s){
     //     this.s = s;
     // }

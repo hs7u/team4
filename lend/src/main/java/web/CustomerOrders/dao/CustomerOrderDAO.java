@@ -1,5 +1,6 @@
 package web.CustomerOrders.dao;
 
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
@@ -26,12 +27,14 @@ import web.CustomerOrders.vo.CustomerOrdersVO;
 
 @Repository
 public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO>{
-    @Autowired
-    private SessionFactory sf;
+    // @Autowired
+    // private SessionFactory sf;
+    @PersistenceContext
+    private Session s;
     public Session getSession() {
-		return sf.getCurrentSession();
+		// return sf.getCurrentSession();
+		return s;
 	}
-    // private Session s;
     // public CustomerOrderDAO(Session s){
     //     this.s = s;
     // }

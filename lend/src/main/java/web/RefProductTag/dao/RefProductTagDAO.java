@@ -11,6 +11,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource; */
 import java.util.ArrayList;
 
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
@@ -26,12 +27,14 @@ import web.RefProductTag.vo.RefProductTagVO;
 
 @Repository
 public class RefProductTagDAO implements RefProductTagInterface<RefProductTagVO>{
-    @Autowired
-    private SessionFactory sf;
+    // @Autowired
+    // private SessionFactory sf;
+    @PersistenceContext
+    private Session s;
     public Session getSession() {
-		return sf.getCurrentSession();
+		// return sf.getCurrentSession();
+		return s;
 	}
-    // private Session s;
     // public RefProductTagDAO(Session s){
     //     getSession() = s;
     // }

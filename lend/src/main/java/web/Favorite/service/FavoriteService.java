@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ProjectInterfaces.FavoriteInterface;
 import web.Favorite.dao.FavoriteDAO;
 import web.Favorite.vo.FavoriteVO;
 
 @Service
+@Transactional
 public class FavoriteService {
     @Autowired
     private FavoriteDAO dao;

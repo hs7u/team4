@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ProjectInterfaces.CourseTimeableInterface;
 import web.CourseTimeable.dao.CourseTimeableDAO;
 import web.CourseTimeable.vo.CourseTimeableVO;
 
 @Service
+@Transactional
 public class CourseTimeableService {
     @Autowired
     private CourseTimeableDAO dao;

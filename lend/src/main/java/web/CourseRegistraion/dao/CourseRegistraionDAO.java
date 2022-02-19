@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException; */
 import java.util.ArrayList;
 
+import javax.persistence.PersistenceContext;
 /* import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException; */
@@ -25,12 +26,14 @@ import web.CourseRegistraion.vo.CourseRegistraionVO;
 
 @Repository
 public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRegistraionVO> {
-    @Autowired
-    private SessionFactory sf;
+    // @Autowired
+    // private SessionFactory sf;
+    @PersistenceContext
+    private Session s;
     public Session getSession() {
-		return sf.getCurrentSession();
+		// return sf.getCurrentSession();
+		return s;
 	}
-    // private Session s;
     // public CourseRegistraionDAO(Session s){
     //     this.s = s;
     // }

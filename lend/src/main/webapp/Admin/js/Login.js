@@ -34,7 +34,7 @@ function dofirst(){
                 let t = document.getElementById("target");
                 let text = res.data;
                 t.innerText = text;
-                if(text.match(/Success/) != null){
+                if(text.match(/Success/) != null || text.match(/login/) != null){
                     $("div.overlay").alloy();
                 }else{
                     $("div.overlay").denied();

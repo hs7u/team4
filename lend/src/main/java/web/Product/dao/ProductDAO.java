@@ -2,6 +2,7 @@ package web.Product.dao;
 
 import java.util.ArrayList;
 
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
@@ -27,12 +28,14 @@ import web.Product.vo.ProductVO;
 
 @Repository
 public class ProductDAO implements ProductInterface<ProductVO>{
-    @Autowired
-    private SessionFactory sf;
+    // @Autowired
+    // private SessionFactory sf;
+    @PersistenceContext
+    private Session s;
     public Session getSession() {
-		return sf.getCurrentSession();
+		// return sf.getCurrentSession();
+		return s;
 	}
-    // private Session s;
     // public ProductDAO(Session s){
     //     getSession() = s;
     // }

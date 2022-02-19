@@ -1,5 +1,6 @@
 package web.RefShippingCategories.dao;
 
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
@@ -25,12 +26,14 @@ import web.RefShippingCategories.vo.RefShippingCategoriesVO;
 
 @Repository
 public class RefShippingCategoriesDAO implements RefShippingCategoriesInterface<RefShippingCategoriesVO> {
-	@Autowired
-	private SessionFactory sf;
+	// @Autowired
+	// private SessionFactory sf;
+	@PersistenceContext
+	private Session s;
 	public Session getSession() {
-		return sf.getCurrentSession();
+		// return sf.getCurrentSession();
+		return s;
 	}
-	// private Session s;
 	// public RefShippingCategoriesDAO(Session s){
 	// 	getSession() = s;
 	// }

@@ -2,6 +2,7 @@ package web.Course.dao;
 
 import java.util.List;
 
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
@@ -25,12 +26,14 @@ import web.Course.vo.CourseVO;
 
 @Repository
 public class CourseDAO implements CourseInterface<CourseVO> {
-    @Autowired
-    private SessionFactory sf;
+    // @Autowired
+    // private SessionFactory sf;
+    @PersistenceContext
+    private Session session;
     public Session getSession() {
-		return sf.getCurrentSession();
+		// return sf.getCurrentSession();
+		return session;
 	}
-    // private Session session;
     // public CourseDAO(Session session){
     //     getSession() = session;
     // }

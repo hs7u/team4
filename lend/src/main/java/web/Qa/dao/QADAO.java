@@ -1,5 +1,6 @@
 package web.Qa.dao;
 
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
@@ -26,12 +27,14 @@ import web.Qa.vo.QAVO;
 
 @Repository
 public class QADAO implements QAInterface<QAVO>{
-    @Autowired
-    private SessionFactory sf;
+    // @Autowired
+    // private SessionFactory sf;
+    @PersistenceContext
+    private Session s;
     public Session getSession() {
-		return sf.getCurrentSession();
+		// return sf.getCurrentSession();
+		return s;
 	}
-    // private Session s;
     // public QADAO(Session s){
     //     this.s = s;
     // }

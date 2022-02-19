@@ -67,7 +67,8 @@ public class LoginServlet extends HttpServlet{
 			}
 			
 		}else{
-			res.sendRedirect("/Admin/AdminDashBoard_v2.html");
+			out.println("Already login");
+			return;
 		}
     }
 }

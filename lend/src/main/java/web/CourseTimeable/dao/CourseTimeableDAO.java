@@ -7,6 +7,7 @@ import java.sql.SQLException; */
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
@@ -25,12 +26,14 @@ import web.CourseTimeable.vo.CourseTimeableVO;
 
 @Repository
 public class CourseTimeableDAO implements CourseTimeableInterface<CourseTimeableVO>{
-    @Autowired
-    private SessionFactory sf;
+    // @Autowired
+    // private SessionFactory sf;
+    @PersistenceContext
+    private Session s;
     public Session getSession() {
-		return sf.getCurrentSession();
+		// return sf.getCurrentSession();
+		return s;
 	}
-    // private Session s;
     // public CourseTimeableDAO(Session s){
     //     this.s = s;
     // }

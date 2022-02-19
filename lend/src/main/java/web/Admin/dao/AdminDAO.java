@@ -2,6 +2,7 @@ package web.Admin.dao;
 
 import java.util.ArrayList;
 
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
@@ -18,14 +19,16 @@ import web.Admin.vo.AdminVO;
 
 @Repository
 public class AdminDAO implements AdminInterface<AdminVO>{
-    @Autowired
-    private SessionFactory sf;
-    // private Session s;
+    // @Autowired
+    // private SessionFactory sf;
+    @PersistenceContext
+    private Session s;
     // public AdminDAO(Session s){
     //     getSession() = s;
     // }
     public Session getSession() {
-		return sf.getCurrentSession();
+		// return sf.getCurrentSession();
+        return s;
 	} 
     @Override
     public void insert(AdminVO aVo) {
