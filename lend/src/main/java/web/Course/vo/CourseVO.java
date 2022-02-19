@@ -98,7 +98,7 @@ public class CourseVO implements java.io.Serializable{
 	public void setCourseDescribe(String courseDescribe) {
 		this.courseDescribe = courseDescribe;
 	} 
-	public Byte getCourseState(){
+	public Byte getCourseStatus(){
 		return this.courseStatus;
 	}
 	public void setCourseStatus(Byte courseStatus){

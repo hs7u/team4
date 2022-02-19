@@ -25,6 +25,6 @@ hs_err_pid*
 
 #my settings
 lend/.classpath
-.project
-.settings/
+lend/.project
+lend/.settings/
 */target/**
