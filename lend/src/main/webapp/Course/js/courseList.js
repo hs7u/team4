@@ -1,14 +1,14 @@
 window.addEventListener("load",function(){
 
-    function Uint8ToString(u8a){
+    
+function Uint8ToString(u8a){
         var CHUNK_SZ = 0x8000;
         var c = [];
         for (var i=0; i < u8a.length; i+=CHUNK_SZ) {
           c.push(String.fromCharCode.apply(null, u8a.subarray(i, i+CHUNK_SZ)));
         }
         return c.join("");
-      }
-
+    }
     let data = {
         action: "courseList"
     }
@@ -26,8 +26,8 @@ window.addEventListener("load",function(){
             },
             500: function (res) {
             }
-          },
-          success: function(res){      // request 成功取得回應後執行
+        },
+        success: function(res){      // request 成功取得回應後執行
             // console.log(res);
             // console.log(Array.isArray(res));
             // console.log(typeof res );
@@ -44,7 +44,7 @@ window.addEventListener("load",function(){
                                     <div class="thumbnail"><img src="data:image/png;base64,${b64encoded}" /></div>
                                     <div class="content">
                                         <h4 class="title"><a href="course-details.html">${element.courseName}</a></h4>
-                                         <div class="desc">
+                                            <div class="desc">
                                             <p>${element.courseDescribe}</p>
                                         </div>
                                         <div class="link"><a href="course-details.html">Read more</a></div>
@@ -53,10 +53,10 @@ window.addEventListener("load",function(){
                             </div>`;
             $(showData).appendTo("#show");
             });
-            
-          },error: function(xhr){         // request 發生錯誤的話執行
-            // console.log(xhr);
-          }
+        },
+        error: function(xhr){         // request 發生錯誤的話執行
+        // console.log(xhr);
+        }
     })
 })
 
