@@ -8,6 +8,9 @@
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.webp">
 
@@ -476,8 +479,8 @@
 
     <div class="offcanvas-overlay"></div>
 
-    <!-- Page Title/Header Start
-    <div class="page-title-section section" data-bg-image="assets/images/bg/page-title-1.webp">
+    <!-- Page Title/Header Start-->
+    <div class="page-title-section section" data-bg-image="assets/images/bg/login_backgrand.png">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -494,78 +497,115 @@
             </div>
         </div>
     </div>
-    Page Title/Header End -->
+   <!-- Page Title/Header End -->
 
     <!-- Login & Register Section Start -->
-    <div class="section section-padding">
-        <div class="container">
-            <div class="row g-0">
-                <div class="col-lg-6">
-                    <div class="user-login-register bg-light">
-                        <div class="login-register-title">
-                            <h2 class="title">Login</h2>
-                            <p class="desc">Great to have you back!</p>
-                        </div>
-                        <div class="login-register-form">
-                            <form action="#">
-                                <div class="row learts-mb-n50">
-                                    <div class="col-12 learts-mb-50">
-                                        <input type="email" placeholder="Username or email address">
-                                    </div>
-                                    <div class="col-12 learts-mb-50">
-                                        <input type="password" placeholder="Password">
-                                    </div>
-                                    <div class="col-12 text-center learts-mb-50">
-                                        <button class="btn btn-dark btn-outline-hover-dark">login</button>
-                                    </div>
-                                    <div class="col-12 learts-mb-50">
-                                        <div class="row learts-mb-n20">
-                                            <div class="col-12 learts-mb-20">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="rememberMe">
-                                                    <label class="form-check-label" for="rememberMe">Remember me</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 learts-mb-20">
-                                                <a href="lost-password.html" class="fw-400">Lost your password?</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="user-login-register">
-                        <div class="login-register-title">
-                            <h2 class="title">Register</h2>
-                            <p class="desc">If you don’t have an account, register now!</p>
-                        </div>
-                        <div class="login-register-form">
-                            <form action="#">
-                                <div class="row learts-mb-n50">
-                                    <div class="col-12 learts-mb-20">
-                                        <label for="registerEmail">Email address <abbr class="required">*</abbr></label>
-                                        <input type="email" id="registerEmail">
-                                    </div>
-                                    <div class="col-12 learts-mb-50">
-                                        <p>按下註冊鈕的同時，您的個人數據僅用於支持您在整個網站上的體驗、管理對您帳戶的訪問，以及同意使用 studio4art 所提供的服務。</p>
-                                    </div>
-                                    <div class="col-12 text-center learts-mb-50">
-                                        <button class="btn btn-dark btn-outline-hover-dark">Register</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-        </div>
+	<div class="section section-padding">
+		<div class="container">
+			<div class="row g-0">
+				<div class="col-lg-6">
+					<div class="user-login-register bg-light">
+						<div class="login-register-title">
+							<h2 class="title">登入帳號</h2>
+							<p class="desc">歡迎回來！ 用 studio4art 帳號登入</p>
+						</div>
+						<div class="login-register-form">
+							<form action="#">
+								<div class="row learts-mb-n50">
+									<div class="col-12 learts-mb-50">
+										<br><input type="email" placeholder="Username or email">
+									</div>
+									<div class="col-12 learts-mb-50">
+										<input type="password" placeholder="Password">
+									</div>
+								
+									<div class="col-12 text-center learts-mb-50">
+										<br> <button class="btn btn-dark btn-outline-hover-dark">登入</button>
+									</div>
+									<div class="col-12 learts-mb-50">
+										<div class="row learts-mb-n20">
+											<div class="col-12 learts-mb-20">
+												<div class="form-check">
+													<input type="checkbox" class="form-check-input"
+														id="rememberMe"> <label class="form-check-label"
+														for="rememberMe">記住我的帳號</label>
+												</div>
+											</div>
+											<div class="col-12 learts-mb-20">
+												<a href="lost-password.html" class="fw-400">忘記密碼？</a>
+											</div>
+										</div>
+									</div>
+									<div class="login-register-title">
+											<h2 class="title"></h2>
+											<p class="desc">或是用以下帳號繼續登入</p>
+											<div class="col-12 learts-mb-20"></div>
+										</div>
+									<div class="g-signin2" data-onsuccess="onSignIn"
+										data-theme="dark"></div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="user-login-register">
+						<div class="login-register-title">
+							<h2 class="title">註冊會員</h2>
+							<p class="desc">還不是會員嗎？ 立刻註冊新帳號！</p>
+						</div>
+						<div class="login-register-form">
+							<form action="#">
+								<div class="row learts-mb-n30">
+									<div class="col-12 learts-mb-20">
+										<label for="customer_email">Email<abbr
+											class="required">*</abbr></label> <input type="email"
+											id="customer_email">
+									</div>
+									<div class="col-12 learts-mb-20">
+										<input type="password" placeholder="密碼">
+									</div>
+									<div class="col-12 learts-mb-20">
+										<input type="text" placeholder="姓名">
+									</div>
+									<div class="col-12 learts-mb-20">
+										<input type="tel" placeholder="電話">
+									</div>
+									<div class="col-12 learts-mb-20">
+										<input type="text" placeholder="寄送地址">
+									</div>
+									<div class="col-12 learts-mb-20">
+										<input type="date" placeholder="生日">
+									</div>
 
-    </div>
-    <!-- Login & Register Section End -->
+									<div class="col-12 learts-mb-20">
+										<div style="display: flex;">
+											<input type="radio" name="customization" size="20"
+												value="<%= (productVO==null)? " 1" /> <label
+												for="customization">男</label> <input type="radio"
+												name="customization" size="45"
+												value="<%= (productVO==null)? " 0"  /> <label
+												for="customization"> 女</label>
+										</div>
+									</div>
+									<div class="col-12 learts-mb-50">
+										<p>按下註冊鈕的同時，表示您已詳閱我們的資料使用政策與使用條款，同意使用 studio4art 所提供的服務。</p>
+									</div>
+									<div class="col-12 text-center learts-mb-50">
+										<button class="btn btn-dark btn-outline-hover-dark">註冊</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<!-- Login & Register Section End -->
 
     <div class="footer2-section section section-padding">
         <div class="container">
