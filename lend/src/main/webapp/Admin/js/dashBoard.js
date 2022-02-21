@@ -61,7 +61,7 @@ function getCourses() {
                                                     <td><label for="">開始報名<input type="date" class="nomal ${res.data[i].courseId}" name="signUpStartdate"></label></td>
                                                 </tr>
                                                 <tr class="twoline">
-                                                    <td><label for="">開課中<input type="radio" class="nomal ${res.data[i].courseId}" name="courseStatus" value="1" checked="${res.data[i]}"></label>
+                                                    <td><label for="">開課中<input type="radio" class="nomal ${res.data[i].courseId}" name="courseStatus" value="1" checked="${res.data[i].courseStatus == 1? true: false}"></label>
                                                     </td>
                                                 </tr>
                                             </table>                    
@@ -82,10 +82,11 @@ function getCourses() {
                                                     <td><label for="">截止報名<input type="date" class="nomal ${res.data[i].courseId}" name="signUpDeadline"></label></td>
                                                 </tr>   
                                                 <tr class="twoline">
-                                                    <td> <label for="">未開課<input type="radio" class="nomal ${res.data[i].courseId}" name="courseStatus" value="0" checked="${res.data[i]}"></label></td>
+                                                    <td> <label for="">未開課<input type="radio" class="nomal ${res.data[i].courseId}" name="courseStatus" value="0" checked="${res.data[i].courseStatus == 0? true: false}"></label></td>
                                                 </tr>
                                             </table>
                                         </div>
+                                        <input type="hidden" name="courseId" value="${res.data[i].courseId}">
                                         <button type="button"  class="btn_CUP btn_UPcourse" CUPtarget="${res.data[i].courseId}" >送出修改</button>
                                         <button type="button" class="btn_CUP closeCUP" CUPtarget="${res.data[i].courseId}">取消修改</button>
                                     </FORM>
@@ -117,6 +118,7 @@ function cupListener() {
     });
     $("button.btn_UPcourse").on("click", function(e){
         e.preventDefault();        
+        sendCoDate.courseId       = $("input."+$(this).attr("CUPtarget")+"[name = 'courseId']").val();
         sendCoDate.courseName     = $("input."+$(this).attr("CUPtarget")+"[name = 'courseName']").val();
         sendCoDate.coursePrice    = $("input."+$(this).attr("CUPtarget")+"[name = 'coursePrice']").val();
         sendCoDate.maxOfCourse    = $("input."+$(this).attr("CUPtarget")+"[name = 'maxOfCourse']").val();
@@ -125,9 +127,10 @@ function cupListener() {
         sendCoDate.courseDescribe = $("input."+$(this).attr("CUPtarget")+"[name = 'courseDescribe']").val();
         sendCoDate.courseStatus   = $("input."+$(this).attr("CUPtarget")+"[name = 'courseStatus']:checked").val();
 
-        sendCTDate.signUpStartdate  = $("input."+$(this).attr("CUPtarget")+"[name = 'signUpStartdate']").val();
-        sendCTDate.signUpDeadline   = $("input."+$(this).attr("CUPtarget")+"[name = 'signUpDeadline']").val();
-        sendCTDate.courseDate       = $("input."+$(this).attr("CUPtarget")+"[name = 'courseDate']").val();
+        sendCTDate.courseId        = $("input."+$(this).attr("CUPtarget")+"[name = 'courseId']").val();
+        sendCTDate.signUpStartdate = $("input."+$(this).attr("CUPtarget")+"[name = 'signUpStartdate']").val();
+        sendCTDate.signUpDeadline  = $("input."+$(this).attr("CUPtarget")+"[name = 'signUpDeadline']").val();
+        sendCTDate.courseDate      = $("input."+$(this).attr("CUPtarget")+"[name = 'courseDate']").val();
         sendCoDate = JSON.stringify(sendCoDate);
         sendCTDate = JSON.stringify(sendCTDate);
         console.log(sendCoDate);

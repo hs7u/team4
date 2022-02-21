@@ -19,12 +19,12 @@ public class CourseTimeableService {
     // public CourseTimeableService(Session session) {
     //     dao = new CourseTimeableDAO(session);
     // }
-    public CourseTimeableVO addCourseTimeable(Integer courseId, Timestamp courseDate,Timestamp signUpStartdate, Timestamp signUpDeadline) {
-        CourseTimeableVO ctvo = new CourseTimeableVO();
-        ctvo.setCourseId(courseId);
-        ctvo.setCourseDate(courseDate);
-        ctvo.setSignUpStartdate(signUpStartdate);
-        ctvo.setSignUpDeadline(signUpDeadline);
+    public CourseTimeableVO addCourseTimeable(CourseTimeableVO ctvo) {
+        // CourseTimeableVO ctvo = new CourseTimeableVO();
+        // ctvo.setCourseId(courseId);
+        // ctvo.setCourseDate(courseDate);
+        // ctvo.setSignUpStartdate(signUpStartdate);
+        // ctvo.setSignUpDeadline(signUpDeadline);
         dao.insert(ctvo);
         return ctvo;
     }

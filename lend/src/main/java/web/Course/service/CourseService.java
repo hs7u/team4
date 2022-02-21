@@ -34,17 +34,16 @@ public class CourseService {
         dao.insert(cVo);
         return cVo;
     }
-    public CourseVO update(Integer courseId, String courseName, Integer coursePrice, byte[] courseImage,
-            Integer maxOfCourse, Integer minOfCourse, String courseLocation, String courseDescribe){
-        CourseVO cVo = new CourseVO();
-        cVo.setCourseId(courseId);
-		cVo.setCourseName(courseName);
-		cVo.setCoursePrice(coursePrice);
-		cVo.setCourseImage(courseImage);
-		cVo.setMaxOfCourse(maxOfCourse);
-		cVo.setMinOfCourse(minOfCourse);
-		cVo.setCourseLocation(courseLocation);
-		cVo.setCourseDescribe(courseDescribe);
+    public CourseVO update(CourseVO cVo){
+        // CourseVO cVo = new CourseVO();
+        // cVo.setCourseId(courseId);
+		// cVo.setCourseName(courseName);
+		// cVo.setCoursePrice(coursePrice);
+		// cVo.setCourseImage(courseImage);
+		// cVo.setMaxOfCourse(maxOfCourse);
+		// cVo.setMinOfCourse(minOfCourse);
+		// cVo.setCourseLocation(courseLocation);
+		// cVo.setCourseDescribe(courseDescribe);
         dao.update(cVo);
         return cVo;
     }
