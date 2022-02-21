@@ -49,6 +49,10 @@ main.tab.course div.table-responsive input {
 	outline: none;
 	font-size: 6px;
 }
+main.tab.course div.table-responsive input[type="search"] {
+	border: 0.5px solid black;
+    height: 2rem;
+}
 
 main.tab.course div.table-responsive input.las:hover {
 	cursor: pointer;

@@ -137,18 +137,20 @@ function cupListener() {
         console.log(sendCTDate);
         axios({
             method: "post",
-            url: "./Course/update",
+            url: "../Course/update",
             data: sendCoDate,
             headers: { "Content-Type": "application/json" },
           }).then(res=>{
-              if(res.data != null){
+              let check = res.data;
+              if(check.match(/success/) != null){
                 axios({
                     method: "post",
-                    url: "./CourseTimeable/insert",
+                    url: "../CourseTimeable/insert",
                     data: sendCTDate,
                     headers: { "Content-Type": "application/json" },
                   }).then(res=>{
-                      if(res.data != null){
+                      let check2 = res.data;
+                      if(check2.match(/success/) != null){
                         $("div.overCUP."+$(this).attr("CUPtarget")).fadeOut();  
                       }
                   })  
@@ -186,8 +188,8 @@ function getCustomers() {
                             <td><h4>${res.data[i].customerName}</h4></td>
                             <td><small>${res.data[i].customerEmail}</small></td>
                             <td><span class="status ${light}"></span>${cstate}</td>
-                            <td><span class="las la-user-circle"></span></td>
-                            <td><span class="las la-comment"></span></td>
+                            <td><input type="button" class="las" value="停權"></td>
+                            <td><span class="las la-birthday-cake">${res.data[i].customerBirthday}</span></td>
                             <td><span class="las la-phone">${res.data[i].customerPhone}</span></td>
                         </tr>`;
             $(list).appendTo("tbody.cuList");

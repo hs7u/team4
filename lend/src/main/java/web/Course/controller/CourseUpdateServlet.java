@@ -2,6 +2,7 @@ package web.Course.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -25,12 +26,19 @@ public class CourseUpdateServlet extends HttpServlet{
 		doPost(req,res);
 	}
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        PrintWriter out = res.getWriter();
         req.setCharacterEncoding("UTF-8");
 		res.setContentType("text/html; charset=UTF-8");
         BufferedReader reader = req.getReader();
 		Gson gson = new Gson();
         CourseVO cVo = gson.fromJson(reader, CourseVO.class);
-        csc.update(cVo); 
+        if(csc.update(cVo)){
+            out.println("success");
+            return;
+        }else{
+            out.println("fail");
+            return;
+        }
         
     }
     public void init() throws ServletException {

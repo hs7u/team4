@@ -34,7 +34,7 @@ public class CourseService {
         dao.insert(cVo);
         return cVo;
     }
-    public CourseVO update(CourseVO cVo){
+    public Boolean update(CourseVO cVo){
         // CourseVO cVo = new CourseVO();
         // cVo.setCourseId(courseId);
 		// cVo.setCourseName(courseName);
@@ -44,8 +44,8 @@ public class CourseService {
 		// cVo.setMinOfCourse(minOfCourse);
 		// cVo.setCourseLocation(courseLocation);
 		// cVo.setCourseDescribe(courseDescribe);
-        dao.update(cVo);
-        return cVo;
+        
+        return dao.update(cVo);
     }
     public void delete(Integer courseId){
         dao.delete(courseId);

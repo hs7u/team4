@@ -75,7 +75,7 @@ public class CourseDAO implements CourseInterface<CourseVO> {
             + se.getMessage());
         } */
     }
-    public void update(CourseVO cVo){
+    public Boolean update(CourseVO cVo){
        // JPA CriterQuery
        CriteriaBuilder cb = getSession().getCriteriaBuilder();
        CriteriaUpdate<CourseVO> cu = cb.createCriteriaUpdate(CourseVO.class);
@@ -88,8 +88,8 @@ public class CourseDAO implements CourseInterface<CourseVO> {
               .set(root.get("courseLocation"), cVo.getCourseLocation())
               .set(root.get("courseDescribe"), cVo.getCourseDescribe())
               .where(cb.equal(root.get("courseId"), cVo.getCourseId()));
-        getSession().createQuery(cu).executeUpdate();
-
+        
+        return getSession().createQuery(cu).executeUpdate() > 0 ? true: false;
        // Hibernate
        /* CourseVO courseVo = this.s.get(CourseVO.class, cVo.getCourseId());
        if(courseVo != null){
