@@ -100,14 +100,6 @@ public class CourseServlet extends HttpServlet {
 				errorMsgs.put("courseLocation", "上課地點: 請勿空白");
 			}
 
-//			System.out.println(courseName);
-//			System.out.println(courseDescribe);
-//			System.out.println(coursePrice);
-//			System.out.println(part.getInputStream());
-//			System.out.println(part.getSize());
-//			System.out.println(minOfCourse);
-//			System.out.println(maxOfCourse);
-//			System.out.println(courseLocation);
 
 			/*************************** 2.開始新增資料 ***************************************/
 

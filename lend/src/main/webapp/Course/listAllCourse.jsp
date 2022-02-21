@@ -5,9 +5,15 @@
 <%@ page import="org.hibernate.Session"%>
 <%@ page import="ProjectInterfaces.CourseInterface"%>
 <%@ page import="web.Course.service.CourseService"%>
+<<<<<<< HEAD
 <%@ page import="web.Course.vo.CourseVO"%>
 <%@ page import="org.springframework.context.ApplicationContext"%>
 <%@ page import="org.springframework.web.context.WebApplicationContext"%>
+=======
+<%@ page import ="web.Course.vo.CourseVO"%>
+<%@ page import="ProjectInterfaces.CourseInterface"%>
+
+>>>>>>> origin/main
 
 <%
     ApplicationContext context = (ApplicationContext)request.getServletContext().getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
@@ -18,112 +24,55 @@
 
 <html>
 <head>
-<title>所有商品資料 - listAllCourse.jsp</title>
-<link rel="stylesheet" href="css/listAllCourse.css">
+<title>所有課程資料 - listAllCourse.jsp</title>
 <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 
 <style>
- 
-  table {
-	height: 30px;
-	width: 900px;
-	background-color: white;
-	
-	margin-top: 2px;
-	margin-bottom: 2px;
-  }
-  table, th {
-  height: 60px;
-  font-size:  1rem;
-  }
-  
-  table, th, td {
-    border: 1px solid #ccc ;
-  }
- 
-  th, td {
-    text-align: center;
-    font-size:  0.3rem;
-  }
-</style>
+    * {
+        font-family: 'Poppins', sans-serif;	
+    }
+    table {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    th {
+        text-align: center;
+    }
+    
+    table, td {
+        border: 0.1px solid white;
+    }
+    
+    th, td {
+        text-align: center;
+        padding: .0 .3rem 0.2rem;
+        font-size: 0.01rem;
+        height: 80px;
+        border-bottom: 0.5px solid #f0f0f0;
+    }
+    
+    input {
+        border-radius: 15px;
+        padding: .5rem;
+        border: none;
+        outline: none;
+        font-size: 6px;
+    }
+    
+    input.las:hover {
+        cursor: pointer;
+        background-color: #666666;
+        color: white;
+        
+    }
+    </style>
 
 </head>
 
-<body bgcolor='white'>
-   <input type="checkbox" id="nav-toggle">
-    <div class="sidebar">
-        <div class="sidebar-brand">
-            <h2><span class="lab la-accusoft"></span><span>studio4art</span></h2>
-        </div>
-        <div class="sidebar-menu">
-            <ul>
-                <li>
-                    <a href="" class=""><span class="las la-igloo"></span>
-                    <span>Dashboard</span></a>
-                </li>
-                <li>
-                    <a href="" class=""><span class="las la-users"></span>
-                    <span>客戶管理</span></a>
-                </li>
-                <li>
-                    <a href="" class=""><span class="las la-clipboard-list"></span>
-                    <span>課程管理</span></a>
-                </li>
-                <li>
-                    <a href="" class=""><span class="las la-shopping-bag"></span>
-                    <span>訂單列表</span></a>
-                </li>
-                <li>
-                    <a href="./listAllProduct.jsp" class="active"><span class="las la-receipt"></span>
-                    <span>商品管理</span></a>
-                </li>
-                <li>
-                    <a href="" class=""><span class="las la-user-circle"></span>
-                    <span>帳號管理</span></a>
-                </li>
-                <li>
-                    <a href="./addProduct.jsp" class=""><span class="las la-clipboard-list"></span>
-                    <span>新增商品</span></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    
-    <div class="main-content">
-        <header>
-            <h2>
-                <label for="nav-toggle">
-                    <span class="las la-bars"></span>
-                </label>
-                課程管理
-            </h2>
-            <div class="search-wrapper">
-                <span class="las la-search"></span>
-                <input type="search" placeholder="Search here">
-            </div>
-            <div class="user-wrapper">
-                <img src="image/cat.jpg" width="40px" height="40px" alt="">
-                <div>
-                    <h4>doge</h4>
-                    <small>toor</small>
-                </div>
-            </div>
-          </header>
-          <main>
-
-		 <h3>所有課程資料</h3>
-	
-
-
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
+<body bgcolor='#f1f5f9'>
+    <h3>所有課程資料</h3>	
 
 <table>
 	<tr>
@@ -132,42 +81,35 @@
 		<th>課程描述</th>
 		<th>課程價格</th>
 		<th>課程圖片</th>
-		<th>開課人數</th>
-		<th>上架時間</th>
 		<th>課程狀態</th>
-<!-- 		<th>剩餘名額</th> -->
-<!-- 		<th>截止報名日期</th> -->
 		<th>修改</th>
 		<th>刪除</th>
 	</tr>
 	<%@ include file="page1.file" %> 
-	<c:forEach var="CourseVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		
+	<c:forEach var="cVo" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >		
 		<tr>
-			<td>${CourseVO.courseId}</td>
-			<td>${CourseVO.courseName}</td>
-			<td>${CourseVO.courseDescription}</td>
-			<td>${CourseVO.coursePrice}</td>
-			<td>${CourseVO.courseImage}</td>
-			<td>${CourseVO.minOfCourse}</td> 
-			<td>${CourseVO.releasedTime}</td>
-			<td>${CourseVO.courseState}</td>
+			<td>${cVo.courseId}</td>
+			<td>${cVo.courseName}</td>
+			<td>${cVo.courseDescribe}</td>
+			<td>${cVo.coursePrice}</td>
+			<c:set var="image" scope="page" value="${cVo.courseImage}" />
+			<td><img src="data:image/png;base64,<%=Base64.getEncoder().encodeToString(((byte[])pageContext.getAttribute("image"))) %>" width="60px" height="50px"/></td>
+			<td>${cVo.courseStatus eq 0 ? "下架中": "上架中"}</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>../update_product_input" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
-			     <input type="hidden" name="productId"  value="${ProductVO.productId}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Course/updateCourse" style="margin-bottom: 0px;">
+			     <input type="hidden" name="action"  value="transform">
+                 <input type="hidden" name="courseId" value="${cVo.courseId}">  
+			     <input type="submit" class="las" value="修改">
+                </FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>../addNewProduct" style="margin-bottom: 0px;">
-			     <input type="submit" value="刪除">
-			     <input type="hidden" name="courseId"  value="${ProductVO.productId}">
-			     <input type="hidden" name="action" value="delete"></FORM>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Course/updateCourse" style="margin-bottom: 0px;">
+			     <input type="hidden" name="action"  value="delete">
+			     <input type="hidden" name="coursId"  value="${cVo.courseId}">
+			     <input type="submit"  class="las" value="刪除">
+                </FORM>
 			</td>
 		</tr>
 	</c:forEach>
 </table>
 <%@ include file="page2.file" %>
-</main>
-</body>
-</html>
