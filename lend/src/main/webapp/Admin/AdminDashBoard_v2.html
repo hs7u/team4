@@ -308,7 +308,7 @@
                         </tr>
                         <tr>
                             <td>課程圖片</td>
-                            <td><input type="file" name="courseImage" size="45"/></td>
+                            <td><label for="mainCUP">上傳<input type="file" id="mainCUP" name="courseImage" size="45" style="display: none;"/></label></td>
                         </tr>
                         <tr>
                             <td>開課人數</td>
@@ -489,7 +489,6 @@
        $(function(){ 
             $("button.innerCourse-tab").on("click", function(e) {
                 e.preventDefault();
-                // console.log($(this).attr("inner-target"));
                 if($(this).attr("inner-target") == "listCourse"){
                     getCourses();
                 }
@@ -500,7 +499,6 @@
        $(function(){ 
             $("button.innerProduct-tab").on("click", function(e) {
                 e.preventDefault();
-                console.log($(this).attr("inner-target"));
                 $("main.tab.product").find("div.innerProduct").addClass("inner-dis");
                 $("main.tab.product").find("div.innerProduct." + $(this).attr("inner-target")).removeClass("inner-dis");
                 history.pushState(null, null, "#product/" + $(this).attr("inner-target"));
@@ -567,7 +565,7 @@
       // 或以下這樣寫
       window.addEventListener("popstate", function(){
         tab_active();
-        innerController()
+        // innerController();
       });
     </script>
 </body>

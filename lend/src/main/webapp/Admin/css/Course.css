@@ -26,9 +26,15 @@ main.tab.course div.addNewCourse th, td {
 }
 main.tab.course div.addNewCourse label{
     height: 100%;
-    padding: .5rem;
+    padding: 0.4rem;
     border: none;
     outline: none;
+    text-align: center;
+    background-color: white;
+    outline: none;
+    width: 22rem;
+    display: inline-block;
+    border-radius: 15px;
 }
 main.tab.course div.addNewCourse input {
     border-radius: 15px;

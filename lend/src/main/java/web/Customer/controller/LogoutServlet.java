@@ -22,7 +22,6 @@ public class LogoutServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		Integer account = (Integer)session.getAttribute("customerId");
 	    if (session.isNew() && account != null) {
-			session.removeAttribute("customerId");
 	    	session.invalidate();
 			req.getRequestDispatcher("/index.html").forward(req, res);  
     	}else {

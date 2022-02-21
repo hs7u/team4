@@ -87,6 +87,7 @@ public class CourseDAO implements CourseInterface<CourseVO> {
               .set(root.get("minOfCourse"), cVo.getMinOfCourse())
               .set(root.get("courseLocation"), cVo.getCourseLocation())
               .set(root.get("courseDescribe"), cVo.getCourseDescribe())
+              .set(root.get("courseStatus"), cVo.getCourseStatus())
               .where(cb.equal(root.get("courseId"), cVo.getCourseId()));
         
         return getSession().createQuery(cu).executeUpdate() > 0 ? true: false;

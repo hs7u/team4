@@ -27,7 +27,6 @@ function getCourses() {
         for(let i = 0 ; i < res.data.length; i++){
             let state = res.data[i].courseStatus == 0 ? '未開課' : res.data[i].courseStatus == 1 ? "開課中" : "報名中" ;
             let light = res.data[i].courseStatus == 0 ? 'red' : res.data[i].courseStatus == 1 ? "green" : "yello" ;
-            // let data = new Uint8Array(res.data[i].courseImage);
             var u8 = new Uint8Array(res.data[i].courseImage)
             var b64encoded = btoa(Uint8ToString(u8));
             let table = `<tr>
@@ -86,7 +85,7 @@ function getCourses() {
                                                 </tr>
                                             </table>
                                         </div>
-                                        <input type="hidden" name="courseId" value="${res.data[i].courseId}">
+                                        <input type="hidden" class="${res.data[i].courseId}" name="courseId" value="${res.data[i].courseId}">
                                         <button type="button"  class="btn_CUP btn_UPcourse" CUPtarget="${res.data[i].courseId}" >送出修改</button>
                                         <button type="button" class="btn_CUP closeCUP" CUPtarget="${res.data[i].courseId}">取消修改</button>
                                     </FORM>
@@ -127,10 +126,10 @@ function cupListener() {
         sendCoDate.courseDescribe = $("input."+$(this).attr("CUPtarget")+"[name = 'courseDescribe']").val();
         sendCoDate.courseStatus   = $("input."+$(this).attr("CUPtarget")+"[name = 'courseStatus']:checked").val();
 
+        sendCTDate.courseDate      = $("input."+$(this).attr("CUPtarget")+"[name = 'courseDate']").val();
         sendCTDate.courseId        = $("input."+$(this).attr("CUPtarget")+"[name = 'courseId']").val();
         sendCTDate.signUpStartdate = $("input."+$(this).attr("CUPtarget")+"[name = 'signUpStartdate']").val();
         sendCTDate.signUpDeadline  = $("input."+$(this).attr("CUPtarget")+"[name = 'signUpDeadline']").val();
-        sendCTDate.courseDate      = $("input."+$(this).attr("CUPtarget")+"[name = 'courseDate']").val();
         sendCoDate = JSON.stringify(sendCoDate);
         sendCTDate = JSON.stringify(sendCTDate);
         console.log(sendCoDate);
