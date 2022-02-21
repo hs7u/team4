@@ -37,13 +37,121 @@ function getCourses() {
                                 <span class="status ${light}"></span>
                                 ${state}
                             </td>
-                            <td><input type="button" class="las" value="修改"></td>
+                            <td><input type="button" class="las CUP" CUPtarget="${res.data[i].courseId}" value="修改"></td>
                             <td><input type="button" class="las" value="刪除"></td>
                         </tr>`;
-                
+            let uptable = `<div class="overCUP ${res.data[i].courseId}">
+                                <article>
+                                    <FORM METHOD="post" id="courseUPForm" enctype="multipart/form-data">
+                                        <div id="forflex">
+                                            <table>
+                                                <tr class="twoline tt">
+                                                    <td><label for="">課程名稱<input class="hh nomal ${res.data[i].courseId}" type="TEXT" name="courseName" size="45" placeholder="Ex:/ 水彩繪杯墊" value="${res.data[i].courseName}"></label></td>
+                                                </tr>
+                                                <tr class="twoline">
+                                                    <td><label for="">課程描述<input class="hh nomal ${res.data[i].courseId}" type="TEXT" name="courseDescribe" size="45" placeholder="Ex:/ 可學習自行繪製杯墊" value="${res.data[i].courseDescribe}"/></label></td>
+                                                </tr>
+                                                <tr class="twoline">
+                                                    <td><label for="">上課地點<input class="hh nomal ${res.data[i].courseId}" type="TEXT" name="courseLocation" size="45" placeholder="Ex:/ 台南市新營區民治路36號" value="${res.data[i].courseLocation}"/></label></td>
+                                                </tr>
+                                                <tr class="twoline">
+                                                    <td><label for="">開課人數<input class="hh nomal ${res.data[i].courseId}" type="TEXT" name="minOfCourse" size="45" placeholder="Ex:/ 10" value="${res.data[i].minOfCourse}"/></label></td>
+                                                </tr>
+                                                <tr class="twoline">
+                                                    <td><label for="">開始報名<input type="date" class="nomal ${res.data[i].courseId}" name="signUpStartdate"></label></td>
+                                                </tr>
+                                                <tr class="twoline">
+                                                    <td><label for="">開課中<input type="radio" class="nomal ${res.data[i].courseId}" name="courseStatus" value="1" checked="${res.data[i]}"></label>
+                                                    </td>
+                                                </tr>
+                                            </table>                    
+                                            <table>
+                                                <tr class="">
+                                                    <td>課程圖片<label for="photoCUP" class="nomal hh CUPlable">上傳<input type="file" class="${res.data[i].courseId}" id="photoCUP" name="courseImage" size="45" style="display: none;"/></label></td>
+                                                </tr>
+                                                <tr class="twoline ">
+                                                    <td class="nomalSec"><label for="">課程日期<input type="date" class="nomal ${res.data[i].courseId}" name="courseDate"></label></td>
+                                                </tr>
+                                                <tr class="twoline">
+                                                    <td><label for="">課程價格<input class="hh nomal ${res.data[i].courseId}" type="TEXT" name="coursePrice" size="45" placeholder="Ex:/ 1500" value="${res.data[i].coursePrice}"/></label></td>
+                                                </tr>
+                                                <tr class="twoline">
+                                                    <td><label for="">額滿人數<input class="hh nomal ${res.data[i].courseId}" type="TEXT" name="maxOfCourse" size="45" placeholder="Ex:/ 30" value="${res.data[i].maxOfCourse}"/></label></td>
+                                                </tr>                        
+                                                <tr class="twoline">
+                                                    <td><label for="">截止報名<input type="date" class="nomal ${res.data[i].courseId}" name="signUpDeadline"></label></td>
+                                                </tr>   
+                                                <tr class="twoline">
+                                                    <td> <label for="">未開課<input type="radio" class="nomal ${res.data[i].courseId}" name="courseStatus" value="0" checked="${res.data[i]}"></label></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <button type="button"  class="btn_CUP btn_UPcourse" CUPtarget="${res.data[i].courseId}" >送出修改</button>
+                                        <button type="button" class="btn_CUP closeCUP" CUPtarget="${res.data[i].courseId}">取消修改</button>
+                                    </FORM>
+                                </article>
+                            </div>`;    
             $(table).appendTo("tbody.dynamicsC");
+            $("div.overlay").after(uptable);
         }        
       })
+}
+function cupListener() {
+    let sendCoDate = {};
+    let sendCTDate = {};
+    $("input.CUP").on("click", function(e){
+        e.preventDefault();
+        $("div.overCUP."+$(this).attr("CUPtarget")).fadeIn();
+        $("input[name='courseImage']").on("change" ,function(){
+            let reader = new FileReader(); // 用來讀取檔案
+            reader.readAsArrayBuffer(this.files[0]); // 讀取檔案
+            reader.addEventListener("load", function () {
+            let u = new Uint8Array(reader.result);
+            sendCoDate.courseImage = Array.from(u);
+            })
+        })
+    });
+    $("button.closeCUP").on("click", function(e){
+        e.preventDefault();
+        $("div.overCUP."+$(this).attr("CUPtarget")).fadeOut();
+    });
+    $("button.btn_UPcourse").on("click", function(e){
+        e.preventDefault();        
+        sendCoDate.courseName     = $("input."+$(this).attr("CUPtarget")+"[name = 'courseName']").val();
+        sendCoDate.coursePrice    = $("input."+$(this).attr("CUPtarget")+"[name = 'coursePrice']").val();
+        sendCoDate.maxOfCourse    = $("input."+$(this).attr("CUPtarget")+"[name = 'maxOfCourse']").val();
+        sendCoDate.minOfCourse    = $("input."+$(this).attr("CUPtarget")+"[name = 'minOfCourse']").val();
+        sendCoDate.courseLocation = $("input."+$(this).attr("CUPtarget")+"[name = 'courseLocation']").val();
+        sendCoDate.courseDescribe = $("input."+$(this).attr("CUPtarget")+"[name = 'courseDescribe']").val();
+        sendCoDate.courseStatus   = $("input."+$(this).attr("CUPtarget")+"[name = 'courseStatus']:checked").val();
+
+        sendCTDate.signUpStartdate  = $("input."+$(this).attr("CUPtarget")+"[name = 'signUpStartdate']").val();
+        sendCTDate.signUpDeadline   = $("input."+$(this).attr("CUPtarget")+"[name = 'signUpDeadline']").val();
+        sendCTDate.courseDate       = $("input."+$(this).attr("CUPtarget")+"[name = 'courseDate']").val();
+        sendCoDate = JSON.stringify(sendCoDate);
+        sendCTDate = JSON.stringify(sendCTDate);
+        console.log(sendCoDate);
+        console.log(sendCTDate);
+        axios({
+            method: "post",
+            url: "./Course/update",
+            data: sendCoDate,
+            headers: { "Content-Type": "application/json" },
+          }).then(res=>{
+              if(res.data != null){
+                axios({
+                    method: "post",
+                    url: "./CourseTimeable/insert",
+                    data: sendCTDate,
+                    headers: { "Content-Type": "application/json" },
+                  }).then(res=>{
+                      if(res.data != null){
+                        $("div.overCUP."+$(this).attr("CUPtarget")).fadeOut();  
+                      }
+                  })  
+              }
+          })     
+    });
 }
 function getCustomers() {
     let data = {
@@ -238,7 +346,8 @@ function init(){
     $('#courseTable').DataTable({
         "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
         "pageLength":'5'
-    });  
+    });
+    cupListener();  
 }
 $(document).ready(function () {
     getAccountInfo();
