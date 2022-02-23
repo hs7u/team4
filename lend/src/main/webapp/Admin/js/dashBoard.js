@@ -238,7 +238,7 @@ function callStateP(){
 function init(){
     getAccountInfo();
     getCustomers();
-    getCourses();
+    // getCourses();
     openWorker();
     productInsert();
     courseInsert();

@@ -250,7 +250,7 @@
 
         </main>
         <main class="tab course dis">
-            <div class="innerCourse listCourse">
+            <!-- <div class="innerCourse listCourse">
                 <div class="card">
                     <div class="card-header">
                         <h3>課程列表</h3>
@@ -269,21 +269,23 @@
                                     </tr>
                                 </thead>
                                 <tbody class="dynamicsC">
-                                    <!-- <tr>
-                                        <td>Servlet</td>
-                                        <td>David</td>
-                                        <td>
-                                            <span class="status red"></span>
-                                            未開課 
-                                        </td>
-                                        <td><input type="button" class="las" value="修改"></td>
-                                        <td><input type="button" class="las" value="刪除"></td>
-                                    </tr> -->
+                                    
+
+
+
+                                    
                                 </tbody>
                             </table>
                        </div>
                     </div>
                 </div>
+            </div> -->
+            <div class="innerCourse listCourse">
+                <div class="card-header">
+                    <h3>課程列表</h3>
+                    <button class="innerCourse-tab" inner-target="addNewCourse" >新增課程<span class="las la-arrow-right"></span></button>
+                </div>
+                <iframe class="innerWindow" src="../Course/listAllCourse.jsp" style="width: 60rem; height: 33rem;"></iframe>
             </div>
             <div class="innerCourse addNewCourse inner-dis">
                 <div class="card-header">
@@ -334,7 +336,8 @@
                             <td><input type="date" name="signUpDeadline"></td>
                         </tr> -->
                     </table>
-                    <input type="button"  class="las" id="btn_course" value="送出新增">         
+                    <input type="button"  class="las" id="btn_course" value="送出新增">
+                    <input type="reset" class="las" value="清除重填">         
                 </FORM>
             </div>
         </main>
