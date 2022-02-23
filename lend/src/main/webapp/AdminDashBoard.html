@@ -1,49 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LLL</title>
-    <link rel="stylesheet" href="./css/AdminDashBoard.css">
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="./Admin/css/AdminDashBoard.css">
+    <link rel="stylesheet" href="./Admin/css/Product.css">
+    <link rel="stylesheet" href="./Admin/css/Course.css">
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <style>
+        main.tab.dis {
+            display: none;
+        }
+
+        .innerWindow {
+            flex-grow: 1;
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .tab.product {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .btn_modal_close {
+            cursor: pointer;
+        }
+
+        div.overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: hsla(0, 0%, 0%, .5);
+
+            display: none;
+        }
+
+        /* 元素 article 置中及基本樣式 */
+        div.overlay>article {
+            background-color: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgb(255, 0, 0);
+            padding: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+
 </head>
+
 <body>
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
         <div class="sidebar-brand">
-            <h2><span class="lab la-accusoft"></span><span>Lend^3</span></h2>
+            <h2><span class="lab la-accusoft"></span><span>studio4art</span></h2>
         </div>
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="" class="active"><span class="las la-igloo"></span>
-                    <span>Dashboard</span></a>
+                    <a href="#" class="tab active" data-target="main" headerName="Dashboard"><span
+                            class="las la-igloo"></span>
+                        <span>Dashboard</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-users"></span>
-                    <span>Customers</span></a>
+                    <a href="#" class="tab " data-target="customer" headerName="客戶管理"><span class="las la-users"></span>
+                        <span>客戶管理</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-clipboard-list"></span>
-                    <span>Course</span></a>
+                    <a href="#" class="tab " data-target="course" headerName="課程管理"><span
+                            class="las la-clipboard-list"></span>
+                        <span>課程管理</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-shopping-bag"></span>
-                    <span>Orders</span></a>
+                    <a href="#" class="tab " data-target="order" headerName="訂單列表"><span
+                            class="las la-shopping-bag"></span>
+                        <span>訂單列表</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-receipt"></span>
-                    <span>Inventory</span></a>
+                    <a href="#" class="tab " data-target="product" headerName="商品管理"><span
+                            class="las la-receipt"></span>
+                        <span>商品管理</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-user-circle"></span>
-                    <span>Accounts</span></a>
+                    <a href="#" class="tab " data-target="account" headerName="帳號管理"><span
+                            class="las la-user-circle"></span>
+                        <span>帳號管理</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-clipboard-list"></span>
-                    <span>Tasks</span></a>
+                    <a href="#" class="tab " data-target="addProduct" headerName="新增商品"><span
+                            class="las la-clipboard-list"></span>
+                        <span>新增商品</span></a>
                 </li>
             </ul>
         </div>
@@ -55,25 +116,25 @@
                 <label for="nav-toggle">
                     <span class="las la-bars"></span>
                 </label>
-                Dashboard
+                <span class="headerName">Dashboard</span>
             </h2>
             <div class="search-wrapper">
                 <span class="las la-search"></span>
-                <input type="search" placeholder="Search here">
+                <input type="search" placeholder="Ex:/ Search here">
             </div>
             <div class="user-wrapper">
-                <img src="cat.jpg" width="40px" height="40px" alt="">
+                <img src="./Admin/icon/cat.jpg" width="40px" height="40px" alt="">
                 <div>
                     <h4>doge</h4>
                     <small>toor</small>
                 </div>
             </div>
         </header>
-        <main>
+        <main class="tab main">
             <div class="cards">
                 <div class="cards-single">
                     <div>
-                        <h1>999</h1>
+                        <h1 id="customerCount">0</h1>
                         <span>Customers</span>
                     </div>
                     <div>
@@ -82,7 +143,7 @@
                 </div>
                 <div class="cards-single">
                     <div>
-                        <h1>999</h1>
+                        <h1 id="courseCount">0</h1>
                         <span>Course</span>
                     </div>
                     <div>
@@ -91,7 +152,7 @@
                 </div>
                 <div class="cards-single">
                     <div>
-                        <h1>999</h1>
+                        <h1 id="orderCount">0</h1>
                         <span>Orders</span>
                     </div>
                     <div>
@@ -100,7 +161,7 @@
                 </div>
                 <div class="cards-single">
                     <div>
-                        <h1>$70k</h1>
+                        <h1 id="incomeCount">$0</h1>
                         <span>Income</span>
                     </div>
                     <div>
@@ -117,51 +178,51 @@
                             <button>See All <span class="las la-arrow-right"></span></button>
                         </div>
                         <div class="card-body">
-                           <div class="table-responsive">
-                            <table width="100%">
-                                <thead>
-                                    <tr>
-                                        <td>Course Title</td>
-                                        <td>Teacher</td>
-                                        <td>Status</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Design</td>
-                                        <td>Tom</td>
-                                        <td>
-                                            <span class="status red"></span>
-                                            pending 
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Servlet dev</td>
-                                        <td>Big Wu</td>
-                                        <td>
-                                            <span class="status green"></span>
-                                            approval
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Java SE</td>
-                                        <td>Small Wu</td>
-                                        <td>
-                                            <span class="status green"></span>
-                                            approval
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>mySQL</td>
-                                        <td>Wei Min</td>
-                                        <td>
-                                            <span class="status yellow"></span>
-                                            review
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                           </div>
+                            <div class="table-responsive">
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <td>Course Title</td>
+                                            <td>Teacher</td>
+                                            <td>Status</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Design</td>
+                                            <td>Tom</td>
+                                            <td>
+                                                <span class="status red"></span>
+                                                pending
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Servlet dev</td>
+                                            <td>Big Wu</td>
+                                            <td>
+                                                <span class="status green"></span>
+                                                approval
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Java SE</td>
+                                            <td>Small Wu</td>
+                                            <td>
+                                                <span class="status green"></span>
+                                                approval
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>mySQL</td>
+                                            <td>Wei Min</td>
+                                            <td>
+                                                <span class="status yellow"></span>
+                                                review
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -176,7 +237,7 @@
                         <div class="card-body">
                             <div class="customer">
                                 <div class="info">
-                                    <img src="cat.jpg" width="40px" height="40px" alt="">
+                                    <img src="./Admin/icon/cat.jpg" width="40px" height="40px" alt="">
                                     <div>
                                         <h4>Ge Ku~~~~ </h4>
                                         <small>How dare you come Ice Bird</small>
@@ -195,6 +256,244 @@
             </div>
 
         </main>
+        <main class="tab course dis">
+            <h3>新增課程資料</h3>
+            <FORM METHOD="post" id="courseForm" enctype="multipart/form-data">
+                <table>
+                    <tr>
+                        <td>課程名稱</td>
+                        <td><input type="TEXT" name="courseName" size="45" placeholder="Ex:/ 水彩繪杯墊"></td>
+                    </tr>
+                    <tr>
+                        <td>課程描述</td>
+                        <td><input type="TEXT" name="courseDescription" size="45" placeholder="Ex:/ 可學習自行繪製杯墊" /></td>
+                    </tr>
+                    <tr>
+                        <td>課程價格</td>
+                        <td><input type="TEXT" name="coursePrice" size="45" placeholder="Ex:/ 1500" /></td>
+                    </tr>
+                    <tr>
+                        <td>課程圖片</td>
+                        <td><input type="file" name="courseImage" size="45" /></td>
+                    </tr>
+                    <tr>
+                        <td>開課人數</td>
+                        <td><input type="TEXT" name="minOfCourse" size="45" placeholder="Ex:/ 10" /></td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td>額滿人數</td>
+                        <td><input type="TEXT" name="maxOfCourse" size="45" placeholder="Ex:/ 30" /></td>
+                    </tr>
+                    <tr>
+                        <td>上課地點</td>
+                        <td><input type="TEXT" name="courseLocation" size="45" placeholder="Ex:/ 台南市新營區民治路36號" /></td>
+                    </tr>
+                    <!-- <tr>
+                        <td>課程日期</td>
+                        <td><input type="date" name="courseDate"></td>
+                    </tr>
+                    <tr>
+                        <td>開始報名</td>
+                        <td><input type="date" name="signUpStartdate"></td>
+                    </tr>
+                    <tr>
+                        <td>截止報名</td>
+                        <td><input type="date" name="signUpDeadline"></td>
+                    </tr> -->
+                </table>
+                <input type="button" class="las" id="btn_course" value="送出新增">
+            </FORM>
+        </main>
+        <main class="tab addProduct dis">
+            <h3>新增商品資料</h3>
+            <FORM METHOD="post" id="productForm" enctype="multipart/form-data">
+                <table>
+                    <tr>
+                        <td>商品標籤</td>
+                        <td><input type="radio" name="product_category_code" size="45" value="11" checked />
+                            <label for="product_category_code">瓷畫</label>
+                            <input type="radio" name="product_category_code" size="45" value="22" />
+                            <label for="product_category_code">電烙</label>
+                            <input type="radio" name="product_category_code" size="45" value="33" />
+                            <label for="product_category_code">燒陶</label>
+                            <input type="radio" name="product_category_code" size="45" value="44" />
+                            <label for="product_category_code">色鉛筆</label>
+                            <input type="radio" name="product_category_code" size="45" value="55" />
+                            <label for="product_category_code">水彩</label>
+                            <input type="radio" name="product_category_code" size="45" value="66" />
+                            <label for="product_category_code">壓克力彩繪</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>商品名稱</td>
+                        <td><input type="TEXT" name="product_name" size="45" placeholder="Ex:/ 可客製｜色鉛筆｜手繪卡通人像" /></td>
+                    </tr>
+                    <tr>
+                        <td>商品描述</td>
+                        <td><input type="TEXT" name="product_description" size="45"
+                                placeholder="Ex:/ 尺寸 : 長方形 6吋 10.2*15.2 cm 材質 : 寶虹水彩紙(完成後會噴上專用防霉噴漆)、Mijello水彩顏料" /></td>
+                    </tr>
+                    <tr>
+                        <td>商品價格</td>
+                        <td><input type="TEXT" name="product_price" size="45" placeholder="Ex:/ 2500" /></td>
+                    </tr>
+                    <tr>
+                        <td>商品圖片</td>
+                        <td><input type="file" name="product_image" id=""></td>
+                    </tr>
+                    <tr>
+                        <td>商品庫存</td>
+                        <td><input type="TEXT" name="product_inventory" size="45" placeholder="Ex:/ 3" /></td>
+                    </tr>
+                    <tr>
+                        <td>是否可客製化</td>
+                        <td><input type="radio" name="customization" size="20" value="1" checked />
+                            <label for="customization">是</label>
+                            <input type="radio" name="customization" size="45" value="0" />
+                            <label for="customization">否</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>客製商品價格</td>
+                        <td><input type="TEXT" name="customer_product_price" size="45" placeholder="Ex:/ 2500" /></td>
+                    </tr>
+                </table>
+
+
+                <input type="button" class="las" id="btn_product" value="送出新增">
+                <input type="reset" class="las" value="清除重填">
+            </FORM>
+        </main>
+        <main class="tab product dis" id="productList">
+            <iframe class="innerWindow" src="./Product/listAllProduct_test.jsp"></iframe>
+        </main>
+        <main class="tab order dis">
+
+        </main>
+        <main class="tab account dis">
+
+        </main>
+        <main class="tab customer dis">
+
+        </main>
     </div>
+
+
+
+    <div class="overlay">
+        <article>
+            <p id="target"></p>
+            <button type="button" class="btn_modal_close">關閉</button>
+        </article>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        // 第二步：函式
+        $(function () {
+
+            //console.log(location);
+            //console.log(location.hash);
+            // 第三步
+            //tab_active();
+            $("a.tab").on("click", function (e) {
+                e.preventDefault();
+
+                /* 將頁籤列表移除所有 -on，再將指定的加上 -on */
+                $(this).closest("ul").find("a.tab").removeClass("active");
+                $(this).addClass("active");
+                $("span.headerName").text($(this).attr("headerName"));
+
+                /* 找到對應的頁籤內容，加上 -on 來顯示 */
+                $("main.tab").addClass("dis");
+                $("main.tab." + $(this).attr("data-target")).removeClass("dis");
+                // 第一步         
+            });
+        });
+        // 第二步
+        //window.onpopstate = function(){        
+        //};
+        // 或以下這樣寫
+        window.addEventListener("popstate", function () {
+
+        });
+    </script>
+    <!-- <script src="./Admin/js/dashBoard.js"></script> -->
+    <script>
+        function openWorker() {
+            if (window.Worker) {
+                // 建立一個 Dedicated Worker
+                let customerCount = document.getElementById("customerCount");
+                let worker1 = new Worker("./Admin/js/workers/worker1.js");
+                worker1.onmessage = function (e) {
+                    customerCount.innerText = `${e.data}`;
+                };
+                let courseCount = document.getElementById("courseCount");
+                let worker2 = new Worker("./Admin/js/workers/worker2.js");
+                worker2.onmessage = function (e) {
+                    courseCount.innerText = `${e.data}`;
+                };
+                let orderCount = document.getElementById("orderCount");
+                let worker3 = new Worker("./Admin/js/workers/worker3.js");
+                worker3.onmessage = function (e) {
+                    orderCount.innerText = `${e.data}`;
+                };
+                let incomeCount = document.getElementById("incomeCount");
+                let worker4 = new Worker("./Admin/js/workers/worker4.js");
+                worker4.onmessage = function (e) {
+                    incomeCount.innerText = `$${e.data}`;
+                };
+            }
+        }
+        function courseInsert() {
+            const form = document.getElementById("courseForm");
+            document.getElementById('btn_course').addEventListener('click', function (e) {
+                let fdate = new FormData(form);
+                e.preventDefault();
+                xhr = new XMLHttpRequest();
+                xhr.addEventListener('readystatechange', callState);
+                let urlSource = './addCourse';
+                xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
+                xhr.send(fdate);
+            })
+
+        }
+        function productInsert() {
+            const form = document.getElementById("productForm");
+            document.getElementById('btn_product').addEventListener('click', function (e) {
+                let fdate = new FormData(form);
+                e.preventDefault();
+                xhr = new XMLHttpRequest();
+                xhr.addEventListener('readystatechange', callState);
+                let urlSource = 'Product/addNewProduct';
+                xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
+                xhr.send(fdate);
+            })
+
+        }
+        function callState() {
+            $(function () {
+                $("button.btn_modal_close").on("click", function () {
+                    $("div.overlay").fadeOut();
+                });
+            });
+            if (xhr.readyState == 4) {    //readyState: 0 -> 1 -> 2 -> 3 -> 4
+                let t = document.getElementById("target");
+                if (xhr.status == 200) {
+                    t.innerText = `${xhr.responseText}`;
+                } else {
+                    t.innerText = `${xhr.status}: ${xhr.statusText}`
+                }
+                $("div.overlay").fadeIn();
+            }
+        }
+        function init() {
+            openWorker();
+            productInsert();
+            courseInsert();
+        }
+        window.addEventListener('load', init);
+    </script>
 </body>
+
 </html>

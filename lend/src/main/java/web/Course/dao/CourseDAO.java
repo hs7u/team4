@@ -166,7 +166,7 @@ public class CourseDAO implements CourseInterface<CourseVO> {
             }
         } */
     }
-    public void changeState(Integer courseId, Byte courseState){
+    public void changeStatus(Integer courseId, Byte courseStatus){
 
         // Hibernate
         /* CourseVO cVo = this.s.get(CourseVO.class, courseId);
@@ -179,7 +179,7 @@ public class CourseDAO implements CourseInterface<CourseVO> {
         CriteriaBuilder cb = this.session.getCriteriaBuilder();
         CriteriaUpdate<CourseVO> cu = cb.createCriteriaUpdate(CourseVO.class);
         Root<CourseVO> root = cu.from(CourseVO.class);
-        cu = cu.set(root.get("courseStatus"), courseState)
+        cu = cu.set(root.get("courseStatus"), courseStatus)
                .where(cb.equal(root.get("courseId"), courseId));
         this.session.createQuery(cu).executeUpdate();
 
@@ -195,7 +195,7 @@ public class CourseDAO implements CourseInterface<CourseVO> {
             + se.getMessage());
         } */
     }
-    public CourseVO selectByCourseId(Integer courseId){
+    public CourseVO getOneCourse(Integer courseId){
         // JPA CriterQuery
         CriteriaBuilder cb = this.session.getCriteriaBuilder();
         CriteriaQuery<CourseVO> cq = cb.createQuery(CourseVO.class);

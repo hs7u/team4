@@ -113,7 +113,7 @@ public class CourseServlet extends HttpServlet {
 				return;
 			} else {
 				CourseService csc = new CourseService((Session) req.getAttribute("session"));
-				CourseVO check = csc.selectByCourseId(csc.hashCode(courseNameReg, courseLocation));
+				CourseVO check = csc.getOneCourse(csc.hashCode(courseNameReg, courseLocation));
 				CourseVO cvo = null;
 				if(check == null) {
 					cvo = csc.addCourse(courseName, coursePrice, imgData,
