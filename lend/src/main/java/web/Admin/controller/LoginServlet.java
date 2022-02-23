@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import web.Admin.service.AdminService;
 import web.Admin.vo.AdminVO;
 
-@WebServlet("/Admin/login")
+// @WebServlet("/Admin/login")
 public class LoginServlet extends HttpServlet{
 	private AdminService as;
 	public void init() throws ServletException {
@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet{
 		
 		if (account == null) {
 			if (errorMsg.size() <= 0) {
-				AdminVO check = as.getOneManager(login.getAdminAccount(), login.getAdminPassword());
+				AdminVO check = as.getOneManager(login);
 				if(check.getAdminAccount() != null) {
 					session.setAttribute("account", check.getAdminAccount());
 					session.setAttribute("info", check);

@@ -9,10 +9,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Table(name = "Customer")
 @DynamicInsert
+@DynamicUpdate
 public class CustomerVO implements java.io.Serializable{
 //	@OneToMany(mappedBy = "Favorite",cascade = CascadeType.REMOVE)
 //	private Set<FavoriteVO> fVos;

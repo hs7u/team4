@@ -9,9 +9,11 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 @Entity
 @Table(name = "Course")
 @DynamicInsert
+@DynamicUpdate
 public class CourseVO implements java.io.Serializable{
 	@Id
 	@Column(name = "course_id")

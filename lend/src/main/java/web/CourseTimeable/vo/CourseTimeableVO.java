@@ -8,8 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.DynamicUpdate;
 @Entity
 @Table(name = "Course_Timeable")
+@DynamicUpdate
 public class CourseTimeableVO implements java.io.Serializable{
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

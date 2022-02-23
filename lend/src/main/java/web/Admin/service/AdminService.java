@@ -32,8 +32,8 @@ public class AdminService {
     public void deleteManager(Integer adminId){
         dao.delete(adminId);
     }
-    public AdminVO getOneManager(String adminAccount, String adminPassword) {
-        return dao.getOneManager(adminAccount, adminPassword);
+    public AdminVO getOneManager(AdminVO vo) {
+        return dao.getOneManager(vo.getAdminAccount(), vo.getAdminPassword());
     }
     public ArrayList<AdminVO> allManager(){
         return dao.allManager();
