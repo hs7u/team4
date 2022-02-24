@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import web.Course.service.CourseService;
 import web.Course.vo.CourseVO;
 
-@WebServlet("/Course/update")
+// @WebServlet("/Course/update")
 public class CourseUpdateServlet extends HttpServlet{
     private CourseService csc;
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

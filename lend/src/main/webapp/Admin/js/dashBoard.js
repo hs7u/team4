@@ -24,6 +24,7 @@ function getCourses() {
         headers: { "Content-Type": "application/json" },
       }).then(res=>{
         $("tbody.dynamicsC").empty();
+        $("div.forCUP").empty();
         for(let i = 0 ; i < res.data.length; i++){
             let state = res.data[i].courseStatus == 0 ? '未開課' : res.data[i].courseStatus == 1 ? "開課中" : "報名中" ;
             let light = res.data[i].courseStatus == 0 ? 'red' : res.data[i].courseStatus == 1 ? "green" : "yello" ;
@@ -92,9 +93,23 @@ function getCourses() {
                                 </article>
                             </div>`;    
             $(table).appendTo("tbody.dynamicsC");
-            $("div.overlay").after(uptable);
-        }        
+            $(uptable).appendTo("div.forCUP");
+        }
+        $('#courseTable').DataTable({
+            "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
+            "pageLength":'5'
+        });
+        cupListener();  
       })
+}
+function timeable(res){
+    $("t.target").text(res);
+    $("div.overlay").css("z-index", 999999).fadeIn();
+    $("button.btn_modal_close").on("click", function(){
+        $("div.overlay").fadeOut("done", function(){
+            window.location.reload();
+        });
+    });
 }
 function cupListener() {
     let sendCoDate = {};
@@ -150,9 +165,14 @@ function cupListener() {
                   }).then(res=>{
                       let check2 = res.data;
                       if(check2.match(/success/) != null){
-                        $("div.overCUP."+$(this).attr("CUPtarget")).fadeOut();  
+                        $("div.overCUP."+$(this).attr("CUPtarget")).fadeOut();
+                        window.location.reload();
+                      } else {
+                        timeable(res.data);
                       }
                   })  
+              } else {
+                timeable(res.data);
               }
           })     
     });
@@ -339,7 +359,7 @@ function callStateP(){
         $("div.overlay").fadeIn();
     }   
 }
-function init(){  
+function init(){
     openWorker();
     productInsert();
     courseInsert();
@@ -347,11 +367,7 @@ function init(){
         "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
         "pageLength":'5'
     });
-    $('#courseTable').DataTable({
-        "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
-        "pageLength":'5'
-    });
-    cupListener();  
+    
 }
 $(document).ready(function () {
     getAccountInfo();

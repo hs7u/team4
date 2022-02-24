@@ -45,7 +45,7 @@
     
   }
   th, td {
-    margin
+    margin: auto;
     padding: 1px;
   }
   

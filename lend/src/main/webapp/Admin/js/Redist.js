@@ -14,6 +14,14 @@ $.fn.denied = function(){
         });
     });
 };
+$.fn.exeist = function(){ 
+    this.fadeIn();          
+    $("button.btn_modal_close").on("click", function(){
+        $("div.overlay").fadeOut("done", function(){
+            window.location.assign("./AdminDashBoard_v2.html");
+        });
+    });
+};
 function dofirst(){
     const form = document.getElementById("myForm");
     document.getElementById('btn_sub').addEventListener('click',function(e){
@@ -34,8 +42,10 @@ function dofirst(){
                 t.innerText = text;
                 if(text.match(/Success/) != null){
                     $("div.overlay").alloy();
-                }else{
+                }else if(text.match(/Fail/) != null){
                     $("div.overlay").denied();
+                }else{
+                    $("div.overlay").exeist();
                 }
             })
     })

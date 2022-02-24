@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="utf-8">
+    <title>File API：檔案上傳進度顯示</title>
+    <style>
+        img.preview {
+            width: 200px;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul>li {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        div.progressbar {
+            height: 20px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        div.progressbar>span.progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            box-sizing: border-box;
+            background-color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="file" id="the_file" accept="image/*" multiple>
+    <ul class="picture_list"></ul>
+
+    <!--
+    <p>底下這個是進度條的介面示意：</p>
+    <div class="progressbar">
+      <span class="progress" style="width: 0%;"></span>
+    </div>
+    -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        window.addEventListener("DOMContentLoaded", function () {
+
+            var the_file_element = document.getElementById("the_file");
+            the_file_element.addEventListener("change", function (e) {
+
+                var picture_list = document.getElementsByClassName("picture_list")[0];
+                picture_list.innerHTML = ""; // 清空
+
+                var that = this; // 將 this 用 that 來替代，底下程式會用到
+
+                // 跑每個使用者選的檔案
+                for (let i = 0; i < this.files.length; i++) {
+
+                    let reader = new FileReader(); // 用來讀取檔案
+
+                    reader.readAsDataURL(this.files[i]); // 讀取檔案
+
+                    reader.addEventListener("load", function (e) {
+                        console.log("load 事件");
+                        console.log(e);
+
+                        // 建立 li 標籤，加上屬性、圖片、進度條，最後放入 ul 標籤裡
+                        let li_html = `
+                <li data-index="${i}">
+                  <img class="preview" src="${reader.result}">
+                  <div class="progressbar"><span class="progress" style="width: 0%;"></span></div>
+                </li>
+              `;
+                        picture_list.insertAdjacentHTML("beforeend", li_html); // 加進節點
+
+                        // 這裡實際將檔案傳送出去：ajax 技術
+                        let form_data = new FormData();
+                        form_data.append('the_file', that.files[i]);
+
+                        $.ajax({
+                            url: "http://notes.carlos-studio.com/html5_tutorial/file/file_receive.php",
+                            type: "POST",
+                            data: form_data,
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+
+                            xhr: function () {
+                                //console.log("這是第幾個索引：" + i);
+                                var myXhr = $.ajaxSettings.xhr();
+                                if (myXhr.upload) {
+                                    myXhr.upload.addEventListener('progress', function (evt) {
+                                        console.log("progress 事件觸發");
+                                        // 註：nth-child 是從 1 開始
+                                        var progress_el = document.querySelector(".picture_list li:nth-child(" + (i + 1) + ") span.progress");
+
+                                        if (evt.lengthComputable) {
+                                            var loaded = (evt.loaded / evt.total);
+                                            if (loaded <= 1) {
+                                                //console.log(evt.loaded / evt.total)
+                                                var percent = loaded * 100;
+                                                console.log("進度：" + percent + "%");
+
+                                                // 改變介面進度條的百分比
+                                                progress_el.setAttribute("style", "width: " + percent + "%;");
+                                            }
+                                        }
+
+                                    }, false);
+                                }
+                                return myXhr;
+                            },
+
+                            success: function (data_obj) { // 從伺服器回傳的資料
+                                //console.log("success");
+                                alert("傳送完成");
+                                console.log(data_obj);
+
+                            }
+                        });
+
+                    });
+
+
+                }
+
+            });
+        });
+    </script>
+</body>
+
+</html>

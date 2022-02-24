@@ -9,4 +9,5 @@ public interface CustomerInterface<CustomerVO> {
     public void changeStatus(Integer customerId ,Byte statusCode);
     public CustomerVO selectByUserEmailAndPassword(String customerEmail, String customerPassword); 
     public List<CustomerVO> getAll();
+    public Long countCustomer();
 }

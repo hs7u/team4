@@ -23,6 +23,7 @@
 				<value>web.Product.vo.ProductVO</value>
 				<value>web.Customer.vo.CustomerVO</value>
 				<value>web.Course.vo.CourseVO</value>
+				<value>web.CustomerOrders.vo.CustomerOrdersVO</value>
 			</array>
 		</property>
 		<property name="hibernateProperties">

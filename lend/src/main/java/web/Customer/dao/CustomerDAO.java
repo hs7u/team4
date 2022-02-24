@@ -279,4 +279,12 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
         cq = cq.select(root);
         return  getSession().createQuery(cq).getResultList();
     }
+    public Long countCustomer(){
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
+        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+        Root<CustomerVO> root = cq.from(CustomerVO.class);
+        cq = cq.select(cb.count(root));
+        return getSession().createQuery(cq).getSingleResult();
+    }
 }

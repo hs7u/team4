@@ -15,9 +15,9 @@ public class CustomerOrdersService {
     @Autowired
     private CustomerOrderInterface<CustomerOrdersVO> dao;
     // private CustomerOrderDAO dao;
-//     public CustomerOrdersService(Session session){
-//         dao = new CustomerOrderDAO(session);
-//     }
+    // public CustomerOrdersService(Session session){
+    //     dao = new CustomerOrderDAO(session);
+    // }
     public CustomerOrdersVO addOrder(Integer customerId, Integer shippingMethodCode,Integer orderDeliveryCharge, 
             Timestamp orderShippingDate,String recipient, String sendersAddress,String orderDetails){
         java.sql.Timestamp orderCreatedDate = new java.sql.Timestamp(System.currentTimeMillis());
@@ -64,5 +64,8 @@ public class CustomerOrdersService {
 		result = result * prime + (orderDetails == null ? 0 : (orderDetails).hashCode()); 
 
 		return result;
+    }
+    public Long countOrder(){
+        return dao.countOrder();
     }
 }

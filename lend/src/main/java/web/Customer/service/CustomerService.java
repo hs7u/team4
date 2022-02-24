@@ -73,6 +73,9 @@ public class CustomerService {
     public List<CustomerVO> getAllCustomer() {
         return dao.getAll();
     }
+    public Long countCustomer() {
+        return dao.countCustomer();
+    }
     public int hashCode(String customerName,String customerEmail) {
         final int prime = 31;
 		int result = 1;

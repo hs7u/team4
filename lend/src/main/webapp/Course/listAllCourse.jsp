@@ -72,7 +72,6 @@
 </head>
 
 <body bgcolor='#f1f5f9'>
-    <h3>所有課程資料</h3>	
 
 <table>
 	<tr>

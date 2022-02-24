@@ -118,7 +118,7 @@ public class CourseServlet extends HttpServlet {
 				ApplicationContext context = (ApplicationContext)application.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
 				CourseService csc = (CourseService) context.getBean("courseService");
 
-				CourseVO check = csc.selectByCourseId(csc.hashCode(courseNameReg, courseLocation));
+				CourseVO check = csc.getOneCourse(csc.hashCode(courseNameReg, courseLocation));
 				CourseVO cvo = null;
 				if(check == null) {
 					cvo = csc.addCourse(courseName, coursePrice, imgData,

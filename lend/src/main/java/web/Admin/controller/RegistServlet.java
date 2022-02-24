@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import web.Admin.service.AdminService;
 import web.Admin.vo.AdminVO;
 
-@WebServlet("/Admin/regist")
+// @WebServlet("/Admin/regist")
 public class RegistServlet extends HttpServlet{
     private AdminService as;
 	public void init() throws ServletException {
@@ -44,7 +44,7 @@ public class RegistServlet extends HttpServlet{
 	    if (account == null) {
 			if (errorMsg.size() <= 0){
 				// AdminService as = new AdminService((Session)req.getAttribute("session"));
-				AdminVO check = as.getOneManager(regist.getAdminAccount(), regist.getAdminPassword());
+				AdminVO check = as.getOneManager(regist);
 				if(check == null){
 					as.newManager(regist);
 					out.print("Regist Success");

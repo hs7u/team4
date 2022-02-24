@@ -285,4 +285,12 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
         }
         return coVo; */
     }
+    public Long countOrder(){
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
+        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+        Root<CustomerOrdersVO> root = cq.from(CustomerOrdersVO.class);
+        cq = cq.select(cb.count(root));
+        return getSession().createQuery(cq).getSingleResult();
+    }
 }

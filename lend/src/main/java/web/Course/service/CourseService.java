@@ -50,11 +50,11 @@ public class CourseService {
     public void delete(Integer courseId){
         dao.delete(courseId);
     }
-    public void changeState(Integer courseId, Byte courseState){
-        dao.changeState(courseId, courseState);
+    public void changeStatus(Integer courseId, Byte courseState){
+        dao.changeStatus(courseId, courseState);
     }
-    public CourseVO selectByCourseId(Integer courseId){
-        return dao.selectByCourseId(courseId);
+    public CourseVO getOneCourse(Integer courseId){
+        return dao.getOneCourse(courseId);
     }
     public int hashCode(String courseName, String courseLocation) {
         final int prime = 31;
@@ -64,9 +64,10 @@ public class CourseService {
         
 		return result;
     }
-    
     public List<CourseVO> getALL(){
     	return dao.getAll();
     }
-    
+    public Long countCourse() {
+        return dao.countCourse();
+    }
 }

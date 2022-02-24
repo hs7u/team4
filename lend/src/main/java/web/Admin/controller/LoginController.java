@@ -27,8 +27,7 @@ public class LoginController {
             }
             if(errorMsg.length() > 0){
                 return errorMsg.toString();
-            }
-        
+            }      
             AdminVO check = as.getOneManager(login);
             if(check != null){
                 session.setAttribute("account", check.getAdminAccount());

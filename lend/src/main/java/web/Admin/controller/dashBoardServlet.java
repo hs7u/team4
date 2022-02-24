@@ -20,7 +20,7 @@ import web.Course.service.CourseService;
 import web.Customer.service.CustomerService;
 
 
-@WebServlet("/Admin/dashBoard")
+// @WebServlet("/Admin/dashBoard")
 public class dashBoardServlet extends HttpServlet{
 	private int i = 1;
 	private CustomerService cs;
