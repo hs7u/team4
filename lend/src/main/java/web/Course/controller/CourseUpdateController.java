@@ -21,7 +21,7 @@ public class CourseUpdateController {
                 vo.setCourseName(check.getCourseName());
             if(vo.getCoursePrice() == null)
                 vo.setCoursePrice(check.getCoursePrice());
-            if(vo.getCourseImage().length <= 0)
+            if(vo.getCourseImage() == null)
                 vo.setCourseImage(check.getCourseImage());
             if(vo.getMaxOfCourse() == null)
                 vo.setMaxOfCourse(check.getMaxOfCourse());

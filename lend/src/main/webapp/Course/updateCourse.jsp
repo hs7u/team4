@@ -4,7 +4,7 @@
 <%@ page import="web.Course.vo.*"%>
 <%@ page import="java.util.*"%>
 <%
-CourseVO courseVo = request.getAttribute("currentCourse");
+	CourseVO courseVo = request.getAttribute("currentCourse");
 %>
 <title>課程資料修改 - updateCourse.jsp</title>
 

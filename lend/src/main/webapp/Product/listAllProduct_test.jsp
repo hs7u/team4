@@ -2,8 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="web.Product.service.ProductService"%>
-<%@ page import ="org.hibernate.Session"%>
-<%@ page import ="web.Product.vo.ProductVO"%>
+<%@ page import="org.hibernate.Session"%>
+<%@ page import="web.Product.vo.ProductVO"%>
 <%@ page import="ProjectInterfaces.ProductInterface"%>
 <%@ page import="org.springframework.context.ApplicationContext"%>
 <%@ page import="org.springframework.web.context.WebApplicationContext"%>

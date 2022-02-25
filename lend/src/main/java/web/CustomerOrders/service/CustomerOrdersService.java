@@ -18,21 +18,27 @@ public class CustomerOrdersService {
     // public CustomerOrdersService(Session session){
     //     dao = new CustomerOrderDAO(session);
     // }
-    public CustomerOrdersVO addOrder(Integer customerId, Integer shippingMethodCode,Integer orderDeliveryCharge, 
-            Timestamp orderShippingDate,String recipient, String sendersAddress,String orderDetails){
+    public String addOrder(CustomerOrdersVO coVo){
         java.sql.Timestamp orderCreatedDate = new java.sql.Timestamp(System.currentTimeMillis());
-        CustomerOrdersVO coVo = new CustomerOrdersVO();
-        coVo.setOrderId(hashCode(customerId, orderDetails));
-        coVo.setCustomerId(customerId);
-        coVo.setShippingMethodCode(shippingMethodCode);
+        StringBuilder errorMsg = new StringBuilder();
         coVo.setOrderCreatedDate(orderCreatedDate);
-        coVo.setOrderDeliveryCharge(orderDeliveryCharge);
-        coVo.setOrderShippingDate(orderShippingDate);
-        coVo.setRecipient(recipient);
-        coVo.setSendersAddress(sendersAddress);
-        coVo.setOrderDetails(orderDetails);
-        dao.insert(coVo);
-        return coVo;
+        if(coVo.getOrderDeliveryCharge() == null)
+            errorMsg.append("運費不得為空"+System.lineSeparator());
+        if(coVo.getOrderDeliveryCharge() <= 0)
+            errorMsg.append("運費不得為0"+System.lineSeparator());
+        if(coVo.getOrderShippingDate() == null)
+            errorMsg.append("日期不得為空"+System.lineSeparator());
+        if(coVo.getRecipint().isEmpty())
+            errorMsg.append("取貨人不得為空"+System.lineSeparator());
+        if(coVo.getSendersAddress().isEmpty())
+            errorMsg.append("地址不得為空"+System.lineSeparator());
+        if(coVo.getOrderDetails().isEmpty())
+            errorMsg.append("細節不得為空"+System.lineSeparator());
+        if(errorMsg.length() <= 0){
+            dao.insert(coVo);
+            return "success";
+        }
+        return errorMsg.toString();
     }
     public CustomerOrdersVO updateCustomerOrder(Integer orderId, Integer customerId, Integer shippingMethodCode,Integer orderDeliveryCharge,
             Timestamp orderShippingDate,String recipient, String sendersAddress, String orderDetails){
@@ -56,14 +62,6 @@ public class CustomerOrdersService {
     }
     public void updateStatus(String status_name, Integer orderId, Byte statusCode) {
         dao.updateStatus(status_name, orderId, statusCode);
-    }
-    public int hashCode(Integer customerId,String orderDetails) {
-        final int prime = 31;
-		int result = 1;
-		result = result * prime + customerId;
-		result = result * prime + (orderDetails == null ? 0 : (orderDetails).hashCode()); 
-
-		return result;
     }
     public Long countOrder(){
         return dao.countOrder();

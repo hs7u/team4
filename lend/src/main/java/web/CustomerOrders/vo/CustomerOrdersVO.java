@@ -3,6 +3,8 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,6 +14,7 @@ import org.hibernate.annotations.ColumnDefault;
 @Table(name = "Customer_Orders")
 public class CustomerOrdersVO implements java.io.Serializable{
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "order_id")
 	private Integer orderId;
 	@Column(name = "customer_id")

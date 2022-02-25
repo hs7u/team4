@@ -61,7 +61,7 @@ function getCourses() {
                                                     <td><label for="">開始報名<input type="date" class="nomal ${res.data[i].courseId}" name="signUpStartdate"></label></td>
                                                 </tr>
                                                 <tr class="twoline">
-                                                    <td><label for="">開課中<input type="radio" class="nomal ${res.data[i].courseId}" name="courseStatus" value="1" checked="${res.data[i].courseStatus == 1? true: false}"></label>
+                                                    <td><label for="">開課中<input type="radio" class="nomal ${res.data[i].courseId}" name="courseStatus" value="1" checked="${res.data[i].courseStatus == 1 ? true : false}"></label>
                                                     </td>
                                                 </tr>
                                             </table>                    
@@ -82,7 +82,7 @@ function getCourses() {
                                                     <td><label for="">截止報名<input type="date" class="nomal ${res.data[i].courseId}" name="signUpDeadline"></label></td>
                                                 </tr>   
                                                 <tr class="twoline">
-                                                    <td> <label for="">未開課<input type="radio" class="nomal ${res.data[i].courseId}" name="courseStatus" value="0" checked="${res.data[i].courseStatus == 0? true: false}"></label></td>
+                                                    <td> <label for="">未開課<input type="radio" class="nomal ${res.data[i].courseId}" name="courseStatus" value="0" checked="${res.data[i].courseStatus == 0 ? true : false}"></label></td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -103,7 +103,7 @@ function getCourses() {
       })
 }
 function timeable(res){
-    $("t.target").text(res);
+    $("p#target").text(res);
     $("div.overlay").css("z-index", 999999).fadeIn();
     $("button.btn_modal_close").on("click", function(){
         $("div.overlay").fadeOut("done", function(){

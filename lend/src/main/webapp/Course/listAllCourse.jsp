@@ -5,15 +5,9 @@
 <%@ page import="org.hibernate.Session"%>
 <%@ page import="ProjectInterfaces.CourseInterface"%>
 <%@ page import="web.Course.service.CourseService"%>
-<<<<<<< HEAD
 <%@ page import="web.Course.vo.CourseVO"%>
 <%@ page import="org.springframework.context.ApplicationContext"%>
 <%@ page import="org.springframework.web.context.WebApplicationContext"%>
-=======
-<%@ page import ="web.Course.vo.CourseVO"%>
-<%@ page import="ProjectInterfaces.CourseInterface"%>
-
->>>>>>> origin/main
 
 <%
     ApplicationContext context = (ApplicationContext)request.getServletContext().getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
