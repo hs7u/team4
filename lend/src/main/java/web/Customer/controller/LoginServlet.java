@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import web.Customer.service.CustomerService;
 import web.Customer.vo.CustomerVO;
 
-@WebServlet("/Customer/login")
+// @WebServlet("/Customer/login")
 public class LoginServlet extends HttpServlet {
 	
 	private CustomerService cs;

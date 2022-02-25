@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -19,6 +21,7 @@ public class CustomerVO implements java.io.Serializable{
 //	@OneToMany(mappedBy = "Favorite",cascade = CascadeType.REMOVE)
 //	private Set<FavoriteVO> fVos;
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "customer_id")
 	private Integer customerId;
 	@Column(name = "customer_name")

@@ -514,14 +514,14 @@
 							<form action="#">
 								<div class="row learts-mb-n50">
 									<div class="col-12 learts-mb-50">
-										<br><input type="email" placeholder="Username or email">
+										<br><input type="email" placeholder="Email" name="customerEmail" id="loginEmail>
 									</div>
 									<div class="col-12 learts-mb-50">
-										<input type="password" placeholder="Password">
+										<input type="password" placeholder="Password" name="customerPassword" id="loginPassword>
 									</div>
 								
 									<div class="col-12 text-center learts-mb-50">
-										<br> <button class="btn btn-dark btn-outline-hover-dark">登入</button>
+										<br> <button class="btn btn-dark btn-outline-hover-dark btn_login">登入</button>
 									</div>
 									<div class="col-12 learts-mb-50">
 										<div class="row learts-mb-n20">
@@ -559,41 +559,42 @@
 							<form action="#">
 								<div class="row learts-mb-n30">
 									<div class="col-12 learts-mb-20">
-										<label for="customer_email">Email<abbr
-											class="required">*</abbr></label> <input type="email"
-											id="customer_email">
+										<label for="customerEmail">Email<abbr class="required">*</abbr></label>
+                                        <input type="email" placeholder="信箱" name="customerEmail" id="registEmail">
 									</div>
 									<div class="col-12 learts-mb-20">
-										<input type="password" placeholder="密碼">
+                                        <label for="customerPassword">Password<abbr class="required">*</abbr></label>
+										<input type="password" placeholder="密碼" name="customerPassword" id="registPassword">
 									</div>
 									<div class="col-12 learts-mb-20">
-										<input type="text" placeholder="姓名">
+                                        <label for="customerName">Name<abbr class="required">*</abbr></label>
+										<input type="text" placeholder="姓名" name="customerName" id="registName">
 									</div>
 									<div class="col-12 learts-mb-20">
-										<input type="tel" placeholder="電話">
+                                        <label for="customerPhone">Phone<abbr class="required">*</abbr></label>
+										<input type="tel" placeholder="電話" name="customerPhone" id="registPhone">
 									</div>
 									<div class="col-12 learts-mb-20">
-										<input type="text" placeholder="寄送地址">
+                                        <label for="customerAddress">Address<abbr class="required">*</abbr></label>
+										<input type="text" placeholder="寄送地址" name="customerAddress" id="registAddress">
 									</div>
 									<div class="col-12 learts-mb-20">
-										<input type="date" placeholder="生日">
+                                        <label for="bitrhday">Bitrhday<abbr class="required">*</abbr></label>
+										<input type="date" placeholder="生日" name="customerBirthday" id="registBitrhday">
 									</div>
 
 									<div class="col-12 learts-mb-20">
+                                        <label for="gender">Gender<abbr class="required">*</abbr></label>
 										<div style="display: flex;">
-											<input type="radio" name="customization" size="20"
-												value="<%= (productVO==null)? " 1" /> <label
-												for="customization">男</label> <input type="radio"
-												name="customization" size="45"
-												value="<%= (productVO==null)? " 0"  /> <label
-												for="customization"> 女</label>
+											<label for="gender">男<input type="radio" name="customerGender" size="45" value="M" checked/></label> 
+                                            <label for="gender"> 女<input type="radio" name="customerGender" size="45" value="F" /></label>
 										</div>
 									</div>
 									<div class="col-12 learts-mb-50">
 										<p>按下註冊鈕的同時，表示您已詳閱我們的資料使用政策與使用條款，同意使用 studio4art 所提供的服務。</p>
 									</div>
 									<div class="col-12 text-center learts-mb-50">
-										<button class="btn btn-dark btn-outline-hover-dark">註冊</button>
+										<button class="btn btn-dark btn-outline-hover-dark btn_regist">註冊</button>
 									</div>
 								</div>
 							</form>
@@ -697,7 +698,9 @@
 
     <!-- Main Activation JS -->
     <script src="assets/js/main.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./customerRegist.js"></script>
 </body>
 
 </html>

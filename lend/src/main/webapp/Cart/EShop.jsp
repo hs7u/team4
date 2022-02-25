@@ -86,7 +86,7 @@
 				if(cartAll[i].productId != select.productId){
 					check++;
 				}
-				if(cartAll[i].productQuantity == select.productQuantity){
+				if(cartAll[i].productProductId == select.productProductId){
 					cartAll[i].productQuantity += select.productQuantity;
 					cartAll[i].productPrice += select.productPrice;
 				}

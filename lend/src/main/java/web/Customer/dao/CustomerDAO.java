@@ -53,15 +53,25 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     +"`customer_status` = ?"
     +"WHERE `customer_id` = ?;"; */
     
-    public void insert(CustomerVO customerVo){
-        // Hibernate
-        if(customerVo != null && customerVo.getCustomerEmail() != null){
-            CustomerVO cVo =  getSession().get(CustomerVO.class, customerVo.getCustomerId());
-            if(cVo == null){
-                 getSession().save(customerVo);
-            }
+    public String insert(CustomerVO customerVo){
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
+        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+        Root<CustomerVO> root = cq.from(CustomerVO.class);
+        cq = cq.select(cb.count(root)).where(cb.equal(root.get("customerEmail"), customerVo.getCustomerEmail()));
+        long result = getSession().createQuery(cq).getSingleResult();
+        if(result == 0){
+            getSession().save(customerVo);
+            return "success";
         }
-       
+        return "fail";
+        // Hibernate
+        // CustomerVO cVo =  getSession().get(CustomerVO.class, customerVo.getCustomerId());
+        // if(cVo == null){
+        //         getSession().save(customerVo);
+        //         return "success";
+        // }
+        // return "fail";
         // DateSource Jdbc
         /* try (Connection con = ds.getConnection(); 
              PreparedStatement ps = con.prepareStatement(INSERT_STMT)){

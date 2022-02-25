@@ -24,21 +24,32 @@ public class CustomerService {
     	// this.session = this.sf.getCurrentSession();
     //     dao = new CustomerDAO(session);
     // }
-    public CustomerVO addCustomer(String customerName, String customerEmail, String customerPassword,
-            String customerPhone, Date customerBirthday, String customerGender, String customerAddress) {
+    public String addCustomer(CustomerVO cVo) {
         java.sql.Timestamp customerRegisterTime = new java.sql.Timestamp(System.currentTimeMillis());
-        CustomerVO cVo = new CustomerVO();
-        cVo.setCustomerId(hashCode(customerName, customerEmail));
-        cVo.setCustomerName(customerName);
-        cVo.setCustomerEmail(customerEmail);
-        cVo.setCustomerPassword(customerPassword);
-        cVo.setCustomerPhone(customerPhone);
-        cVo.setCustomerBirthday(customerBirthday);
-        cVo.setCustomerGender(customerGender);
-        cVo.setCustomerAddress(customerAddress);
+        StringBuilder errorMsg = new StringBuilder();
+        if(cVo.getCustomerName().trim().isEmpty()){
+            errorMsg.append("姓名不得為空"+System.lineSeparator());
+        }
+        if(cVo.getCustomerEmail().trim().isEmpty()){
+            errorMsg.append("信箱不得為空"+System.lineSeparator());
+        }
+        if(cVo.getCustomerPassword().trim().isEmpty()){
+            errorMsg.append("密碼不得為空"+System.lineSeparator());
+        }
+        if(cVo.getCustomerPhone().trim().isEmpty()){
+            errorMsg.append("電話不得為空"+System.lineSeparator());
+        }
+        if(cVo.getCustomerBirthday() == null){
+            errorMsg.append("生日不得為空"+System.lineSeparator());
+        }
+        if(cVo.getCustomerAddress().trim().isEmpty()){
+            errorMsg.append("地址不得為空"+System.lineSeparator());
+        }
+        if(errorMsg.length() > 0){
+            return errorMsg.toString();
+        } 
         cVo.setCustomerRegisterTime(customerRegisterTime);
-        dao.insert(cVo);
-        return cVo;
+        return dao.insert(cVo);
     }
     public CustomerVO updateCustomer(Integer customeId, String customerName, String customerEmail, String customerPassword,
             String customerPhone, Date customerBirthday, String customerGender, String customerAddress, Byte customerStatus){
@@ -75,13 +86,5 @@ public class CustomerService {
     }
     public Long countCustomer() {
         return dao.countCustomer();
-    }
-    public int hashCode(String customerName,String customerEmail) {
-        final int prime = 31;
-		int result = 1;
-		result = result * prime + (customerName == null ? 0 : (customerName).hashCode()); 
-		result = result * prime + (customerEmail == null ? 0 : (customerEmail).hashCode()); 
-        
-		return result;
     }
 }

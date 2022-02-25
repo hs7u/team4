@@ -18,8 +18,8 @@ import java.util.HashMap;
 import web.Customer.service.CustomerService;
 import web.Customer.vo.CustomerVO;
 
-@WebServlet("/Customer/regist")
-@MultipartConfig
+// @WebServlet("/Customer/regist")
+// @MultipartConfig
 public class RegistServlet extends HttpServlet{
 	 protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
          doPost(req,res);
@@ -43,25 +43,25 @@ public class RegistServlet extends HttpServlet{
 			is.close();
         }
         // CustomerService cs = new CustomerService((Session)req.getAttribute("session"));
-        ServletContext application = this.getServletContext();
-        ApplicationContext context = (ApplicationContext)application.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
-        CustomerService cs = (CustomerService) context.getBean("customerService");    
-        CustomerVO check = cs.getOneCustomer(regist.get("email"), regist.get("password"));
-        CustomerVO cVo = null;
-        if(check == null) {
-            cVo = cs.addCustomer(regist.get("cname"),
-                                regist.get("email"),
-                                regist.get("password"),
-                                regist.get("Phone"),
-                                java.sql.Date.valueOf(regist.get("birth")),
-                                regist.get("gender"),
-                                regist.get("address"));
-        }
-        if (cVo != null) {
-            out.println(cVo.getCustomerName()+"("+cVo.getCustomerId()+")"+"\t\t"+"Regist Success");
-        } else {
-            out.println("Regist fail or Account already exists");
-        }
+        // ServletContext application = this.getServletContext();
+        // ApplicationContext context = (ApplicationContext)application.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+        // CustomerService cs = (CustomerService) context.getBean("customerService");    
+        // CustomerVO check = cs.getOneCustomer(regist.get("email"), regist.get("password"));
+        // CustomerVO cVo = null;
+        // if(check == null) {
+            // cVo = cs.addCustomer(regist.get("cname"),
+            //                     regist.get("email"),
+            //                     regist.get("password"),
+            //                     regist.get("Phone"),
+            //                     java.sql.Date.valueOf(regist.get("birth")),
+            //                     regist.get("gender"),
+            //                     regist.get("address"));
+        // }
+        // if (cVo != null) {
+        //     out.println(cVo.getCustomerName()+"("+cVo.getCustomerId()+")"+"\t\t"+"Regist Success");
+        // } else {
+        //     out.println("Regist fail or Account already exists");
+        // }
         out.close();
     }   
 }
