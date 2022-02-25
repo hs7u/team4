@@ -7,15 +7,6 @@
 <%@ page import ="web.Product.vo.ProductVO"%>
 <%@ page import ="web.Cart.CartVO"%>
 <%@ page import="ProjectInterfaces.ProductInterface"%>
-<%@ page import="org.springframework.context.ApplicationContext"%>
-<%@ page import="org.springframework.web.context.WebApplicationContext"%>
-
-<%
-    ApplicationContext context = (ApplicationContext)request.getServletContext().getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
-	ProductService psc = (ProductService)context.getBean("productService");
-    ArrayList<ProductVO> list = psc.getAll();
-    pageContext.setAttribute("list",list);
-%>
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -28,7 +19,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/web title logo 6.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.webp">
 
     <!-- CSS
 	============================================ -->
@@ -40,8 +31,6 @@
     <link rel="stylesheet" href="assets/css/vendor/customFonts.css">
 
     <!-- Plugins CSS (All Plugins Files) -->
-    
-    <link rel="stylesheet" href="assets/css/shop/shop.css">
     <link rel="stylesheet" href="assets/css/plugins/select2.min.css">
     <link rel="stylesheet" href="assets/css/plugins/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/css/plugins/swiper.min.css">
@@ -119,16 +108,16 @@
                 <!-- Search End -->
 
                 <!-- Header Tools Start -->
-                <div class="col-auto">
+                 <div class="col-auto">
                     <div class="header-tools justify-content-end">
                         <div class="header-login">
-                            <a href="my-account.html"><i class="fal fa-user"></i></a>
+                            <a href="login-register.html"><i class="fal fa-user"></i></a>
                         </div>
                         <div class="header-wishlist">
                             <a href="#offcanvas-wishlist" class="offcanvas-toggle"><span class="wishlist-count">3</span><i class="fal fa-heart"></i></a>
                         </div>
                         <div class="header-cart">
-                            <a href="#offcanvas-cart " class="offcanvas-toggle"><span class="cart-count -none"></span><i class="fal fa-shopping-cart"></i></a>
+                            <a href="#offcanvas-cart" class="offcanvas-toggle"><span class="cart-count">3</span><i class="fal fa-shopping-cart"></i></a>
                         </div>
                     </div>
                 </div>
@@ -139,39 +128,7 @@
 
     </div>
     <!-- Header Section End -->
-      <!-- Slider main container Start -->
-      <div class="section">
-          <div class="container">
-              <div class="home4-slider swiper-container">
-                  <div class="swiper-wrapper">
-                      <div class="home4-slide-item swiper-slide" data-swiper-autoplay="5000">
-                          <div class="home4-slide-image"><img src="assets/images/slider/home4/slide-1_plant.png" alt="Home 4 Slider Image"></div>
-                          <div class="home4-slide-content">
-                             <!-- <div class="link"><a href="shop.html" class="btn btn-black btn-outline-hover-black">shop now</a></div>-->
-                          </div>
-                      </div>
-                      <div class="home4-slide-item swiper-slide" data-swiper-autoplay="5000">
-                          <div class="home4-slide-image"><img src="assets/images/slider/home4/slide-1_woodburn.PNG" alt="Home 4 Slider Image"></div>
-                          <div class="home4-slide-content">
-                              <!-- <div class="link"><a href="shop.html" class="btn btn-black btn-outline-hover-black">shop now</a></div>-->
-                          </div>
-                      </div>
-                      <div class="home4-slide-item swiper-slide" data-swiper-autoplay="5000">
-                          <div class="home4-slide-image"><img src="assets/images/slider/home4/slide-3.webp" alt="Home 4 Slider Image"></div>
-                          <div class="home4-slide-content">
-                              <span class="category">HOME DECOR</span>
-                              <h2 class="title">Handmade Wooden<br> Rounded Bowl</h2>
-                             <!--  <div class="link"><a href="shop.html" class="btn btn-black btn-outline-hover-black">shop now</a></div> -->
-                          </div>
-                      </div>
-                  </div>
-                  <div class="home4-slider-prev swiper-button-prev"><i class="ti-angle-left"></i></div>
-                  <div class="home4-slider-next swiper-button-next"><i class="ti-angle-right"></i></div>
-                  <div class="home4-slider-pagination swiper-pagination"></div>
-              </div>
-          </div>
-      </div>
-      <!-- Slider main container End -->
+
     <!-- Header Section Start -->
     <div class="sticky-header section bg-white section-fluid d-none d-xl-block">
         <div class="container">
@@ -180,7 +137,7 @@
                 <!-- Header Logo Start -->
                 <div class="col-xl-auto col">
                     <div class="header-logo">
-                        <a href="index.html"><img src="./assets/images/web logo1.png" alt="studio4art Logo"></a>
+                        <a href="index.html"><img src="assets/images/logo/logo-2.webp" alt="Learts Logo"></a>
                     </div>
                 </div>
                 <!-- Header Logo End -->
@@ -239,7 +196,7 @@
                             <a href="#offcanvas-wishlist" class="offcanvas-toggle"><span class="wishlist-count">3</span><i class="fal fa-heart"></i></a>
                         </div>
                         <div class="header-cart">
-                            <a href="#offcanvas-cart" class="offcanvas-toggle"><span class="cart-count -none"></span><i class="fal fa-shopping-cart"></i></a>
+                            <a href="#offcanvas-cart" class="offcanvas-toggle"><span class="cart-count">3</span><i class="fal fa-shopping-cart"></i></a>
                         </div>
                         <div class="mobile-menu-toggle d-xl-none">
                             <a href="#" class="offcanvas-toggle">
@@ -267,7 +224,7 @@
                 <!-- Header Logo Start -->
                 <div class="col">
                     <div class="header-logo">
-                        <a href="index.html"><img src="./assets/images/web logo1.png" alt="studio4art Logo"></a>
+                        <a href="index.html"><img src="assets/images/logo/logo-2.webp" alt="Learts Logo"></a>
                     </div>
                 </div>
                 <!-- Header Logo End -->
@@ -313,7 +270,7 @@
                 <!-- Header Logo Start -->
                 <div class="col">
                     <div class="header-logo">
-                        <a href="index.html"><img src="./assets/images/web logo1.png" alt="studio4art Logo"></a>
+                        <a href="index.html"><img src="assets/images/logo/logo-2.webp" alt="Learts Logo"></a>
                     </div>
                 </div>
                 <!-- Header Logo End -->
@@ -440,15 +397,31 @@
                             <a href="#" class="remove">×</a>
                         </div>
                     </li>
+                    <li>
+                        <a href="product-details.html" class="image"><img src="assets/images/product/cart-product-2.webp" alt="Cart product Image"></a>
+                        <div class="content">
+                            <a href="product-details.html" class="title">Lucky Wooden Elephant</a>
+                            <span class="quantity-price">1 x <span class="amount">$35.00</span></span>
+                            <a href="#" class="remove">×</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="product-details.html" class="image"><img src="assets/images/product/cart-product-3.webp" alt="Cart product Image"></a>
+                        <div class="content">
+                            <a href="product-details.html" class="title">Fish Cut Out Set</a>
+                            <span class="quantity-price">1 x <span class="amount">$9.00</span></span>
+                            <a href="#" class="remove">×</a>
+                        </div>
+                    </li>
                 </ul>
             </div>
             <div class="foot">
                 <div class="sub-total">
-                    <strong>Subtotal :</strong>
+                    <strong>小計 :</strong>
                     <span class="amount">$144.00</span>
                 </div>
                 <div class="buttons">
-                    <a href="shopping-cart.jsp" class="btn btn-dark btn-hover-primary">view cart</a>
+                    <a href="shopping-cart.html" class="btn btn-dark btn-hover-primary">view cart</a>
                     <a href="checkout.html" class="btn btn-outline-dark">checkout</a>
                 </div>
                 <p class="minicart-message">Free Shipping on All Orders Over $100!</p>
@@ -660,188 +633,84 @@
     <div class="offcanvas-overlay"></div>
 
     <!-- Page Title/Header Start -->
-  
+    <div class="page-title-section section" data-bg-image="assets/images/bg/page-title-1.webp">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+
+                    <div class="page-title">
+                        <h1 class="title">Cart</h1>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active">Cart</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Page Title/Header End -->
 
-    <!-- Shop Products Section Start -->
-    <div class="section section-padding pt-0">
-
-        <!-- Shop Toolbar Start -->
-        <div class="shop-toolbar border-bottom">
-            <div class="container">
-                <div class="row learts-mb-n20">
-
-                    <!-- Isotop Filter Start -->
-                    <div class="col-md col-12 align-self-center learts-mb-20">
-                        <div class="isotope-filter shop-product-filter" data-target="#shop-products">
-                            <button class="active" data-filter="*">all</button>
-                            <button data-filter=".featured">Hot Products</button>
-                            <button data-filter=".new">New Products</button>
-                            <button data-filter=".sales">Sales Products</button>
-                        </div>
-                    </div>
-                    <!-- Isotop Filter End -->
-
-                    <div class="col-md-auto col-12 learts-mb-20">
-                        <ul class="shop-toolbar-controls">
-
-                            <li>
-                                <div class="product-sorting">
-                                    <select class="nice-select">
-                                        <option value="menu_order" selected="selected">Default sorting</option>
-                                        <option value="popularity">Sort by popularity</option>
-                                        <option value="rating">Sort by average rating</option>
-                                        <option value="date">Sort by latest</option>
-                                        <option value="price">Sort by price: low to high</option>
-                                        <option value="price-desc">Sort by price: high to low</option>
-                                    </select>
+    <!-- Shopping Cart Section Start -->
+    <div class="section section-padding">
+        <div class="container">
+            <form class="cart-form" action="#">
+                <table class="cart-wishlist-table table">
+                    <thead>
+                        <tr>
+                            <th class="name" colspan="2">商品</th>
+                            <th class="price">價格</th>
+                            <th class="quantity">數量</th>
+                            <th class="subtotal">總價</th>
+                            <th class="remove">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="thumbnail"><a href="product-details.html"><img src="assets/images/product/cart-product-1.webp" alt="cart-product-1"></a></td>
+                            <td class="name"> <a href="product-details.html">Walnut Cutting Board</a></td>
+                            <td class="price"><span>£100.00</span></td>
+                            <td class="quantity">
+                                <div class="product-quantity">
+                                    <span class="qty-btn minus"><i class="ti-minus"></i></span>
+                                    <input type="text" class="input-qty" value="1">
+                                    <span class="qty-btn plus"><i class="ti-plus"></i></span>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="product-column-toggle d-none d-xl-flex">
-                                    <button class="toggle active hintT-top" data-hint="5 Column" data-column="5"><i class="ti-layout-grid4-alt"></i></button>
-                                    <button class="toggle hintT-top" data-hint="4 Column" data-column="4"><i class="ti-layout-grid3-alt"></i></button>
-                                    <button class="toggle hintT-top" data-hint="3 Column" data-column="3"><i class="ti-layout-grid2-alt"></i></button>
-                                </div>
-                            </li>
-                            <li>
-                                <a class="product-filter-toggle" href="#product-filter">Filters</a>
-                            </li>
-
-                        </ul>
+                            </td>
+                            <td class="subtotal"><span>£100.00</span></td>
+                            <td class="remove"><a href="#" class="btn">×</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row justify-content-between mb-n3">
+                    <div class="col-auto">
+                        <a class="btn btn-dark btn-outline-hover-dark mb-3" href="shoptest.jsp">繼 續 購 物</a>
                     </div>
-
                 </div>
+            </form>
+            <div class="cart-totals mt-5">
+                <h2 class="title">Cart Total</h2>
+                <table>
+                    <tbody>
+                        <tr class="subtotal">
+                            <th>小計</th>
+                            <td><span class="amount">£242.00</span></td>
+                        </tr>
+                        <tr class="total">
+                            <th>總價</th>
+                            <td><strong><span class="amount">£242.00</span></strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="checkout.html" class="btn btn-dark btn-outline-hover-dark">結帳去</a>
             </div>
         </div>
-        <!-- Shop Toolbar End -->
 
-        <!-- Product Filter Start -->
-        <div id="product-filter" class="product-filter bg-light">
-            <div class="container">
-                <div class="row row-cols-lg-5 row-cols-md-3 row-cols-sm-2 row-cols-1 learts-mb-n30">
+    </div>
+    <!-- Shopping Cart Section End -->
 
-                    <!-- Sort by Start -->
-                    <div class="col learts-mb-30">
-                        <h3 class="widget-title product-filter-widget-title">Sort by</h3>
-                        <ul class="widget-list product-filter-widget customScroll">
-                            <li><a href="#">Popularity</a></li>
-                            <li><a href="#">Average rating</a></li>
-                            <li><a href="#">Newness</a></li>
-                            <li><a href="#">Price: low to high</a></li>
-                            <li><a href="#">Price: high to low</a></li>
-                        </ul>
-                    </div>
-                    <!-- Sort by End -->
-
-                    <!-- Price filter Start -->
-                    <div class="col learts-mb-30">
-                        <h3 class="widget-title product-filter-widget-title">Price filter</h3>
-                        <ul class="widget-list product-filter-widget customScroll">
-                            <li> <a href="#">All</a></li>
-                            <li> <a href="#"><span class="amount"><span class="cur-symbol">£</span>0.00</span> - <span class="amount"><span class="cur-symbol">£</span>80.00</span></a></li>
-                            <li> <a href="#"><span class="amount"><span class="cur-symbol">£</span>80.00</span> - <span class="amount"><span class="cur-symbol">£</span>160.00</span></a></li>
-                            <li> <a href="#"><span class="amount"><span class="cur-symbol">£</span>160.00</span> - <span class="amount"><span class="cur-symbol">£</span>240.00</span></a></li>
-                            <li> <a href="#"><span class="amount"><span class="cur-symbol">£</span>240.00</span> - <span class="amount"><span class="cur-symbol">£</span>320.00</span></a></li>
-                            <li> <a href="#"><span class="amount"><span class="cur-symbol">£</span>320.00</span> +</a></li>
-                        </ul>
-                    </div>
-                    <!-- Price filter End -->
-
-                    <!-- Categories Start -->
-                    <div class="col learts-mb-30">
-                        <h3 class="widget-title product-filter-widget-title">Categories</h3>
-                        <ul class="widget-list product-filter-widget customScroll">
-                            <li><a href="#">Gift ideas</a> <span class="count">16</span></li>
-                            <li><a href="#">Home Decor</a> <span class="count">16</span></li>
-                            <li><a href="#">Kids &amp; Babies</a> <span class="count">6</span></li>
-                            <li><a href="#">Kitchen</a> <span class="count">15</span></li>
-                            <li><a href="#">Kniting &amp; Sewing</a> <span class="count">4</span></li>
-                            <li><a href="#">Pots</a> <span class="count">4</span></li>
-                            <li><a href="#">Toys</a> <span class="count">6</span></li>
-                        </ul>
-                    </div>
-                    <!-- Categories End -->
-
-                    <!-- Filters by colors Start -->
-                    <div class="col learts-mb-30">
-                        <h3 class="widget-title product-filter-widget-title">Filters by colors</h3>
-                        <ul class="widget-colors product-filter-widget customScroll">
-                            <li><a href="#" class="hintT-top" data-hint="Black"><span data-bg-color="#000000">Black</span></a></li>
-                            <li><a href="#" class="hintT-top" data-hint="White"><span data-bg-color="#FFFFFF">White</span></a></li>
-                            <li><a href="#" class="hintT-top" data-hint="Dark Red"><span data-bg-color="#b2483c">Dark Red</span></a></li>
-                            <li><a href="#" class="hintT-top" data-hint="Flaxen"><span data-bg-color="#d5b85a">Flaxen</span></a></li>
-                            <li><a href="#" class="hintT-top" data-hint="Pine"><span data-bg-color="#01796f">Pine</span></a></li>
-                            <li><a href="#" class="hintT-top" data-hint="Tortilla"><span data-bg-color="#997950">Tortilla</span></a></li>
-                        </ul>
-                    </div>
-                    <!-- Filters by colors End -->
-
-                    <!-- Brands Start -->
-                    <div class="col learts-mb-30">
-                        <h3 class="widget-title product-filter-widget-title">Brands</h3>
-                        <ul class="widget-list product-filter-widget customScroll">
-                            <li><a href="#">Alexander</a> <span class="count">(2)</span></li>
-                            <li><a href="#">Carmella</a> <span class="count">(4)</span></li>
-                            <li><a href="#">Danielle</a> <span class="count">(7)</span></li>
-                            <li><a href="#">Diana Day</a> <span class="count">(13)</span></li>
-                            <li><a href="#">Emilia</a> <span class="count">(2)</span></li>
-                            <li><a href="#">Gasmine</a> <span class="count">(15)</span></li>
-                            <li><a href="#">Jack &amp; Ella</a> <span class="count">(7)</span></li>
-                            <li><a href="#">Juliette</a> <span class="count">(11)</span></li>
-                        </ul>
-                    </div>
-                    <!-- Brands End -->
-
-                </div>
-            </div>
-        </div>
-        <!-- Product Filter End -->
-
-        <div class="section learts-mt-70">
-            <div class="container">
-                <!-- Products Start -->
-                <input type="hidden" name="customerId" value="${session.customerId}" style="display: none;">
-                <div id="shop-products" class="products isotope-grid row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
-				<c:forEach var="p" items="${list}">
-                    <div class="grid-sizer col-1"></div>
-
-                    <div class="grid-item col featured">
-                        <div class="product">
-                            <div class="product-thumb">
-                            <c:set var="image" scope="page" value="${p.productImage}" />
-                                <a href="product-details.html" class="image">
-                                    <img src="data:image/png;base64,<%=Base64.getEncoder().encodeToString(((byte[])pageContext.getAttribute("image"))) %>" alt="Product Image">
-                                    <img class="image-hover " src="data:image/png;base64,<%=Base64.getEncoder().encodeToString(((byte[])pageContext.getAttribute("image"))) %>" alt="Product Image">
-                                </a>
-                                <a href="wishlist.html" class="add-to-wishlist hintT-left" data-hint="Add to wishlist"><i class="far fa-heart"></i></a>
-                            </div>
-                            <div class="product-info">
-                                <h6 class="title"><a href="product-details.html">${p.productName}</a></h6>
-                                <span class="price">
-                                   $  ${p.productPrice}
-                                </span>
-                                <div class="product-buttons">
-                                    <button href="#quickViewModal" data-bs-toggle="modal" class="product-button hintT-top" data-hint="Quick View"><i class="fal fa-search"></i></button>
-                                    <button class="product-button hintT-top add" table-target="${p.productId}" data-hint="Add to Cart"><i class="fal fa-shopping-cart"></i></button>
-                                    <button href="#" class="product-button hintT-top" data-hint="Compare"><i class="fal fa-random"></i></button>
-                                </div>
-                            </div>
-                    </div>
-                        <FORM style="display: none;">
-							<input type="hidden" class="${p.productId}" name="productId" value="${p.productId}">
-							<input type="hidden" class="${p.productId}" name="productName" value="${p.productName}">
-							<input type="hidden" class="${p.productId}" name="productPrice" value="${p.productPrice}">
-							<input type="hidden" class="${p.productId}" name="productQuantity" value="1">
-						</FORM>
-                        </div>
-		</c:forEach>
-                    </div>
-                    </div>
-                    
-    <!-- Shop Products Section End -->
-
-     <div class="footer1-section section section-padding">
+    <div class="footer1-section section section-padding">
         <div class="container">
             <div class="row text-center row-cols-1">
 
@@ -885,9 +754,9 @@
         </div>
     </div>
 
-
     <!-- JS
 ============================================ -->
+
     <!-- Vendors JS -->
     <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
@@ -895,7 +764,6 @@
     <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
 
     <!-- Plugins JS -->
-	<script src="assets/js/shop/shop.js"></script>
     <script src="assets/js/plugins/select2.min.js"></script>
     <script src="assets/js/plugins/jquery.nice-select.min.js"></script>
     <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
