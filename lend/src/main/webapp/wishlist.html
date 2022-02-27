@@ -4,13 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>studio4art – 登入/註冊</title>
+    <title>studio4art – 收藏清單</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.webp">
 
@@ -79,9 +76,6 @@
                                   <ul class="sub-menu">
                                       <li><a href="about-us.html"><span class="menu-text">About us</span></a></li>
                                       <li><a href="about-us-2.html"><span class="menu-text">About us 02</span></a></li>
-                                      <li><a href="contact-us.html"><span class="menu-text">Contact us</span></a></li>
-                                      <li><a href="coming-soon.html"><span class="menu-text">Coming Soon</span></a></li>
-                                      <li><a href="404.html"><span class="menu-text">Page 404</span></a></li>
                                   </ul>
                               </li>
                           </ul>
@@ -95,7 +89,7 @@
                 <div class="col-auto">
                     <div class="header-tools justify-content-end">
                         <div class="header-login">
-                            <a href="login-register.html"><i class="fal fa-user"></i></a>
+                            <a href="my-account.html"><i class="fal fa-user"></i></a>
                         </div>
                         <div class="header-wishlist">
                             <a href="#offcanvas-wishlist" class="offcanvas-toggle"><span class="wishlist-count">3</span><i class="fal fa-heart"></i></a>
@@ -151,13 +145,13 @@
                 </div>
                 <!-- Search End -->
 
-                
+               
 
                 <!-- Header Tools Start -->
                 <div class="col-auto">
                     <div class="header-tools justify-content-end">
                         <div class="header-login d-none d-sm-block">
-                            <a href="login-register.html"><i class="fal fa-user"></i></a>
+                            <a href="my-account.html"><i class="fal fa-user"></i></a>
                         </div>
                         <div class="header-search d-none d-sm-block d-xl-none">
                             <a href="#offcanvas-search" class="offcanvas-toggle"><i class="fal fa-search"></i></a>
@@ -203,7 +197,7 @@
                 <div class="col-auto">
                     <div class="header-tools justify-content-end">
                         <div class="header-login d-none d-sm-block">
-                            <a href="login-register.html"><i class="fal fa-user"></i></a>
+                            <a href="my-account.html"><i class="fal fa-user"></i></a>
                         </div>
                         <div class="header-search d-none d-sm-block">
                             <a href="#offcanvas-search" class="offcanvas-toggle"><i class="fal fa-search"></i></a>
@@ -249,7 +243,7 @@
                 <div class="col-auto">
                     <div class="header-tools justify-content-end">
                         <div class="header-login d-none d-sm-block">
-                            <a href="login-register.html"><i class="fal fa-user"></i></a>
+                            <a href="my-account.html"><i class="fal fa-user"></i></a>
                         </div>
                         <div class="header-search d-none d-sm-block">
                             <a href="#offcanvas-search" class="offcanvas-toggle"><i class="fal fa-search"></i></a>
@@ -432,7 +426,7 @@
             <div class="offcanvas-buttons">
                 <div class="header-tools">
                     <div class="header-login">
-                        <a href="login-register.html"><i class="fal fa-user"></i></a>
+                        <a href="my-account.html"><i class="fal fa-user"></i></a>
                     </div>
                     <div class="header-wishlist">
                         <a href="wishlist.html"><span>3</span><i class="fal fa-heart"></i></a>
@@ -453,17 +447,17 @@
 
     <div class="offcanvas-overlay"></div>
 
-    <!-- Page Title/Header Start-->
+    <!-- Page Title/Header Start -->
     <div class="page-title-section section" data-bg-image="assets/images/bg/login_backgrand.png">
         <div class="container">
             <div class="row">
                 <div class="col">
 
                     <div class="page-title">
-                        <h1 class="title">Login & Register</h1>
+                        <h1 class="title">Wishlist</h1>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item active">Login & Register</li>
+                            <li class="breadcrumb-item active">Wishlist</li>
                         </ul>
                     </div>
 
@@ -471,116 +465,56 @@
             </div>
         </div>
     </div>
-   <!-- Page Title/Header End -->
+    <!-- Page Title/Header End -->
 
-    <!-- Login & Register Section Start -->
+    <!-- Wishlist Section Start -->
+    <div class="section section-padding">
+        <div class="container">
+            <form class="cart-form" action="#">
+                <table class="cart-wishlist-table table">
+                    <thead>
+                        <tr>
+                            <th class="name" colspan="2">商品</th>
+                            <th class="price">價格</th>
+                            <th class="add-to-cart">&nbsp;</th>
+                            <th class="remove">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="thumbnail"><a href="product-details.html"><img src="assets/images/product/cart-product-1.webp" alt="wishlist-product-1"></a></td>
+                            <td class="name"> <a href="product-details.html">Walnut Cutting Board</a></td>
+                            <td class="price"><span>NT 100.00</span></td>
+                            <td class="add-to-cart"><a href="#" class="btn btn-light btn-hover-dark"><i class="fal fa-shopping-cart mr-2"></i>放入購物車</a></td>
+                            <td class="remove"><a href="#" class="btn">×</a></td>
+                        </tr>
+                        <tr>
+                            <td class="thumbnail"><a href="product-details.html"><img src="assets/images/product/cart-product-2.webp" alt="wishlist-product-2"></a></td>
+                            <td class="name"> <a href="product-details.html">Lucky Wooden Elephant</a></td>
+                            <td class="price"><span>NT 35.00</span></td>
+                            <td class="add-to-cart"><a href="#" class="btn btn-light btn-hover-dark"><i class="fal fa-shopping-cart mr-2"></i>放入購物車</a></td>
+                            <td class="remove"><a href="#" class="btn">×</a></td>
+                        </tr>
+                        <tr>
+                            <td class="thumbnail"><a href="product-details.html"><img src="assets/images/product/cart-product-3.webp" alt="wishlist-product-3"></a></td>
+                            <td class="name"> <a href="product-details.html">Fish Cut Out Set</a></td>
+                            <td class="price"><span>NT 9.00</span></td>
+                            <td class="add-to-cart"><a href="#" class="btn btn-light btn-hover-dark"><i class="fal fa-shopping-cart mr-2"></i>放入購物車</a></td>
+                            <td class="remove"><a href="#" class="btn">×</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col text-center mb-n3">
+                        <a class="btn btn-light btn-hover-dark mr-3 mb-3" href="shop.html">繼續購物</a>
+                        <a class="btn btn-dark btn-outline-hover-dark mb-3" href="shopping-cart.html">查看購物車</a>
+                    </div>
+                </div>
+            </form>
+        </div>
 
-	<div class="section section-padding">
-		<div class="container">
-			<div class="row g-0">
-				<div class="col-lg-6">
-					<div class="user-login-register bg-light">
-						<div class="login-register-title">
-							<h2 class="title">登入帳號</h2>
-							<p class="desc">歡迎回來！ 用 studio4art 帳號登入</p>
-						</div>
-						<div class="login-register-form">
-							<form action="#">
-								<div class="row learts-mb-n50">
-									<div class="col-12 learts-mb-50">
-										<br><input type="email" placeholder="Email" name="customerEmail" id="loginEmail>
-									</div>
-									<div class="col-12 learts-mb-50">
-										<br><input type="password" placeholder="Password" name="customerPassword" id="loginPassword>
-									</div>
-								
-									<div class="col-12 text-center learts-mb-50">
-										<br> <br><button class="btn btn-dark btn-outline-hover-dark btn_login">登入</button>
-									</div>
-									<div class="col-12 learts-mb-50">
-										<div class="row learts-mb-n20">
-											<div class="col-12 learts-mb-20">
-												<div class="form-check">
-													<input type="checkbox" class="form-check-input"
-														id="rememberMe"> <label class="form-check-label"
-														for="rememberMe">記住我的帳號</label>
-												</div>
-											</div>
-											<div class="col-12 learts-mb-20">
-												<a href="lost-password.html" class="fw-400">忘記密碼？</a>
-											</div>
-										</div>
-									</div>
-									<div class="login-register-title">
-											<h2 class="title"></h2>
-											<p class="desc">或是用以下帳號繼續登入</p>
-											<div class="col-12 learts-mb-20"></div>
-										</div>
-									<div class="g-signin2" data-onsuccess="onSignIn"
-										data-theme="dark"></div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="user-login-register">
-						<div class="login-register-title">
-							<h2 class="title">註冊會員</h2>
-							<p class="desc">還不是會員嗎？ 立刻註冊新帳號！</p>
-						</div>
-						<div class="login-register-form">
-							<form action="#">
-								<div class="row learts-mb-n30">
-									<div class="col-12 learts-mb-20">
-										<label for="customerEmail">Email<abbr class="required">*</abbr></label>
-                                        <input type="email" placeholder="信箱" name="customerEmail" id="registEmail">
-									</div>
-									<div class="col-12 learts-mb-20">
-                                        <label for="customerPassword">Password<abbr class="required">*</abbr></label>
-										<input type="password" placeholder="密碼" name="customerPassword" id="registPassword">
-									</div>
-									<div class="col-12 learts-mb-20">
-                                        <label for="customerName">Name<abbr class="required">*</abbr></label>
-										<input type="text" placeholder="姓名" name="customerName" id="registName">
-									</div>
-									<div class="col-12 learts-mb-20">
-                                        <label for="customerPhone">Phone<abbr class="required">*</abbr></label>
-										<input type="tel" placeholder="電話" name="customerPhone" id="registPhone">
-									</div>
-									<div class="col-12 learts-mb-20">
-                                        <label for="customerAddress">Address<abbr class="required">*</abbr></label>
-										<input type="text" placeholder="寄送地址" name="customerAddress" id="registAddress">
-									</div>
-									<div class="col-12 learts-mb-20">
-                                        <label for="bitrhday">Bitrhday<abbr class="required">*</abbr></label>
-										<input type="date" placeholder="生日" name="customerBirthday" id="registBitrhday">
-									</div>
-
-									<div class="col-12 learts-mb-20">
-                                        <label for="gender">Gender<abbr class="required">*</abbr></label>
-										<div style="display: flex;">
-											<label for="gender">男<input type="radio" name="customerGender" size="45" value="M" checked/></label> 
-                                            <label for="gender"> 女<input type="radio" name="customerGender" size="45" value="F" /></label>
-										</div>
-									</div>
-									<div class="col-12 learts-mb-50">
-										<p>按下註冊鈕的同時，表示您已詳閱我們的資料使用政策與使用條款，同意使用 studio4art 所提供的服務。</p>
-									</div>
-									<div class="col-12 text-center learts-mb-50">
-										<button class="btn btn-dark btn-outline-hover-dark btn_regist">註冊</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</div>
-
-	</div>
-	<!-- Login & Register Section End -->
+    </div>
+    <!-- Wishlist Section End -->
 
     <div class="footer2-section section section-padding">
         <div class="container">
@@ -589,7 +523,7 @@
                 <div class="col-lg-6 learts-mb-40">
                     <div class="widget-about">
                         <img src="assets/images/logo/logo-2.webp" alt="">
-                        <p>為我們的生活點綴，挪出一些時間與空間相互分享創作的樂趣與想法，願能成為更好的自己</p>
+                         <p>為我們的生活點綴，挪出一些時間與空間相互分享創作的樂趣與想法，願能成為更好的自己</p>
                     </div>
                 </div>
 
@@ -625,7 +559,7 @@
 
     <div class="footer2-copyright section">
         <div class="container">
-            <p class="copyright text-center">&copy; 2022 studio4art. All Rights Reserved</p>
+            <p class="copyright text-center">&copy; 2022 studio4art All Rights Reserved</p>
         </div>
     </div>
 
@@ -668,9 +602,7 @@
 
     <!-- Main Activation JS -->
     <script src="assets/js/main.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="./customerRegist.js"></script>
+
 </body>
 
 </html>
