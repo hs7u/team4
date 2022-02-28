@@ -14,7 +14,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Learts – Handmade Shop eCommerce HTML Template</title>
+    <title>studio4art – 購物車</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -86,9 +86,6 @@
                                   <ul class="sub-menu">
                                       <li><a href="about-us.html"><span class="menu-text">About us</span></a></li>
                                       <li><a href="about-us-2.html"><span class="menu-text">About us 02</span></a></li>
-                                      <li><a href="contact-us.html"><span class="menu-text">Contact us</span></a></li>
-                                      <li><a href="coming-soon.html"><span class="menu-text">Coming Soon</span></a></li>
-                                      <li><a href="404.html"><span class="menu-text">Page 404</span></a></li>
                                   </ul>
                               </li>
                           </ul>
@@ -137,7 +134,7 @@
                 <!-- Header Logo Start -->
                 <div class="col-xl-auto col">
                     <div class="header-logo">
-                        <a href="index.html"><img src="assets/images/logo/logo-2.webp" alt="Learts Logo"></a>
+                        <a href="index.html"><img src="assets/images/logo/logo-2.webp" alt="studio4art Logo"></a>
                     </div>
                 </div>
                 <!-- Header Logo End -->
@@ -162,9 +159,6 @@
                                   <ul class="sub-menu">
                                       <li><a href="about-us.html"><span class="menu-text">About us</span></a></li>
                                       <li><a href="about-us-2.html"><span class="menu-text">About us 02</span></a></li>
-                                      <li><a href="contact-us.html"><span class="menu-text">Contact us</span></a></li>
-                                      <li><a href="coming-soon.html"><span class="menu-text">Coming Soon</span></a></li>
-                                      <li><a href="404.html"><span class="menu-text">Page 404</span></a></li>
                                   </ul>
                               </li>
                           </ul>
@@ -224,7 +218,7 @@
                 <!-- Header Logo Start -->
                 <div class="col">
                     <div class="header-logo">
-                        <a href="index.html"><img src="assets/images/logo/logo-2.webp" alt="Learts Logo"></a>
+                        <a href="index.html"><img src="assets/images/logo/logo-2.webp" alt="studio4art Logo"></a>
                     </div>
                 </div>
                 <!-- Header Logo End -->
@@ -270,7 +264,7 @@
                 <!-- Header Logo Start -->
                 <div class="col">
                     <div class="header-logo">
-                        <a href="index.html"><img src="assets/images/logo/logo-2.webp" alt="Learts Logo"></a>
+                        <a href="index.html"><img src="assets/images/logo/logo-2.webp" alt="studio4art Logo"></a>
                     </div>
                 </div>
                 <!-- Header Logo End -->
@@ -318,13 +312,12 @@
                         <div class="col-lg-4 col-12 mb-3">
                             <select class="search-select select2-basic">
                                 <option value="0">All Categories</option>
-                                <option value="kids-babies">Kids &amp; Babies</option>
-                                <option value="home-decor">Home Decor</option>
-                                <option value="gift-ideas">Gift ideas</option>
-                                <option value="kitchen">Kitchen</option>
-                                <option value="toys">Toys</option>
-                                <option value="kniting-sewing">Kniting &amp; Sewing</option>
-                                <option value="pots">Pots</option>
+                                <option value="11">手繪瓷盤</option>
+                                <option value="22">電烙; 電烙木板畫</option>
+                                <option value="33">釉燒陶; 陶藝品</option>
+                                <option value="44">色鉛筆; 似顏繪; 彩色鉛筆Q版畫</option>
+                                <option value="55">水彩</option>
+                                <option value="66">壓克力彩繪</option>
                             </select>
                         </div>
                     </div>
@@ -441,168 +434,21 @@
             </div>
             <div class="offcanvas-menu">
                 <ul>
-                    <li><a href="#"><span class="menu-text">Home</span></a>
+                      <li><a href="#"><span class="menu-text">全部商品</span></a>
                         <ul class="sub-menu">
-                            <li>
-                                <a href="#"><span class="menu-text">Home Group</span></a>
-                                <ul class="sub-menu">
-                                    <li><a href="index.html"><span class="menu-text">Arts Propelled</span></a></li>
-                                    <li><a href="index-2.html"><span class="menu-text">Decor Thriving</span></a></li>
-                                    <li><a href="index-3.html"><span class="menu-text">Savvy Delight</span></a></li>
-                                    <li><a href="index-4.html"><span class="menu-text">Perfect Escapes</span></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><span class="menu-text">Home Group</span></a>
-                                <ul class="sub-menu">
-                                    <li><a href="index-5.html"><span class="menu-text">Kitchen Cozy</span></a></li>
-                                    <li><a href="index-6.html"><span class="menu-text">Dreamy Designs</span></a></li>
-                                    <li><a href="index-7.html"><span class="menu-text">Crispy Recipes</span></a></li>
-                                    <li><a href="index-8.html"><span class="menu-text">Decoholic Chic</span></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><span class="menu-text">Home Group</span></a>
-                                <ul class="sub-menu">
-                                    <li><a href="index-9.html"><span class="menu-text">Reblended Dish</span></a></li>
-                                    <li><a href="index-10.html"><span class="menu-text">Craftin House</span></a></li>
-                                    <li><a href="index-11.html"><span class="menu-text">Craftswork Biz</span></a></li>
-                                </ul>
-                            </li>
+                                <li><a href="index-4.html"><span class="menu-text">全部商品</span></a></li>
+                                 <li><a href="shoptest.jsp"><span class="menu-text">部分商品</span></a></li>
+						 </ul>
+                    </li>
+                    <li><a href="#"><span class="menu-text">手作課程</span></a>
+                        <ul class="sub-menu">
+                            <li><a href="courseList.html"><span class="menu-text">報名課程</span></a></li>
                         </ul>
                     </li>
-                    <li><a href="#"><span class="menu-text">Shop</span></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="#"><span class="menu-text">Shop Pages</span></a>
-                                <ul class="sub-menu">
-                                    <li><a href="shop.html"><span class="menu-text">Shop No Sidebar</span></a></li>
-                                    <li><a href="shop-left-sidebar.html"><span class="menu-text">Shop Left Sidebar</span></a></li>
-                                    <li><a href="shop-right-sidebar.html"><span class="menu-text">Shop Right Sidebar</span></a></li>
-                                    <li><a href="shop-fullwidth-no-gutters.html"><span class="menu-text">Shop Fullwidth No Space</span></a></li>
-                                    <li><a href="shop-fullwidth.html"><span class="menu-text">Shop Fullwidth No Sidebar</span></a></li>
-                                    <li><a href="shop-fullwidth-left-sidebar.html"><span class="menu-text">Shop Fullwidth Left Sidebar</span></a></li>
-                                    <li><a href="shop-fullwidth-right-sidebar.html"><span class="menu-text">Shop Fullwidth Right Sidebar</span></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><span class="menu-text">Product Pages</span></a>
-                                <ul class="sub-menu">
-                                    <li><a href="product-details.html"><span class="menu-text">Basic</span></a></li>
-                                    <li><a href="product-details-fullwidth.html"><span class="menu-text">Fullwidth</span></a></li>
-                                    <li><a href="product-details-sticky.html"><span class="menu-text">Sticky Details</span></a></li>
-                                    <li><a href="product-details-sidebar.html"><span class="menu-text">Width Sidebar</span></a></li>
-                                    <li><a href="product-details-extra-content.html"><span class="menu-text">Extra Content</span></a></li>
-                                    <li><a href="product-details-image-variation.html"><span class="menu-text">Variations Images</span></a></li>
-                                    <li><a href="product-details-group.html"><span class="menu-text">Bought Together</span></a></li>
-                                    <li><a href="product-details-360.html"><span class="menu-text">Product 360</span></a></li>
-                                    <li><a href="product-details-background.html"><span class="menu-text">Product with Background</span></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#" class="mega-menu-title"><span class="menu-text">PRODUCT & Other PAGES</span></a>
-                                <ul class="sub-menu">
-                                    <li><a href="shopping-cart.html"><span class="menu-text">Shopping Cart</span></a></li>
-                                    <li><a href="checkout.html"><span class="menu-text">Checkout</span></a></li>
-                                    <li><a href="order-tracking.html"><span class="menu-text">Order Tracking</span></a></li>
-                                    <li><a href="wishlist.html"><span class="menu-text">Wishlist</span></a></li>
-                                    <li><a href="login-register.html"><span class="menu-text">Customer Login</span></a></li>
-                                    <li><a href="my-account.html"><span class="menu-text">My Account</span></a></li>
-                                    <li><a href="lost-password.html"><span class="menu-text">Lost Password</span></a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><span class="menu-text">Project</span></a>
-                        <ul class="sub-menu">
-                            <li><a href="portfolio-3-columns.html"><span class="menu-text">Portfolio 3 Columns</span></a></li>
-                            <li><a href="portfolio-4-columns.html"><span class="menu-text">Portfolio 4 Columns</span></a></li>
-                            <li><a href="portfolio-5-columns.html"><span class="menu-text">Portfolio 5 Columns</span></a></li>
-                            <li><a href="portfolio-details.html"><span class="menu-text">Portfolio Details</span></a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><span class="menu-text">Elements</span></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="#" class="mega-menu-title"><span class="menu-text">Column One</span></a>
-                                <ul class="sub-menu">
-                                    <li><a href="elements-products.html"><span class="menu-text">Product Styles</span></a></li>
-                                    <li><a href="elements-products-tabs.html"><span class="menu-text">Product Tabs</span></a></li>
-                                    <li><a href="elements-product-sale-banner.html"><span class="menu-text">Product & Sale Banner</span></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#" class="mega-menu-title"><span class="menu-text">Column Two</span></a>
-                                <ul class="sub-menu">
-                                    <li><a href="elements-category-banner.html"><span class="menu-text">Category Banner</span></a></li>
-                                    <li><a href="elements-team.html"><span class="menu-text">Team Member</span></a></li>
-                                    <li><a href="elements-testimonials.html"><span class="menu-text">Testimonials</span></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#" class="mega-menu-title"><span class="menu-text">Column Three</span></a>
-                                <ul class="sub-menu">
-                                    <li><a href="elements-instagram.html"><span class="menu-text">Instagram</span></a></li>
-                                    <li><a href="elements-map.html"><span class="menu-text">Google Map</span></a></li>
-                                    <li><a href="elements-icon-box.html"><span class="menu-text">Icon Box</span></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#" class="mega-menu-title"><span class="menu-text">Column Four</span></a>
-                                <ul class="sub-menu">
-                                    <li><a href="elements-buttons.html"><span class="menu-text">Buttons</span></a></li>
-                                    <li><a href="elements-faq.html"><span class="menu-text">FAQs / Toggles</span></a></li>
-                                    <li><a href="elements-brands.html"><span class="menu-text">Brands</span></a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><span class="menu-text">Blog</span></a>
-                        <ul class="sub-menu">
-                            <li><a href="#"><span class="menu-text">Standard Layout</span></a>
-                                <ul class="sub-menu">
-                                    <li><a href="blog-right-sidebar.html"><span class="menu-text">Right Sidebar</span></a></li>
-                                    <li><a href="blog-left-sidebar.html"><span class="menu-text">Left Sidebar</span></a></li>
-                                    <li><a href="blog-fullwidth.html"><span class="menu-text">Full Width</span></a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#"><span class="menu-text">Grid Layout</span></a>
-                                <ul class="sub-menu">
-                                    <li><a href="blog-grid-right-sidebar.html"><span class="menu-text">Right Sidebar</span></a></li>
-                                    <li><a href="blog-grid-left-sidebar.html"><span class="menu-text">Left Sidebar</span></a></li>
-                                    <li><a href="blog-grid-fullwidth.html"><span class="menu-text">Full Width</span></a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#"><span class="menu-text">List Layout</span></a>
-                                <ul class="sub-menu">
-                                    <li><a href="blog-list-right-sidebar.html"><span class="menu-text">Right Sidebar</span></a></li>
-                                    <li><a href="blog-list-left-sidebar.html"><span class="menu-text">Left Sidebar</span></a></li>
-                                    <li><a href="blog-list-fullwidth.html"><span class="menu-text">Full Width</span></a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#"><span class="menu-text">Masonry Layout</span></a>
-                                <ul class="sub-menu">
-                                    <li><a href="blog-masonry-right-sidebar.html"><span class="menu-text">Right Sidebar</span></a></li>
-                                    <li><a href="blog-masonry-left-sidebar.html"><span class="menu-text">Left Sidebar</span></a></li>
-                                    <li><a href="blog-masonry-fullwidth.html"><span class="menu-text">Full Width</span></a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#"><span class="menu-text">Single Post Layout</span></a>
-                                <ul class="sub-menu">
-                                    <li><a href="blog-details-right-sidebar.html"><span class="menu-text">Right Sidebar</span></a></li>
-                                    <li><a href="blog-details-left-sidebar.html"><span class="menu-text">Left Sidebar</span></a></li>
-                                    <li><a href="blog-details-fullwidth.html"><span class="menu-text">Full Width</span></a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><span class="menu-text">Pages</span></a>
+                   <li><a href="#"><span class="menu-text">關於我們</span></a>
                         <ul class="sub-menu">
                             <li><a href="about-us.html"><span class="menu-text">About us</span></a></li>
                             <li><a href="about-us-2.html"><span class="menu-text">About us 02</span></a></li>
-                            <li><a href="contact-us.html"><span class="menu-text">Contact us</span></a></li>
-                            <li><a href="coming-soon.html"><span class="menu-text">Coming Soon</span></a></li>
-                            <li><a href="404.html"><span class="menu-text">Page 404</span></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -621,8 +467,7 @@
                 </div>
             </div>
             <div class="offcanvas-social">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.facebook.com/fany121105/photos/"><i class="fab fa-facebook-f"></i></a>
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-youtube"></i></a>
             </div>
@@ -633,7 +478,7 @@
     <div class="offcanvas-overlay"></div>
 
     <!-- Page Title/Header Start -->
-    <div class="page-title-section section" data-bg-image="assets/images/bg/page-title-1.webp">
+    <div class="page-title-section section" data-bg-image="assets/images/bg/login_backgrand.png">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -659,10 +504,10 @@
                 <table class="cart-wishlist-table table">
                     <thead>
                         <tr>
-                            <th class="name" colspan="2">商品</th>
+                            <th class="name" colspan="2">商品名稱</th>
                             <th class="price">價格</th>
                             <th class="quantity">數量</th>
-                            <th class="subtotal">總價</th>
+                            <th class="subtotal">小計</th>
                             <th class="remove">&nbsp;</th>
                         </tr>
                     </thead>
@@ -670,7 +515,7 @@
                         <tr>
                             <td class="thumbnail"><a href="product-details.html"><img src="assets/images/product/cart-product-1.webp" alt="cart-product-1"></a></td>
                             <td class="name"> <a href="product-details.html">Walnut Cutting Board</a></td>
-                            <td class="price"><span>£100.00</span></td>
+                            <td class="price"><span>NT 100.00</span></td>
                             <td class="quantity">
                                 <div class="product-quantity">
                                     <span class="qty-btn minus"><i class="ti-minus"></i></span>
@@ -678,79 +523,82 @@
                                     <span class="qty-btn plus"><i class="ti-plus"></i></span>
                                 </div>
                             </td>
-                            <td class="subtotal"><span>£100.00</span></td>
+                            <td class="subtotal"><span>NT 100.00</span></td>
                             <td class="remove"><a href="#" class="btn">×</a></td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="row justify-content-between mb-n3">
                     <div class="col-auto">
-                        <a class="btn btn-dark btn-outline-hover-dark mb-3" href="shoptest.jsp">繼 續 購 物</a>
+                        <a class="btn btn-dark btn-outline-hover-dark mb-3" href="shoptest.jsp">繼續購物</a>
                     </div>
                 </div>
             </form>
             <div class="cart-totals mt-5">
-                <h2 class="title">Cart Total</h2>
+                <h2 class="title">訂單摘要</h2>
                 <table>
                     <tbody>
                         <tr class="subtotal">
                             <th>小計</th>
-                            <td><span class="amount">£242.00</span></td>
+                            <td><span class="amount">NT 242.00</span></td>
                         </tr>
                         <tr class="total">
-                            <th>總價</th>
-                            <td><strong><span class="amount">£242.00</span></strong></td>
+                            <th>結帳總金額</th>
+                            <td><strong><span class="amount">NT 242.00</span></strong></td>
                         </tr>
                     </tbody>
                 </table>
-                <a href="checkout.html" class="btn btn-dark btn-outline-hover-dark">結帳去</a>
+                <a href="checkout.html" class="btn btn-dark btn-outline-hover-dark">前往結帳</a>
             </div>
         </div>
 
     </div>
     <!-- Shopping Cart Section End -->
 
-    <div class="footer1-section section section-padding">
+    <div class="footer2-section section section-padding">
         <div class="container">
-            <div class="row text-center row-cols-1">
+            <div class="row learts-mb-n40">
 
-                <div class="footer1-logo col text-center">
-                    <img src="assets/images/web_logo3.png" alt="">
+                <div class="col-lg-6 learts-mb-40">
+                    <div class="widget-about">
+                        <img src="assets/images/logo/logo-2.webp" alt="">
+                         <p>為我們的生活點綴，挪出一些時間與空間相互分享創作的樂趣與想法，願能成為更好的自己</p>
+                    </div>
                 </div>
 
-                <div class="footer1-menu col">
-                    <ul class="widget-menu justify-content-center">
-                        <li><a href="#">About us</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Policy</a></li>
-                        <li><a href="#">FAQs</a></li>
+                <div class="col-lg-4 learts-mb-40">
+                    <div class="row">
+                        <div class="col">
+                            <ul class="widget-list">
+                                <li><a href="#">關於我們</a></li>
+                                <li><a href="contact-us.html">聯絡我們</a></li>
+                                <li><a href="element-termsofservice.html">服務條款</a></li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <ul class="widget-list">
+                                <li><a href="elements-faq.html">問與答</a></li>
+                                <li><a href="#">退貨政策</a></li>
+                                <li><a href="index.html">回到首頁</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 learts-mb-40">
+                    <ul class="widget-list">
+                        <li> <i class="fab fa-facebook-f"></i> <a href="https://www.facebook.com/fany121105/photos/">Facebook</a></li>
+                        <li> <i class="fab fa-instagram"></i> <a href="https://www.instagram.com/">Instagram</a></li>
+                        <li> <i class="fab fa-youtube"></i> <a href="https://www.youtube.com/">Youtube</a></li>
                     </ul>
                 </div>
-                <div class="footer1-subscribe d-flex flex-column col">
-                    <form id="mc-form" class="mc-form widget-subscibe">
-                        <input id="mc-email" autocomplete="off" type="email" placeholder="Enter your e-mail address">
-                        <button id="mc-submit" class="btn btn-dark">subscibe</button>
-                    </form>
-                    <!-- mailchimp-alerts Start -->
-                    <div class="mailchimp-alerts text-centre">
-                        <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                        <div class="mailchimp-success text-success"></div><!-- mailchimp-success end -->
-                        <div class="mailchimp-error text-danger"></div><!-- mailchimp-error end -->
-                    </div><!-- mailchimp-alerts end -->
-                </div>
-                <div class="footer1-social col">
-                    <ul class="widget-social justify-content-center">
-                        <li class="hintT-top" data-hint="Twitter"> <a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a></li>
-                        <li class="hintT-top" data-hint="Facebook"> <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
-                        <li class="hintT-top" data-hint="Instagram"> <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
-                        <li class="hintT-top" data-hint="Youtube"> <a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a></li>
-                    </ul>
-                </div>
-                <div class="footer1-copyright col">
-                    <p class="copyright">&copy; 2022 studio4art. All Rights Reserved | <strong>(02) 27120589</strong> | <a href="mailto:cs@studio4art.com">cs@studio4art.com</a></p>
-                </div>
-
             </div>
+        </div>
+    </div>
+
+    <div class="footer2-copyright section">
+        <div class="container">
+            <p class="copyright text-center">&copy; 2022 studio4art All Rights Reserved</p>
         </div>
     </div>
 
