@@ -9,6 +9,27 @@
 	
 	<context:annotation-config></context:annotation-config>
 	<context:component-scan base-package="web"></context:component-scan>
+	
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" >
+	    <property name="corePoolSize" value="5"></property>
+	    <property name="maxPoolSize" value="10"></property>
+	    <property name="queueCapacity" value="40"></property>
+	    <property name="waitForTasksToCompleteOnShutdown" value="true"></property>
+    </bean>
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="tfa105g4@gmail.com" />
+		<property name="password" value="javag4200" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>	
+	
 	<tx:annotation-driven />
 	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<constructor-arg ref="sessionFactory"></constructor-arg>

@@ -8,6 +8,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException; */
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.PersistenceContext;
@@ -53,7 +54,7 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     +"`customer_status` = ?"
     +"WHERE `customer_id` = ?;"; */
     
-    public String insert(CustomerVO customerVo){
+    public Serializable insert(CustomerVO customerVo){
         // JPA CriteriaQuery
         CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaQuery<Long> cq = cb.createQuery(Long.class);
@@ -61,10 +62,9 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
         cq = cq.select(cb.count(root)).where(cb.equal(root.get("customerEmail"), customerVo.getCustomerEmail()));
         long result = getSession().createQuery(cq).getSingleResult();
         if(result == 0){
-            getSession().save(customerVo);
-            return "success";
+            return getSession().save(customerVo);
         }
-        return "fail";
+        return null;
         // Hibernate
         // CustomerVO cVo =  getSession().get(CustomerVO.class, customerVo.getCustomerId());
         // if(cVo == null){

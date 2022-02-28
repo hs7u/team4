@@ -34,4 +34,12 @@ public class projectUtil {
 			e.printStackTrace();
 		}
 	}
+
+	public static String getCode() {
+		char nonce[] = new char[16];
+		for (int i = 0; i < nonce.length; i++){
+			nonce[i] = SYMBOLS.charAt(RANDOM.nextInt(SYMBOLS.length()));
+		}
+		return nonce.toString();
+	}
 }

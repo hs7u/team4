@@ -4,7 +4,7 @@
 <%@ page import="web.Course.vo.*"%>
 <%@ page import="java.util.*"%>
 <%
-	CourseVO courseVo = request.getAttribute("currentCourse");
+	CourseVO courseVo = (CourseVO)request.getAttribute("currentCourse");
 %>
 <title>課程資料修改 - updateCourse.jsp</title>
 
@@ -150,46 +150,46 @@ div.overlay > article{
 					<tr>
 						<td class="hint">課程名稱</td>
 						<td>
-							<input type="TEXT" class="line" name="courseName" size="45" value="<%=(courseVO.getCourseName() == null) ? "default" : courseVO.getCourseName()%>" />
+							<input type="TEXT" class="line" name="courseName" size="45" value="<%=(courseVo.getCourseName() == null) ? "default" : courseVo.getCourseName()%>" />
 						</td>
 					</tr>
 					<tr>
 						<td class="hint">課程描述</td>
 						<td>
-							<input type="TEXT" class="line" name="courseDescribe" size="45" value="<%=(courseVO.getCourseDescribe() == null) ? "default" : courseVO.getCourseDescribe()%>" />
+							<input type="TEXT" class="line" name="courseDescribe" size="45" value="<%=(courseVo.getCourseDescribe() == null) ? "default" : courseVo.getCourseDescribe()%>" />
 						</td>
 					</tr>
 					<tr>
 						<td class="hint">課程價格</td>
 						<td>
-							<input type="TEXT" class="line" name="coursePrice" size="45" value="<%=(courseVO.getCoursePrice() == null) ? "0" : courseVO.getCoursePrice()%>" />
+							<input type="TEXT" class="line" name="coursePrice" size="45" value="<%=(courseVo.getCoursePrice() == null) ? "0" : courseVo.getCoursePrice()%>" />
 						</td>
 					</tr>
 					<tr>
 						<td class="hint">課程圖片</td>
 						<td>
-							<input type="file" name="courseImage" id="" value="<%=(courseVO.getCourseImage() == null) ? "0" : courseVO.getCourseImage()%>" />
+							<input type="file" name="courseImage" id="" value="<%=(courseVo.getCourseImage() == null) ? "0" : courseVo.getCourseImage()%>" />
 						</td>
 					</tr>
 
                     <tr>
                         <td class="hint">開課人數</td>
                         <td>
-                            <input type="TEXT" name="minOfCourse" size="45" value="<%=(courseVO.getMinOfCourse() == null) ? "0" : courseVO.getMinOfCourse()%>"/>
+                            <input type="TEXT" name="minOfCourse" size="45" value="<%=(courseVo.getMinOfCourse() == null) ? "0" : courseVo.getMinOfCourse()%>"/>
                         </td>
                     </tr>
 
                     <tr>
                         <td class="hint">額滿人數</td>
                         <td>
-                            <input type="TEXT" name="maxOfCourse" size="45" value="<%=(courseVO.getMaxOfCourse() == null) ? "0" : courseVO.getMaxOfCourse()%>"/>
+                            <input type="TEXT" name="maxOfCourse" size="45" value="<%=(courseVo.getMaxOfCourse() == null) ? "0" : courseVo.getMaxOfCourse()%>"/>
                         </td>
                     </tr>
 
                     <tr>
                         <td class="hint">上課地點</td>
                         <td>
-                            <input type="TEXT" name="courseLocation" size="45" value="<%=(courseVO.getCourseLocation() == null) ? "0" : courseVO.getCourseLocation()%>"/>
+                            <input type="TEXT" name="courseLocation" size="45" value="<%=(courseVo.getCourseLocation() == null) ? "0" : courseVo.getCourseLocation()%>"/>
                         </td>
                     </tr>
 
@@ -201,11 +201,11 @@ div.overlay > article{
 						<td class="hint">課程上架狀態</td>
 						<td>
 							<label for="course_status">
-								<input type="radio" class="" name="courseStatus" size="45" value="1" checked="<%=(courseVO.getCourseStatus() == 1) ? true : false%>" />
+								<input type="radio" class="" name="courseStatus" size="45" value="1" checked="<%=(courseVo.getCourseStatus() == 1) ? true : false%>" />
 								上架
 							</label>
 							<label for="course_status" class="lineup">
-								<input type="radio" class="" name="courseStatus" size="45" value="0" checked="<%=(courseVO.getCourseStatus() == 0) ? true : false%>" />
+								<input type="radio" class="" name="courseStatus" size="45" value="0" checked="<%=(courseVo.getCourseStatus() == 0) ? true : false%>" />
 								下架
 							</label>
 						</td>
@@ -213,7 +213,7 @@ div.overlay > article{
 					<tr>
 						<td>
 							<br>
-							<input type="hidden" name="course_id" value="<%=courseVO.getCourseId()%>">
+							<input type="hidden" name="course_id" value="<%=courseVo.getCourseId()%>">
 							<input type="hidden" name="action" value="update">
 							<input type="button" class="las" id="btn_sub" value="送出修改">
 							<br>
@@ -230,7 +230,7 @@ div.overlay > article{
 
 		<div class="preview">
 			<h3>原課程圖預覽</h3>	
-			<img src="data:image/png;base64,<%=Base64.getEncoder().encodeToString(courseVO.getCourseImage())%>" width="300px" height="100%" />
+			<img src="data:image/png;base64,<%=Base64.getEncoder().encodeToString(courseVo.getCourseImage())%>" width="300px" height="100%" />
 		</div>
 	
 	</main>

@@ -15,9 +15,9 @@ public class CustomerLogoutController {
     public void customerLogout(HttpSession session, HttpServletResponse response) throws IOException{
         if (!session.isNew() && session.getAttribute("customerAccount") != null) {
 	    	session.invalidate();
-			response.sendRedirect("/lend/Customer/login.html");  
+			response.sendRedirect("/lend/Customer/login-register.html");  
     	}else {
-    		response.sendRedirect("/lend/Customer/login.html");
+    		response.sendRedirect("/lend/Customer/login-register.html");
     	}
     }
 }
