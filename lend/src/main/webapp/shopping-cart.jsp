@@ -508,6 +508,7 @@
                             <th class="price">價格</th>
                             <th class="quantity">數量</th>
                             <th class="subtotal">小計</th>
+                            <th class="customer_upload_img">上傳客製圖片</th>
                             <th class="remove">&nbsp;</th>
                         </tr>
                     </thead>
@@ -524,6 +525,7 @@
                                 </div>
                             </td>
                             <td class="subtotal"><span>NT 100.00</span></td>
+                             <td><input type="file" name="customer_upload_img" id=""></td>
                             <td class="remove"><a href="#" class="btn">×</a></td>
                         </tr>
                     </tbody>
