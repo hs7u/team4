@@ -568,7 +568,7 @@
                                     <img src="data:image/png;base64,<%=Base64.getEncoder().encodeToString(((byte[])pageContext.getAttribute("image"))) %>" alt="Product Image">
                                     <img class="image-hover " src="data:image/png;base64,<%=Base64.getEncoder().encodeToString(((byte[])pageContext.getAttribute("image"))) %>" alt="Product Image">
                                 </a>
-                                <a href="wishlist.html" class="add-to-wishlist hintT-left" data-hint="Add to wishlist"><i class="far fa-heart"></i></a>
+                                
                             </div>
                             <div class="product-info">
                                 <h6 class="title"><a href="product-details.html">${p.productName}</a></h6>
@@ -576,9 +576,9 @@
                                    NT  ${p.productPrice}
                                 </span>
                                 <div class="product-buttons">
-                                    <button href="#quickViewModal" data-bs-toggle="modal" class="product-button hintT-top" data-hint="Quick View"><i class="fal fa-search"></i></button>
-                                    <button class="product-button hintT-top add" table-target="${p.productId}" data-hint="Add to Cart"><i class="fal fa-shopping-cart"></i></button>
-                                    <button href="#" class="product-button hintT-top" data-hint="Compare"><i class="fal fa-random"></i></button>
+                                    <button href="#wishlist.html" data-bs-toggle="modal" class="product-button hintT-top" data-hint="加入收藏"><i class="fal fa-heart"></i></button>
+                                    <button class="product-button hintT-top add" table-target="${p.productId}" data-hint="加入購物車"><i class="fal fa-shopping-cart"></i></button>
+                                    <button href="#" class="product-button hintT-top" data-hint="加入比較"><i class="fal fa-random"></i></button>
                                 </div>
                             </div>
                     </div>
@@ -631,9 +631,9 @@
                       </div>
                   </div>
 
-<!--                   <div class="col learts-mb-50"> -->
+                 <div class="col learts-mb-50">
 <!--                       <div id="instafeed" class="instafeed instafeed-carousel instafeed-carousel2"></div> -->
-<!--                   </div> -->
+             </div>
               </div>
           </div>
       </div>
@@ -661,7 +661,7 @@
                         <div class="col">
                             <ul class="widget-list">
                                 <li><a href="elements-faq.html">問與答</a></li>
-                                <li><a href="#">退貨政策</a></li>
+                                <li><a href="element-return.html">退貨政策</a></li>
                                 <li><a href="index.html">回到首頁</a></li>
                             </ul>
                         </div>
