@@ -20,13 +20,15 @@ $("button.add").on("click", function(e){
 		if(cartAll[i].productId != select.productId){
 			check++;
 		}
-		if(cartAll[i].productQuantity == select.productQuantity){
-			cartAll[i].productQuantity += select.productQuantity;
-			cartAll[i].productPrice += select.productPrice;
+		if(cartAll[i].productId == select.productId){
+			console.log(cartAll[i].productQuantity)
+			cartAll[i].productQuantity = parseInt(cartAll[i].productQuantity, 10) + parseInt(select.productQuantity, 10);
+			cartAll[i].productPrice = select.productPrice * cartAll[i].productQuantity;
 		}
 	}
-	if(check == cartAll.length)
+	if(check == cartAll.length){
 		cartAll.push(select);
+	}
 	localStorage.setItem("cart", JSON.stringify(cartAll));
 	$("span.cart-count").html(cartAll.length);
 })

@@ -631,9 +631,9 @@
                       </div>
                   </div>
 
-                  <div class="col learts-mb-50">
-                      <div id="instafeed" class="instafeed instafeed-carousel instafeed-carousel2"></div>
-                  </div>
+<!--                   <div class="col learts-mb-50"> -->
+<!--                       <div id="instafeed" class="instafeed instafeed-carousel instafeed-carousel2"></div> -->
+<!--                   </div> -->
               </div>
           </div>
       </div>
