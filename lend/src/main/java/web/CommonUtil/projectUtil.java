@@ -40,6 +40,6 @@ public class projectUtil {
 		for (int i = 0; i < nonce.length; i++){
 			nonce[i] = SYMBOLS.charAt(RANDOM.nextInt(SYMBOLS.length()));
 		}
-		return nonce.toString();
+		return String.valueOf(nonce);
 	}
 }

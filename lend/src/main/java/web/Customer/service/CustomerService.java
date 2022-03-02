@@ -132,7 +132,7 @@ public class CustomerService {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setTo(to);
             helper.setSubject(subject);
-            helper.setText(text);
+            helper.setText(text, true);
         } catch (MessagingException e) {
             throw new MailParseException(e);
         }
