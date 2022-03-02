@@ -7,7 +7,7 @@ function init(){
         regist.customerPhone    = $("input#registPhone").val();
         regist.customerAddress  = $("input#registAddress").val();
         regist.customerBirthday = $("input#registBitrhday").val();
-        regist.customerGender   = $("input[name = gender]:checked").val();
+        regist.customerGender   = $("input[name = customerGender]:checked").val();
         axios({
             method: "post",
             url: "./Customer/regist",
