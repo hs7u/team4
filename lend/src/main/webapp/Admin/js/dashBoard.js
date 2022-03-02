@@ -1,11 +1,11 @@
-function Uint8ToString(u8a){
-    var CHUNK_SZ = 0x8000;
-    var c = [];
-    for (var i=0; i < u8a.length; i+=CHUNK_SZ) {
-      c.push(String.fromCharCode.apply(null, u8a.subarray(i, i+CHUNK_SZ)));
-    }
-    return c.join("");
-  }
+// function Uint8ToString(u8a){
+//     var CHUNK_SZ = 0x8000;
+//     var c = [];
+//     for (var i=0; i < u8a.length; i+=CHUNK_SZ) {
+//       c.push(String.fromCharCode.apply(null, u8a.subarray(i, i+CHUNK_SZ)));
+//     }
+//     return c.join("");
+// }
 function logout(e) {
     e.preventDefault();
     axios.get("./logout").then(res => {
@@ -28,11 +28,11 @@ function getCourses() {
         for(let i = 0 ; i < res.data.length; i++){
             let state = res.data[i].courseStatus == 0 ? '未開課' : res.data[i].courseStatus == 1 ? "開課中" : "報名中" ;
             let light = res.data[i].courseStatus == 0 ? 'red' : res.data[i].courseStatus == 1 ? "green" : "yello" ;
-            var u8 = new Uint8Array(res.data[i].courseImage)
-            var b64encoded = btoa(Uint8ToString(u8));
+            // var u8 = new Uint8Array(res.data[i].courseImage)
+            // var b64encoded = btoa(Uint8ToString(u8));
             let table = `<tr>
                             <td>${res.data[i].courseName}</td>
-                            <td><img src="data:image/png;base64,${b64encoded}" width="60" height="40""/></td>
+                            <td><img src="data:image/png;base64,${res.data[i].courseImage}" width="60" height="40""/></td>
                             <td>
                                 <span class="status ${light}"></span>
                                 ${state}
@@ -91,8 +91,17 @@ function getCourses() {
                                         <button type="button" class="btn_CUP closeCUP" CUPtarget="${res.data[i].courseId}">取消修改</button>
                                     </FORM>
                                 </article>
-                            </div>`;    
+                            </div>`;
+            let mainTable = `<tr>
+                                <td>${res.data[i].courseName}</td>
+                                <td>${res.data[i].coursePrice}</td>
+                                <td>
+                                    <span class="status ${light}"></span>
+                                    ${state}
+                                </td>
+                            </tr>`;
             $(table).appendTo("tbody.dynamicsC");
+            $(mainTable).appendTo("tbody.mainCource");
             $(uptable).appendTo("div.forCUP");
         }
         $('#courseTable').DataTable({
