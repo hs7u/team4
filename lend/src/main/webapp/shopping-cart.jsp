@@ -512,22 +512,22 @@
                             <th class="remove">&nbsp;</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td class="thumbnail"><a href="product-details.html"><img src="assets/images/product/cart-product-1.webp" alt="cart-product-1"></a></td>
-                            <td class="name"> <a href="product-details.html">Walnut Cutting Board</a></td>
-                            <td class="price"><span>NT 100.00</span></td>
-                            <td class="quantity">
-                                <div class="product-quantity">
-                                    <span class="qty-btn minus"><i class="ti-minus"></i></span>
-                                    <input type="text" class="input-qty" value="1">
-                                    <span class="qty-btn plus"><i class="ti-plus"></i></span>
-                                </div>
-                            </td>
-                            <td class="subtotal"><span>NT 100.00</span></td>
-                             <td><input type="file" name="customer_upload_img" id=""></td>
-                            <td class="remove"><a href="#" class="btn">×</a></td>
-                        </tr>
+                    <tbody class="AllMiniCart">
+<!--                         <tr> -->
+<!--                             <td class="thumbnail"><a href="product-details.html"><img src="assets/images/product/cart-product-1.webp" alt="cart-product-1"></a></td> -->
+<!--                             <td class="name"> <a href="product-details.html">Walnut Cutting Board</a></td> -->
+<!--                             <td class="price"><span>NT 100.00</span></td> -->
+<!--                             <td class="quantity"> -->
+<!--                                 <div class="product-quantity"> -->
+<!--                                     <span class="qty-btn minus"><i class="ti-minus"></i></span> -->
+<!--                                     <input type="text" class="input-qty" value="1"> -->
+<!--                                     <span class="qty-btn plus"><i class="ti-plus"></i></span> -->
+<!--                                 </div> -->
+<!--                             </td> -->
+<!--                             <td class="subtotal"><span>NT 100.00</span></td> -->
+<!--                              <td><input type="file" name="customer_upload_img" id=""></td> -->
+<!--                             <td class="remove"><button class="btn">×</button></td> -->
+<!--                         </tr> -->
                     </tbody>
                 </table>
                 <div class="row justify-content-between mb-n3">
@@ -542,11 +542,11 @@
                     <tbody>
                         <tr class="subtotal">
                             <th>小計</th>
-                            <td><span class="amount">NT 242.00</span></td>
+                            <td><span class="amount">0</span></td>
                         </tr>
-                        <tr class="total">
+                        <tr id="total">
                             <th>結帳總金額</th>
-                            <td><strong><span class="amount">NT 242.00</span></strong></td>
+                            <td><strong><span class="amount">0</span></strong></td>
                         </tr>
                     </tbody>
                 </table>
@@ -614,6 +614,7 @@
     <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
 
     <!-- Plugins JS -->
+    <script src="assets/js/shop/shopCart.js"></script>
     <script src="assets/js/plugins/select2.min.js"></script>
     <script src="assets/js/plugins/jquery.nice-select.min.js"></script>
     <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
