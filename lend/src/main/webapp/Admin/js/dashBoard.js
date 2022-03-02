@@ -12,6 +12,31 @@ function logout(e) {
         console.log(res.data)
     })
 }
+function getQa(){
+    let data = {
+        action: "qaList"
+    }
+    let fdate = JSON.stringify(data);
+    axios({
+        method: "post",
+        url: "../Admin/dashBoard",
+        data: fdate,
+        headers: { "Content-Type": "application/json" },
+      }).then(res=>{
+        for(let i = 0 ; i < res.data.length; i++){
+            let table = `<tr>
+                            <td>${res.data[i].customerId}</td>
+                            <td>${res.data[i].quession}</td>
+                            <td><input type="button" class="las CUP" qrTarget="${res.data[i].qaId}" value="回應"></td>
+                        </tr>`;
+            $(table).appendTo("tbody.qaList");
+        }
+        $('#qaTable').DataTable({
+            "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
+            "pageLength":'5'
+        });
+      })
+}
 function getCourses() {
     let data = {
         action: "courseList"

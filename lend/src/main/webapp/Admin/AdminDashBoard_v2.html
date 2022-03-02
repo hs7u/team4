@@ -94,8 +94,8 @@
                     <span>商品管理</span></a>
                 </li>
                 <li>
-                    <a href="#" class="tab " data-target="account" headerName="帳號管理"><span class="las la-user-circle"></span>
-                    <span>帳號管理</span></a>
+                    <a href="#" class="tab " data-target="qa" headerName="回應客戶"><span class="las la-user-circle"></span>
+                    <span>回應客戶</span></a>
                 </li>
                 <li>
                     <a href="./logout" onclick="logout(e);" class="move "><span class="las la-sign-out-alt"></span>
@@ -407,8 +407,37 @@
         <main class="tab order dis">
 
         </main>
-        <main class="tab account dis">
-
+        <main class="tab qa dis">
+            <div class="innerQa">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>客戶列表</h3>
+                    </div>
+                    <div class="card-body">
+                       <div class="table-responsive">
+                            <table width="100%" id="qaTable">
+                                <thead>
+                                    <tr>
+                                        <td>客戶ID</td>
+                                        <td>問題描述</td>
+                                        <td>回應</td>
+                                    </tr>
+                                </thead>
+                                <tbody class="qaList">
+                                    <!-- <tr>
+                                        <td><h4>Ge Ku~~~~ </h4></td>
+                                        <td><small>How dare you come Ice Bird</small></td>
+                                        <td><span class="status red"></span>未開通</td>
+                                        <td><span class="las la-user-circle"></span></td>
+                                        <td><span class="las la-comment"></span></td>
+                                        <td><span class="las la-phone"></span></td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                       </div>
+                    </div>
+                </div>
+            </div>
         </main>
         <main class="tab customers dis">
             <div class="innerCustomer">
@@ -499,8 +528,8 @@
                 case "#product":
                     target_tab = "product";
                     break;
-                case "#account":
-                    target_tab = "account";
+                case "#qa":
+                    target_tab = "qa";
                     break;
                 case "#addProduct":
                     target_tab = "addProduct";
