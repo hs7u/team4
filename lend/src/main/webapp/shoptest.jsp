@@ -83,8 +83,7 @@
                         <ul>
                               <li class="has-children"><a href="#"><span class="menu-text">商品專區</span></a>
                                   <ul class="sub-menu">
-                                      <li><a href="index-4.html"><span class="menu-text">全部商品</span></a></li>
-                                      <li><a href="shoptest.jsp"><span class="menu-text">部分商品</span></a></li>
+                                      <li><a href="shoptest.jsp"><span class="menu-text">全部商品</span></a></li>
                                   </ul>
                               </li>
                               
@@ -95,8 +94,7 @@
                               </li>
                               <li class="has-children"><a href="#"><span class="menu-text">關於我們</span></a>
                                   <ul class="sub-menu">
-                                      <li><a href="about-us.html"><span class="menu-text">About us</span></a></li>
-                                      <li><a href="about-us-2.html"><span class="menu-text">About us 02</span></a></li>
+                                      <li><a href="about-us.html"><span class="menu-text">關於studio4art</span></a></li>
                                   </ul>
                               </li>
                           </ul>
@@ -142,23 +140,22 @@
               <div class="home4-slider swiper-container">
                   <div class="swiper-wrapper">
                       <div class="home4-slide-item swiper-slide" data-swiper-autoplay="5000">
+                          <div class="home4-slide-image"><img src="assets/images/slider/home4/index_banner_colorpencil4.jpg" alt="Home 4 Slider Image"></div>
+                          <div class="home4-slide-content">
+                          		<span class="category">彩色鉛筆 / 代針筆  繪圖教學</span>
+                              <h2 class="title">Q版人像畫</h2>
+                             	<div class="link"><a href="courseList.html" class="btn btn-black btn-outline-hover-black">MORE</a></div>
+                          </div>
+                      </div>
+                      <div class="home4-slide-item swiper-slide" data-swiper-autoplay="5000">
                           <div class="home4-slide-image"><img src="assets/images/slider/home4/slide-1_plant.png" alt="Home 4 Slider Image"></div>
                           <div class="home4-slide-content">
-                             <!-- <div class="link"><a href="shop.html" class="btn btn-black btn-outline-hover-black">shop now</a></div>-->
+                          <div class="link"><a href="courseList.html" class="btn btn-black btn-outline-hover-black">MORE</a></div>
                           </div>
                       </div>
                       <div class="home4-slide-item swiper-slide" data-swiper-autoplay="5000">
                           <div class="home4-slide-image"><img src="assets/images/slider/home4/slide-1_woodburn.PNG" alt="Home 4 Slider Image"></div>
                           <div class="home4-slide-content">
-                              <!-- <div class="link"><a href="shop.html" class="btn btn-black btn-outline-hover-black">shop now</a></div>-->
-                          </div>
-                      </div>
-                      <div class="home4-slide-item swiper-slide" data-swiper-autoplay="5000">
-                          <div class="home4-slide-image"><img src="assets/images/slider/home4/slide-3.webp" alt="Home 4 Slider Image"></div>
-                          <div class="home4-slide-content">
-                              <span class="category">HOME DECOR</span>
-                              <h2 class="title">Handmade Wooden<br> Rounded Bowl</h2>
-                             <!--  <div class="link"><a href="shop.html" class="btn btn-black btn-outline-hover-black">shop now</a></div> -->
                           </div>
                       </div>
                   </div>
@@ -183,28 +180,24 @@
                 <!-- Header Logo End -->
 
                 <!-- Search Start -->
-                <div class="col">
-                    <nav class="site-main-menu site-main-menu-left menu-height-100 justify-content-center">
-                        <ul>
-                              <li class="has-children"><a href="#"><span class="menu-text">商品專區</span></a>
-                                  <ul class="sub-menu">
-                                      <li><a href="index-4.html"><span class="menu-text">全部商品</span></a></li>
-                                      <li><a href="shoptest.jsp"><span class="menu-text">部分商品</span></a></li>
-                                  </ul>
-                              </li>
-                              
-                              <li class="has-children"><a href="#"><span class="menu-text">手作課程</span></a>
-                                  <ul class="sub-menu">
-                                              <li><a href="courseList.html"><span class="menu-text">報名課程</span></a></li>
-                                   </ul>
-                              </li>
+                <div class="col d-none d-xl-block">
+                    <nav class="site-main-menu justify-content-center">
+                        <ul>       
+                            <li class="has-children"><a href="#"><span class="menu-text">商品專區</span></a>
+                                <ul class="sub-menu">
+                                      <li><a href="shoptest.jsp"><span class="menu-text">全部商品</span></a></li>
+                                    </ul>
+                            <li class="has-children"><a href=""><span class="menu-text">手作課程</span></a>
+                                <ul class="sub-menu">
+                                            <li><a href="courseList.html"><span class="menu-text">報名課程</span></a></li>
+                               </ul>
+                            </li>
                               <li class="has-children"><a href="#"><span class="menu-text">關於我們</span></a>
-                                  <ul class="sub-menu">
-                                      <li><a href="about-us.html"><span class="menu-text">About us</span></a></li>
-                                      <li><a href="about-us-2.html"><span class="menu-text">About us 02</span></a></li>  
-                                  </ul>
-                              </li>
-                          </ul>
+                                <ul class="sub-menu">
+                                    <li><a href="about-us.html"><span class="menu-text">關於studio4art</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </nav>
                 </div>
                 <!-- Search End -->
@@ -454,10 +447,9 @@
             </div>
             <div class="offcanvas-menu">
                 <ul>
-                      <li><a href="#"><span class="menu-text">全部商品</span></a>
+                      <li><a href="#"><span class="menu-text">商品專區</span></a>
                         <ul class="sub-menu">
-                                <li><a href="index-4.html"><span class="menu-text">全部商品</span></a></li>
-                                 <li><a href="shoptest.jsp"><span class="menu-text">部分商品</span></a></li>
+                                <li><a href="shoptest.jsp"><span class="menu-text">全部商品</span></a></li>
 						 </ul>
                     </li>
                     <li><a href="#"><span class="menu-text">手作課程</span></a>
@@ -467,8 +459,7 @@
                     </li>
                    <li><a href="#"><span class="menu-text">關於我們</span></a>
                         <ul class="sub-menu">
-                            <li><a href="about-us.html"><span class="menu-text">About us</span></a></li>
-                            <li><a href="about-us-2.html"><span class="menu-text">About us 02</span></a></li>
+                            <li><a href="about-us.html"><span class="menu-text">關於studio4art</span></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -638,7 +629,7 @@
                 <div class="col-lg-6 learts-mb-40">
                     <div class="widget-about">
                         <img src="assets/images/logo/logo-2.webp" alt="">
-                        <p>為我們的生活點綴，挪出一些時間與空間相互分享創作的樂趣與想法，願能成為更好的自己</p>
+                         <p>為我們的生活點綴，挪出一些時間與空間相互分享創作的樂趣與想法，願能成為更好的自己</p>
                     </div>
                 </div>
 
@@ -646,7 +637,7 @@
                     <div class="row">
                         <div class="col">
                             <ul class="widget-list">
-                                <li><a href="#">關於我們</a></li>
+                                <li><a href="about-us.html">關於我們</a></li>
                                 <li><a href="contact-us.html">聯絡我們</a></li>
                                 <li><a href="element-termsofservice.html">服務條款</a></li>
                             </ul>
@@ -674,7 +665,7 @@
 
     <div class="footer2-copyright section">
         <div class="container">
-            <p class="copyright text-center">&copy; 2022 studio4art. All Rights Reserved</p>
+            <p class="copyright text-center">&copy; 2022 studio4art All Rights Reserved</p>
         </div>
     </div>
 
