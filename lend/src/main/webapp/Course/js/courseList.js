@@ -16,7 +16,7 @@ function Uint8ToString(u8a){
     // console.log(fdata);
     $.ajax({
         type:"post",
-        url:"../Admin/dashBoard",
+        url:"./Course/courseList",
         data: fdata,
         timeout:0,
         statusCode: {                 // 狀態碼
@@ -28,14 +28,14 @@ function Uint8ToString(u8a){
             }
         },
         success: function(res){      // request 成功取得回應後執行
-            // console.log(res);
+            console.log(res);
             // console.log(Array.isArray(res));
             // console.log(typeof res );
-            let response = JSON.parse(res);
+            // let response = JSON.parse(res);
             // console.log(response);
             // console.log(typeof response);
             // console.log(response[0]["courseName"])
-            response.forEach(element => {
+            res.forEach(element => {
             let u8 = new Uint8Array(element.courseImage)
             // console.log(element);
             let b64encoded = btoa(Uint8ToString(u8));
