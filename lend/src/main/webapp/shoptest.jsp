@@ -425,14 +425,14 @@
             </div>
             <div class="body customScroll">
                 <ul class="minicart-product-list">
-                    <li>
+                    <!-- <li>
                         <a href="product-details.html" class="image"><img src="assets/images/product/cart-product-1.webp" alt="Cart product Image"></a>
                         <div class="content">
                             <a href="product-details.html" class="title">Walnut Cutting Board</a>
                             <span class="quantity-price">1 x <span class="amount">$100.00</span></span>
                             <a href="#" class="remove">×</a>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <div class="foot">
@@ -565,7 +565,7 @@
                             <div class="product-thumb">
                             <c:set var="image" scope="page" value="${p.productImage}" />
                                 <a href="product-details.html" class="image">
-                                    <img src="data:image/png;base64,<%=Base64.getEncoder().encodeToString(((byte[])pageContext.getAttribute("image"))) %>" alt="Product Image">
+                                    <img class="pic" src="data:image/png;base64,<%=Base64.getEncoder().encodeToString(((byte[])pageContext.getAttribute("image"))) %>" alt="Product Image">
                                     <img class="image-hover " src="data:image/png;base64,<%=Base64.getEncoder().encodeToString(((byte[])pageContext.getAttribute("image"))) %>" alt="Product Image">
                                 </a>
                                 
@@ -576,7 +576,7 @@
                                    NT  ${p.productPrice}
                                 </span>
                                 <div class="product-buttons">
-                                    <button href="#wishlist.html" data-bs-toggle="modal" class="product-button hintT-top" data-hint="加入收藏"><i class="fal fa-heart"></i></button>
+                                    <button href="#wishlist.html" data-bs-toggle="modal" table-target="${p.productId}" class="product-button hintT-top wishadd" data-hint="加入收藏"><i class="fal fa-heart"></i></button>
                                     <button class="product-button hintT-top add" table-target="${p.productId}" data-hint="加入購物車"><i class="fal fa-shopping-cart"></i></button>
                                     <button href="#" class="product-button hintT-top" data-hint="加入比較"><i class="fal fa-random"></i></button>
                                 </div>

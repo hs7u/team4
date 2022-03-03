@@ -1,5 +1,6 @@
 package web.Course.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.PersistenceContext;
@@ -47,14 +48,24 @@ public class CourseDAO implements CourseInterface<CourseVO> {
     private static final String CHANGE_STATE =  "UPDATE `TEAM4`.`Course`"
     +"`course_state` = ?"
     +"WHERE `course_id` = ?;"; */
-    public void insert(CourseVO cVo){
-        // Hibernate
-        if(cVo != null && cVo.getCourseId() != null){
-            CourseVO newCource = getSession().get(CourseVO.class, cVo.getCourseId());
-            if(newCource == null){
-                getSession().save(cVo);
-            }
+    public Serializable insert(CourseVO cVo){
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
+        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+        Root<CourseVO> root = cq.from(CourseVO.class);
+        cq = cq.select(cb.count(root)).where(cb.equal(root.get("courseName"), cVo.getCourseName()));
+        long result = getSession().createQuery(cq).getSingleResult();
+        if(result == 0){
+            return getSession().save(cVo);
         }
+        return null;
+        // Hibernate
+        // if(cVo != null && cVo.getCourseId() != null){
+        //     CourseVO newCource = getSession().get(CourseVO.class, cVo.getCourseId());
+        //     if(newCource == null){
+        //         getSession().save(cVo);
+        //     }
+        // }
         // DateSource Jdbc
         /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT)) {

@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,6 +18,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicUpdate
 public class CourseVO implements java.io.Serializable{
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "course_id")
 	private Integer courseId;
 	@Column(name = "course_name")

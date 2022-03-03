@@ -1,16 +1,41 @@
-function Uint8ToString(u8a){
-    var CHUNK_SZ = 0x8000;
-    var c = [];
-    for (var i=0; i < u8a.length; i+=CHUNK_SZ) {
-      c.push(String.fromCharCode.apply(null, u8a.subarray(i, i+CHUNK_SZ)));
-    }
-    return c.join("");
-  }
+// function Uint8ToString(u8a){
+//     var CHUNK_SZ = 0x8000;
+//     var c = [];
+//     for (var i=0; i < u8a.length; i+=CHUNK_SZ) {
+//       c.push(String.fromCharCode.apply(null, u8a.subarray(i, i+CHUNK_SZ)));
+//     }
+//     return c.join("");
+// }
 function logout(e) {
     e.preventDefault();
     axios.get("./logout").then(res => {
         console.log(res.data)
     })
+}
+function getQa(){
+    let data = {
+        action: "qaList"
+    }
+    let fdate = JSON.stringify(data);
+    axios({
+        method: "post",
+        url: "../Admin/dashBoard",
+        data: fdate,
+        headers: { "Content-Type": "application/json" },
+      }).then(res=>{
+        for(let i = 0 ; i < res.data.length; i++){
+            let table = `<tr>
+                            <td>${res.data[i].customerId}</td>
+                            <td>${res.data[i].quession}</td>
+                            <td><input type="button" class="las CUP" qrTarget="${res.data[i].qaId}" value="回應"></td>
+                        </tr>`;
+            $(table).appendTo("tbody.qaList");
+        }
+        $('#qaTable').DataTable({
+            "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
+            "pageLength":'5'
+        });
+      })
 }
 function getCourses() {
     let data = {
@@ -28,11 +53,11 @@ function getCourses() {
         for(let i = 0 ; i < res.data.length; i++){
             let state = res.data[i].courseStatus == 0 ? '未開課' : res.data[i].courseStatus == 1 ? "開課中" : "報名中" ;
             let light = res.data[i].courseStatus == 0 ? 'red' : res.data[i].courseStatus == 1 ? "green" : "yello" ;
-            var u8 = new Uint8Array(res.data[i].courseImage)
-            var b64encoded = btoa(Uint8ToString(u8));
+            // var u8 = new Uint8Array(res.data[i].courseImage)
+            // var b64encoded = btoa(Uint8ToString(u8));
             let table = `<tr>
                             <td>${res.data[i].courseName}</td>
-                            <td><img src="data:image/png;base64,${b64encoded}" width="60" height="40""/></td>
+                            <td><img src="data:image/png;base64,${res.data[i].courseImage}" width="60" height="40""/></td>
                             <td>
                                 <span class="status ${light}"></span>
                                 ${state}
@@ -91,9 +116,20 @@ function getCourses() {
                                         <button type="button" class="btn_CUP closeCUP" CUPtarget="${res.data[i].courseId}">取消修改</button>
                                     </FORM>
                                 </article>
-                            </div>`;    
+                            </div>`;
+            let mainTable = `<tr>
+                                <td>${res.data[i].courseName}</td>
+                                <td>${res.data[i].coursePrice}</td>
+                                <td>
+                                    <span class="status ${light}"></span>
+                                    ${state}
+                                </td>
+                            </tr>`;
             $(table).appendTo("tbody.dynamicsC");
             $(uptable).appendTo("div.forCUP");
+            if(i <= 3){
+                $(mainTable).appendTo("tbody.mainCource");
+            }
         }
         $('#courseTable').DataTable({
             "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
@@ -333,15 +369,44 @@ $.fn.pUpfail = function(){
     });
 };
 function courseInsert(){
-    const form = document.getElementById("courseForm");
-    document.getElementById('btn_course').addEventListener('click',function(e){
-        let fdate = new FormData(form);
+    let coDate = {};
+    $("input.courseInsert[name='courseImage']").on("change" ,function(){
+        let reader = new FileReader(); // 用來讀取檔案
+        reader.readAsArrayBuffer(this.files[0]); // 讀取檔案
+        reader.addEventListener("load", function () {
+            let u = new Uint8Array(reader.result);
+            coDate.courseImage = Array.from(u);
+        })
+    })
+    $("#btn_course").on('click',function(e){
+        coDate.courseName        = $("input.courseInsert[name='courseName']").val();
+        coDate.courseDescription = $("input.courseInsert[name='courseDescription']").val();
+        coDate.coursePrice       = $("input.courseInsert[name='coursePrice']").val();
+        coDate.minOfCourse       = $("input.courseInsert[name='minOfCourse']").val();
+        coDate.maxOfCourse       = $("input.courseInsert[name='maxOfCourse']").val();
+        coDate.courseLocation    = $("input.courseInsert[name='courseLocation']").val();
         e.preventDefault();
-        xhr = new XMLHttpRequest();
-        xhr.addEventListener('readystatechange',callStateC);
-        let urlSource = '../addCourse';
-        xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
-        xhr.send(fdate);
+        coDate = JSON.stringify(coDate);
+        axios({
+            method: "post",
+            url: "../Course/addCourse",
+            data: coDate,
+            headers: { "Content-Type": "application/json" },
+          }).then(res=>{
+                $(function(){           
+                    $("button.btn_modal_close").on("click", function(){
+                        $("div.overlay").fadeOut();
+                    });
+                });
+                let check = res.data;
+                let t = document.getElementById("target");
+                t.innerText = check;
+                if(check.match(/success/) != null){
+                    $("div.overlay").cUploaded();
+                }else{
+                    $("div.overlay").cUpfail();
+                }
+            })
     })
    
 }
