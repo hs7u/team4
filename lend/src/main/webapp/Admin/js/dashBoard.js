@@ -126,8 +126,10 @@ function getCourses() {
                                 </td>
                             </tr>`;
             $(table).appendTo("tbody.dynamicsC");
-            $(mainTable).appendTo("tbody.mainCource");
             $(uptable).appendTo("div.forCUP");
+            if(i <= 3){
+                $(mainTable).appendTo("tbody.mainCource");
+            }
         }
         $('#courseTable').DataTable({
             "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
@@ -325,15 +327,44 @@ $.fn.pUpfail = function(){
     });
 };
 function courseInsert(){
-    const form = document.getElementById("courseForm");
-    document.getElementById('btn_course').addEventListener('click',function(e){
-        let fdate = new FormData(form);
+    let coDate = {};
+    $("input.courseInsert[name='courseImage']").on("change" ,function(){
+        let reader = new FileReader(); // 用來讀取檔案
+        reader.readAsArrayBuffer(this.files[0]); // 讀取檔案
+        reader.addEventListener("load", function () {
+            let u = new Uint8Array(reader.result);
+            coDate.courseImage = Array.from(u);
+        })
+    })
+    $("#btn_course").on('click',function(e){
+        coDate.courseName        = $("input.courseInsert[name='courseName']").val();
+        coDate.courseDescription = $("input.courseInsert[name='courseDescription']").val();
+        coDate.coursePrice       = $("input.courseInsert[name='coursePrice']").val();
+        coDate.minOfCourse       = $("input.courseInsert[name='minOfCourse']").val();
+        coDate.maxOfCourse       = $("input.courseInsert[name='maxOfCourse']").val();
+        coDate.courseLocation    = $("input.courseInsert[name='courseLocation']").val();
         e.preventDefault();
-        xhr = new XMLHttpRequest();
-        xhr.addEventListener('readystatechange',callStateC);
-        let urlSource = '../addCourse';
-        xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
-        xhr.send(fdate);
+        coDate = JSON.stringify(coDate);
+        axios({
+            method: "post",
+            url: "../Course/addCourse",
+            data: coDate,
+            headers: { "Content-Type": "application/json" },
+          }).then(res=>{
+                $(function(){           
+                    $("button.btn_modal_close").on("click", function(){
+                        $("div.overlay").fadeOut();
+                    });
+                });
+                let check = res.data;
+                let t = document.getElementById("target");
+                t.innerText = check;
+                if(check.match(/success/) != null){
+                    $("div.overlay").cUploaded();
+                }else{
+                    $("div.overlay").cUpfail();
+                }
+            })
     })
    
 }
