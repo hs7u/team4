@@ -380,7 +380,7 @@
                 <span class="title">Cart</span>
                 <button class="offcanvas-close">×</button>
             </div>
-            <div class="body customScroll">
+            <div class="body customScroll" style="overflow: auto !important">
                 <ul class="minicart-product-list">
                     <!-- <li>
                         <a href="product-details.html" class="image"><img src="assets/images/product/cart-product-1.webp" alt="Cart product Image"></a>

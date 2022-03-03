@@ -2,12 +2,13 @@
 document.addEventListener("DOMContentLoaded", function (event) {
 
 	let miniCart = localStorage.getItem("cart") != null ? JSON.parse(localStorage.getItem("cart")) : [];
-	let littleCartList, cartList, s_price = 0, total = 0;
+	let cartList, s_price = 0, total = 0;
 	console.log(miniCart);
 	if (miniCart != null) {
 		$("span.cart-count").removeClass("-none");
 		$("span.cart-count").html(miniCart.length);
 
+		$(".minicart-product-list").empty();
 		for (let i = 0; i < miniCart.length; i++) {
 			s_price = miniCart[i].productPrice / miniCart[i].productQuantity * miniCart[i].productQuantity;
 			total += s_price
@@ -27,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					<td><input type="file" name="customer_upload_img" id=""></td>
 					<td class="remove"><a herf="#" class="btn_delete">×</a></td>
 				</tr>`
-			littleCartList +=
+			let littleCartList =
 				`<li>
 					<a href="product-details.html" class="image"><img src=${miniCart[i].productImage} alt="Cart product Image"></a>
 					<div class="content">
@@ -36,13 +37,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						<a href="#" class="remove">×</a>
 					</div>
 				</li>`
+
+				$(".minicart-product-list").append(littleCartList);
 		}
 		$(".AllMiniCart")
 			.empty()
 			.append(cartList);
-		$(".minicart-product-list")
-			.empty()
-			.append(littleCartList);
 		$(".amount").html(total);
 
 
@@ -65,3 +65,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	})
 })
 
+/* <div class="product-quantity"> -->
+<!--                                     <span class="qty-btn minus"><i class="ti-minus"></i></span> -->
+<!--                                     <input type="text" class="input-qty" value="1"> -->
+<!--                                     <span class="qty-btn plus"><i class="ti-plus"></i></span> -->
+<!--                                 </div> --> */
+
+$(".ti-minus").on("click",function(e){
+	
+})
+
+$(".ti-plus").on("click",function(e){
+
+})

@@ -416,8 +416,8 @@
                 <span class="title">Cart</span>
                 <button class="offcanvas-close">×</button>
             </div>
-            <div class="body customScroll">
-                <ul class="minicart-product-list">
+            <div class="body customScroll" style="overflow: auto !important">
+                <ul class="minicart-product-list" >
                     
                 </ul>
             </div>

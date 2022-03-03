@@ -63,7 +63,7 @@ $("button.add").on("click", function (e) {
 					<a href="#" class="image"><img src="${miniCart[i].productImage}" alt="Cart product Image"></a>
 					<div class="content">
 						<a href="#" class="title">${ miniCart[i].productName}</a>
-						<span class="quantity-price">${miniCart[i].productQuantity} x <span class="p_price">$ ${miniCart[i].productPrice[i]/productQuantity}</span></span>
+						<span class="quantity-price">${miniCart[i].productQuantity} x <span class="p_price">$ ${miniCart[i].productPrice/miniCart[i].productQuantity}</span></span>
 						<a href="#" class="remove">×</a>
 					</div>
 				</li>`;
