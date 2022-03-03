@@ -3,6 +3,8 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,6 +17,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicUpdate
 public class ProductVO implements java.io.Serializable{
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id")
 	private Integer productId;
 	@Column(name = "product_category_code")
