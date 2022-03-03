@@ -425,20 +425,13 @@
             </div>
             <div class="body customScroll">
                 <ul class="minicart-product-list">
-                    <!-- <li>
-                        <a href="product-details.html" class="image"><img src="assets/images/product/cart-product-1.webp" alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="product-details.html" class="title">Walnut Cutting Board</a>
-                            <span class="quantity-price">1 x <span class="amount">$100.00</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li> -->
+                    
                 </ul>
             </div>
             <div class="foot">
                 <div class="sub-total">
                     <strong>Subtotal :</strong>
-                    <span class="amount">$144.00</span>
+                    <span class="miniCartTotal">$144.00</span>
                 </div>
                 <div class="buttons">
                     <a href="shopping-cart.jsp" class="btn btn-dark btn-hover-primary">view cart</a>
