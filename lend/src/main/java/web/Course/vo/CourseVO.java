@@ -46,7 +46,7 @@ public class CourseVO implements java.io.Serializable{
 			columnDefinition = "bit"
 			)
 	private Byte courseStatus;
-    public CourseVO() {
+	public CourseVO() {
 		super();
 	}
 	public Integer getCourseId() {

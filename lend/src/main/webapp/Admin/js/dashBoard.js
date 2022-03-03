@@ -344,18 +344,18 @@ $.fn.cUploaded = function(){
     this.fadeIn();
     $("button.btn_modal_close").on("click", function(){
         $("div.overlay").fadeOut("done", function(){
-            window.location.assign("./AdminDashBoard_v2.html#course");
+            window.location.reload();
         });
     });
 };
-$.fn.cUpfail = function(){ 
-    this.fadeIn();          
-    $("button.btn_modal_close").on("click", function(){
-        $("div.overlay").fadeOut("done", function(){
-            window.location.assign("./AdminDashBoard_v2.html#course");
-        });
-    });
-};
+// $.fn.cUpfail = function(){ 
+//     this.fadeIn();          
+//     $("button.btn_modal_close").on("click", function(){
+//         $("div.overlay").fadeOut("done", function(){
+//             window.location.reload();
+//         });
+//     });
+// };
 $.fn.pUploaded = function(){           
     this.fadeIn();
     $("button.btn_modal_close").on("click", function(){
@@ -383,12 +383,12 @@ function courseInsert(){
         })
     })
     $("#btn_course").on('click',function(e){
-        coDate.courseName        = $("input.courseInsert[name='courseName']").val();
+        coDate.courseName     = $("input.courseInsert[name='courseName']").val();
         coDate.courseDescribe = $("input.courseInsert[name='courseDescription']").val();
-        coDate.coursePrice       = $("input.courseInsert[name='coursePrice']").val();
-        coDate.minOfCourse       = $("input.courseInsert[name='minOfCourse']").val();
-        coDate.maxOfCourse       = $("input.courseInsert[name='maxOfCourse']").val();
-        coDate.courseLocation    = $("input.courseInsert[name='courseLocation']").val();
+        coDate.coursePrice    = $("input.courseInsert[name='coursePrice']").val();
+        coDate.minOfCourse    = $("input.courseInsert[name='minOfCourse']").val();
+        coDate.maxOfCourse    = $("input.courseInsert[name='maxOfCourse']").val();
+        coDate.courseLocation = $("input.courseInsert[name='courseLocation']").val();
         e.preventDefault();
         coDate = JSON.stringify(coDate);
         axios({
@@ -405,11 +405,11 @@ function courseInsert(){
                 let check = res.data;
                 let t = document.getElementById("target");
                 t.innerText = check;
-                if(check.match(/success/) != null){
+                // if(check.match(/success/) != null){
                     $("div.overlay").cUploaded();
-                }else{
-                    $("div.overlay").cUpfail();
-                }
+                // }else{
+                //     $("div.overlay").cUpfail();
+                // }
             })
     })
    
@@ -426,28 +426,28 @@ function productInsert(){
         xhr.send(fdate);
     })
 }
-function callStateC(){
-    $(function(){           
-        $("button.btn_modal_close").on("click", function(){
-            $("div.overlay").fadeOut();
-        });
-    });
-    if(xhr.readyState == 4){    //readyState: 0 -> 1 -> 2 -> 3 -> 4
-        let t = document.getElementById("target");
-        if(xhr.status == 200){
-            let text = `${xhr.responseText}`
-            t.innerText = text;
-            if(text.match(/成功/) != null){
-                $("div.overlay").cUploaded();
-            }else{
-                $("div.overlay").cUpfail();
-            }
-        }else{
-            t.innerText = `${xhr.status}: ${xhr.statusText}`
-        }
-        $("div.overlay").fadeIn();
-    }   
-}
+// function callStateC(){
+//     $(function(){           
+//         $("button.btn_modal_close").on("click", function(){
+//             $("div.overlay").fadeOut();
+//         });
+//     });
+//     if(xhr.readyState == 4){    //readyState: 0 -> 1 -> 2 -> 3 -> 4
+//         let t = document.getElementById("target");
+//         if(xhr.status == 200){
+//             let text = `${xhr.responseText}`
+//             t.innerText = text;
+//             if(text.match(/成功/) != null){
+//                 $("div.overlay").cUploaded();
+//             }else{
+//                 $("div.overlay").cUpfail();
+//             }
+//         }else{
+//             t.innerText = `${xhr.status}: ${xhr.statusText}`
+//         }
+//         $("div.overlay").fadeIn();
+//     }   
+// }
 function callStateP(){
     $(function(){           
         $("button.btn_modal_close").on("click", function(){
