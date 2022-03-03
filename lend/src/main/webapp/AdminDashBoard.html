@@ -10,7 +10,7 @@
     <!-- <link rel="stylesheet" href="./Admin/css/AdminDashBoard.css"> -->
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <style>
-        .btn_CUP{
+        .btn_OUP{
             height: 2.3rem;
             width: 10rem;
             cursor: pointer;
@@ -18,7 +18,7 @@
             margin: 0 auto;
             display: block;
         }
-        div.overCUP{
+        div.overOUP{
             position: fixed;
             top: 0;
             left: 0;
@@ -27,12 +27,12 @@
             /* background-color: hsla(0, 0%, 0%, .5); */
             /* display: none;     */
         }
-        div.overCUP > article{
+        div.overOUP > article{
             background-color: #f1f5f9;
             width: 90%;
             max-width: 500px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgb(255, 0, 0);
+            box-shadow: 0 0 10px rgba(4, 0, 5, 0.493);
             padding: 10px;
             position: absolute;
             top: 50%;
@@ -263,54 +263,82 @@
             <div id="check"></div>
         </main> -->
     </div>
-    <div class="overCUP">
+    <div class="overOUP">
         <article>
             <FORM METHOD="post" id="courseForm" enctype="multipart/form-data">
                 <div id="forflex">
                     <table>
                         <tr class="twoline">
-                            <td><label for="">課程名稱<input class="hh nomal" type="TEXT" name="courseName" size="45" placeholder="Ex:/ 水彩繪杯墊"></label></td>
+                            <td><label for="">訂單編號<input class="hh nomal" type="TEXT" name="orderId" size="45" placeholder="Ex:/ 1" readonly></label></td>
                         </tr>
                         <tr class="twoline">
-                            <td><label for="">課程描述<input class="hh nomal" type="TEXT" name="courseDescription" size="45" placeholder="Ex:/ 可學習自行繪製杯墊"/></label></td>
+                            <td><label for="">客戶編號<input class="hh nomal" type="TEXT" name="customerId" size="45" placeholder="Ex:/ 5" readonly/></label></td>
                         </tr>
                         <tr class="twoline">
-                            <td><label for="">上課地點<input class="hh nomal" type="TEXT" name="courseLocation" size="45" placeholder="Ex:/ 台南市新營區民治路36號"/></label></td>
+                            <td><label for="">運送方式<input class="hh nomal" type="TEXT" name="shippingMethodCode" size="45" placeholder="Ex:/ 腳踏車" readonly/></label></td>
                         </tr>
                         <tr class="twoline">
-                            <td><label for="">開課人數<input class="hh nomal" type="TEXT" name="minOfCourse" size="45" placeholder="Ex:/ 10"/></label></td>
+                            <td><label for="">訂單日期<input class="nomal" type="date" name="orderCreatedDate" readonly/></label></td>
                         </tr>
                         <tr class="twoline">
-                            <td><label for="">開始報名<input type="date" class="nomal" name="signUpStartdate"></label></td>
+                            <td><label for="">運費<br><input class="hh nomal" type="TEXT" name="orderDeliveryCharge" placeholder="Ex:/ 60" readonly></label></td>
                         </tr>
                         <tr class="twoline">
-                            <td><label for="">開課中<input type="radio" class="nomal" name="signUpDeadline"></label>
+                            <td><label for="">出貨日<br><input type="date" class="nomal" name="orderShippingDate" readonly></label>
                             </td>
                         </tr>
                     </table>                    
                     <table>
-                        <tr class="twoine">
-                            <td><label for="" class="nomal">課程圖片<input type="file"  name="courseImage" size="45"/></label></td>
-                        </tr>
                         <tr class="twoline tt">
-                            <td><label for="">課程日期<input type="date" class="nomal" name="courseDate"></label></td>
+                            <td><label for="">收件人<br><input class="hh nomal" type="TEXT" name="recipient" placeholder="Ex:/ gg" readonly></label></td>
                         </tr>
                         <tr class="twoline">
-                            <td><label for="">課程價格<input class="hh nomal" type="TEXT" name="coursePrice" size="45" placeholder="Ex:/ 1500"/></label></td>
+                            <td><label for="">收件地址<input class="hh nomal" type="TEXT" name="sendersAddress" size="45" placeholder="Ex:/ 台北市XX區XX路XX號XX樓" readonly/></label></td>
                         </tr>
                         <tr class="twoline">
-                            <td><label for="">額滿人數<input class="hh nomal" type="TEXT" name="maxOfCourse" size="45" placeholder="Ex:/ 30"/></label></td>
+                            <td><label for="">備註<br><input class="hh nomal" type="TEXT" name="orderDetails" size="45" placeholder="Ex:/ 微糖去冰加珍珠" readonly/></label></td>
                         </tr>                        
                         <tr class="twoline">
-                            <td><label for="">截止報名<input type="date" class="nomal" name="signUpDeadline"></label></td>
-                        </tr>   
+                            <td>
+                                <label for="">訂單狀態
+                                 <select id=”orderSelect” class="nomal" name="orderStatus">
+                                    <option value=”訂單成立″>訂單成立</option>
+                                    <option value=”訂單處理中″>訂單處理中</option>
+                                    <option value=”訂單取消″>訂單取消</option>
+                                 </select>
+                                </label>
+                            </td>
+                        </tr>
                         <tr class="twoline">
-                            <td> <label for="">未開課<input type="radio" class="nomal" name="signUpDeadline"></label></td>
+                            <td>
+                                <label for="">付款狀態
+                                 <select id=”orderSelect” class="nomal" name="paymentStatus">
+                                    <option value=”已付款″>已付款</option>
+                                    <option value=”未付款″>未付款</option>
+                                 </select>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="twoline">
+                            <td>
+                                <label for="">運送狀態
+                                 <select id=”orderSelect” class="nomal" name="shipping_status">
+                                    <option value=”已送達″>已送達</option>
+                                    <option value=”運送中″>運送中</option>
+                                    <option value=”未出貨″>未出貨</option>
+                                 </select>
+                                </label>
+                            </td>
                         </tr>
                     </table>
                 </div>
-                <button type="button"  class="btn_CUP" id="btn_UPcourse" >送出新增</button>
-                <button type="button" class="btn_CUP">取消修改</button>
+                <div id="forflex">
+                    <table>
+
+                    </table>
+                </div>
+                <button type="button"  class="btn_OUP" id="btn_UPorder" >修改</button>
+                <button type="button" class="btn_OUP">關閉</button>
             </FORM>
         </article>
     </div>

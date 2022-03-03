@@ -52,7 +52,7 @@ function getCourses() {
         $("div.forCUP").empty();
         for(let i = 0 ; i < res.data.length; i++){
             let state = res.data[i].courseStatus == 0 ? '未開課' : res.data[i].courseStatus == 1 ? "開課中" : "報名中" ;
-            let light = res.data[i].courseStatus == 0 ? 'red' : res.data[i].courseStatus == 1 ? "green" : "yello" ;
+            let light = res.data[i].courseStatus == 0 ? 'red' : res.data[i].courseStatus == 1 ? "green" : "yellow" ;
             // var u8 = new Uint8Array(res.data[i].courseImage)
             // var b64encoded = btoa(Uint8ToString(u8));
             let table = `<tr>
@@ -152,16 +152,14 @@ function getOrder() {
         headers: { "Content-Type": "application/json" },
       }).then(res=>{
         $("tbody.dynamicsD").empty();
-        $("div.forOUP").empty();
+        // $("div.forOUP").empty();
         for(let i = 0 ; i <= res.data.length; i++){
             let state = res.data[i].orderStatus == 0 ? '訂單取消' : res.data[i].orderStatus == 1 ? "訂單成立" : "訂單處理中" ;
-            let light = res.data[i].orderStatus == 0 ? 'red' : res.data[i].orderStatus == 1 ? "green" : "yello" ;
-
+            let light = res.data[i].orderStatus == 0 ? 'red' : res.data[i].orderStatus == 1 ? "green" : "yellow" ;
             let table = `<tr>
                             <td>${res.data[i].orderId}</td>
                             <td>${res.data[i].customerId}</td>
-                            <td>${res.data[i].orderCreatedDate}</td>
-                            <td>${res.data[i].productPrice}</td>
+                            <td>${moment(res.data[i].orderCreatedDate).locale("zh-tw").format("YYYY-MM-DD HH:mm")}</td>
                             <td>
                                 <span class="status ${light}"></span>
                                 ${state}
@@ -286,7 +284,7 @@ function getCustomers() {
                             <td><small>${res.data[i].customerEmail}</small></td>
                             <td><span class="status ${light}"></span>${cstate}</td>
                             <td><input type="button" class="las" value="停權"></td>
-                            <td><span class="las la-birthday-cake">${res.data[i].customerBirthday}</span></td>
+                            <td><span class="las la-birthday-cake">${moment(res.data[i].customerBirthday).locale("zh-tw").format("YYYY-MM-DD HH:mm")}</span></td>
                             <td><span class="las la-phone">${res.data[i].customerPhone}</span></td>
                         </tr>`;
             $(list).appendTo("tbody.cuList");
@@ -294,6 +292,12 @@ function getCustomers() {
                 $(mainAdd).appendTo("div.newCustomer");            
             }
         }
+        $('#customerTable').DataTable({
+            "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
+            "pageLength":'5',
+             destroy:true,
+             retrieve:true
+        });
       })
 }
 function getAccountInfo() {
@@ -470,20 +474,7 @@ function init(){
     openWorker();
     productInsert();
     courseInsert();
-    $('#customerTable').DataTable({
-        "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
-        "pageLength":'5',
-         destroy:true,
-         retrieve:true
-    });
-
-    $('#orderTable').DataTable({
-        "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
-        "pageLength":'5',
-         destroy:true,
-         retrieve:true
-    });
-    
+  
 }
 $(document).ready(function () {
     getAccountInfo();

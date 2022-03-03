@@ -22,6 +22,7 @@ import web.Course.vo.CourseVO;
 import web.Customer.service.CustomerService;
 import web.Customer.vo.CustomerVO;
 import web.CustomerOrders.service.CustomerOrdersService;
+import web.CustomerOrders.vo.CustomerOrdersVO;
 
 @RestController
 public class BoardController {
@@ -49,6 +50,8 @@ public class BoardController {
                 return new ResponseEntity<List<CustomerVO>>(cs.getAllCustomer(), HttpStatus.OK);
             case "courseList":
                 return new ResponseEntity<List<CourseVO>>(csc.getALL(), HttpStatus.OK);
+            case "orderList":
+            	return new ResponseEntity<List<CustomerOrdersVO>>(cos.getAll(), HttpStatus.OK);
         }
         return null;
     }
