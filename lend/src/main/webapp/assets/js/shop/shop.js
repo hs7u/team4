@@ -1,14 +1,28 @@
 document.addEventListener("DOMContentLoaded", function (event) {
 	let miniCart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
-	let miniWish = localStorage.getItem("wish") ? JSON.parse(localStorage.getItem("wish")) : [];
 	if (miniCart != null) {
 		$("span.cart-count").removeClass("-none");
 		$("span.cart-count").html(miniCart.length);
+		let s_price = 0, total = 0;
+		$(".minicart-product-list").empty();
+		for (let i = 0; i < miniCart.length; i++) {
+			s_price = miniCart[i].productPrice;
+			total += parseInt(s_price, 10)
+			let cartList =
+				`<li>
+					<a href="#" class="image"><img src="${miniCart[i].productImage}" alt="Cart product Image"></a>
+					<div class="content">
+						<a href="#" class="title">${ miniCart[i].productName}</a>
+						<span class="quantity-price">${miniCart[i].productQuantity} x <span class="p_price">$ ${miniCart[i].productPrice/miniCart[i].productQuantity}</span></span>
+						<a href="#" class="remove">×</a>
+					</div>
+				</li>`;
+			$(".minicart-product-list").append(cartList);
+		}
+		
+		$(".miniCartTotal").html(total);
 	}
-	if (miniWish != null) {
-		$("span.wishlist-count").removeClass("-none");
-		$("span.wishlist-count").html(miniWish.length);
-	}
+	
 })
 
 $("button.add").on("click", function (e) {
@@ -37,44 +51,45 @@ $("button.add").on("click", function (e) {
 	}
 	localStorage.setItem("cart", JSON.stringify(cartAll));
 	$("span.cart-count").html(cartAll.length);
-})
 
-$("button.wishadd").on("click", function (e) {
-	let target = $(this).attr("table-target");
-	let wishAll = sessionStorage.getItem("wish") ? JSON.parse(localStorage.getItem("wish")) : [];
-	let select = {};
-	select.cuatomerId = $("input[name = customerId]").val();
-	select.productId = $("input." + target + "[name = productId]").val();
-	let check = 0;
-	for (let i = 0; i < wishAll.length; i++) {
-		if (wishAll[i].productId != select.productId) {
-			check++;
+	let miniCart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
+	let s_price = 0, total = 0;
+	$(".minicart-product-list").empty();
+		for (let i = 0; i < miniCart.length; i++) {
+			s_price = miniCart[i].productPrice;
+			total += parseInt(s_price, 10)
+			let cartList =
+				`<li>
+					<a href="#" class="image"><img src="${miniCart[i].productImage}" alt="Cart product Image"></a>
+					<div class="content">
+						<a href="#" class="title">${ miniCart[i].productName}</a>
+						<span class="quantity-price">${miniCart[i].productQuantity} x <span class="p_price">$ ${miniCart[i].productPrice[i]/productQuantity}</span></span>
+						<a href="#" class="remove">×</a>
+					</div>
+				</li>`;
+			$(".minicart-product-list").append(cartList);
 		}
-	}
-	if (check == wishAll.length) {
-		wishAll.push(select);
-	}
-	sessionStorage.setItem("wish", JSON.stringify(wishAll));
-	$("span.wishlist-count").html(wishAll.length);
+		
+		$(".miniCartTotal").html(total);
+	
 })
 
-document.addEventListener("DOMContentLoaded", function (event) {
-	var cartList;
-	let miniCart = localStorage.getItem("cart") != null ? JSON.parse(localStorage.getItem("cart")) : [];
-	for (let i = 0; i < miniCart.length; i++) {
-		
-		cartList +=
-			`<li>
-				<a href="product-details.html" class="image"><img src="assets/images/product/cart-product-1.webp" alt="Cart product Image"></a>
-				<div class="content">
-					<a href="product-details.html" class="title">${ miniCart[i].productName}</a>
-					<span class="quantity-price">${miniCart[i].productQuantity} x <span class="p_price">$ ${miniCart[i].productPrice}</span></span>
-					<a href="#" class="remove">×</a>
-				</div>
-			</li>`
-	}
-	$(".minicart-product-list")
-		.empty()
-		.append(cartList);
-	
-});
+
+//$(".offcanvas-toggle").on("click", function (e) {
+//	var cartList, s_price = 0, total = 0;
+//	let miniCart = localStorage.getItem("cart") != null ? JSON.parse(localStorage.getItem("cart")) : [];
+//	for (let i = 0; i < miniCart.length; i++) {
+//		cartList +=
+//			`<li>
+//				<a href="product-details.html" class="image"><img src="${miniCart[i].productImage}" alt="Cart product Image"></a>
+//				<div class="content">
+//					<a href="product-details.html" class="title">${ miniCart[i].productName}</a>
+//					<span class="quantity-price">${miniCart[i].productQuantity} x <span class="p_price">$ ${miniCart[i].productPrice/miniCart[i].productQuantity}</span></span>
+//					<a href="#" class="remove">×</a>
+//				</div>
+//			</li>`
+//	}
+//	$(".minicart-product-list")
+//		.empty()
+//		.append(cartList);
+//});

@@ -22,7 +22,6 @@ public class ProductService {
             String productDescription, Integer productInventory, Byte customization, Integer customerProductPrice){
         java.sql.Timestamp releasedTime = new java.sql.Timestamp(System.currentTimeMillis());
         ProductVO pVo = new ProductVO();
-        pVo.setProductId(hashCode(productName, productDescription));
         pVo.setProductCategoryCode(productCategoryCode);
         pVo.setProductPrice(productPrice);
         pVo.setProductName(productName);
@@ -68,13 +67,5 @@ public class ProductService {
     }
     public byte[] getImage(Integer productId) {
         return dao.selectPhotoByProductId(productId);
-    }
-    public int hashCode(String productName, String productDescription) {
-        final int prime = 31;
-		int result = 1;
-		result = result * prime + (productName == null ? 0 : (productName).hashCode()); 
-		result = result * prime + (productDescription == null ? 0 : (productDescription).hashCode()); 
-		
-		return result;
     }
 }

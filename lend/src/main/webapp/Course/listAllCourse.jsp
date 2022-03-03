@@ -89,14 +89,14 @@
 			<td><img src="data:image/png;base64,<%=Base64.getEncoder().encodeToString(((byte[])pageContext.getAttribute("image"))) %>" width="60px" height="50px"/></td>
 			<td>${cVo.courseStatus eq 0 ? "下架中": "上架中"}</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Course/updateCourse" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Course/update" style="margin-bottom: 0px;">
 			     <input type="hidden" name="action"  value="transform">
                  <input type="hidden" name="courseId" value="${cVo.courseId}">  
 			     <input type="submit" class="las" value="修改">
                 </FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Course/updateCourse" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Course/update" style="margin-bottom: 0px;">
 			     <input type="hidden" name="action"  value="delete">
 			     <input type="hidden" name="coursId"  value="${cVo.courseId}">
 			     <input type="submit"  class="las" value="刪除">
