@@ -376,26 +376,19 @@
                 <button class="offcanvas-close">×</button>
             </div>
             <div class="body customScroll" style="overflow: auto !important">
-                <ul class="minicart-product-list">
-                    <!-- <li>
-                        <a href="product-details.html" class="image"><img src="assets/images/product/cart-product-1.webp" alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="product-details.html" class="title">Walnut Cutting Board</a>
-                            <span class="quantity-price">1 x <span class="amount">$100.00</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li> -->
+                <ul class="minicart-product-list" >
+                    
                 </ul>
             </div>
             <div class="foot">
                 <div class="sub-total">
                     <strong>小計 :</strong>
-                    <span class="amount">$144.00</span>
+                    <span class="miniCartTotal">$144.00</span>
                 </div>
                 <div class="buttons">
-                    <a href="shopping-cart.html" class="btn btn-dark btn-hover-primary">查看購物車</a>
+                    <a href="shopping-cart.jsp" class="btn btn-dark btn-hover-primary">查看購物車</a>
                     <a href="checkout.html" class="btn btn-outline-dark">前往結帳</a>
-                </div>
+                </div>   
             </div>
         </div>
     </div>
@@ -438,7 +431,7 @@
                         <a href="wishlist.html"><span>3</span><i class="fal fa-heart"></i></a>
                     </div>
                     <div class="header-cart">
-                        <a href="shopping-cart.html"><span class="cart-count">3</span><i class="fal fa-shopping-cart"></i></a>
+                        <a href="shopping-cart.jsp"><span class="cart-count">3</span><i class="fal fa-shopping-cart"></i></a>
                     </div>
                 </div>
             </div>
