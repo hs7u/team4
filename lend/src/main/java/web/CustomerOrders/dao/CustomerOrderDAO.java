@@ -1,5 +1,7 @@
 package web.CustomerOrders.dao;
 
+import java.util.List;
+
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
@@ -21,6 +23,7 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import ProjectInterfaces.CustomerOrderInterface;
+import web.Course.vo.CourseVO;
 import web.CustomerOrders.vo.CustomerOrdersVO;
 
 @Repository
@@ -284,6 +287,14 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
 					+ se.getMessage());
         }
         return coVo; */
+    }
+    public List<CustomerOrdersVO> getAll(){
+    	// JPA CtiteriaQuery
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
+        CriteriaQuery<CustomerOrdersVO> cq = cb.createQuery(CustomerOrdersVO.class);
+        Root<CustomerOrdersVO> root = cq.from(CustomerOrdersVO.class);
+        cq = cq.select(root);
+        return getSession().createQuery(cq).getResultList();
     }
     public Long countOrder(){
         // JPA CriteriaQuery

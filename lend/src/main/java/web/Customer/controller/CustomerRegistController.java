@@ -29,13 +29,13 @@ public class CustomerRegistController {
         String result = cs.addCustomer(vo, code);
         if("success".equals(result)){
             session.setAttribute(vo.getCustomerEmail(), code);
-            try {
-                ses.schedule(new Thread(() -> {
-                    session.invalidate();
-                }), 10*60, TimeUnit.SECONDS);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//            try {
+//                ses.schedule(new Thread(() -> {
+//                    session.invalidate();
+//                }), 10*60, TimeUnit.SECONDS);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
             return result;
         }
         return result;

@@ -97,9 +97,51 @@ function getCourses() {
         }
         $('#courseTable').DataTable({
             "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
-            "pageLength":'5'
+            "pageLength":'5',
+        	 destroy:true,
+        	 retrieve:true
         });
         cupListener();  
+      })
+}
+function getOrder() {
+    let data = {
+        action: "orderList"
+    }
+    let fdate = JSON.stringify(data);
+    axios({
+        method: "post",
+        url: "../Admin/dashBoard",
+        data: fdate,
+        headers: { "Content-Type": "application/json" },
+      }).then(res=>{
+        $("tbody.dynamicsD").empty();
+        $("div.forOUP").empty();
+        for(let i = 0 ; i <= res.data.length; i++){
+            let state = res.data[i].orderStatus == 0 ? '訂單取消' : res.data[i].orderStatus == 1 ? "訂單成立" : "訂單處理中" ;
+            let light = res.data[i].orderStatus == 0 ? 'red' : res.data[i].orderStatus == 1 ? "green" : "yello" ;
+
+            let table = `<tr>
+                            <td>${res.data[i].orderId}</td>
+                            <td>${res.data[i].customerId}</td>
+                            <td>${res.data[i].orderCreatedDate}</td>
+                            <td>${res.data[i].productPrice}</td>
+                            <td>
+                                <span class="status ${light}"></span>
+                                ${state}
+                            </td>
+                            <td><input type="button" class="las OUP" OUPtarget="${res.data[i].orderId}" value="明細"></td>
+                        </tr>`;
+           
+            $(table).appendTo("tbody.dynamicsD");
+            // $(uptable).appendTo("div.forOUP");
+        }
+        $('#orderTable').DataTable({
+            "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
+            "pageLength":'5',
+             destroy:true,
+             retrieve:true
+        });
       })
 }
 function timeable(res){
@@ -365,7 +407,16 @@ function init(){
     courseInsert();
     $('#customerTable').DataTable({
         "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
-        "pageLength":'5'
+        "pageLength":'5',
+         destroy:true,
+         retrieve:true
+    });
+
+    $('#orderTable').DataTable({
+        "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
+        "pageLength":'5',
+         destroy:true,
+         retrieve:true
     });
     
 }
@@ -373,5 +424,6 @@ $(document).ready(function () {
     getAccountInfo();
     getCustomers();
     getCourses();
+    getOrder();
 })
 window.addEventListener('load',init);

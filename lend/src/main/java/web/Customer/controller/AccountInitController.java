@@ -16,11 +16,20 @@ public class AccountInitController {
     @RequestMapping(path = {"/Customer/init/id/{param1}/status/{param2}/account/{param3}/check/{param4}"})
     public String accountInit(@PathVariable("param1") Integer customeId, @PathVariable("param2") Byte statusCode,
                       @PathVariable("param3") String email,  @PathVariable("param4") String code, HttpSession session){
-        if(((String)session.getAttribute(email)).equals(code)){
-            cs.changeStatus(customeId, statusCode);
-            session.removeAttribute(email);
-            return "success";
-        }
-        return "account not found";
+    	System.out.println(customeId);
+    	System.out.println(statusCode);
+    	System.out.println(email);
+    	try {
+    		String test = (String) session.getAttribute(email);
+			if(test.equals(code)){
+				System.out.println("ok");
+			    cs.changeStatus(customeId, statusCode);
+			    session.removeAttribute(email);
+			    return "success";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return "account not found";
     }
 }

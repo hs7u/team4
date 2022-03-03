@@ -1,6 +1,7 @@
 package web.CustomerOrders.service;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,5 +66,8 @@ public class CustomerOrdersService {
     }
     public Long countOrder(){
         return dao.countOrder();
+    }
+    public List<CustomerOrdersVO> getAll(){
+    	return dao.getAll();
     }
 }

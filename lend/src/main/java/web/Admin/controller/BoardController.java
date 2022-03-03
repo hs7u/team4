@@ -43,6 +43,8 @@ public class BoardController {
                 return GSON.toJson(cs.getAllCustomer());
             case "courseList":
                 return GSON.toJson(csc.getALL());
+            case "orderList":
+            	return GSON.toJson(cos.getAll());
         }
         return null;
     }
