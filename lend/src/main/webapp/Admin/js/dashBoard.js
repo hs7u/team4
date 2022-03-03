@@ -338,7 +338,7 @@ function courseInsert(){
     })
     $("#btn_course").on('click',function(e){
         coDate.courseName        = $("input.courseInsert[name='courseName']").val();
-        coDate.courseDescription = $("input.courseInsert[name='courseDescription']").val();
+        coDate.courseDescribe = $("input.courseInsert[name='courseDescription']").val();
         coDate.coursePrice       = $("input.courseInsert[name='coursePrice']").val();
         coDate.minOfCourse       = $("input.courseInsert[name='minOfCourse']").val();
         coDate.maxOfCourse       = $("input.courseInsert[name='maxOfCourse']").val();

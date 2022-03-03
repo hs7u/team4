@@ -496,7 +496,7 @@
             $("button.innerCourse-tab").on("click", function(e) {
                 e.preventDefault();
                 if($(this).attr("inner-target") == "listCourse"){
-                    getCourses();
+                    window.location.reload();
                 }
                 $("main.tab.course").find("div.innerCourse").addClass("inner-dis");
                 $("main.tab.course").find("div.innerCourse." + $(this).attr("inner-target")).removeClass("inner-dis");
