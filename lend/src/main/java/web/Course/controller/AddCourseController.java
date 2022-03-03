@@ -13,7 +13,7 @@ import web.Course.vo.CourseVO;
 public class AddCourseController {
     @Autowired
     private CourseService cs;
-    @RequestMapping(path = {"/addCourse"}, method = RequestMethod.POST)
+    @RequestMapping(path = {"/Course/addCourse"}, method = RequestMethod.POST)
     public String newCourse(@RequestBody(required = false)CourseVO cVo){
         return cs.addCourse(cVo);
     }
