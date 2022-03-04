@@ -409,7 +409,7 @@
                     <span class="amount">$144.00</span>
                 </div>
                 <div class="buttons">
-                    <a href="shopping-cart.html" class="btn btn-dark btn-hover-primary">view cart</a>
+                    <a href="shopping-cart.jsp" class="btn btn-dark btn-hover-primary">view cart</a>
                     <a href="checkout.html" class="btn btn-outline-dark">checkout</a>
                 </div>
                 <p class="minicart-message">Free Shipping on All Orders Over $100!</p>
@@ -457,7 +457,7 @@
                         <a href="wishlist.html"><span>3</span><i class="fal fa-heart"></i></a>
                     </div>
                     <div class="header-cart">
-                        <a href="shopping-cart.html"><span class="cart-count">3</span><i class="fal fa-shopping-cart"></i></a>
+                        <a href="shopping-cart.jsp"><span class="cart-count">3</span><i class="fal fa-shopping-cart"></i></a>
                     </div>
                 </div>
             </div>
@@ -500,12 +500,10 @@
                 <!-- My Account Tab List Start -->
                 <div class="col-lg-4 col-12 learts-mb-30">
                     <div class="myaccount-tab-list nav">
-                        <a href="#dashboad" class="active" data-bs-toggle="tab">Dashboard <i class="far fa-home"></i></a>
-                        <a href="#orders" data-bs-toggle="tab">Orders <i class="far fa-file-alt"></i></a>
-                        <a href="#download" data-bs-toggle="tab">Download <i class="far fa-arrow-to-bottom"></i></a>
-                        <a href="#address" data-bs-toggle="tab">address <i class="far fa-map-marker-alt"></i></a>
-                        <a href="#account-info" data-bs-toggle="tab">Account Details <i class="far fa-user"></i></a>
-                        <a href="login-register.html">Logout <i class="far fa-sign-out-alt"></i></a>
+                    	<a href="#account-info" class="active" data-bs-toggle="tab">基本資料<i class="far fa-user"></i></a>
+                        <a href="#orders" data-bs-toggle="tab">購買訂單 <i class="far fa-file-alt"></i></a>
+                        <a href="#address" data-bs-toggle="tab">您的地址 <i class="far fa-map-marker-alt"></i></a>
+                        <a href="login-register.html">登出 <i class="far fa-sign-out-alt"></i></a>
                     </div>
                 </div>
                 <!-- My Account Tab List End -->
@@ -515,15 +513,53 @@
                     <div class="tab-content">
 
                         <!-- Single Tab Content Start -->
-                        <div class="tab-pane fade show active" id="dashboad">
-                            <div class="myaccount-content dashboad">
-                                <p>Hello <strong>didiv91396</strong> (not <strong>didiv91396</strong>? <a href="login-register.html">Log out</a>)</p>
-                                <p>From your account dashboard you can view your <span>recent orders</span>, manage your <span>shipping and billing addresses</span>, and <span>edit your password and account details</span>.</p>
+                        <div class="tab-pane fade show active" id="account-info">
+                            <div class="myaccount-content account-details">
+                             <div class="myaccount-content dashboad">
+                                <p>請放心，你的電子郵件及所有與本站設計師溝通的訊息、檔案及相關購買資料， <span>網站將依照個人資料保護法保障你的個人隱私</span>！</p>
+                            	<br></div>
+                                <div class="account-details-form">
+                                    <form action="#">
+                                        <div class="row learts-mb-n30">
+                                            <div class="col-md-6 col-12 learts-mb-30">
+                                                <div class="single-input-item">
+                                                    <label for="first-name"> 姓名 <abbr class="required">*</abbr></label>
+                                                    <input type="text" id="first-name">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12 learts-mb-30">
+                                                <label for="email">Email <abbr class="required">*</abbr></label>
+                                                <input type="email" id="email" value="">
+                                                <h6>當你忘記密碼時，系統會需要你輸入該電子郵件，以寄送重設密碼連結</h6>
+                                            </div>
+                                            <div class="col-12 learts-mb-30 learts-mt-30">
+                                                <fieldset>
+                                                    <legend>變更密碼</legend>
+                                                    <div class="row learts-mb-n30">
+                                                        <div class="col-12 learts-mb-30">
+                                                            <label for="current-pwd">目前密碼</label>
+                                                            <input type="password" id="current-pwd">
+                                                        </div>
+                                                        <div class="col-12 learts-mb-30">
+                                                            <label for="new-pwd">新密碼</label>
+                                                            <input type="password" id="new-pwd">
+                                                        </div>
+                                                        <div class="col-12 learts-mb-30">
+                                                            <label for="confirm-pwd">再次確認新密碼</label>
+                                                            <input type="password" id="confirm-pwd">
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-12 learts-mb-30">
+                                                <button class="btn btn-dark btn-outline-hover-dark">確認修改</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                        <!-- Single Tab Content End -->
-
-                        <!-- Single Tab Content Start -->
+                        </div> <!-- Single Tab Content End -->
+						<!-- Single Tab Content Start -->
                         <div class="tab-pane fade" id="orders">
                             <div class="myaccount-content order">
                                 <div class="table-responsive">
@@ -566,122 +602,25 @@
                         </div>
                         <!-- Single Tab Content End -->
 
-                        <!-- Single Tab Content Start -->
-                        <div class="tab-pane fade" id="download">
-                            <div class="myaccount-content download">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Product</th>
-                                                <th>Date</th>
-                                                <th>Expire</th>
-                                                <th>Download</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Haven - Free Real Estate PSD Template</td>
-                                                <td>Aug 22, 2018</td>
-                                                <td>Yes</td>
-                                                <td><a href="#"><i class="far fa-arrow-to-bottom mr-1"></i> Download File</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>HasTech - Profolio Business Template</td>
-                                                <td>Sep 12, 2018</td>
-                                                <td>Never</td>
-                                                <td><a href="#"><i class="far fa-arrow-to-bottom mr-1"></i> Download File</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single Tab Content End -->
 
                         <!-- Single Tab Content Start -->
                         <div class="tab-pane fade" id="address">
                             <div class="myaccount-content address">
-                                <p>The following addresses will be used on the checkout page by default.</p>
+                                <p>預設情況下，結帳頁面將使用您註冊時所輸入的寄送地址</p>
                                 <div class="row learts-mb-n30">
                                     <div class="col-md-6 col-12 learts-mb-30">
-                                        <h4 class="title">Billing Address <a href="#" class="edit-link">edit</a></h4>
+                                        <h4 class="title">寄送地址 <a href="#" class="edit-link">修改</a></h4>
                                         <address>
                                             <p><strong>Alex Tuntuni</strong></p>
-                                            <p>1355 Market St, Suite 900 <br>
-                                                San Francisco, CA 94103</p>
-                                            <p>Mobile: (123) 456-7890</p>
-                                        </address>
-                                    </div>
-                                    <div class="col-md-6 col-12 learts-mb-30">
-                                        <h4 class="title">Shipping Address <a href="#" class="edit-link">edit</a></h4>
-                                        <address>
-                                            <p><strong>Alex Tuntuni</strong></p>
-                                            <p>1355 Market St, Suite 900 <br>
-                                                San Francisco, CA 94103</p>
-                                            <p>Mobile: (123) 456-7890</p>
+                                            <p>臺北市信義區西村里市府路45號</p>
+                                            <p>電話: (0911) 111111</p>
                                         </address>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Single Tab Content End -->
-
-                        <!-- Single Tab Content Start -->
-                        <div class="tab-pane fade" id="account-info">
-                            <div class="myaccount-content account-details">
-                                <div class="account-details-form">
-                                    <form action="#">
-                                        <div class="row learts-mb-n30">
-                                            <div class="col-md-6 col-12 learts-mb-30">
-                                                <div class="single-input-item">
-                                                    <label for="first-name">First Name <abbr class="required">*</abbr></label>
-                                                    <input type="text" id="first-name">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-12 learts-mb-30">
-                                                <div class="single-input-item">
-                                                    <label for="last-name">Last Name <abbr class="required">*</abbr></label>
-                                                    <input type="text" id="last-name">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 learts-mb-30">
-                                                <label for="display-name">Display Name <abbr class="required">*</abbr></label>
-                                                <input type="text" id="display-name" value="didiv91396">
-                                                <p>This will be how your name will be displayed in the account section and in reviews</p>
-                                            </div>
-                                            <div class="col-12 learts-mb-30">
-                                                <label for="email">Email Addres <abbr class="required">*</abbr></label>
-                                                <input type="email" id="email" value="didiv91396@ismailgul.net">
-                                            </div>
-                                            <div class="col-12 learts-mb-30 learts-mt-30">
-                                                <fieldset>
-                                                    <legend>Password change</legend>
-                                                    <div class="row learts-mb-n30">
-                                                        <div class="col-12 learts-mb-30">
-                                                            <label for="current-pwd">Current password (leave blank to leave unchanged)</label>
-                                                            <input type="password" id="current-pwd">
-                                                        </div>
-                                                        <div class="col-12 learts-mb-30">
-                                                            <label for="new-pwd">New password (leave blank to leave unchanged)</label>
-                                                            <input type="password" id="new-pwd">
-                                                        </div>
-                                                        <div class="col-12 learts-mb-30">
-                                                            <label for="confirm-pwd">Confirm new password</label>
-                                                            <input type="password" id="confirm-pwd">
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                            </div>
-                                            <div class="col-12 learts-mb-30">
-                                                <button class="btn btn-dark btn-outline-hover-dark">Save Changes</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div> <!-- Single Tab Content End -->
-
+                        
                     </div>
                 </div> <!-- My Account Tab Content End -->
             </div>
@@ -704,7 +643,7 @@
                     <div class="row">
                         <div class="col">
                             <ul class="widget-list">
-                                <li><a href="#">關於我們</a></li>
+                                <li><a href="about-us.html">關於我們</a></li>
                                 <li><a href="contact-us.html">聯絡我們</a></li>
                                 <li><a href="element-termsofservice.html">服務條款</a></li>
                             </ul>
@@ -746,6 +685,7 @@
     <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
 
     <!-- Plugins JS -->
+    <script src="assets/js/shop/shop.js"></script>
     <script src="assets/js/plugins/select2.min.js"></script>
     <script src="assets/js/plugins/jquery.nice-select.min.js"></script>
     <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
