@@ -33,8 +33,8 @@ public class OauthController {
         // 開始傳送參數 
         OutputStreamWriter writer = new OutputStreamWriter(connectionObtainToken.getOutputStream());
         writer.write("code="+req.getParameter("code")+"&");   // 取得Google回傳的參數code
-        writer.write("client_id=403227549647-bgrop942vuu0d20niigdl324ftn2uc5g.apps.googleusercontent.com&");   // 這裡請將xxxx替換成自己的client_id
-        writer.write("client_secret=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&");   // 這裡請將xxxx替換成自己的client_serect
+        writer.write("client_id=256304216081-u7ji7nb24h040688p9rq98mdnisr9ue7.apps.googleusercontent.com&");   // 這裡請將xxxx替換成自己的client_id
+        writer.write("client_secret=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&");   // 這裡請將xxxx替換成自己的client_serect
         writer.write("redirect_uri=http://localhost:7080/lend/Customer/login/oauth2/google&");   // 這裡請將xxxx替換成自己的redirect_uri
         writer.write("grant_type=authorization_code");  
         writer.close();
