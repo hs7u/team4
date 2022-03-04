@@ -56,13 +56,23 @@ public class ProductDAO implements ProductInterface<ProductVO>{
     +"`product_status` = ?"
     +"WHERE `product_id` = ?;"; */
     public void insert(ProductVO pVo){
-        // Hibernate
-        if(pVo != null){
-            ProductVO newProduct = getSession().get(ProductVO.class, pVo.getProductId());
-            if(newProduct == null){
-                getSession().save(pVo);
-            }
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
+        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+        Root<ProductVO> root = cq.from(ProductVO.class);
+        cq = cq.select(cb.count(root)).where(cb.equal(root.get("productName"), pVo.getProductName()));
+        long result = getSession().createQuery(cq).getSingleResult();
+        if(result == 0){
+            getSession().save(pVo);
         }
+        // return null;
+        // Hibernate
+        // if(pVo != null){
+        //     ProductVO newProduct = getSession().get(ProductVO.class, pVo.getProductId());
+        //     if(newProduct == null){
+        //         getSession().save(pVo);
+        //     }
+        // }
         // DateSource Jdbc
         /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT_STMT)) {
