@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>studio4art – 收藏清單</title>
+    <title>studio4art – 我的收藏</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -62,8 +62,7 @@
                         <ul>
                               <li class="has-children"><a href="#"><span class="menu-text">商品專區</span></a>
                                   <ul class="sub-menu">
-                                      <li><a href="index-4.html"><span class="menu-text">全部商品</span></a></li>
-                                      <li><a href="shoptest.jsp"><span class="menu-text">部分商品</span></a></li>
+                                      <li><a href="shoptest.jsp"><span class="menu-text">全部商品</span></a></li>
                                   </ul>
                               </li>
                               
@@ -74,8 +73,7 @@
                               </li>
                               <li class="has-children"><a href="#"><span class="menu-text">關於我們</span></a>
                                   <ul class="sub-menu">
-                                      <li><a href="about-us.html"><span class="menu-text">About us</span></a></li>
-                                      <li><a href="about-us-2.html"><span class="menu-text">About us 02</span></a></li>
+                                      <li><a href="about-us.html"><span class="menu-text">關於studio4art</span></a></li>
                                   </ul>
                               </li>
                           </ul>
@@ -126,8 +124,7 @@
                         <ul>       
                             <li class="has-children"><a href="#"><span class="menu-text">商品專區</span></a>
                                 <ul class="sub-menu">
-                                      <li><a href="index-4.html"><span class="menu-text">全部商品</span></a></li>
-                                      <li><a href="shoptest.jsp"><span class="menu-text">部分商品</span></a></li>
+                                      <li><a href="shoptest.jsp"><span class="menu-text">全部商品</span></a></li>
                                     </ul>
                             <li class="has-children"><a href=""><span class="menu-text">手作課程</span></a>
                                 <ul class="sub-menu">
@@ -136,8 +133,7 @@
                             </li>
                               <li class="has-children"><a href="#"><span class="menu-text">關於我們</span></a>
                                 <ul class="sub-menu">
-                                    <li><a href="about-us.html"><span class="menu-text">About us</span></a></li>
-                                    <li><a href="about-us-2.html"><span class="menu-text">About us 02</span></a></li>
+                                    <li><a href="about-us.html"><span class="menu-text">關於studio4art</span></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -303,7 +299,7 @@
     <div id="offcanvas-wishlist" class="offcanvas offcanvas-wishlist">
         <div class="inner">
             <div class="head">
-                <span class="title">Wishlist</span>
+                <span class="title">我的收藏</span>
                 <button class="offcanvas-close">×</button>
             </div>
             <div class="body customScroll">
@@ -336,7 +332,7 @@
             </div>
             <div class="foot">
                 <div class="buttons">
-                    <a href="wishlist.html" class="btn btn-dark btn-hover-primary">view wishlist</a>
+                    <a href="wishlist.html" class="btn btn-dark btn-hover-primary">查看我的收藏</a>
                 </div>
             </div>
         </div>
@@ -347,47 +343,24 @@
     <div id="offcanvas-cart" class="offcanvas offcanvas-cart">
         <div class="inner">
             <div class="head">
-                <span class="title">Cart</span>
+                <span class="title">購物車</span>
+                <p class="minicart-message">所有商品免運費！</p>
                 <button class="offcanvas-close">×</button>
             </div>
-            <div class="body customScroll">
-                <ul class="minicart-product-list">
-                    <li>
-                        <a href="product-details.html" class="image"><img src="assets/images/product/cart-product-1.webp" alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="product-details.html" class="title">Walnut Cutting Board</a>
-                            <span class="quantity-price">1 x <span class="amount">$100.00</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="product-details.html" class="image"><img src="assets/images/product/cart-product-2.webp" alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="product-details.html" class="title">Lucky Wooden Elephant</a>
-                            <span class="quantity-price">1 x <span class="amount">$35.00</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="product-details.html" class="image"><img src="assets/images/product/cart-product-3.webp" alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="product-details.html" class="title">Fish Cut Out Set</a>
-                            <span class="quantity-price">1 x <span class="amount">$9.00</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
+            <div class="body customScroll" style="overflow: auto !important">
+                <ul class="minicart-product-list" >
+                    
                 </ul>
             </div>
             <div class="foot">
                 <div class="sub-total">
-                    <strong>Subtotal :</strong>
-                    <span class="amount">$144.00</span>
+                    <strong>小計 :</strong>
+                    <span class="miniCartTotal">$144.00</span>
                 </div>
                 <div class="buttons">
-                    <a href="shopping-cart.html" class="btn btn-dark btn-hover-primary">view cart</a>
-                    <a href="checkout.html" class="btn btn-outline-dark">checkout</a>
-                </div>
-                <p class="minicart-message">Free Shipping on All Orders Over $100!</p>
+                    <a href="shopping-cart.jsp" class="btn btn-dark btn-hover-primary">查看購物車</a>
+                    <a href="checkout.html" class="btn btn-outline-dark">前往結帳</a>
+                </div>   
             </div>
         </div>
     </div>
@@ -404,10 +377,9 @@
             </div>
             <div class="offcanvas-menu">
                 <ul>
-                      <li><a href="#"><span class="menu-text">全部商品</span></a>
+                      <li><a href="#"><span class="menu-text">商品專區</span></a>
                         <ul class="sub-menu">
-                                <li><a href="index-4.html"><span class="menu-text">全部商品</span></a></li>
-                                 <li><a href="shoptest.jsp"><span class="menu-text">部分商品</span></a></li>
+                                <li><a href="shoptest.jsp"><span class="menu-text">全部商品</span></a></li>
 						 </ul>
                     </li>
                     <li><a href="#"><span class="menu-text">手作課程</span></a>
@@ -417,8 +389,7 @@
                     </li>
                    <li><a href="#"><span class="menu-text">關於我們</span></a>
                         <ul class="sub-menu">
-                            <li><a href="about-us.html"><span class="menu-text">About us</span></a></li>
-                            <li><a href="about-us-2.html"><span class="menu-text">About us 02</span></a></li>
+                            <li><a href="about-us.html"><span class="menu-text">關於studio4art</span></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -432,7 +403,7 @@
                         <a href="wishlist.html"><span>3</span><i class="fal fa-heart"></i></a>
                     </div>
                     <div class="header-cart">
-                        <a href="shopping-cart.html"><span class="cart-count">3</span><i class="fal fa-shopping-cart"></i></a>
+                        <a href="shopping-cart.jsp"><span class="cart-count">3</span><i class="fal fa-shopping-cart"></i></a>
                     </div>
                 </div>
             </div>
@@ -492,7 +463,7 @@
                 </table>
                 <div class="row">
                     <div class="col text-center mb-n3">
-                        <a class="btn btn-light btn-hover-dark mr-3 mb-3" href="shoptest.jsp">繼續購物</a>
+                        <a class="btn btn-light btn-hover-dark mr-3 mb-3" href="shoptest.jsp">繼續購物</a>&emsp;&emsp;
                         <a class="btn btn-dark btn-outline-hover-dark mb-3" href="shopping-cart.jsp">查看購物車</a>
                     </div>
                 </div>
@@ -517,7 +488,7 @@
                     <div class="row">
                         <div class="col">
                             <ul class="widget-list">
-                                <li><a href="#">關於我們</a></li>
+                                <li><a href="about-us.html">關於我們</a></li>
                                 <li><a href="contact-us.html">聯絡我們</a></li>
                                 <li><a href="element-termsofservice.html">服務條款</a></li>
                             </ul>
@@ -559,6 +530,7 @@
     <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
 
     <!-- Plugins JS -->
+    <script src="assets/js/shop/shop.js"></script>
     <script src="assets/js/plugins/select2.min.js"></script>
     <script src="assets/js/plugins/jquery.nice-select.min.js"></script>
     <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>

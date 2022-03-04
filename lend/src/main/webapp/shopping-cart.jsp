@@ -72,20 +72,18 @@
                         <ul>
                               <li class="has-children"><a href="#"><span class="menu-text">商品專區</span></a>
                                   <ul class="sub-menu">
-                                      <li><a href="index-4.html"><span class="menu-text">全部商品</span></a></li>
-                                      <li><a href="shoptest.jsp"><span class="menu-text">部分商品</span></a></li>
+                                      <li><a href="shoptest.jsp"><span class="menu-text">全部商品</span></a></li>
                                   </ul>
                               </li>
                               
                               <li class="has-children"><a href="#"><span class="menu-text">手作課程</span></a>
                                   <ul class="sub-menu">
-                                              <li><a href="./Course/courseList.html"><span class="menu-text">報名課程</span></a></li>
+                                              <li><a href="courseList.html"><span class="menu-text">報名課程</span></a></li>
                                    </ul>
                               </li>
                               <li class="has-children"><a href="#"><span class="menu-text">關於我們</span></a>
                                   <ul class="sub-menu">
-                                      <li><a href="about-us.html"><span class="menu-text">About us</span></a></li>
-                                      <li><a href="about-us-2.html"><span class="menu-text">About us 02</span></a></li>
+                                      <li><a href="about-us.html"><span class="menu-text">關於studio4art</span></a></li>
                                   </ul>
                               </li>
                           </ul>
@@ -140,28 +138,24 @@
                 <!-- Header Logo End -->
 
                 <!-- Search Start -->
-                <div class="col">
-                    <nav class="site-main-menu site-main-menu-left menu-height-100 justify-content-center">
-                        <ul>
-                              <li class="has-children"><a href="#"><span class="menu-text">商品專區</span></a>
-                                  <ul class="sub-menu">
-                                      <li><a href="index-4.html"><span class="menu-text">全部商品</span></a></li>
-                                      <li><a href="shoptest.jsp"><span class="menu-text">部分商品</span></a></li>
-                                  </ul>
-                              </li>
-                              
-                              <li class="has-children"><a href="#"><span class="menu-text">手作課程</span></a>
-                                  <ul class="sub-menu">
-                                              <li><a href="./Course/courseList.html"><span class="menu-text">報名課程</span></a></li>
-                                   </ul>
-                              </li>
+                <div class="col d-none d-xl-block">
+                    <nav class="site-main-menu justify-content-center">
+                        <ul>       
+                            <li class="has-children"><a href="#"><span class="menu-text">商品專區</span></a>
+                                <ul class="sub-menu">
+                                      <li><a href="shoptest.jsp"><span class="menu-text">全部商品</span></a></li>
+                                    </ul>
+                            <li class="has-children"><a href=""><span class="menu-text">手作課程</span></a>
+                                <ul class="sub-menu">
+                                            <li><a href="courseList.html"><span class="menu-text">報名課程</span></a></li>
+                               </ul>
+                            </li>
                               <li class="has-children"><a href="#"><span class="menu-text">關於我們</span></a>
-                                  <ul class="sub-menu">
-                                      <li><a href="about-us.html"><span class="menu-text">About us</span></a></li>
-                                      <li><a href="about-us-2.html"><span class="menu-text">About us 02</span></a></li>
-                                  </ul>
-                              </li>
-                          </ul>
+                                <ul class="sub-menu">
+                                    <li><a href="about-us.html"><span class="menu-text">關於studio4art</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </nav>
                 </div>
                 <!-- Search End -->
@@ -377,31 +371,24 @@
     <div id="offcanvas-cart" class="offcanvas offcanvas-cart">
         <div class="inner">
             <div class="head">
-                <span class="title">Cart</span>
+                <span class="title">購物車</span>
+                <p class="minicart-message">所有商品免運費！</p>
                 <button class="offcanvas-close">×</button>
             </div>
             <div class="body customScroll" style="overflow: auto !important">
-                <ul class="minicart-product-list">
-                    <!-- <li>
-                        <a href="product-details.html" class="image"><img src="assets/images/product/cart-product-1.webp" alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="product-details.html" class="title">Walnut Cutting Board</a>
-                            <span class="quantity-price">1 x <span class="amount">$100.00</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li> -->
+                <ul class="minicart-product-list" >
+                    
                 </ul>
             </div>
             <div class="foot">
                 <div class="sub-total">
                     <strong>小計 :</strong>
-                    <span class="amount">$144.00</span>
+                    <span class="miniCartTotal">$144.00</span>
                 </div>
                 <div class="buttons">
-                    <a href="shopping-cart.html" class="btn btn-dark btn-hover-primary">view cart</a>
-                    <a href="checkout.html" class="btn btn-outline-dark">checkout</a>
-                </div>
-                <p class="minicart-message">Free Shipping on All Orders Over $100!</p>
+                    <a href="shopping-cart.jsp" class="btn btn-dark btn-hover-primary">查看購物車</a>
+                    <a href="checkout.html" class="btn btn-outline-dark">前往結帳</a>
+                </div>   
             </div>
         </div>
     </div>
@@ -418,10 +405,9 @@
             </div>
             <div class="offcanvas-menu">
                 <ul>
-                      <li><a href="#"><span class="menu-text">全部商品</span></a>
+                      <li><a href="#"><span class="menu-text">商品專區</span></a>
                         <ul class="sub-menu">
-                                <li><a href="index-4.html"><span class="menu-text">全部商品</span></a></li>
-                                 <li><a href="shoptest.jsp"><span class="menu-text">部分商品</span></a></li>
+                                <li><a href="shoptest.jsp"><span class="menu-text">全部商品</span></a></li>
 						 </ul>
                     </li>
                     <li><a href="#"><span class="menu-text">手作課程</span></a>
@@ -431,8 +417,7 @@
                     </li>
                    <li><a href="#"><span class="menu-text">關於我們</span></a>
                         <ul class="sub-menu">
-                            <li><a href="about-us.html"><span class="menu-text">About us</span></a></li>
-                            <li><a href="about-us-2.html"><span class="menu-text">About us 02</span></a></li>
+                            <li><a href="about-us.html"><span class="menu-text">關於studio4art</span></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -446,7 +431,7 @@
                         <a href="wishlist.html"><span>3</span><i class="fal fa-heart"></i></a>
                     </div>
                     <div class="header-cart">
-                        <a href="shopping-cart.html"><span class="cart-count">3</span><i class="fal fa-shopping-cart"></i></a>
+                        <a href="shopping-cart.jsp"><span class="cart-count">3</span><i class="fal fa-shopping-cart"></i></a>
                     </div>
                 </div>
             </div>
@@ -556,7 +541,7 @@
                     <div class="row">
                         <div class="col">
                             <ul class="widget-list">
-                                <li><a href="#">關於我們</a></li>
+                                <li><a href="about-us.html">關於我們</a></li>
                                 <li><a href="contact-us.html">聯絡我們</a></li>
                                 <li><a href="element-termsofservice.html">服務條款</a></li>
                             </ul>

@@ -32,7 +32,7 @@ public class CourseService {
         if(cVo.getCourseLocation().trim().isEmpty()){
             errorMsg.append("上課地點: 請勿空白"+System.lineSeparator());
         }
-        if(cVo.getCourseImage().length <= 0){
+        if(cVo.getCourseImage() == null){
             errorMsg.append("請上傳課程圖片"+System.lineSeparator());
         }
         if(cVo.getCoursePrice() == null){

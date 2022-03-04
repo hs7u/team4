@@ -18,8 +18,22 @@ public class AdminService {
     // public AdminService(Session session){
     //     dao = new AdminDAO(session);
     // }
-    public void newManager(AdminVO aVo){
-        dao.insert(aVo);
+    public String newManager(AdminVO aVo){
+        StringBuilder errorMsg = new StringBuilder();
+        if (aVo.getAdminAccount().trim().isEmpty()) {
+            errorMsg.append("帳號不得為空"+System.lineSeparator());
+        }
+        if (aVo.getAdminPassword().trim().isEmpty()) {
+            errorMsg.append("密碼不得為空"+System.lineSeparator());
+        }
+        if(errorMsg.length() > 0){
+            return errorMsg.toString();
+        }
+        Integer id = (Integer)dao.insert(aVo);
+        if(id!= null){
+            return "Regist Success";
+        }
+        return "Account Exist";
     }
     public void updateManager(Integer adminId, String adminAccount, String adminPassword, String permission){
         AdminVO aVo = new AdminVO();

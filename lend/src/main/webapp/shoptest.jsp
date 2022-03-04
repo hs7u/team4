@@ -28,7 +28,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/web title logo 6.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.webp">
 
     <!-- CSS
 	============================================ -->
@@ -134,38 +134,8 @@
 
     </div>
     <!-- Header Section End -->
-      <!-- Slider main container Start -->
-      <div class="section">
-          <div class="container">
-              <div class="home4-slider swiper-container">
-                  <div class="swiper-wrapper">
-                      <div class="home4-slide-item swiper-slide" data-swiper-autoplay="5000">
-                          <div class="home4-slide-image"><img src="assets/images/slider/home4/index_banner_colorpencil4.jpg" alt="Home 4 Slider Image"></div>
-                          <div class="home4-slide-content">
-                          		<span class="category">彩色鉛筆 / 代針筆  繪圖教學</span>
-                              <h2 class="title">Q版人像畫</h2>
-                             	<div class="link"><a href="courseList.html" class="btn btn-black btn-outline-hover-black">MORE</a></div>
-                          </div>
-                      </div>
-                      <div class="home4-slide-item swiper-slide" data-swiper-autoplay="5000">
-                          <div class="home4-slide-image"><img src="assets/images/slider/home4/slide-1_plant.png" alt="Home 4 Slider Image"></div>
-                          <div class="home4-slide-content">
-                          <div class="link"><a href="courseList.html" class="btn btn-black btn-outline-hover-black">MORE</a></div>
-                          </div>
-                      </div>
-                      <div class="home4-slide-item swiper-slide" data-swiper-autoplay="5000">
-                          <div class="home4-slide-image"><img src="assets/images/slider/home4/slide-1_woodburn.PNG" alt="Home 4 Slider Image"></div>
-                          <div class="home4-slide-content">
-                          </div>
-                      </div>
-                  </div>
-                  <div class="home4-slider-prev swiper-button-prev"><i class="ti-angle-left"></i></div>
-                  <div class="home4-slider-next swiper-button-next"><i class="ti-angle-right"></i></div>
-                  <div class="home4-slider-pagination swiper-pagination"></div>
-              </div>
-          </div>
-      </div>
-      <!-- Slider main container End -->
+    
+      
     <!-- Header Section Start -->
     <div class="sticky-header section bg-white section-fluid d-none d-xl-block">
         <div class="container">
@@ -246,6 +216,7 @@
 
     </div>
     <!-- Header Section End -->
+    
     <!-- Mobile Header Section Start -->
     <div class="mobile-header bg-white section d-xl-none">
         <div class="container">
@@ -337,6 +308,7 @@
         </div>
     </div>
     <!-- Mobile Header Section End -->
+    
     <!-- OffCanvas Search Start -->
     <div id="offcanvas-search" class="offcanvas offcanvas-search">
         <div class="inner">
@@ -413,7 +385,8 @@
     <div id="offcanvas-cart" class="offcanvas offcanvas-cart">
         <div class="inner">
             <div class="head">
-                <span class="title">Cart</span>
+                <span class="title">購物車</span>
+                <p class="minicart-message">所有商品免運費！</p>
                 <button class="offcanvas-close">×</button>
             </div>
             <div class="body customScroll" style="overflow: auto !important">
@@ -423,14 +396,13 @@
             </div>
             <div class="foot">
                 <div class="sub-total">
-                    <strong>Subtotal :</strong>
+                    <strong>小計 :</strong>
                     <span class="miniCartTotal">$144.00</span>
                 </div>
                 <div class="buttons">
-                    <a href="shopping-cart.jsp" class="btn btn-dark btn-hover-primary">view cart</a>
-                    <a href="checkout.html" class="btn btn-outline-dark">checkout</a>
-                </div>
-                <p class="minicart-message">Free Shipping on All Orders Over $100!</p>
+                    <a href="shopping-cart.jsp" class="btn btn-dark btn-hover-primary">查看購物車</a>
+                    <a href="checkout.html" class="btn btn-outline-dark">前往結帳</a>
+                </div>   
             </div>
         </div>
     </div>
@@ -473,7 +445,7 @@
                         <a href="wishlist.html"><span>3</span><i class="fal fa-heart"></i></a>
                     </div>
                     <div class="header-cart">
-                        <a href="shopping-cart.html"><span class="cart-count">3</span><i class="fal fa-shopping-cart"></i></a>
+                        <a href="shopping-cart.jsp"><span class="cart-count">3</span><i class="fal fa-shopping-cart"></i></a>
                     </div>
                 </div>
             </div>
@@ -488,7 +460,38 @@
 
     <div class="offcanvas-overlay"></div>
 
- 
+ <!-- Slider main container Start -->
+      <div class="section">
+          <div class="container">
+              <div class="home4-slider swiper-container">
+                  <div class="swiper-wrapper">
+                      <div class="home4-slide-item swiper-slide" data-swiper-autoplay="5000">
+                          <div class="home4-slide-image"><img src="assets/images/slider/home4/slide-1_colorpencil.jpg" alt="Home 4 Slider Image"></div>
+                          <div class="home4-slide-content">
+                          		<span class="category">彩色鉛筆 / 代針筆  繪圖教學</span>
+                              <h2 class="title">Q版人像畫</h2>
+                             	<div class="link"><a href="courseList.html" class="btn btn-black btn-outline-hover-black">MORE</a></div>
+                          </div>
+                      </div>
+                      <div class="home4-slide-item swiper-slide" data-swiper-autoplay="5000">
+                          <div class="home4-slide-image"><img src="assets/images/slider/home4/slide-1_plant.png" alt="Home 4 Slider Image"></div>
+                          <div class="home4-slide-content"><br><br><br><br><br><br>
+                          <div class="link"><a href="courseList.html" class="btn btn-black btn-outline-hover-black">MORE</a></div>
+                          </div>
+                      </div>
+                      <div class="home4-slide-item swiper-slide" data-swiper-autoplay="5000">
+                          <div class="home4-slide-image"><img src="assets/images/slider/home4/slide-1_woodburn.PNG" alt="Home 4 Slider Image"></div>
+                          <div class="home4-slide-content">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="home4-slider-prev swiper-button-prev"><i class="ti-angle-left"></i></div>
+                  <div class="home4-slider-next swiper-button-next"><i class="ti-angle-right"></i></div>
+                  <div class="home4-slider-pagination swiper-pagination"></div>
+              </div>
+          </div>
+      </div>
+      <!-- Slider main container End -->
 
     <!-- Shop Products Section Start -->
     <div class="section section-padding pt-0">

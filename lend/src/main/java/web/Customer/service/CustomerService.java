@@ -129,7 +129,7 @@ public class CustomerService {
     private void sendMailSimple(String text, String to, String subject) throws Exception { 
         MimeMessage message = mailSender.createMimeMessage();
         try {
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(text, true);
