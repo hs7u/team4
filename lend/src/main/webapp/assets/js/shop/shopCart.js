@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			.empty()
 			.append(cartList);
 		$(".amount").html(total);
-		$(".miniCartTotal").html(total);
+	
 
 
 	}

@@ -383,7 +383,7 @@
             <div class="foot">
                 <div class="sub-total">
                     <strong>小計 :</strong>
-                    <span class="miniCartTotal">$144.00</span>
+                    <span class="amount">$144.00</span>
                 </div>
                 <div class="buttons">
                     <a href="shopping-cart.jsp" class="btn btn-dark btn-hover-primary">查看購物車</a>
