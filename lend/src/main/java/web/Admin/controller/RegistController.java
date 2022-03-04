@@ -1,5 +1,7 @@
 package web.Admin.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -17,25 +19,14 @@ public class RegistController {
     @Autowired
     private AdminService as;
     @RequestMapping(path = {"/Admin/regist"}, method = RequestMethod.POST)
-    public String regist(@RequestBody AdminVO vo, HttpSession session, HttpServletResponse response) {
+    public String regist(@RequestBody AdminVO vo, HttpSession session, HttpServletResponse response) throws IOException {
         if(session.getAttribute("account") == null){
-            StringBuilder errorMsg = new StringBuilder();
-            if (vo.getAdminAccount().trim().isEmpty()) {
-	    		errorMsg.append("帳號不得為空"+System.lineSeparator());
-	    	}
-	    	if (vo.getAdminPassword().trim().isEmpty()) {
-	    		errorMsg.append("密碼不得為空"+System.lineSeparator());
-	    	}
-            if(errorMsg.length() > 0){
-                return errorMsg.toString();
-            }
             AdminVO regist = as.getOneManager(vo);
             if(regist == null){
-                as.newManager(vo);
-                return "Regist Success";
+                return as.newManager(vo);
             }
-            return "Regist Fail";
         }
-        return "Account Exist";
+        response.sendRedirect("/Admin/AdminDashBoard_v2.html");
+        return null;
     }
 }

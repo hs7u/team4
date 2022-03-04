@@ -1,5 +1,6 @@
 package web.Admin.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.persistence.PersistenceContext;
@@ -29,9 +30,19 @@ public class AdminDAO implements AdminInterface<AdminVO>{
         return s;
 	} 
     @Override
-    public void insert(AdminVO aVo) {
+    public Serializable insert(AdminVO aVo) {
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
+        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+        Root<AdminVO> root = cq.from(AdminVO.class);
+        cq = cq.select(cb.count(root)).where(cb.equal(root.get("adminAccount"), aVo.getAdminAccount()));
+        long result = getSession().createQuery(cq).getSingleResult();
+        if(result == 0){
+            return getSession().save(aVo);
+        }
+        return null;
         // Hibernate
-        getSession().save(aVo);
+        // return getSession().save(aVo);
     }
     @Override
     public void update(AdminVO aVo) {
