@@ -69,20 +69,18 @@
                         <ul>
                               <li class="has-children"><a href="#"><span class="menu-text">商品專區</span></a>
                                   <ul class="sub-menu">
-                                      <li><a href="index-4.html"><span class="menu-text">全部商品</span></a></li>
-                                      <li><a href="shoptest.jsp"><span class="menu-text">部分商品</span></a></li>
+                                      <li><a href="shoptest.jsp"><span class="menu-text">全部商品</span></a></li>
                                   </ul>
                               </li>
                               
                               <li class="has-children"><a href="#"><span class="menu-text">手作課程</span></a>
                                   <ul class="sub-menu">
-                                              <li><a href="./Course/courseList.html"><span class="menu-text">報名課程</span></a></li>
+                                              <li><a href="courseList.html"><span class="menu-text">報名課程</span></a></li>
                                    </ul>
                               </li>
                               <li class="has-children"><a href="#"><span class="menu-text">關於我們</span></a>
                                   <ul class="sub-menu">
-                                      <li><a href="about-us.html"><span class="menu-text">About us</span></a></li>
-                                      <li><a href="about-us-2.html"><span class="menu-text">About us 02</span></a></li>
+                                      <li><a href="about-us.html"><span class="menu-text">關於studio4art</span></a></li>
                                   </ul>
                               </li>
                           </ul>
@@ -136,14 +134,13 @@
                 </div>
                 <!-- Header Logo End -->
 
-                <!-- Search Start -->
+				<!-- Search Start -->
                 <div class="col d-none d-xl-block">
                     <nav class="site-main-menu justify-content-center">
                         <ul>       
                             <li class="has-children"><a href="#"><span class="menu-text">商品專區</span></a>
                                 <ul class="sub-menu">
-                                      <li><a href="index-4.html"><span class="menu-text">全部商品</span></a></li>
-                                      <li><a href="shoptest.jsp"><span class="menu-text">部分商品</span></a></li>
+                                      <li><a href="shoptest.jsp"><span class="menu-text">全部商品</span></a></li>
                                     </ul>
                             <li class="has-children"><a href=""><span class="menu-text">手作課程</span></a>
                                 <ul class="sub-menu">
@@ -152,8 +149,7 @@
                             </li>
                               <li class="has-children"><a href="#"><span class="menu-text">關於我們</span></a>
                                 <ul class="sub-menu">
-                                    <li><a href="about-us.html"><span class="menu-text">About us</span></a></li>
-                                    <li><a href="about-us-2.html"><span class="menu-text">About us 02</span></a></li>
+                                    <li><a href="about-us.html"><span class="menu-text">關於studio4art</span></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -372,47 +368,24 @@
     <div id="offcanvas-cart" class="offcanvas offcanvas-cart">
         <div class="inner">
             <div class="head">
-                <span class="title">Cart</span>
+                <span class="title">購物車</span>
+                <p class="minicart-message">所有商品免運費！</p>
                 <button class="offcanvas-close">×</button>
             </div>
-            <div class="body customScroll">
-                <ul class="minicart-product-list">
-                    <li>
-                        <a href="product-details.html" class="image"><img src="assets/images/product/cart-product-1.webp" alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="product-details.html" class="title">Walnut Cutting Board</a>
-                            <span class="quantity-price">1 x <span class="amount">$100.00</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="product-details.html" class="image"><img src="assets/images/product/cart-product-2.webp" alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="product-details.html" class="title">Lucky Wooden Elephant</a>
-                            <span class="quantity-price">1 x <span class="amount">$35.00</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="product-details.html" class="image"><img src="assets/images/product/cart-product-3.webp" alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="product-details.html" class="title">Fish Cut Out Set</a>
-                            <span class="quantity-price">1 x <span class="amount">$9.00</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
+            <div class="body customScroll" style="overflow: auto !important">
+                <ul class="minicart-product-list" >
+                    
                 </ul>
             </div>
             <div class="foot">
                 <div class="sub-total">
-                    <strong>Subtotal :</strong>
-                    <span class="amount">$144.00</span>
+                    <strong>小計 :</strong>
+                    <span class="miniCartTotal">$144.00</span>
                 </div>
                 <div class="buttons">
-                    <a href="shopping-cart.jsp" class="btn btn-dark btn-hover-primary">view cart</a>
-                    <a href="checkout.html" class="btn btn-outline-dark">checkout</a>
-                </div>
-                <p class="minicart-message">Free Shipping on All Orders Over $100!</p>
+                    <a href="shopping-cart.jsp" class="btn btn-dark btn-hover-primary">查看購物車</a>
+                    <a href="checkout.html" class="btn btn-outline-dark">前往結帳</a>
+                </div>   
             </div>
         </div>
     </div>
@@ -429,10 +402,9 @@
             </div>
             <div class="offcanvas-menu">
                 <ul>
-                      <li><a href="#"><span class="menu-text">全部商品</span></a>
+                      <li><a href="#"><span class="menu-text">商品專區</span></a>
                         <ul class="sub-menu">
-                                <li><a href="index-4.html"><span class="menu-text">全部商品</span></a></li>
-                                 <li><a href="shoptest.jsp"><span class="menu-text">部分商品</span></a></li>
+                                <li><a href="shoptest.jsp"><span class="menu-text">全部商品</span></a></li>
 						 </ul>
                     </li>
                     <li><a href="#"><span class="menu-text">手作課程</span></a>
@@ -442,8 +414,7 @@
                     </li>
                    <li><a href="#"><span class="menu-text">關於我們</span></a>
                         <ul class="sub-menu">
-                            <li><a href="about-us.html"><span class="menu-text">About us</span></a></li>
-                            <li><a href="about-us-2.html"><span class="menu-text">About us 02</span></a></li>
+                            <li><a href="about-us.html"><span class="menu-text">關於studio4art</span></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -579,21 +550,21 @@
                                                 <td>Aug 22, 2018</td>
                                                 <td>Pending</td>
                                                 <td>$3000</td>
-                                                <td><a href="shopping-cart.html">View</a></td>
+                                                <td><a href="shopping-cart.jsp">View</a></td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
                                                 <td>July 22, 2018</td>
                                                 <td>Approved</td>
                                                 <td>$200</td>
-                                                <td><a href="shopping-cart.html">View</a></td>
+                                                <td><a href="shopping-cart.jsp">View</a></td>
                                             </tr>
                                             <tr>
                                                 <td>3</td>
                                                 <td>June 12, 2017</td>
                                                 <td>On Hold</td>
                                                 <td>$990</td>
-                                                <td><a href="shopping-cart.html">View</a></td>
+                                                <td><a href="shopping-cart.jsp">View</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
