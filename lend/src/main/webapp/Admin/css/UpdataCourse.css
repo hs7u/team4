@@ -27,7 +27,7 @@ div.overCUP > article{
     left: 50%;
     transform: translate(-50%, -50%);
 }
-#forflex{
+.forflex{
     height: 19.7rem;
     display:flex;
 }
