@@ -356,31 +356,34 @@ $.fn.cUploaded = function(){
 //         });
 //     });
 // };
-$.fn.pUploaded = function(){           
-    this.fadeIn();
-    $("button.btn_modal_close").on("click", function(){
-        $("div.overlay").fadeOut("done", function(){
-            window.location.assign("./AdminDashBoard_v2.html#product");
-        });
-    });
-};
-$.fn.pUpfail = function(){ 
-    this.fadeIn();          
-    $("button.btn_modal_close").on("click", function(){
-        $("div.overlay").fadeOut("done", function(){
-            window.location.assign("./AdminDashBoard_v2.html#product");
-        });
-    });
-};
+// $.fn.pUploaded = function(){           
+//     this.fadeIn();
+//     $("button.btn_modal_close").on("click", function(){
+//         $("div.overlay").fadeOut("done", function(){
+//             window.location.assign("./AdminDashBoard_v2.html#product");
+//         });
+//     });
+// };
+// $.fn.pUpfail = function(){ 
+//     this.fadeIn();          
+//     $("button.btn_modal_close").on("click", function(){
+//         $("div.overlay").fadeOut("done", function(){
+//             window.location.assign("./AdminDashBoard_v2.html#product");
+//         });
+//     });
+// };
+function imageForAjax(file){
+    let reader = new FileReader(); // 用來讀取檔案
+        reader.readAsArrayBuffer(file); // 讀取檔案
+        reader.addEventListener("load", function () {
+            let u = new Uint8Array(reader.result);
+            return Array.from(u);
+        })
+}
 function courseInsert(){
     let coDate = {};
     $("input.courseInsert[name='courseImage']").on("change" ,function(){
-        let reader = new FileReader(); // 用來讀取檔案
-        reader.readAsArrayBuffer(this.files[0]); // 讀取檔案
-        reader.addEventListener("load", function () {
-            let u = new Uint8Array(reader.result);
-            coDate.courseImage = Array.from(u);
-        })
+            coDate.courseImage = imageForAjax(this.files[0])
     })
     $("#btn_course").on('click',function(e){
         coDate.courseName     = $("input.courseInsert[name='courseName']").val();
@@ -415,15 +418,40 @@ function courseInsert(){
    
 }
 function productInsert(){
-    const form = document.getElementById("productForm");
+    let pdate = {};
+    $("input[name='productImage']").on("change" ,function(){
+        pdate.productImage = imageForAjax(this.files[0])
+    })
     document.getElementById('btn_product').addEventListener('click',function(e){
-        let fdate = new FormData(form);
         e.preventDefault();
-        xhr = new XMLHttpRequest();
-        xhr.addEventListener('readystatechange',callStateP);
-        let urlSource = '../Product/addNewProduct';
-        xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
-        xhr.send(fdate);
+        pdate.productCategoryCode  = $('input[name="productCategoryCode"]:checked').val();
+        pdate.customerProductPrice = $('input[name="customerProductPrice"]').val();
+        pdate.customization        = $('input[name="customization"]:checked').val();
+        pdate.productInventory     = $('input[name="productInventory"]').val();
+        pdate.productName          = $('input[name="productName"]').val();
+        pdate.productPrice         = $('input[name="productPrice"]').val();
+        pdate.productDescription   = $('input[name="productDescription"]').val();
+        pdate = JSON.stringify(pdate);
+            axios({
+              method: "post",
+              url: "../Product/addNewProduct",
+              data: pdate,
+              headers: { "Content-Type": "application/json" },
+            }).then(res=>{
+                $(function(){           
+                    $("button.btn_modal_close").on("click", function(){
+                        $("div.overlay").fadeOut();
+                    });
+                });
+                let check = res.data;
+                let t = document.getElementById("target");
+                t.innerText = check;
+                // if(check.match(/success/) != null){
+                    $("div.overlay").cUploaded();
+                // }else{
+                //     $("div.overlay").cUpfail();
+                // }
+            })    
     })
 }
 // function callStateC(){
@@ -448,28 +476,28 @@ function productInsert(){
 //         $("div.overlay").fadeIn();
 //     }   
 // }
-function callStateP(){
-    $(function(){           
-        $("button.btn_modal_close").on("click", function(){
-            $("div.overlay").fadeOut();
-        });
-    });
-    if(xhr.readyState == 4){    //readyState: 0 -> 1 -> 2 -> 3 -> 4
-        let t = document.getElementById("target");
-        if(xhr.status == 200){
-            let text = `${xhr.responseText}`
-            t.innerText = text;
-            if(text.match(/成功/) != null){
-                $("div.overlay").pUploaded();
-            }else{
-                $("div.overlay").pUpfail();
-            }
-        }else{
-            t.innerText = `${xhr.status}: ${xhr.statusText}`
-        }
-        $("div.overlay").fadeIn();
-    }   
-}
+// function callStateP(){
+//     $(function(){           
+//         $("button.btn_modal_close").on("click", function(){
+//             $("div.overlay").fadeOut();
+//         });
+//     });
+//     if(xhr.readyState == 4){    //readyState: 0 -> 1 -> 2 -> 3 -> 4
+//         let t = document.getElementById("target");
+//         if(xhr.status == 200){
+//             let text = `${xhr.responseText}`
+//             t.innerText = text;
+//             if(text.match(/成功/) != null){
+//                 $("div.overlay").pUploaded();
+//             }else{
+//                 $("div.overlay").pUpfail();
+//             }
+//         }else{
+//             t.innerText = `${xhr.status}: ${xhr.statusText}`
+//         }
+//         $("div.overlay").fadeIn();
+//     }   
+// }
 function init(){
     openWorker();
     productInsert();
