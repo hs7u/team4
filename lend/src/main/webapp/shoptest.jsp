@@ -547,8 +547,7 @@
   <!-- Products Start -->
         <div class="section section-padding pt-0">
         <div class="container">
-			<div id="shop-products"
-				class="products isotope-grid row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
+			<div id="shop-products" class="products isotope-grid row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
 				<div class="grid-sizer col-1"></div>
 				
 				<div class="grid-item col new">
@@ -556,38 +555,54 @@
 						<div class="product-thumb">
 							<a href="product-details.jsp" class="image"> <img
 								src="assets/images/product/s328/22010-1.jpg" alt="Product Image">
-							</a> <a href="wishlist.html" class="add-to-wishlist hintT-left"
-								data-hint="Add to wishlist"><i class="far fa-heart"></i></a>
+							</a> 
 						</div>
 						<div class="product-info">
 							<h6 class="title">
-								<a href="product-details.jsp">Bouncer Measuring Cup</a>
+								<a href="product-details.jsp">電烙 | 壓克力彩繪 | 松鼠屋</a>
 							</h6>
-							<span class="price"> NT 1500 </span>
+							<span class="price"> NT 2500 </span>
+							<br>
 							<div class="product-buttons">
-								<a href="#quickViewModal" data-bs-toggle="modal"
-									class="product-button hintT-top" data-hint="Quick View"><i
-									class="fal fa-search"></i></a> <a href="#"
-									class="product-button hintT-top" data-hint="Add to Cart"><i
-									class="fal fa-shopping-cart"></i></a> <a href="#"
-									class="product-button hintT-top" data-hint="Compare"><i
-									class="fal fa-random"></i></a>
+								<button href="#wishlist.html" data-bs-toggle="modal" table-target="${p.productId}" class="product-button hintT-top wishadd" data-hint="加入收藏"><i class="fal fa-heart"></i></button>
+                                    <button class="product-button hintT-top add" table-target="${p.productId}" data-hint="加入購物車"><i class="fal fa-shopping-cart"></i></button>
+                                    <button href="#" class="product-button hintT-top" data-hint="加入比較"><i class="fal fa-random"></i></button>
 							</div>
 						</div>
 					</div>
 				</div>
-
 				<div class="grid-item col new">
 					<div class="product">
 						<div class="product-thumb">
 							<a href="product-details.jsp" class="image"> <img
-								src="assets/images/product/s328/66010-4.jpg" alt="Product Image">
-							</a> <a href="wishlist.html" class="add-to-wishlist hintT-left"
-								data-hint="Add to wishlist"><i class="far fa-heart"></i></a>
+								src="assets/images/product/s328/22009-3.jpg" alt="Product Image">
+							</a> 
 						</div>
 						<div class="product-info">
 							<h6 class="title">
-								<a href="product-details.jsp">電烙 | 壓克力彩繪 | 生肖虎與兔</a>
+								<a href="product-details.jsp">電烙 | 壓克力彩繪 | 松鼠屋鑰匙圈吊飾</a>
+							</h6>
+							<span class="price"> NT 1500 </span>
+							<br>
+							<div class="product-buttons">
+								<button href="#wishlist.html" data-bs-toggle="modal" table-target="${p.productId}" class="product-button hintT-top wishadd" data-hint="加入收藏"><i class="fal fa-heart"></i></button>
+                                    <button class="product-button hintT-top add" table-target="${p.productId}" data-hint="加入購物車"><i class="fal fa-shopping-cart"></i></button>
+                                    <button href="#" class="product-button hintT-top" data-hint="加入比較"><i class="fal fa-random"></i></button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="grid-item col new">
+					<div class="product">
+						<div class="product-thumb">
+							<a href="product-details.jsp" class="image"> <img
+								src="assets/images/product/s328/66010-3.jpg" alt="Product Image">
+							</a> 
+						</div>
+						<div class="product-info">
+							<h6 class="title">
+								<a href="product-details.jsp">電烙 | 壓克力彩繪 | 生肖虎與兔吊飾</a>
 							</h6>
 							<span class="price"> NT 1500 </span>
 							<br>
@@ -604,12 +619,11 @@
 						<div class="product-thumb">
 							<a href="product-details.jsp" class="image"> <img
 								src="assets/images/product/s328/66010-4.jpg" alt="Product Image">
-							</a> <a href="wishlist.html" class="add-to-wishlist hintT-left"
-								data-hint="Add to wishlist"><i class="far fa-heart"></i></a>
+							</a>
 						</div>
 						<div class="product-info">
 							<h6 class="title">
-								<a href="product-details.jsp">電烙 | 壓克力彩繪 | 生肖虎與兔</a>
+								<a href="product-details.jsp">電烙 | 壓克力彩繪 | 生肖虎與兔吊飾</a>
 							</h6>
 							<span class="price"> NT 1500 </span>
 							<br>
@@ -625,35 +639,12 @@
 					<div class="product">
 						<div class="product-thumb">
 							<a href="product-details.jsp" class="image"> <img
-								src="assets/images/product/s328/66010-4.jpg" alt="Product Image">
-							</a> <a href="wishlist.html" class="add-to-wishlist hintT-left"
-								data-hint="Add to wishlist"><i class="far fa-heart"></i></a>
+								src="assets/images/product/s328/66009-3.jpg" alt="Product Image">
+							</a> 
 						</div>
 						<div class="product-info">
 							<h6 class="title">
-								<a href="product-details.jsp">電烙 | 壓克力彩繪 | 生肖虎與兔</a>
-							</h6>
-							<span class="price"> NT 1500 </span>
-							<br>
-							<div class="product-buttons">
-								<button href="#wishlist.html" data-bs-toggle="modal" table-target="${p.productId}" class="product-button hintT-top wishadd" data-hint="加入收藏"><i class="fal fa-heart"></i></button>
-                                    <button class="product-button hintT-top add" table-target="${p.productId}" data-hint="加入購物車"><i class="fal fa-shopping-cart"></i></button>
-                                    <button href="#" class="product-button hintT-top" data-hint="加入比較"><i class="fal fa-random"></i></button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="grid-item col new">
-					<div class="product">
-						<div class="product-thumb">
-							<a href="product-details.jsp" class="image"> <img
-								src="assets/images/product/s328/66010-4.jpg" alt="Product Image">
-							</a> <a href="wishlist.html" class="add-to-wishlist hintT-left"
-								data-hint="Add to wishlist"><i class="far fa-heart"></i></a>
-						</div>
-						<div class="product-info">
-							<h6 class="title">
-								<a href="product-details.jsp">電烙 | 壓克力彩繪 | 生肖虎與兔</a>
+								<a href="product-details.jsp">電烙 | 壓克力彩繪 | 可愛貓頭鷹吊飾</a>
 							</h6>
 							<span class="price"> NT 1500 </span>
 							<br>
