@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			total += s_price
 			cartList +=
 				`<tr>
-					<td class="thumbnail"><a href="product-details.html"><img src=${miniCart[i].productImage} alt="cart-product-1"></a></td>
-					<td class="name"> <a href="product-details.html">${miniCart[i].productName}</a></td>
+					<td class="thumbnail"><a href="product-details.jsp"><img src=${miniCart[i].productImage} alt="cart-product-1"></a></td>
+					<td class="name"> <a href="product-details.jsp">${miniCart[i].productName}</a></td>
 					<td class="price"><span>NT ${miniCart[i].productPrice / miniCart[i].productQuantity}</span></td>
 					<td class="quantity">
 						<div class="product-quantity">
@@ -30,9 +30,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				</tr>`
 			let littleCartList =
 				`<li>
-					<a href="product-details.html" class="image"><img src=${miniCart[i].productImage} alt="Cart product Image"></a>
+					<a href="product-details.jsp" class="image"><img src=${miniCart[i].productImage} alt="Cart product Image"></a>
 					<div class="content">
-						<a href="product-details.html" class="title">${miniCart[i].productName}</a>
+						<a href="product-details.jsp" class="title">${miniCart[i].productName}</a>
 						<span class="quantity-price">${miniCart[i].productQuantity} x <span>$ ${miniCart[i].productPrice / miniCart[i].productQuantity}</span></span>
 						<a href="#" class="remove">×</a>
 					</div>
