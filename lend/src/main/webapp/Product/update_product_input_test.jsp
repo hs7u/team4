@@ -149,29 +149,29 @@ div.overlay > article{
 					<tr>
 						<td class="hint">商品標籤</td>
 						<td>
-							<label for="product_category_code">
-							<input type="radio" class="" name="product_category_code" size="45" value="11" checked="<%=(productVO.getProductCategoryCode() == 11) ? true : false%>" />
+							<label for="productCategoryCode">
+							<input type="radio" class="" name="productCategoryCode" size="45" value="11" checked="<%=(productVO.getProductCategoryCode() == 11) ? true : false%>" />
 								瓷畫
 							</label>
-							<label for="product_category_code" class="lineup">
-								<input type="radio" class="" name="product_category_code" size="45" value="22" checked="<%=(productVO.getProductCategoryCode() == 22) ? true : false%>" />
+							<label for="productCategoryCode" class="lineup">
+								<input type="radio" class="" name="productCategoryCode" size="45" value="22" checked="<%=(productVO.getProductCategoryCode() == 22) ? true : false%>" />
 								電烙
 							</label>
-							<label for="product_category_code">
-								<input type="radio" class="" name="product_category_code" size="45" value="33" checked="<%=(productVO.getProductCategoryCode() == 33) ? true : false%>" />
+							<label for="productCategoryCode">
+								<input type="radio" class="" name="productCategoryCode" size="45" value="33" checked="<%=(productVO.getProductCategoryCode() == 33) ? true : false%>" />
 								燒陶
 							</label>
 							<br>
-							<label for="product_category_code">
-								<input type="radio" class="" name="product_category_code" size="45" value="44" checked="<%=(productVO.getProductCategoryCode() == 44) ? true : false%>" />
+							<label for="productCategoryCode">
+								<input type="radio" class="" name="productCategoryCode" size="45" value="44" checked="<%=(productVO.getProductCategoryCode() == 44) ? true : false%>" />
 								色鉛筆
 							</label>
-							<label for="product_category_code">
-								<input type="radio" class="" name="product_category_code" size="45" value="55" checked="<%=(productVO.getProductCategoryCode() == 55) ? true : false%>" />
+							<label for="productCategoryCode">
+								<input type="radio" class="" name="productCategoryCode" size="45" value="55" checked="<%=(productVO.getProductCategoryCode() == 55) ? true : false%>" />
 								水彩
 							</label>
-							<label for="product_category_code">
-								<input type="radio" class="" name="product_category_code" size="45" value="66" checked="<%=(productVO.getProductCategoryCode() == 66) ? true : false%>" />
+							<label for="productCategoryCode">
+								<input type="radio" class="" name="productCategoryCode" size="45" value="66" checked="<%=(productVO.getProductCategoryCode() == 66) ? true : false%>" />
 								壓克力彩繪
 							</label>
 						</td>
@@ -179,32 +179,32 @@ div.overlay > article{
 					<tr>
 						<td class="hint">商品名稱</td>
 						<td>
-							<input type="TEXT" class="line" name="product_name" size="45" value="<%=(productVO.getProductName() == null) ? "default" : productVO.getProductName()%>" />
+							<input type="TEXT" class="line" name="productName" size="45" value="<%=(productVO.getProductName() == null) ? "default" : productVO.getProductName()%>" />
 						</td>
 					</tr>
 					<tr>
 						<td class="hint">商品描述</td>
 						<td>
-							<input type="TEXT" class="line" name="product_description" size="45" value="<%=(productVO.getProductDescription() == null) ? "default" : productVO.getProductDescription()%>" />
+							<input type="TEXT" class="line" name="productDescription" size="45" value="<%=(productVO.getProductDescription() == null) ? "default" : productVO.getProductDescription()%>" />
 						</td>
 					</tr>
 					<tr>
 						<td class="hint">商品價格</td>
 						<td>
-							<input type="TEXT" class="line" name="product_price" size="45" value="<%=(productVO.getProductPrice() == null) ? "0" : productVO.getProductPrice()%>" />
+							<input type="TEXT" class="line" name="productPrice" size="45" value="<%=(productVO.getProductPrice() == null) ? "0" : productVO.getProductPrice()%>" />
 						</td>
 					</tr>
 					<tr>
 						<td class="hint">商品圖片</td>
 						<td>
-							<input type="file" name="product_image" id="" value="<%=(productVO.getProductImage() == null) ? "0" : productVO.getProductImage()%>" />
+							<input type="file" name="productImage" id="" value="<%=(productVO.getProductImage() == null) ? "0" : productVO.getProductImage()%>" />
 						</td>
 					</tr>
 
 					<tr>
 						<td class="hint">商品庫存</td>
 						<td>
-							<input type="TEXT" class="line" name="product_inventory" size="45" value="<%=(productVO.getProductInventory() == null) ? "0" : productVO.getProductInventory()%>" />
+							<input type="TEXT" class="line" name="productInventory" size="45" value="<%=(productVO.getProductInventory() == null) ? "0" : productVO.getProductInventory()%>" />
 						</td>
 					</tr>
 					<tr>
@@ -223,18 +223,18 @@ div.overlay > article{
 					<tr>
 						<td class="hint">客製商品價格</td>
 						<td>
-							<input type="TEXT" class="line" name="customer_product_price" size="45" value="<%=(productVO.getCustomerProductPrice() == null) ? "0" : productVO.getCustomerProductPrice()%>" />
+							<input type="TEXT" class="line" name="customerProductPrice" size="45" value="<%=(productVO.getCustomerProductPrice() == null) ? "0" : productVO.getCustomerProductPrice()%>" />
 						</td>
 					</tr>
 					<tr>
 						<td class="hint">商品上架狀態</td>
 						<td>
 							<label for="product_status">
-								<input type="radio" class="" name="product_status" size="45" value="1" checked="<%=(productVO.getProductStatus() == 1) ? true : false%>" />
+								<input type="radio" class="" name="productStatus" size="45" value="1" checked="<%=(productVO.getProductStatus() == 1) ? true : false%>" />
 								上架
 							</label>
 							<label for="product_status" class="lineup">
-								<input type="radio" class="" name="product_status" size="45" value="0" checked="<%=(productVO.getProductStatus() == 0) ? true : false%>" />
+								<input type="radio" class="" name="productStatus" size="45" value="0" checked="<%=(productVO.getProductStatus() == 0) ? true : false%>" />
 								下架
 							</label>
 						</td>
@@ -242,7 +242,7 @@ div.overlay > article{
 					<tr>
 						<td>
 							<br>
-							<input type="hidden" name="product_id" value="<%=productVO.getProductId()%>">
+							<input type="hidden" name="productId" value="<%=productVO.getProductId()%>">
 							<input type="hidden" name="action" value="update">
 							<input type="button" class="las" id="btn_sub" value="送出修改">
 							<br>
@@ -271,21 +271,18 @@ div.overlay > article{
 	</div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-	function dofirst(){
-		const form = document.getElementById("myForm");
-		document.getElementById('btn_sub').addEventListener('click',function(e){
-			let fdate = new FormData(form);
-			e.preventDefault();
-			xhr = new XMLHttpRequest();
-			xhr.addEventListener('readystatechange',callState);
-			let urlSource = './updateProduct';
-			xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
-			xhr.send(fdate);
-		})
-   
+	function imageForAjax(file){
+    	let reader = new FileReader(); 
+        reader.readAsArrayBuffer(file);
+        reader.addEventListener("load", function () {
+            let u = new Uint8Array(reader.result);
+            return Array.from(u);
+        })
 	}
-	function callState(){
+	function dofirst(){
+		let pudate = {};
 		$.fn.fail = function(){           
 			this.fadeIn();
 			$("button.btn_modal_close").on("click", function(){
@@ -300,20 +297,36 @@ div.overlay > article{
 				});
 			});
 		};
-		if(xhr.readyState == 4){    //readyState: 0 -> 1 -> 2 -> 3 -> 4
-			let t = document.getElementById("target");
-			if(xhr.status == 200){
-				let text = xhr.responseText;
+		$("input[name='product_image']").on("change" ,function(){
+            pudate.productImage = imageForAjax(this.files[0])
+    	})
+		$("#btn_sub").on("click", function(){
+			pudate.productId			= $('input[name="productId"]').val();
+			pudate.productCategoryCode  = $('input[name="productCategoryCode"]:checked').val();
+			pudate.customerProductPrice = $('input[name="customerProductPrice"]').val();
+			pudate.customization        = $('input[name="customization"]:checked').val();
+			pudate.productInventory     = $('input[name="productInventory"]').val();
+			pudate.productName          = $('input[name="productName"]').val();
+			pudate.productPrice         = $('input[name="productPrice"]').val();
+			pudate.productDescription   = $('input[name="productDescription"]').val();
+			pudate.productStatus		= $('input[name="productStatus"]:checked').val();
+			pudate = JSON.stringify(pudate);
+            axios({
+              method: "post",
+              url: "./updateProduct",
+              data: pudate,
+              headers: { "Content-Type": "application/json" },
+            }).then(res => {
+				let t = document.getElementById("target");
+				let text = res.data;
 				t.innerHTML = text;
 				if(text.match(/success/) != null){
 					$("div.overlay").success();
 				}else{
 					$("div.overlay").fail();
 				}
-			}else{
-				t.innerText = `${xhr.status}: ${xhr.statusText}`;                    
-			}
-		}   
+			})
+		})
 	}
 	window.addEventListener('load',dofirst);
 </script>

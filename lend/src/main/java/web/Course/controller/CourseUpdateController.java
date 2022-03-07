@@ -1,5 +1,7 @@
 package web.Course.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,23 +18,8 @@ public class CourseUpdateController {
     @RequestMapping(path = {"/Course/update"}, method = RequestMethod.POST)
     public String update(@RequestBody(required = false) CourseVO vo) {
         CourseVO check = cs.getOneCourse(vo.getCourseId());
-        if(check != null){
-            if(vo.getCourseName().trim().isEmpty())
-                vo.setCourseName(check.getCourseName());
-            if(vo.getCoursePrice() == null)
-                vo.setCoursePrice(check.getCoursePrice());
-            if(vo.getCourseImage() == null)
-                vo.setCourseImage(check.getCourseImage());
-            if(vo.getMaxOfCourse() == null)
-                vo.setMaxOfCourse(check.getMaxOfCourse());
-            if(vo.getMinOfCourse() == null)
-                vo.setMinOfCourse(check.getMinOfCourse());
-            if(vo.getCourseLocation().trim().isEmpty())
-                vo.setCourseLocation(check.getCourseDescribe());
-            if(vo.getCourseDescribe().trim().isEmpty())
-                vo.setCourseDescribe(check.getCourseDescribe());
-            if(cs.update(vo))
-                return "success";
+        if(cs.update(vo, check)){
+            return "success";
         }
         return "fail";
     }

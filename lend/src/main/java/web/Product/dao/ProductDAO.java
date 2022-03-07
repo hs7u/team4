@@ -1,5 +1,6 @@
 package web.Product.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.persistence.PersistenceContext;
@@ -55,7 +56,7 @@ public class ProductDAO implements ProductInterface<ProductVO>{
     +"SET"
     +"`product_status` = ?"
     +"WHERE `product_id` = ?;"; */
-    public void insert(ProductVO pVo){
+    public Serializable insert(ProductVO pVo){
         // JPA CriteriaQuery
         CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaQuery<Long> cq = cb.createQuery(Long.class);
@@ -63,8 +64,9 @@ public class ProductDAO implements ProductInterface<ProductVO>{
         cq = cq.select(cb.count(root)).where(cb.equal(root.get("productName"), pVo.getProductName()));
         long result = getSession().createQuery(cq).getSingleResult();
         if(result == 0){
-            getSession().save(pVo);
+            return getSession().save(pVo);
         }
+        return null;
         // return null;
         // Hibernate
         // if(pVo != null){
@@ -93,7 +95,7 @@ public class ProductDAO implements ProductInterface<ProductVO>{
             + se.getMessage());
         } */
     }
-    public void update(ProductVO pVo){
+    public Boolean update(ProductVO pVo){
         // JPA Criteria
         CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaUpdate<ProductVO> cu = cb.createCriteriaUpdate(ProductVO.class);
@@ -109,7 +111,7 @@ public class ProductDAO implements ProductInterface<ProductVO>{
                .set(root.get("customerProductPrice"), pVo.getCustomerProductPrice())
                .set(root.get("productStatus"), pVo.getProductStatus())
                .where(cb.equal(root.get("productId"), pVo.getProductId()));
-        getSession().createQuery(cu).executeUpdate();
+        return getSession().createQuery(cu).executeUpdate() > 0 ? true: false;
         // Hibernate
         /* ProductVO productVo = getSession().get(ProductVO.class, pVo.getProductId());
         if(productVo != null){

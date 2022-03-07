@@ -18,37 +18,54 @@ public class ProductService {
     // public ProductService(Session session){
     //     dao = new ProductDAO(session);
     // }
-    public ProductVO addProduct(Integer productCategoryCode, Integer productPrice, String productName,byte[] productImage,
-            String productDescription, Integer productInventory, Byte customization, Integer customerProductPrice){
+    public String addProduct(ProductVO pVo){
         java.sql.Timestamp releasedTime = new java.sql.Timestamp(System.currentTimeMillis());
-        ProductVO pVo = new ProductVO();
-        pVo.setProductCategoryCode(productCategoryCode);
-        pVo.setProductPrice(productPrice);
-        pVo.setProductName(productName);
-        pVo.setProductImage(productImage);
-        pVo.setProductDescription(productDescription);
-        pVo.setProductInventory(productInventory);
+        StringBuilder errorMsg = new StringBuilder();
+        if(pVo.getProductPrice() == null){
+            errorMsg.append("商品價格: 請勿空白"+System.lineSeparator());
+        }
+        if(pVo.getProductName().trim().isEmpty()){
+            errorMsg.append("商品名稱: 請勿空白"+System.lineSeparator());
+        }
+        if(pVo.getProductImage() == null){
+            errorMsg.append("請上傳商品圖片"+System.lineSeparator());
+        }
+        if(pVo.getProductDescription().trim().isEmpty()){
+            errorMsg.append("商品描述: 請勿空白"+System.lineSeparator());
+        }
+        if(pVo.getProductInventory() == null){
+            errorMsg.append("商品庫存: 請勿空白"+System.lineSeparator());
+        }
+        if(pVo.getCustomerProductPrice() == null){
+            errorMsg.append("客制價格: 請勿空白"+System.lineSeparator());
+        }
+        if(errorMsg.length() > 0){
+            return errorMsg.toString();
+        }
         pVo.setReleasedTime(releasedTime);
-        pVo.setCustomization(customization);
-        pVo.setCustomerProductPrice(customerProductPrice);
-        dao.insert(pVo);    
-        return pVo;
+        Integer id = (Integer)dao.insert(pVo);    
+        if(id!= null){
+            return "success";
+        }
+        return "fail";
     }
-    public ProductVO updateProduct(Integer ProductId, Integer productCategoryCode, Integer productPrice, String productName,byte[] productImage,
-            String productDescription, Integer productInventory, Byte customization, Integer customerProductPrice, Byte productStatus) {
-        ProductVO pVo = new ProductVO();
-        pVo.setProductId(ProductId);
-        pVo.setProductCategoryCode(productCategoryCode);
-        pVo.setProductPrice(productPrice);
-        pVo.setProductName(productName);
-        pVo.setProductImage(productImage);
-        pVo.setProductDescription(productDescription);
-        pVo.setProductInventory(productInventory);
-        pVo.setCustomization(customization);
-        pVo.setCustomerProductPrice(customerProductPrice);
-        pVo.setProductStatus(productStatus);
-        dao.update(pVo);
-        return pVo;    
+    public Boolean updateProduct(ProductVO vo, ProductVO check) {
+        if(check != null){
+            if(vo.getProductName().trim().isEmpty())
+                vo.setProductName(check.getProductName());
+            if(vo.getProductPrice() == null)
+                vo.setProductPrice(check.getProductPrice());
+            if(vo.getProductImage() == null)
+                vo.setProductImage(check.getProductImage());
+            if(vo.getProductDescription().trim().isEmpty())
+                vo.setProductDescription(check.getProductDescription());
+            if(vo.getProductInventory() == null)
+                vo.setProductInventory(check.getProductInventory());
+            if(vo.getCustomerProductPrice() == null)
+                vo.setCustomerProductPrice(check.getCustomerProductPrice());
+            return dao.update(vo);
+        }
+        return false; 
     }
     public void updateSold(Integer productId, Integer sold) {
         dao.sold(productId, sold);

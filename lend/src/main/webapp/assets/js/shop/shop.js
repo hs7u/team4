@@ -81,9 +81,9 @@ $("button.add").on("click", function (e) {
 //	for (let i = 0; i < miniCart.length; i++) {
 //		cartList +=
 //			`<li>
-//				<a href="product-details.html" class="image"><img src="${miniCart[i].productImage}" alt="Cart product Image"></a>
+//				<a href="product-details.jsp" class="image"><img src="${miniCart[i].productImage}" alt="Cart product Image"></a>
 //				<div class="content">
-//					<a href="product-details.html" class="title">${ miniCart[i].productName}</a>
+//					<a href="product-details.jsp" class="title">${ miniCart[i].productName}</a>
 //					<span class="quantity-price">${miniCart[i].productQuantity} x <span class="p_price">$ ${miniCart[i].productPrice/miniCart[i].productQuantity}</span></span>
 //					<a href="#" class="remove">×</a>
 //				</div>

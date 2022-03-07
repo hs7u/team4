@@ -54,18 +54,25 @@ public class CourseService {
         }
         return "fail";
     }
-    public Boolean update(CourseVO cVo){
-        // CourseVO cVo = new CourseVO();
-        // cVo.setCourseId(courseId);
-		// cVo.setCourseName(courseName);
-		// cVo.setCoursePrice(coursePrice);
-		// cVo.setCourseImage(courseImage);
-		// cVo.setMaxOfCourse(maxOfCourse);
-		// cVo.setMinOfCourse(minOfCourse);
-		// cVo.setCourseLocation(courseLocation);
-		// cVo.setCourseDescribe(courseDescribe);
-        
-        return dao.update(cVo);
+    public Boolean update(CourseVO vo, CourseVO check){
+        if(check != null){
+            if(vo.getCourseName().trim().isEmpty())
+                vo.setCourseName(check.getCourseName());
+            if(vo.getCoursePrice() == null)
+                vo.setCoursePrice(check.getCoursePrice());
+            if(vo.getCourseImage() == null)
+                vo.setCourseImage(check.getCourseImage());
+            if(vo.getMaxOfCourse() == null)
+                vo.setMaxOfCourse(check.getMaxOfCourse());
+            if(vo.getMinOfCourse() == null)
+                vo.setMinOfCourse(check.getMinOfCourse());
+            if(vo.getCourseLocation().trim().isEmpty())
+                vo.setCourseLocation(check.getCourseLocation());
+            if(vo.getCourseDescribe().trim().isEmpty())
+                vo.setCourseDescribe(check.getCourseDescribe());
+            return dao.update(vo);
+        }
+        return false;
     }
     public void delete(Integer courseId){
         dao.delete(courseId);

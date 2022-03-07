@@ -60,9 +60,19 @@ input.las:hover {
 	cursor: pointer;
 	background-color: #666666;
 	color: white;
-	
 }
-
+.btn_del{
+	border-radius: 15px;
+    padding: .5rem;
+    border: none;
+    outline: none;
+    font-size: 6px;
+}
+.btn_del:hover{
+	cursor: pointer;
+	background-color: #666666;
+	color: white;
+}
 </style>
 </head>
 
@@ -99,18 +109,13 @@ input.las:hover {
 			<td>${pVo.customerProductPrice}</td>
 			<td>${pVo.productStatus eq 0 ? "下架中": "上架中"}</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Product/updateProduct" style="margin-bottom: 0px;">
-			     <input type="hidden" name="action"  value="transform">
+			  <FORM METHOD="get" ACTION="<%=request.getContextPath()%>/Product/updateProduct" style="margin-bottom: 0px;">
                  <input type="hidden" name="productId" value="${pVo.productId}">  
 			     <input type="submit" class="las" value="修改">
                 </FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Product/updateProduct" style="margin-bottom: 0px;">
-			     <input type="hidden" name="action"  value="delete">
-			     <input type="hidden" name="productId"  value="${pVo.productId}">
-			     <input type="submit"  class="las" value="刪除">
-                </FORM>
+				<button class="las btn_del" onclick="location.href='<%=request.getContextPath()%>/Product/updateProduct/${pVo.productId}'">刪除</button>
 			</td>
 		</tr>
 	</c:forEach>

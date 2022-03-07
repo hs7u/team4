@@ -59,6 +59,12 @@
     <!-- <link rel="stylesheet" href="assets/css/vendor/vendor.min.css">
     <link rel="stylesheet" href="assets/css/plugins/plugins.min.css"> -->
     <link rel="stylesheet" href="assets/css/style.min.css">
+    
+    <meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
 
 </head>
 
@@ -314,10 +320,10 @@
         <div class="inner">
             <div class="offcanvas-search-form">
                 <button class="offcanvas-close">×</button>
-                <form action="#">
+                <form action="servlet/DatabaseSearch" method="post">
                     <div class="row mb-n3">
                         <div class="col-lg-8 col-12 mb-3"><input type="text" placeholder="Search Products..."></div>
-                        <div class="col-lg-4 col-12 mb-3">
+                        <div class="col-lg-4 col-12 mb-3"><input type="submit" value="so easy" ></div>
                             <select class="search-select select2-basic">
                                 <option value="0">All Categories</option>
                                 <option value="11">手繪瓷盤</option>
@@ -347,25 +353,25 @@
             <div class="body customScroll">
                 <ul class="minicart-product-list">
                     <li>
-                        <a href="product-details.html" class="image"><img src="assets/images/product/cart-product-1.webp" alt="Cart product Image"></a>
+                        <a href="product-details.jsp" class="image"><img src="assets/images/product/cart-product-1.webp" alt="Cart product Image"></a>
                         <div class="content">
-                            <a href="product-details.html" class="title">Walnut Cutting Board</a>
+                            <a href="product-details.jsp" class="title">Walnut Cutting Board</a>
                             <span class="quantity-price">1 x <span class="amount">$100.00</span></span>
                             <a href="#" class="remove">×</a>
                         </div>
                     </li>
                     <li>
-                        <a href="product-details.html" class="image"><img src="assets/images/product/cart-product-2.webp" alt="Cart product Image"></a>
+                        <a href="product-details.jsp" class="image"><img src="assets/images/product/cart-product-2.webp" alt="Cart product Image"></a>
                         <div class="content">
-                            <a href="product-details.html" class="title">Lucky Wooden Elephant</a>
+                            <a href="product-details.jsp" class="title">Lucky Wooden Elephant</a>
                             <span class="quantity-price">1 x <span class="amount">$35.00</span></span>
                             <a href="#" class="remove">×</a>
                         </div>
                     </li>
                     <li>
-                        <a href="product-details.html" class="image"><img src="assets/images/product/cart-product-3.webp" alt="Cart product Image"></a>
+                        <a href="product-details.jsp" class="image"><img src="assets/images/product/cart-product-3.webp" alt="Cart product Image"></a>
                         <div class="content">
-                            <a href="product-details.html" class="title">Fish Cut Out Set</a>
+                            <a href="product-details.jsp" class="title">Fish Cut Out Set</a>
                             <span class="quantity-price">1 x <span class="amount">$9.00</span></span>
                             <a href="#" class="remove">×</a>
                         </div>
@@ -451,8 +457,8 @@
             </div>
             <div class="offcanvas-social">
                 <a href="https://www.facebook.com/fany121105/photos/"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/studio4arttfa105/"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtu.be/YF5OK4_PEJM"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
     </div>
@@ -517,9 +523,8 @@
                                 <div class="product-sorting">
                                     <select class="nice-select">
                                         <option value="menu_order" selected="selected">預設排序優先</option>
-                                        <option value="popularity">熱門程度優先</option>
-                                        <option value="price">價格由低至高</option>
-                                        <option value="price-desc">價格由高至低</option>
+                                        <option value="${p.productPrice}">價格由低至高</option>
+                                        <option value="${p.productPrice}">價格由高至低</option>
                                     </select>
                                 </div>
                             </li>
@@ -541,7 +546,119 @@
         
   <!-- Products Start -->
         <div class="section section-padding pt-0">
-            <div class="container">
+        <div class="container">
+			<div id="shop-products" class="products isotope-grid row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
+				<div class="grid-sizer col-1"></div>
+				
+				<div class="grid-item col new">
+					<div class="product">
+						<div class="product-thumb">
+							<a href="product-details.jsp" class="image"> <img
+								src="assets/images/product/s328/22010-1.jpg" alt="Product Image">
+							</a> 
+						</div>
+						<div class="product-info">
+							<h6 class="title">
+								<a href="product-details.jsp">電烙 | 壓克力彩繪 | 松鼠屋</a>
+							</h6>
+							<span class="price"> NT 2500 </span>
+							<br>
+							<div class="product-buttons">
+								<button href="#wishlist.html" data-bs-toggle="modal" table-target="${p.productId}" class="product-button hintT-top wishadd" data-hint="加入收藏"><i class="fal fa-heart"></i></button>
+                                    <button class="product-button hintT-top add" table-target="${p.productId}" data-hint="加入購物車"><i class="fal fa-shopping-cart"></i></button>
+                                    <button href="#" class="product-button hintT-top" data-hint="加入比較"><i class="fal fa-random"></i></button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="grid-item col new">
+					<div class="product">
+						<div class="product-thumb">
+							<a href="product-details.jsp" class="image"> <img
+								src="assets/images/product/s328/22009-3.jpg" alt="Product Image">
+							</a> 
+						</div>
+						<div class="product-info">
+							<h6 class="title">
+								<a href="product-details.jsp">電烙 | 壓克力彩繪 | 松鼠屋鑰匙圈吊飾</a>
+							</h6>
+							<span class="price"> NT 1500 </span>
+							<br>
+							<div class="product-buttons">
+								<button href="#wishlist.html" data-bs-toggle="modal" table-target="${p.productId}" class="product-button hintT-top wishadd" data-hint="加入收藏"><i class="fal fa-heart"></i></button>
+                                    <button class="product-button hintT-top add" table-target="${p.productId}" data-hint="加入購物車"><i class="fal fa-shopping-cart"></i></button>
+                                    <button href="#" class="product-button hintT-top" data-hint="加入比較"><i class="fal fa-random"></i></button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="grid-item col new">
+					<div class="product">
+						<div class="product-thumb">
+							<a href="product-details.jsp" class="image"> <img
+								src="assets/images/product/s328/66010-3.jpg" alt="Product Image">
+							</a> 
+						</div>
+						<div class="product-info">
+							<h6 class="title">
+								<a href="product-details.jsp">電烙 | 壓克力彩繪 | 生肖虎與兔吊飾</a>
+							</h6>
+							<span class="price"> NT 1500 </span>
+							<br>
+							<div class="product-buttons">
+								<button href="#wishlist.html" data-bs-toggle="modal" table-target="${p.productId}" class="product-button hintT-top wishadd" data-hint="加入收藏"><i class="fal fa-heart"></i></button>
+                                    <button class="product-button hintT-top add" table-target="${p.productId}" data-hint="加入購物車"><i class="fal fa-shopping-cart"></i></button>
+                                    <button href="#" class="product-button hintT-top" data-hint="加入比較"><i class="fal fa-random"></i></button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="grid-item col new">
+					<div class="product">
+						<div class="product-thumb">
+							<a href="product-details.jsp" class="image"> <img
+								src="assets/images/product/s328/66010-4.jpg" alt="Product Image">
+							</a>
+						</div>
+						<div class="product-info">
+							<h6 class="title">
+								<a href="product-details.jsp">電烙 | 壓克力彩繪 | 生肖虎與兔吊飾</a>
+							</h6>
+							<span class="price"> NT 1500 </span>
+							<br>
+							<div class="product-buttons">
+								<button href="#wishlist.html" data-bs-toggle="modal" table-target="${p.productId}" class="product-button hintT-top wishadd" data-hint="加入收藏"><i class="fal fa-heart"></i></button>
+                                    <button class="product-button hintT-top add" table-target="${p.productId}" data-hint="加入購物車"><i class="fal fa-shopping-cart"></i></button>
+                                    <button href="#" class="product-button hintT-top" data-hint="加入比較"><i class="fal fa-random"></i></button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="grid-item col new">
+					<div class="product">
+						<div class="product-thumb">
+							<a href="product-details.jsp" class="image"> <img
+								src="assets/images/product/s328/66009-3.jpg" alt="Product Image">
+							</a> 
+						</div>
+						<div class="product-info">
+							<h6 class="title">
+								<a href="product-details.jsp">電烙 | 壓克力彩繪 | 可愛貓頭鷹吊飾</a>
+							</h6>
+							<span class="price"> NT 1500 </span>
+							<br>
+							<div class="product-buttons">
+								<button href="#wishlist.html" data-bs-toggle="modal" table-target="${p.productId}" class="product-button hintT-top wishadd" data-hint="加入收藏"><i class="fal fa-heart"></i></button>
+                                    <button class="product-button hintT-top add" table-target="${p.productId}" data-hint="加入購物車"><i class="fal fa-shopping-cart"></i></button>
+                                    <button href="#" class="product-button hintT-top" data-hint="加入比較"><i class="fal fa-random"></i></button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		
                 <input type="hidden" name="customerId" value="${session.customerId}" style="display: none;">
                 <div id="shop-products" class="products isotope-grid row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
 				<c:forEach var="p" items="${list}">
@@ -551,14 +668,14 @@
                         <div class="product">
                             <div class="product-thumb">
                             <c:set var="image" scope="page" value="${p.productImage}" />
-                                <a href="product-details.html" class="image">
+                                <a href="product-details.jsp" class="image">
                                     <img class="pic" src="data:image/png;base64,<%=Base64.getEncoder().encodeToString(((byte[])pageContext.getAttribute("image"))) %>" alt="Product Image">
                                     <img class="image-hover " src="data:image/png;base64,<%=Base64.getEncoder().encodeToString(((byte[])pageContext.getAttribute("image"))) %>" alt="Product Image">
                                 </a>
                                 
                             </div>
                             <div class="product-info">
-                                <h6 class="title"><a href="product-details.html">${p.productName}</a></h6>
+                                <h6 class="title"><a href="product-details.jsp">${p.productName}</a></h6>
                                 <span class="price">
                                    NT  ${p.productPrice}
                                 </span>
@@ -579,8 +696,13 @@
 		</c:forEach>
                     </div>
                     </div>
-          </div>          
-    <!-- Shop Products Section End -->
+        
+		
+	</div>
+
+
+	<!-- Shop Products Section End -->
+    
      <!-- Separator -->
       <div class="section">
           <div class="container">

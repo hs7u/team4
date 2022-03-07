@@ -1,3 +1,13 @@
+<%@page import="org.hibernate.internal.build.AllowSysOut"%>
+<%@ page contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="web.Product.service.ProductService"%>
+<%@ page import ="org.hibernate.Session"%>
+<%@ page import ="web.Product.vo.ProductVO"%>
+<%@ page import ="web.Cart.CartVO"%>
+<%@ page import="ProjectInterfaces.ProductInterface"%>
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -323,25 +333,25 @@
             <div class="body customScroll">
                 <ul class="minicart-product-list">
                     <li>
-                        <a href="product-details.html" class="image"><img src="assets/images/product/cart-product-1.webp" alt="Cart product Image"></a>
+                        <a href="product-details.jsp" class="image"><img src="assets/images/product/cart-product-1.webp" alt="Cart product Image"></a>
                         <div class="content">
-                            <a href="product-details.html" class="title">Walnut Cutting Board</a>
+                            <a href="product-details.jsp" class="title">Walnut Cutting Board</a>
                             <span class="quantity-price">1 x <span class="amount">$100.00</span></span>
                             <a href="#" class="remove">×</a>
                         </div>
                     </li>
                     <li>
-                        <a href="product-details.html" class="image"><img src="assets/images/product/cart-product-2.webp" alt="Cart product Image"></a>
+                        <a href="product-details.jsp" class="image"><img src="assets/images/product/cart-product-2.webp" alt="Cart product Image"></a>
                         <div class="content">
-                            <a href="product-details.html" class="title">Lucky Wooden Elephant</a>
+                            <a href="product-details.jsp" class="title">Lucky Wooden Elephant</a>
                             <span class="quantity-price">1 x <span class="amount">$35.00</span></span>
                             <a href="#" class="remove">×</a>
                         </div>
                     </li>
                     <li>
-                        <a href="product-details.html" class="image"><img src="assets/images/product/cart-product-3.webp" alt="Cart product Image"></a>
+                        <a href="product-details.jsp" class="image"><img src="assets/images/product/cart-product-3.webp" alt="Cart product Image"></a>
                         <div class="content">
-                            <a href="product-details.html" class="title">Fish Cut Out Set</a>
+                            <a href="product-details.jsp" class="title">Fish Cut Out Set</a>
                             <span class="quantity-price">1 x <span class="amount">$9.00</span></span>
                             <a href="#" class="remove">×</a>
                         </div>
@@ -427,8 +437,8 @@
             </div>
             <div class="offcanvas-social">
                 <a href="https://www.facebook.com/fany121105/photos/"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/studio4arttfa105/"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtu.be/YF5OK4_PEJM"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
     </div>
@@ -446,8 +456,8 @@
                         <h1 class="title">Shop</h1>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item"><a href="shop.html">Products</a></li>
-                            <li class="breadcrumb-item active">Cleaning Dustpan & Brush</li>
+                            <li class="breadcrumb-item"><a href="shoptest.jsp">Products</a></li>
+                            <li class="breadcrumb-item active">Product detail</li>
                         </ul>
                     </div>
 
@@ -482,9 +492,8 @@
 						<div class="product-nav">
 							
 						</div>
-
-						<h3 class="product-price">色鉛筆｜客製｜手繪卡通人像</h3>
-						<div class="product-title">NT 2500 </div>
+						<h3 class="name" colspan="2">色鉛筆｜客製｜手繪卡通人像</h3>
+						<div class="price">價格</div>
 						<div class="product-description">
 						 <ul>
 							<li>尺寸：8吋大小（19×14cm）材質：紙張  代針筆強調人物輪廓，寫實逗趣，特色鮮明</li>
@@ -513,9 +522,8 @@
 							</table>
 						</div>
 						<div class="product-buttons">
-							<a href="#" class="btn btn-icon btn-outline-body btn-hover-dark"><i class="fal fa-heart"></i></a>
-							<a href="#" class="btn btn-light btn-hover-dark mr-3 mb-3"><i class="fal fa-shopping-cart"></i>&emsp;加入購物車&emsp;</a> 
-							<a href="#" class="btn btn-light btn-hover-dark mr-3 mb-3"><img src="assets/images/icons/image.png" width="20px" height="20px">&emsp;我要客製&emsp;</a>
+							<a href="#" class="btn btn-icon btn-outline-body btn-hover-dark hintT-top" data-hint="加入收藏"><i class="fal fa-heart"></i></a>
+							<a href="#" class="btn btn-light btn-hover-dark mr-3 mb-3"><i class="fal fa-shopping-cart"></i>&emsp;&emsp;加入購物車&emsp;&emsp;</a> 
 						</div>
 
 						
@@ -592,7 +600,7 @@
                 <div class="col">
                     <div class="product">
                         <div class="product-thumb">
-                            <a href="product-details.html" class="image">
+                            <a href="product-details.jsp" class="image">
                                 <span class="product-badges">
                                     <span class="onsale">-13%</span>
                                 </span>
@@ -602,7 +610,7 @@
                             <a href="wishlist.html" class="add-to-wishlist hintT-left" data-hint="Add to wishlist"><i class="far fa-heart"></i></a>
                         </div>
                         <div class="product-info">
-                            <h6 class="title"><a href="product-details.html">Boho Beard Mug</a></h6>
+                            <h6 class="title"><a href="product-details.jsp">Boho Beard Mug</a></h6>
                             <span class="price">
                                 <span class="old">$45.00</span>
                             <span class="new">$39.00</span>
@@ -619,14 +627,14 @@
                 <div class="col">
                     <div class="product">
                         <div class="product-thumb">
-                            <a href="product-details.html" class="image">
+                            <a href="product-details.jsp" class="image">
                                 <img src="assets/images/product/s270/product-2.webp" alt="Product Image">
                                 <img class="image-hover " src="assets/images/product/s270/product-2-hover.webp" alt="Product Image">
                             </a>
                             <a href="wishlist.html" class="add-to-wishlist hintT-left" data-hint="Add to wishlist"><i class="far fa-heart"></i></a>
                         </div>
                         <div class="product-info">
-                            <h6 class="title"><a href="product-details.html">Motorized Tricycle</a></h6>
+                            <h6 class="title"><a href="product-details.jsp">Motorized Tricycle</a></h6>
                             <span class="price">
                                 $35.00
                             </span>
@@ -645,14 +653,14 @@
                             <span class="product-badges">
                                 <span class="hot">hot</span>
                             </span>
-                            <a href="product-details.html" class="image">
+                            <a href="product-details.jsp" class="image">
                                 <img src="assets/images/product/s270/product-3.webp" alt="Product Image">
                                 <img class="image-hover " src="assets/images/product/s270/product-3-hover.webp" alt="Product Image">
                             </a>
                             <a href="wishlist.html" class="add-to-wishlist hintT-left" data-hint="Add to wishlist"><i class="far fa-heart"></i></a>
                         </div>
                         <div class="product-info">
-                            <h6 class="title"><a href="product-details.html">Walnut Cutting Board</a></h6>
+                            <h6 class="title"><a href="product-details.jsp">Walnut Cutting Board</a></h6>
                             <span class="price">
                                 $100.00
                             </span>
@@ -668,7 +676,7 @@
                 <div class="col">
                     <div class="product">
                         <div class="product-thumb">
-                            <a href="product-details.html" class="image">
+                            <a href="product-details.jsp" class="image">
                                 <span class="product-badges">
                                     <span class="onsale">-27%</span>
                                 </span>
@@ -678,7 +686,7 @@
                             <a href="wishlist.html" class="add-to-wishlist hintT-left" data-hint="Add to wishlist"><i class="far fa-heart"></i></a>
                         </div>
                         <div class="product-info">
-                            <h6 class="title"><a href="product-details.html">Pizza Plate Tray</a></h6>
+                            <h6 class="title"><a href="product-details.jsp">Pizza Plate Tray</a></h6>
                             <span class="price">
                                 <span class="old">$30.00</span>
                             <span class="new">$22.00</span>
@@ -695,7 +703,7 @@
                 <div class="col">
                     <div class="product">
                         <div class="product-thumb">
-                            <a href="product-details.html" class="image">
+                            <a href="product-details.jsp" class="image">
                                 <img src="assets/images/product/s270/product-5.webp" alt="Product Image">
                                 <img class="image-hover " src="assets/images/product/s270/product-5-hover.webp" alt="Product Image">
                             </a>
@@ -714,7 +722,7 @@
                             </div>
                         </div>
                         <div class="product-info">
-                            <h6 class="title"><a href="product-details.html">Minimalist Ceramic Pot</a></h6>
+                            <h6 class="title"><a href="product-details.jsp">Minimalist Ceramic Pot</a></h6>
                             <span class="price">
                                 $120.00
                             </span>
@@ -730,14 +738,14 @@
                 <div class="col">
                     <div class="product">
                         <div class="product-thumb">
-                            <a href="product-details.html" class="image">
+                            <a href="product-details.jsp" class="image">
                                 <img src="assets/images/product/s270/product-6.webp" alt="Product Image">
                                 <img class="image-hover " src="assets/images/product/s270/product-6-hover.webp" alt="Product Image">
                             </a>
                             <a href="wishlist.html" class="add-to-wishlist hintT-left" data-hint="Add to wishlist"><i class="far fa-heart"></i></a>
                         </div>
                         <div class="product-info">
-                            <h6 class="title"><a href="product-details.html">Clear Silicate Teapot</a></h6>
+                            <h6 class="title"><a href="product-details.jsp">Clear Silicate Teapot</a></h6>
                             <span class="price">
                                 $140.00
                             </span>
@@ -753,7 +761,7 @@
                 <div class="col">
                     <div class="product">
                         <div class="product-thumb">
-                            <a href="product-details.html" class="image">
+                            <a href="product-details.jsp" class="image">
                                 <span class="product-badges">
                                     <span class="hot">hot</span>
                                 </span>
@@ -763,7 +771,7 @@
                             <a href="wishlist.html" class="add-to-wishlist hintT-left" data-hint="Add to wishlist"><i class="far fa-heart"></i></a>
                         </div>
                         <div class="product-info">
-                            <h6 class="title"><a href="product-details.html">Lucky Wooden Elephant</a></h6>
+                            <h6 class="title"><a href="product-details.jsp">Lucky Wooden Elephant</a></h6>
                             <span class="price">
                                 $35.00
                             </span>
@@ -779,7 +787,7 @@
                 <div class="col">
                     <div class="product">
                         <div class="product-thumb">
-                            <a href="product-details.html" class="image">
+                            <a href="product-details.jsp" class="image">
                                 <span class="product-badges">
                                     <span class="outofstock"><i class="fal fa-frown"></i></span>
                                 <span class="hot">hot</span>
@@ -801,7 +809,7 @@
                             </div>
                         </div>
                         <div class="product-info">
-                            <h6 class="title"><a href="product-details.html">Decorative Christmas Fox</a></h6>
+                            <h6 class="title"><a href="product-details.jsp">Decorative Christmas Fox</a></h6>
                             <span class="price">
                                 $50.00
                             </span>
@@ -854,8 +862,8 @@
                 <div class="col-lg-2 learts-mb-40">
                     <ul class="widget-list">
                         <li> <i class="fab fa-facebook-f"></i> <a href="https://www.facebook.com/fany121105/photos/">Facebook</a></li>
-                        <li> <i class="fab fa-instagram"></i> <a href="https://www.instagram.com/">Instagram</a></li>
-                        <li> <i class="fab fa-youtube"></i> <a href="https://www.youtube.com/">Youtube</a></li>
+                        <li> <i class="fab fa-instagram"></i> <a href="https://www.instagram.com/studio4arttfa105/">Instagram</a></li>
+                        <li> <i class="fab fa-youtube"></i> <a href="https://youtu.be/YF5OK4_PEJM">Youtube</a></li>
                     </ul>
                 </div>
             </div>
@@ -867,192 +875,7 @@
             <p class="copyright text-center">&copy; 2022 studio4art All Rights Reserved</p>
         </div>
     </div>
-    <!-- Modal -->
-    <div class="quickViewModal modal fade" id="quickViewModal">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <button class="close" data-bs-dismiss="modal">&times;</button>
-                <div class="row learts-mb-n30">
-
-                    <!-- Product Images Start -->
-                    <div class="col-lg-6 col-12 learts-mb-30">
-                        <div class="product-images">
-                            <div class="product-gallery-slider-quickview">
-                                <div class="product-zoom" data-image="assets/images/product/single/1/product-zoom-1.webp">
-                                    <img src="assets/images/product/single/1/product-1.webp" alt="">
-                                </div>
-                                <div class="product-zoom" data-image="assets/images/product/single/1/product-zoom-2.webp">
-                                    <img src="assets/images/product/single/1/product-2.webp" alt="">
-                                </div>
-                                <div class="product-zoom" data-image="assets/images/product/single/1/product-zoom-3.webp">
-                                    <img src="assets/images/product/single/1/product-3.webp" alt="">
-                                </div>
-                                <div class="product-zoom" data-image="assets/images/product/single/1/product-zoom-4.webp">
-                                    <img src="assets/images/product/single/1/product-4.webp" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product Images End -->
-
-                    <!-- Product Summery Start -->
-                    <div class="col-lg-6 col-12 overflow-hidden position-relative learts-mb-30">
-                        <div class="product-summery customScroll">
-                            <div class="product-ratings">
-                                <span class="star-rating">
-                                <span class="rating-active" style="width: 100%;">ratings</span>
-                                </span>
-                                <a href="#reviews" class="review-link">(<span class="count">3</span> customer reviews)</a>
-                            </div>
-                            <h3 class="product-title">Cleaning Dustpan & Brush</h3>
-                            <div class="product-price">£38.00 – £50.00</div>
-                            <div class="product-description">
-                                <p>Easy clip-on handle – Hold the brush and dustpan together for storage; the dustpan edge is serrated to allow easy scraping off the hair without entanglement. High-quality bristles – no burr damage, no scratches, thick and durable, comfortable to remove dust and smaller particles.</p>
-                            </div>
-                            <div class="product-variations">
-                                <table>
-                                    <tbody>
-                                        
-                                        
-                                        <tr>
-                                            <td class="label"><span>數量</span></td>
-                                            <td class="value">
-                                                <div class="product-quantity">
-                                                    <span class="qty-btn minus"><i class="ti-minus"></i></span>
-                                                    <input type="text" class="input-qty" value="1">
-                                                    <span class="qty-btn plus"><i class="ti-plus"></i></span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="product-buttons">
-                                <a href="#" class="btn btn-icon btn-outline-body btn-hover-dark"><i class="fal fa-heart"></i></a>
-                                <a href="#" class="btn btn-dark btn-outline-hover-dark"><i class="fal fa-shopping-cart"></i> Add to Cart</a>
-                                <a href="#" class="btn btn-icon btn-outline-body btn-hover-dark"><i class="fal fa-random"></i></a>
-                            </div>
-                            <div class="product-brands">
-                                <span class="title">Brands</span>
-                                <div class="brands">
-                                    <a href="#"><img src="assets/images/brands/brand-3.webp" alt=""></a>
-                                    <a href="#"><img src="assets/images/brands/brand-8.webp" alt=""></a>
-                                </div>
-                            </div>
-                            <div class="product-meta mb-0">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="label"><span>SKU</span></td>
-                                            <td class="value">0404019</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="label"><span>Category</span></td>
-                                            <td class="value">
-                                                <ul class="product-category">
-                                                    <li><a href="#">Kitchen</a></li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="label"><span>Tags</span></td>
-                                            <td class="value">
-                                                <ul class="product-tags">
-                                                    <li><a href="#">handmade</a></li>
-                                                    <li><a href="#">learts</a></li>
-                                                    <li><a href="#">mug</a></li>
-                                                    <li><a href="#">product</a></li>
-                                                    <li><a href="#">learts</a></li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="label"><span>Share on</span></td>
-                                            <td class="va">
-                                                <div class="product-share">
-                                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                                    <a href="#"><i class="fab fa-google-plus-g"></i></a>
-                                                    <a href="#"><i class="fab fa-pinterest"></i></a>
-                                                    <a href="#"><i class="fal fa-envelope"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product Summery End -->
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Root element of PhotoSwipe. Must have class pswp. -->
-    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-        <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-        <div class="pswp__bg"></div>
-
-        <!-- Slides wrapper with overflow:hidden. -->
-        <div class="pswp__scroll-wrap">
-
-            <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-            <div class="pswp__container">
-                <div class="pswp__item"></div>
-                <div class="pswp__item"></div>
-                <div class="pswp__item"></div>
-            </div>
-
-            <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-            <div class="pswp__ui pswp__ui--hidden">
-
-                <div class="pswp__top-bar">
-
-                    <!--  Controls are self-explanatory. Order can be changed. -->
-
-                    <div class="pswp__counter"></div>
-
-                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                    <button class="pswp__button pswp__button--share" title="Share"></button>
-
-                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                    <div class="pswp__preloader">
-                        <div class="pswp__preloader__icn">
-                            <div class="pswp__preloader__cut">
-                                <div class="pswp__preloader__donut"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                    <div class="pswp__share-tooltip"></div>
-                </div>
-
-                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-                </button>
-
-                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-                </button>
-
-                <div class="pswp__caption">
-                    <div class="pswp__caption__center"></div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
+    
 
     <!-- JS
 ============================================ -->
@@ -1064,6 +887,7 @@
     <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
 
     <!-- Plugins JS -->
+    
     <script src="assets/js/shop/shop.js"></script>
     <script src="assets/js/plugins/select2.min.js"></script>
     <script src="assets/js/plugins/jquery.nice-select.min.js"></script>

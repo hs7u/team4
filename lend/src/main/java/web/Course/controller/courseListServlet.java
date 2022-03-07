@@ -37,6 +37,7 @@ public class courseListServlet extends HttpServlet{
 		res.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = res.getWriter();
 		JsonObject jsonObject = json2Pojo(req, JsonObject.class);
+		// getCourseList(res);
 		switch (jsonObject.get("action").getAsString()) {
 			case "customer":
 				out.print(getCustomerount());
@@ -59,7 +60,10 @@ public class courseListServlet extends HttpServlet{
 			case "courseList":
 				getCourseList(res);
 				break;
-		}    
+		}
+//		String url = "/emp/listAllEmp.jsp";
+//		RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+//		successView.forward(req, res);			
     }
 	private int getCustomerount() {
 		// AdminService as = new AdminService(session);
