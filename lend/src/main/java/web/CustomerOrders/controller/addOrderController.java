@@ -43,7 +43,7 @@ public class addOrderController {
         String result = cos.addOrder(order);
         if(result.matches("-?\\d+")){
             CustomerOrdersVO currentOrder = cos.getOneOrder(Integer.valueOf(result));
-            Integer amount = orderDetail.stream().mapToInt(e -> Integer.valueOf(e.get("productQuantity"))).sum();
+            Integer amount = orderDetail.stream().mapToInt(e -> Integer.valueOf(e.get("productPrice"))).sum();
             String itemName = orderDetail.stream().map(e -> e.get("productName")).collect(Collectors.joining("#"));
             
             for(Map<String, String> detail : orderDetail){
@@ -56,7 +56,7 @@ public class addOrderController {
             }
 
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-            String date = simpleDateFormat.format(currentOrder.getOrderCreatedDate());
+            String date = simpleDateFormat.format(currentOrder.getOrderCreatedDate().getTime());
             AioCheckOutALL obj = new AioCheckOutALL();
             obj.setMerchantTradeNo("studio4art"+currentOrder.getOrderId());
             obj.setMerchantTradeDate(date);
