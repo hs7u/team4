@@ -31,7 +31,7 @@ public class CustomerLoginController {
             }      
             CustomerVO check = cs.getOneCustomer(vo.getCustomerEmail(), vo.getCustomerPassword());
             if(check != null && check.getCustomerStatus() != 0){
-                session.setAttribute("cuatomerAccount", check.getCustomerEmail());
+                session.setAttribute("customerAccount", check.getCustomerEmail());
                 session.setAttribute("customerInfo", check);
                 return "Login Success";
             }else{

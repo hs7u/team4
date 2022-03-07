@@ -56,15 +56,15 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
     
     public Serializable insert(CustomerVO customerVo){
         // JPA CriteriaQuery
-        CriteriaBuilder cb = getSession().getCriteriaBuilder();
-        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
-        Root<CustomerVO> root = cq.from(CustomerVO.class);
-        cq = cq.select(cb.count(root)).where(cb.equal(root.get("customerEmail"), customerVo.getCustomerEmail()));
-        long result = getSession().createQuery(cq).getSingleResult();
-        if(result == 0){
+       CriteriaBuilder cb = getSession().getCriteriaBuilder();
+       CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+       Root<CustomerVO> root = cq.from(CustomerVO.class);
+       cq = cq.select(cb.count(root)).where(cb.equal(root.get("customerEmail"), customerVo.getCustomerEmail()));
+       Long result = getSession().createQuery(cq).getSingleResult();
+       if(result == null){
             return getSession().save(customerVo);
-        }
-        return null;
+       }
+       return null;
         // Hibernate
         // CustomerVO cVo =  getSession().get(CustomerVO.class, customerVo.getCustomerId());
         // if(cVo == null){

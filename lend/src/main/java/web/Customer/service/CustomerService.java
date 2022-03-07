@@ -76,6 +76,9 @@ public class CustomerService {
         }
         return "fail";
     }
+    public void oauth2User(CustomerVO vo) {
+        dao.insert(vo);
+    }
     public CustomerVO updateCustomer(Integer customeId, String customerName, String customerEmail, String customerPassword,
             String customerPhone, Date customerBirthday, String customerGender, String customerAddress, Byte customerStatus){
         CustomerVO cVo = new CustomerVO();
