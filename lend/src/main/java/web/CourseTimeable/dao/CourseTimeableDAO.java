@@ -47,12 +47,8 @@ public class CourseTimeableDAO implements CourseTimeableInterface<CourseTimeable
     private static final String selectByCourseId ="SELECT `course_date` FROM TEAM4.Course_Timeable WHERE `course_id` = ?;"; */
     public void insert(CourseTimeableVO ctvo){
         // Hibernate
-        if(ctvo != null && ctvo.getCourseTimeableId() != null){
-            CourseTimeableVO schedule = getSession().get(CourseTimeableVO.class, ctvo.getCourseTimeableId());
-            if(schedule == null){
                 getSession().save(ctvo);
-            }
-        }
+        
         // DateSource Jdbc
         /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT)) {
