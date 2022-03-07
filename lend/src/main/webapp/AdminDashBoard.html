@@ -30,7 +30,7 @@
         div.overOUP > article{
             background-color: #f1f5f9;
             width: 90%;
-            max-width: 500px;
+            max-width: 900px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(4, 0, 5, 0.493);
             padding: 10px;
@@ -268,18 +268,11 @@
             <FORM METHOD="post" id="courseForm" enctype="multipart/form-data">
                 <div id="forflex">
                     <table>
-                        <tr class="twoline">
-                            <td><label for="">訂單編號<input class="hh nomal" type="TEXT" name="orderId" size="45" placeholder="Ex:/ 1" readonly></label></td>
-                        </tr>
-                        <tr class="twoline">
-                            <td><label for="">客戶編號<input class="hh nomal" type="TEXT" name="customerId" size="45" placeholder="Ex:/ 5" readonly/></label></td>
-                        </tr>
+
                         <tr class="twoline">
                             <td><label for="">運送方式<input class="hh nomal" type="TEXT" name="shippingMethodCode" size="45" placeholder="Ex:/ 腳踏車" readonly/></label></td>
                         </tr>
-                        <tr class="twoline">
-                            <td><label for="">訂單日期<input class="nomal" type="date" name="orderCreatedDate" readonly/></label></td>
-                        </tr>
+
                         <tr class="twoline">
                             <td><label for="">運費<br><input class="hh nomal" type="TEXT" name="orderDeliveryCharge" placeholder="Ex:/ 60" readonly></label></td>
                         </tr>
@@ -298,7 +291,7 @@
                         <tr class="twoline">
                             <td><label for="">備註<br><input class="hh nomal" type="TEXT" name="orderDetails" size="45" placeholder="Ex:/ 微糖去冰加珍珠" readonly/></label></td>
                         </tr>                        
-                        <tr class="twoline">
+                        <!-- <tr class="twoline">
                             <td>
                                 <label for="">訂單狀態
                                  <select id=”orderSelect” class="nomal" name="orderStatus">
@@ -308,7 +301,7 @@
                                  </select>
                                 </label>
                             </td>
-                        </tr>
+                        </tr> -->
                         <tr class="twoline">
                             <td>
                                 <label for="">付款狀態
