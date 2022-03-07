@@ -28,13 +28,19 @@ document.addEventListener("DOMContentLoaded", function (event) {
 $("button.add").on("click", function (e) {
 	let target = $(this).attr("table-target");
 	let cartAll = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
+	let cartForController = localStorage.getItem("cfc") ? JSON.parse(localStorage.getItem("cfc")) : [];
 	let select = {};
+	let detailForController = {};
 	select.cuatomerId = $("input[name = customerId]").val();
 	select.productId = $("input." + target + "[name = productId]").val();
 	select.productImage = $(this).parent().parent().prev(".product-thumb").find("img.pic").attr("src");
 	select.productName = $("input." + target + "[name = productName]").val();
 	select.productPrice = $("input." + target + "[name = productPrice]").val();
 	select.productQuantity = $("input." + target + "[name = productQuantity]").val();
+	
+	detailForController.productId = $("input." + target + "[name = productId]").val();
+	detailForController.productPrice = $("input." + target + "[name = productPrice]").val();
+	detailForController.productQuantity = $("input." + target + "[name = productQuantity]").val();
 	let check = 0;
 	for (let i = 0; i < cartAll.length; i++) {
 		if (cartAll[i].productId != select.productId) {
@@ -44,12 +50,17 @@ $("button.add").on("click", function (e) {
 			console.log(cartAll[i].productQuantity)
 			cartAll[i].productQuantity = parseInt(cartAll[i].productQuantity, 10) + parseInt(select.productQuantity, 10);
 			cartAll[i].productPrice = select.productPrice * cartAll[i].productQuantity;
+
+			detailForController[i].productPrice		= cartAll[i].productPrice;
+			detailForController[i].productQuantity	= cartAll[i].productQuantity;
 		}
 	}
 	if (check == cartAll.length) {
 		cartAll.push(select);
+		cartForController.push(detailForController);
 	}
 	localStorage.setItem("cart", JSON.stringify(cartAll));
+	localStorage.setItem("cfc", JSON.stringify(cartForController));
 	$("span.cart-count").html(cartAll.length);
 
 	let miniCart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];

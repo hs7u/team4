@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <FORM METHOD="post" id="productForm" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>商品標籤</td>
+                <td><input type="radio" name="product_category_code" size="45"
+                    value="11" checked="true"/>
+                    <label for="product_category_code">瓷畫</label> 
+                    <input type="radio" name="product_category_code" size="45"
+                    value="22"/>
+                    <label for="product_category_code">電烙</label> 
+                    <input type="radio" name="product_category_code" size="45"
+                    value="33"/>
+                    <label for="product_category_code">燒陶</label>
+                    <input type="radio" name="product_category_code" size="45"
+                    value="44"/>
+                    <label for="product_category_code">色鉛筆</label>
+                    <input type="radio" name="product_category_code" size="45"
+                    value="55"/>
+                    <label for="product_category_code">水彩</label>
+                    <input type="radio" name="product_category_code" size="45"
+                    value="66"/>
+                    <label for="product_category_code">壓克力彩繪</label>
+                </td>
+            </tr>
+            <tr>
+                <td>商品名稱</td>
+                <td><input type="TEXT" name="product_name" size="45"
+                    placeholder="Ex:/ 可客製｜色鉛筆｜手繪卡通人像"/></td>
+            </tr>
+            <tr>
+                <td>商品描述</td>
+                <td><input type="TEXT" name="product_description" size="45"
+                    placeholder="Ex:/ 尺寸 : 長方形 6吋 10.2*15.2 cm 材質 : 寶虹水彩紙(完成後會噴上專用防霉噴漆)、Mijello水彩顏料"/></td>
+            </tr>
+            <tr>
+                <td>商品價格</td>
+                <td><input type="TEXT" name="product_price" size="45"
+                    placeholder="Ex:/ 2500"/></td>
+            </tr>
+            <tr>
+                <td>商品圖片</td>
+                <td><input type="file" name="product_image" id="p_file"></td>			
+            </tr>
+            <tr>
+                <td>商品庫存</td>
+                <td><input type="TEXT" name="product_inventory" size="45"
+                    placeholder="Ex:/ 3"/></td>
+            </tr>
+            <tr>
+                <td>是否可客製化</td>
+                <td><input type="radio" name="customization" size="20"
+                    value="1" checked="true"/>
+                    <label for="customization">是</label> 
+                    <input type="radio" name="customization" size="45"
+                    value="0"/>
+                    <label for="customization">否</label>
+                </td>
+            </tr>
+            <tr>
+                <td>客製商品價格</td>
+                <td><input type="TEXT" name="customer_product_price" size="45"
+                    placeholder="Ex:/ 2500"/></td>
+            </tr>
+        </table>                 
+           <input type="button" class="las" id="btn_product" value="送出新增">
+           <input type="reset" class="las" value="清除重填">
+    </FORM>
+    <img id="test" src="" alt="" srcset="" width="400" height="500">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        var fdate = {};
+        let preview_img = function(file){
+            let reader = new FileReader(); // 用來讀取檔案
+            reader.readAsArrayBuffer(file); // 讀取檔案
+            reader.addEventListener("load", function () {
+            let u = new Uint8Array(reader.result);
+            // console.log(u);
+            fdate.productImage = Array.from(u);
+            });
+        };
+        let p_file_el = document.getElementById("p_file");
+        p_file_el.addEventListener("change", function(e){
+            preview_img(this.files[0]);
+        });
+        document.getElementById('btn_product').addEventListener('click',function(e){
+            fdate.productCategoryCode  = document.querySelector('input[name="product_category_code"]:checked').value = "" ? " " : document.querySelector('input[name="product_category_code"]:checked').value ;
+            fdate.customerProductPrice = document.querySelector('input[name="customer_product_price"]').value = "" ? " " : document.querySelector('input[name="customer_product_price"]').value ;
+            fdate.customization        = document.querySelector('input[name="customization"]:checked').value = "" ? " " : document.querySelector('input[name="customization"]:checked').value ;
+            fdate.productInventory     = document.querySelector('input[name="product_inventory"]').value = "" ? " " : document.querySelector('input[name="product_inventory"]').value ;
+            fdate.productName          = document.querySelector('input[name="product_name"]').value = "" ? " " : document.querySelector('input[name="product_name"]').value ;
+            fdate.productPrice         = document.querySelector('input[name="product_price"]').value = "" ? " " : document.querySelector('input[name="product_price"]').value ;
+            fdate.productDescription   = document.querySelector('input[name="product_description"]').value = "" ? " " : document.querySelector('input[name="product_description"]').value ;
+            fdate = JSON.stringify(fdate);
+            axios({
+              method: "post",
+              url: "./Product/mvc",
+              data: fdate,
+              headers: { "Content-Type": "application/json" },
+            }).then(res=>{
+                console.log(res.data);
+            })
+        })
+        
+    </script>
+</body>
+</html>

@@ -3,7 +3,14 @@ package web.CustomerOrders.service;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.mail.MailParseException;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,9 +27,10 @@ public class CustomerOrdersService {
     //     dao = new CustomerOrderDAO(session);
     // }
     public String addOrder(CustomerOrdersVO coVo){
-        java.sql.Timestamp orderCreatedDate = new java.sql.Timestamp(System.currentTimeMillis());
+        java.sql.Timestamp date = new java.sql.Timestamp(System.currentTimeMillis());
         StringBuilder errorMsg = new StringBuilder();
-        coVo.setOrderCreatedDate(orderCreatedDate);
+        coVo.setOrderCreatedDate(date);
+        coVo.setOrderShippingDate(date);
         if(coVo.getOrderDeliveryCharge() == null)
             errorMsg.append("運費不得為空"+System.lineSeparator());
         if(coVo.getOrderDeliveryCharge() <= 0)
@@ -36,8 +44,7 @@ public class CustomerOrdersService {
         if(coVo.getOrderDetails().isEmpty())
             errorMsg.append("細節不得為空"+System.lineSeparator());
         if(errorMsg.length() <= 0){
-            dao.insert(coVo);
-            return "success";
+            return dao.insert(coVo).toString();
         }
         return errorMsg.toString();
     }

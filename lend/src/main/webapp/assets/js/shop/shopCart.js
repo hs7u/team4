@@ -65,7 +65,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		})
 	})
 })
-
+function sendOrder(){
+	let orderDate = [];
+	let detail = JSON.parse(localStorage.getItem("cfc"));
+	axios({
+		method: "post",
+		url: "./Customer/Order/checkout",
+		data: orderDate,
+		headers: { "Content-Type": "application/json" },
+	}).then(res => {
+		sessionStorage.setItem("pay", JSON.stringify(res.data));
+	})
+}
 /* <div class="product-quantity"> -->
 <!--                                     <span class="qty-btn minus"><i class="ti-minus"></i></span> -->
 <!--                                     <input type="text" class="input-qty" value="1"> -->
