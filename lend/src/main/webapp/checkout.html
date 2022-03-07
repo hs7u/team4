@@ -596,6 +596,7 @@
                     </div>
                 </div>
             </div>
+            <div id="ecpay"></div>
         </div>
     </div>
     <!-- Checkout Section End -->
@@ -687,7 +688,12 @@
 
     <!-- Main Activation JS -->
     <script src="assets/js/main.js"></script>
-
+    <script>
+        function init(){
+            $("div.ecpay").html(JSON.parse(sessionStorage.getItem("pay")));
+        }
+        window.addEventListener("load", init);
+    </script>
 </body>
 
 </html>

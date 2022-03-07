@@ -48,7 +48,7 @@
     <!-- <link rel="stylesheet" href="assets/css/vendor/vendor.min.css">
     <link rel="stylesheet" href="assets/css/plugins/plugins.min.css"> -->
     <link rel="stylesheet" href="assets/css/style.min.css">
-
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -387,7 +387,7 @@
                 </div>
                 <div class="buttons">
                     <a href="shopping-cart.jsp" class="btn btn-dark btn-hover-primary">查看購物車</a>
-                    <a href="checkout.html" class="btn btn-outline-dark">前往結帳</a>
+                    <a href="checkout.html" class="btn btn-outline-dark" onclick="sendOrder();">前往結帳</a>
                 </div>   
             </div>
         </div>
@@ -519,7 +519,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <a href="checkout.html" class="btn btn-dark btn-outline-hover-dark">前往結帳</a>
+                <a href="checkout.html" class="btn btn-dark btn-outline-hover-dark" onclick="sendOrder();">前往結帳</a>
             </div>
         </div>
 

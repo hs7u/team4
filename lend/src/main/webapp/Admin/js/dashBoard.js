@@ -92,7 +92,7 @@ function getCourses() {
                                             </table>                    
                                             <table>
                                                 <tr class="">
-                                                    <td>課程圖片<label for="photoCUP" class="nomal hh CUPlable">上傳<input type="file" class="${res.data[i].courseId}" class="photoCUP" name="courseImage" size="45" style="display: none;"/></label></td>
+                                                    <td>課程圖片<label for="photoCUP${res.data[i].courseId}" class="nomal hh CUPlable">上傳<input type="file" id="photoCUP${res.data[i].courseId}" name="courseImage" size="45" style="display: none;"/></label></td>
                                                 </tr>
                                                 <tr class="twoline ">
                                                     <td class="nomalSec"><label for="">課程日期<input type="date" class="nomal ${res.data[i].courseId}" name="courseDate"></label></td>

@@ -1,5 +1,6 @@
 package web.CustomerOrders.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.PersistenceContext;
@@ -23,7 +24,6 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import ProjectInterfaces.CustomerOrderInterface;
-import web.Course.vo.CourseVO;
 import web.CustomerOrders.vo.CustomerOrdersVO;
 
 @Repository
@@ -65,14 +65,15 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
     +"SET"
     +"`return_status` = ?"
     +"WHERE `order_id` = ?;"; */
-    public void insert(CustomerOrdersVO coVo){
+    public Serializable insert(CustomerOrdersVO coVo){
         // Hibernate
         if(coVo != null){
-            CustomerOrdersVO newOrder = getSession().get(CustomerOrdersVO.class, coVo.getOrderId());
-            if(newOrder == null){
-                getSession().save(coVo);
-            }
+            // CustomerOrdersVO newOrder = getSession().get(CustomerOrdersVO.class, coVo.getOrderId());
+            // if(newOrder == null){
+               return getSession().save(coVo);
+            // }
         }
+        return null;
         // Datasource
         /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT_STMT)) {
