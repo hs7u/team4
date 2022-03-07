@@ -9,12 +9,13 @@
 <%@ page import="ProjectInterfaces.ProductInterface"%>
 <%@ page import="org.springframework.context.ApplicationContext"%>
 <%@ page import="org.springframework.web.context.WebApplicationContext"%>
+<%@ page import="java.util.stream.Collectors"%>
 
 <%
     ApplicationContext context = (ApplicationContext)request.getServletContext().getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
 	ProductService psc = (ProductService)context.getBean("productService");
     ArrayList<ProductVO> list = psc.getAll();
-    pageContext.setAttribute("list",list);
+    pageContext.setAttribute("list", list.stream().filter(vo -> vo.getProductCategoryCode() == 11).collect(Collectors.toList()));
 %>
 
 <!DOCTYPE html>
@@ -23,7 +24,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>studio4art – 商品列表</title>
+    <title>studio4art – 手繪瓷盤</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -519,8 +520,9 @@
                     <!-- Isotop Filter Start -->
                     <div class="col-md col-12 align-self-center learts-mb-20">
                         <div class="isotope-filter shop-product-filter" data-target="#shop-products">
-                            <button data-filter=".featured">全部</button>                         
-                            <button data-filter=".new">New !</button>
+                            <a href="shoptest.jsp"><span class="menu-text">回全部商品</span></a>&emsp;&emsp;
+                            <a href=""><span class="menu-text">手繪瓷盤</span></a>
+                            
                         </div>
                     </div>
                     <!-- Isotop Filter End -->
@@ -590,6 +592,7 @@
                             </div>
                     </div>
                         <FORM style="display: none;">
+                        
 							<input type="hidden" class="${p.productId}" name="productId" value="${p.productId}">
 							<input type="hidden" class="${p.productId}" name="productName" value="${p.productName}">
 							<input type="hidden" class="${p.productId}" name="productPrice" value="${p.productPrice}">

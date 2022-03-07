@@ -318,4 +318,21 @@ public class ProductDAO implements ProductInterface<ProductVO>{
         }
         return list;
     }
+    public ArrayList<ProductVO> selectCategoryByProduct(Integer productCategoryCode){
+        // JPA CtiteriaQuery
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
+        CriteriaQuery<ProductVO> cq = cb.createQuery(ProductVO.class);
+        Root<ProductVO> root = cq.from(ProductVO.class);
+        cq = cq.select(root).where(cb.equal(root.get("productCategoryCode"), productCategoryCode)).orderBy(cb.desc(root.get("productCategoryCode")));
+        ArrayList<ProductVO> list = new ArrayList<ProductVO>();
+        for(ProductVO pVo : getSession().createQuery(cq).getResultList()){
+            list.add(pVo);
+        }
+        return list;
+    }
+	@Override
+	public ArrayList<ProductVO> selectCategoryByProduct() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
