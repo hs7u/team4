@@ -7,13 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import web.CustomerOrders.service.CustomerOrdersService;
+import web.OrderDetail.service.OrderService;
 import web.Product.service.ProductService;
 import web.Product.vo.ProductVO;
 
@@ -21,6 +22,10 @@ import web.Product.vo.ProductVO;
 public class ProductUpdateController {
     @Autowired
     private ProductService ps;
+    @Autowired
+    private OrderService os;
+    @Autowired
+    private CustomerOrdersService cos;
     @PostMapping(path = {"/Product/updateProduct"})
     public String updateProduct(@RequestBody(required = false) ProductVO vo, HttpServletRequest request){
         ProductVO check = ps.getOneProduct(vo.getProductId());
@@ -38,6 +43,8 @@ public class ProductUpdateController {
     }
     @GetMapping(path = {"/Product/updateProduct/{param1}"})
     public void delete(@PathVariable("param1") Integer productId, HttpServletResponse response) throws IOException {
+        os.deleteWithProduct(productId);
+        cos.deleteOrderByProductId(productId);
         ps.deleteProduct(productId);
         response.sendRedirect("/lend/Product/listAllProduct_test.jsp");
     }

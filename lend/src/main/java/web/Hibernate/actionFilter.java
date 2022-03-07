@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(value = {"/Customer/","/Cart/","/Fac"})
+@WebFilter(value = {"/checkout.html","/shopping-cart.jsp","/my-account.html"})
 public class actionFilter implements javax.servlet.Filter{
     public void init(FilterConfig filterConfig) throws ServletException{}
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
@@ -23,7 +23,7 @@ public class actionFilter implements javax.servlet.Filter{
 		// 【從 session 判斷此user是否登入過】
 		Object account = session.getAttribute("customerAccount");
 		if (account == null) {
-			res.sendRedirect(req.getContextPath() + "/Customer/login-register.html");
+			res.sendRedirect(req.getContextPath() + "/login-register.html");
 			return;
 		} else {
 			chain.doFilter(request, response);

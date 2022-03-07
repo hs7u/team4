@@ -25,6 +25,7 @@ import org.springframework.stereotype.Repository;
 
 import ProjectInterfaces.CustomerOrderInterface;
 import web.CustomerOrders.vo.CustomerOrdersVO;
+import web.OrderDetail.vo.OrderDetailVO;
 
 @Repository
 public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO>{
@@ -191,6 +192,14 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
             }
         } */
     }
+    public void deleteOrderByProductId(Integer productId){
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
+        CriteriaDelete<CustomerOrdersVO> cd = cb.createCriteriaDelete(CustomerOrdersVO.class);
+        Root<CustomerOrdersVO> root = cd.from(CustomerOrdersVO.class);
+        cd = cd.where(cb.equal(root.get("productId"), productId));
+        getSession().createQuery(cd).executeUpdate();
+    }
     public void updateStatus(String statusName, Integer orderId, Byte statusCode) {
         // JPA CriteriaQuery
         CriteriaBuilder cb = getSession().getCriteriaBuilder();
@@ -304,5 +313,13 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
         Root<CustomerOrdersVO> root = cq.from(CustomerOrdersVO.class);
         cq = cq.select(cb.count(root));
         return getSession().createQuery(cq).getSingleResult();
+    }
+	public List<OrderDetailVO> getAllDetail(Integer orderId) {
+//		return null;
+		CriteriaBuilder cb = getSession().getCriteriaBuilder();
+        CriteriaQuery<OrderDetailVO> cq = cb.createQuery(OrderDetailVO.class);
+        Root<OrderDetailVO> root = cq.from(OrderDetailVO.class);
+        cq = cq.where(cb.equal(root.get("orderId"), orderId));
+        return getSession().createQuery(cq).getResultList();
     }
 }

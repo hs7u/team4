@@ -65,7 +65,7 @@
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -406,8 +406,8 @@
                     <span class="miniCartTotal">$144.00</span>
                 </div>
                 <div class="buttons">
-                    <a href="shopping-cart.jsp" class="btn btn-dark btn-hover-primary">查看購物車</a>
-                    <a href="checkout.html" class="btn btn-outline-dark">前往結帳</a>
+                    <a href="./shopping-cart.jsp" class="btn btn-dark btn-hover-primary">查看購物車</a>
+                    <a href="./checkout.html" class="btn btn-outline-dark">前往結帳</a>
                 </div>   
             </div>
         </div>

@@ -65,7 +65,7 @@ function getCourses() {
                             <td><input type="button" class="las CUP" CUPtarget="${res.data[i].courseId}" value="修改"></td>
                             <td><input type="button" class="las" value="刪除"></td>
                         </tr>`;
-            let uptable = `<div class="overCUP ${res.data[i].courseId}">
+            let uptable = `<div class="overCUP ${res.data[i].courseId}" style="display : none">
                                 <article>
                                     <FORM METHOD="post" class="courseUPForm" enctype="multipart/form-data">
                                         <div class="forflex">
@@ -153,30 +153,21 @@ function getOrder() {
         headers: { "Content-Type": "application/json" },
     }).then(res => {
         $("tbody.dynamicsD").empty();
-        // $("div.forOUP").empty();
-<<<<<<< HEAD
-        for (let i = 0; i <= res.data.length; i++) {
-            // console.log(res.data[i].orderStatus);
-            // let stateO = res.data[i].orderStatus == 0 ? '訂單取消' : res.data[i].orderStatus == 1 ? "訂單成立" : "訂單處理中";
-            // let lightO = res.data[i].orderStatus == 0 ? 'red' : res.data[i].orderStatus == 1 ? "green" : "yellow";
-            let stateO = 0;
-            let lightO = 0;
-=======
+        $("div.forOUP").empty();
         for(let i = 0 ; i < res.data.length; i++){
             let state = res.data[i].orderStatus == 0 ? '未完成' : res.data[i].orderStatus == 1 ? "完成" : "訂單處理中" ;
             let light = res.data[i].orderStatus == 0 ? 'red' : res.data[i].orderStatus == 1 ? "green" : "yellow" ;
->>>>>>> main
             let table = `<tr>
                             <td>${res.data[i].orderId}</td>
                             <td>${res.data[i].customerId}</td>
                             <td>${moment(res.data[i].orderCreatedDate).locale("zh-tw").format("YYYY-MM-DD HH:mm")}</td>
                             <td>
-                                <span class="status ${lightO}"></span>
-                                ${stateO}
+                                <span class="status ${light}"></span>
+                                ${state}
                             </td>
                             <td><input type="button" class="las OUP" OUPtarget="${res.data[i].orderId}" value="明細"></td>
                         </tr>`;
-            let detail = `<div class="overOUP ${res.data[i].orderId}">
+            let detail = `<div class="overOUP${res.data[i].orderId}"  style="display : none">
                             <article>
                                 <FORM METHOD="post" id="courseForm" enctype="multipart/form-data">
                                     <div id="forflexO1">
@@ -235,13 +226,10 @@ function getOrder() {
             
             $(table).appendTo("tbody.dynamicsD");
             $(detail).appendTo("div.forOUP");
-            let oDetail = {
-                orderId: res.data[i].orderId
-            }
-            let odList = JSON.stringify(oDetail);
+            
             axios({
-                method: "post",
-                url: "../Customer/orderDetail",
+                method: "get",
+                url: `../Customer/orderDetail/res.data[i].orderId`,
                 data: odList,
                 headers: { "Content-Type": "application/json" },
             }).then(res2 => {
@@ -366,17 +354,10 @@ function getCustomers() {
         url: "../Admin/dashBoard",
         data: fdate,
         headers: { "Content-Type": "application/json" },
-<<<<<<< HEAD
-    }).then(res => {
-        for (let i = 0; i < res.data.length; i++) {
-            let cstate = res.data[i].customerStatus == 0 ? '未開通' : res.data[i].customerStatus == 1 ? "已開通" : "等驗證";
-            let light = res.data[i].customerStatus == 0 ? 'red' : res.data[i].customerStatus == 1 ? "green" : "yello";
-=======
       }).then(res=>{
         for(let i = 0 ; i < res.data.length; i++){
             let cstate = res.data[i].customerStatus == 0 ? '未開通' : res.data[i].customerStatus == 1 ? "已開通" : "等驗證" ;
             let clight = res.data[i].customerStatus == 0 ? 'red' : res.data[i].customerStatus == 1 ? "green" : "yello" ;
->>>>>>> main
             let mainAdd = `<div class="info">
                             <span class="las la-user-plus" style="font-size: 2.5rem;"></span>
                             <div>
@@ -398,13 +379,8 @@ function getCustomers() {
                             <td><span class="las la-phone">${res.data[i].customerPhone}</span></td>
                         </tr>`;
             $(list).appendTo("tbody.cuList");
-<<<<<<< HEAD
-            if (i <= 2) {
-                $(mainAdd).appendTo("div.newCustomer");
-=======
             if(i <= 3){
                 $(mainAdd).appendTo("div.newCustomer");            
->>>>>>> main
             }
         }
         $('#customerTable').DataTable({
@@ -471,25 +447,6 @@ $.fn.cUploaded = function () {
 //         });
 //     });
 // };
-<<<<<<< HEAD
-$.fn.pUploaded = function () {
-    this.fadeIn();
-    $("button.btn_modal_close").on("click", function () {
-        $("div.overlay").fadeOut("done", function () {
-            window.location.assign("./AdminDashBoard_v2.html#product");
-        });
-    });
-};
-$.fn.pUpfail = function () {
-    this.fadeIn();
-    $("button.btn_modal_close").on("click", function () {
-        $("div.overlay").fadeOut("done", function () {
-            window.location.assign("./AdminDashBoard_v2.html#product");
-        });
-    });
-};
-function courseInsert() {
-=======
 // $.fn.pUploaded = function(){           
 //     this.fadeIn();
 //     $("button.btn_modal_close").on("click", function(){
@@ -507,7 +464,6 @@ function courseInsert() {
 //     });
 // };
 function courseInsert(){
->>>>>>> main
     let coDate = {};
     $("input.courseInsert[name='courseImage']").on("change", function () {
         let reader = new FileReader(); // 用來讀取檔案
@@ -549,18 +505,6 @@ function courseInsert(){
     })
 
 }
-<<<<<<< HEAD
-function productInsert() {
-    const form = document.getElementById("productForm");
-    document.getElementById('btn_product').addEventListener('click', function (e) {
-        let fdate = new FormData(form);
-        e.preventDefault();
-        xhr = new XMLHttpRequest();
-        xhr.addEventListener('readystatechange', callStateP);
-        let urlSource = '../Product/addNewProduct';
-        xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
-        xhr.send(fdate);
-=======
 function productInsert(){
     let pdate = {};
     $("input[name='productImage']").on("change" ,function(){
@@ -601,7 +545,6 @@ function productInsert(){
                 //     $("div.overlay").cUpfail();
                 // }
             })    
->>>>>>> main
     })
 }
 // function callStateC(){
@@ -626,31 +569,6 @@ function productInsert(){
 //         $("div.overlay").fadeIn();
 //     }   
 // }
-<<<<<<< HEAD
-function callStateP() {
-    $(function () {
-        $("button.btn_modal_close").on("click", function () {
-            $("div.overlay").fadeOut();
-        });
-    });
-    if (xhr.readyState == 4) {    //readyState: 0 -> 1 -> 2 -> 3 -> 4
-        let t = document.getElementById("target");
-        if (xhr.status == 200) {
-            let text = `${xhr.responseText}`
-            t.innerText = text;
-            if (text.match(/成功/) != null) {
-                $("div.overlay").pUploaded();
-            } else {
-                $("div.overlay").pUpfail();
-            }
-        } else {
-            t.innerText = `${xhr.status}: ${xhr.statusText}`
-        }
-        $("div.overlay").fadeIn();
-    }
-}
-function init() {
-=======
 // function callStateP(){
 //     $(function(){           
 //         $("button.btn_modal_close").on("click", function(){
@@ -674,7 +592,6 @@ function init() {
 //     }   
 // }
 function init(){
->>>>>>> main
     openWorker();
     productInsert();
     courseInsert();
@@ -684,5 +601,6 @@ $(document).ready(function () {
     getAccountInfo();
     getCustomers();
     getCourses();
+    getOrder();
 })
 window.addEventListener('load', init);

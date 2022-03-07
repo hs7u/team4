@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ProjectInterfaces.CustomerOrderInterface;
 import web.CustomerOrders.vo.CustomerOrdersVO;
+import web.OrderDetail.vo.OrderDetailVO;
 
 @Service
 @Transactional
@@ -65,6 +66,9 @@ public class CustomerOrdersService {
     public void deleteOrder(Integer orderId) {
         dao.delete(orderId);
     }
+    public void deleteOrderByProductId(Integer productId) {
+        dao.delete(productId);
+    }
     public CustomerOrdersVO getOneOrder(Integer orderId){
         return dao.selectByOrderId(orderId); 
     }
@@ -76,5 +80,8 @@ public class CustomerOrdersService {
     }
     public List<CustomerOrdersVO> getAll(){
     	return dao.getAll();
+    }
+    public List<OrderDetailVO> getAllDetail(Integer orderId){
+        return dao.getAllDetail(orderId);
     }
 }

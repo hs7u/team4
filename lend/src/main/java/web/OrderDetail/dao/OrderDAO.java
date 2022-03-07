@@ -39,6 +39,13 @@ public class OrderDAO implements OrderInteface<OrderDetailVO>{
         cd = cd.where(cb.equal(root.get("orderDetailsId"), orderDetailsId));
         this.session.createQuery(cd).executeUpdate();
     }
+    public void deleteWithProduct(Integer productId){
+        CriteriaBuilder cb = this.session.getCriteriaBuilder();
+        CriteriaDelete<OrderDetailVO> cd = cb.createCriteriaDelete(OrderDetailVO.class);
+        Root<OrderDetailVO> root = cd.from(OrderDetailVO.class);
+        cd = cd.where(cb.equal(root.get("productId"), productId));
+        this.session.createQuery(cd).executeUpdate();
+    }
     public OrderDetailVO getOneDetail(Integer orderDetailsId){
         CriteriaBuilder cb = this.session.getCriteriaBuilder();
         CriteriaQuery<OrderDetailVO> cq = cb.createQuery(OrderDetailVO.class);

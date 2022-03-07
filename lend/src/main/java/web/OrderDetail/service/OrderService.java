@@ -50,6 +50,9 @@ public class OrderService {
     public void delete(Integer orderDetailsId){
         dao.delete(orderDetailsId);
     }
+    public void deleteWithProduct(Integer productId){
+        dao.delete(productId);
+    }
     public OrderDetailVO getOneDetail(Integer orderDetailsId){
         return dao.getOneDetail(orderDetailsId);
     }

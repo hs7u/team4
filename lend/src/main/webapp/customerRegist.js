@@ -27,12 +27,12 @@ function init(){
         axios({
             method: "post",
             url: "./Customer/login",
-            data: JSON.stringify(regist),
+            data: JSON.stringify(login),
             headers: { "Content-Type": "application/json" },
           }).then(res=>{
               let check = res.data;
-              if(check.match(/success/) != null){
-                console.log(check);
+              if(check.match(/success/) != null || check.match(/login/) != null){
+                window.location.href = "./my-account.html"
               }
           })
     })

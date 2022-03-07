@@ -688,9 +688,30 @@
 
     <!-- Main Activation JS -->
     <script src="assets/js/main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         function init(){
-            $("div.ecpay").html(JSON.parse(sessionStorage.getItem("pay")));
+            let miniCart = localStorage.getItem("cart")!= null ? JSON.parse(localStorage.getItem("cart")) : [];
+            let sendData = [];
+            console.log(miniCart);
+            for(let i = 0; i < miniCart.length ; i++){
+                let item = {};
+                item.productId = miniCart[i].productId; 
+                item.productName = miniCart[i].productName; 
+                item.productPrice = miniCart[i].productPrice;
+                item.productQuantity = miniCart[i].productQuantity;
+                sendData.push(item);
+            }
+            console.log(sendData);
+        	axios({
+        		method: "post",
+        		url: "./Customer/Order/checkout",
+        		data: JSON.stringify(sendData),
+        		headers: { "Content-Type": "application/json" },
+        	}).then(res => {
+        		$("div#ecpay").html(res.data);
+        	})
+            
         }
         window.addEventListener("load", init);
     </script>

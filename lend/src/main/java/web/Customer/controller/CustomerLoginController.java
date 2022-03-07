@@ -18,7 +18,7 @@ public class CustomerLoginController {
     private CustomerService cs;
     @RequestMapping(path = {"/Customer/login"}, method=RequestMethod.POST)
     public String login(@RequestBody(required = false) CustomerVO vo, HttpSession session) {
-        if(session.getAttribute("cuatomerAccount") == null){
+        if(session.getAttribute("customerAccount") == null){
             StringBuilder errorMsg = new StringBuilder();
             if (vo.getCustomerEmail().trim().isEmpty()) {
                 errorMsg.append("帳號不得為空"+System.lineSeparator());
@@ -31,7 +31,7 @@ public class CustomerLoginController {
             }      
             CustomerVO check = cs.getOneCustomer(vo.getCustomerEmail(), vo.getCustomerPassword());
             if(check != null && check.getCustomerStatus() != 0){
-                session.setAttribute("cuatomerAccount", check.getCustomerEmail());
+                session.setAttribute("customerAccount", check.getCustomerEmail());
                 session.setAttribute("customerInfo", check);
                 return "Login Success";
             }else{
