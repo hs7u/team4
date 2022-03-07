@@ -67,8 +67,8 @@ function getCourses() {
                         </tr>`;
             let uptable = `<div class="overCUP ${res.data[i].courseId}">
                                 <article>
-                                    <FORM METHOD="post" id="courseUPForm" enctype="multipart/form-data">
-                                        <div id="forflex">
+                                    <FORM METHOD="post" class="courseUPForm" enctype="multipart/form-data">
+                                        <div class="forflex">
                                             <table>
                                                 <tr class="twoline tt">
                                                     <td><label for="">課程名稱<input class="hh nomal ${res.data[i].courseId}" type="TEXT" name="courseName" size="45" placeholder="Ex:/ 水彩繪杯墊" value="${res.data[i].courseName}"></label></td>
@@ -92,7 +92,7 @@ function getCourses() {
                                             </table>                    
                                             <table>
                                                 <tr class="">
-                                                    <td>課程圖片<label for="photoCUP" class="nomal hh CUPlable">上傳<input type="file" class="${res.data[i].courseId}" id="photoCUP" name="courseImage" size="45" style="display: none;"/></label></td>
+                                                    <td>課程圖片<label for="photoCUP" class="nomal hh CUPlable">上傳<input type="file" class="${res.data[i].courseId}" class="photoCUP" name="courseImage" size="45" style="display: none;"/></label></td>
                                                 </tr>
                                                 <tr class="twoline ">
                                                     <td class="nomalSec"><label for="">課程日期<input type="date" class="nomal ${res.data[i].courseId}" name="courseDate"></label></td>
@@ -154,12 +154,18 @@ function getOrder() {
     }).then(res => {
         $("tbody.dynamicsD").empty();
         // $("div.forOUP").empty();
+<<<<<<< HEAD
         for (let i = 0; i <= res.data.length; i++) {
             // console.log(res.data[i].orderStatus);
             // let stateO = res.data[i].orderStatus == 0 ? '訂單取消' : res.data[i].orderStatus == 1 ? "訂單成立" : "訂單處理中";
             // let lightO = res.data[i].orderStatus == 0 ? 'red' : res.data[i].orderStatus == 1 ? "green" : "yellow";
             let stateO = 0;
             let lightO = 0;
+=======
+        for(let i = 0 ; i < res.data.length; i++){
+            let state = res.data[i].orderStatus == 0 ? '未完成' : res.data[i].orderStatus == 1 ? "完成" : "訂單處理中" ;
+            let light = res.data[i].orderStatus == 0 ? 'red' : res.data[i].orderStatus == 1 ? "green" : "yellow" ;
+>>>>>>> main
             let table = `<tr>
                             <td>${res.data[i].orderId}</td>
                             <td>${res.data[i].customerId}</td>
@@ -360,10 +366,17 @@ function getCustomers() {
         url: "../Admin/dashBoard",
         data: fdate,
         headers: { "Content-Type": "application/json" },
+<<<<<<< HEAD
     }).then(res => {
         for (let i = 0; i < res.data.length; i++) {
             let cstate = res.data[i].customerStatus == 0 ? '未開通' : res.data[i].customerStatus == 1 ? "已開通" : "等驗證";
             let light = res.data[i].customerStatus == 0 ? 'red' : res.data[i].customerStatus == 1 ? "green" : "yello";
+=======
+      }).then(res=>{
+        for(let i = 0 ; i < res.data.length; i++){
+            let cstate = res.data[i].customerStatus == 0 ? '未開通' : res.data[i].customerStatus == 1 ? "已開通" : "等驗證" ;
+            let clight = res.data[i].customerStatus == 0 ? 'red' : res.data[i].customerStatus == 1 ? "green" : "yello" ;
+>>>>>>> main
             let mainAdd = `<div class="info">
                             <span class="las la-user-plus" style="font-size: 2.5rem;"></span>
                             <div>
@@ -379,14 +392,19 @@ function getCustomers() {
             let list = `<tr>
                             <td><h4>${res.data[i].customerName}</h4></td>
                             <td><small>${res.data[i].customerEmail}</small></td>
-                            <td><span class="status ${light}"></span>${cstate}</td>
+                            <td><span class="status ${clight}"></span>${cstate}</td>
                             <td><input type="button" class="las" value="停權"></td>
                             <td><span class="las la-birthday-cake">${moment(res.data[i].customerBirthday).locale("zh-tw").format("YYYY-MM-DD HH:mm")}</span></td>
                             <td><span class="las la-phone">${res.data[i].customerPhone}</span></td>
                         </tr>`;
             $(list).appendTo("tbody.cuList");
+<<<<<<< HEAD
             if (i <= 2) {
                 $(mainAdd).appendTo("div.newCustomer");
+=======
+            if(i <= 3){
+                $(mainAdd).appendTo("div.newCustomer");            
+>>>>>>> main
             }
         }
         $('#customerTable').DataTable({
@@ -453,6 +471,7 @@ $.fn.cUploaded = function () {
 //         });
 //     });
 // };
+<<<<<<< HEAD
 $.fn.pUploaded = function () {
     this.fadeIn();
     $("button.btn_modal_close").on("click", function () {
@@ -470,6 +489,25 @@ $.fn.pUpfail = function () {
     });
 };
 function courseInsert() {
+=======
+// $.fn.pUploaded = function(){           
+//     this.fadeIn();
+//     $("button.btn_modal_close").on("click", function(){
+//         $("div.overlay").fadeOut("done", function(){
+//             window.location.assign("./AdminDashBoard_v2.html#product");
+//         });
+//     });
+// };
+// $.fn.pUpfail = function(){ 
+//     this.fadeIn();          
+//     $("button.btn_modal_close").on("click", function(){
+//         $("div.overlay").fadeOut("done", function(){
+//             window.location.assign("./AdminDashBoard_v2.html#product");
+//         });
+//     });
+// };
+function courseInsert(){
+>>>>>>> main
     let coDate = {};
     $("input.courseInsert[name='courseImage']").on("change", function () {
         let reader = new FileReader(); // 用來讀取檔案
@@ -511,6 +549,7 @@ function courseInsert() {
     })
 
 }
+<<<<<<< HEAD
 function productInsert() {
     const form = document.getElementById("productForm");
     document.getElementById('btn_product').addEventListener('click', function (e) {
@@ -521,6 +560,48 @@ function productInsert() {
         let urlSource = '../Product/addNewProduct';
         xhr.open('POST', urlSource, true); // if false --> 同步 | true: 非同步
         xhr.send(fdate);
+=======
+function productInsert(){
+    let pdate = {};
+    $("input[name='productImage']").on("change" ,function(){
+        let reader = new FileReader(); // 用來讀取檔案
+        reader.readAsArrayBuffer(this.files[0]); // 讀取檔案
+        reader.addEventListener("load", function () {
+            let u = new Uint8Array(reader.result);
+            pdate.productImage = Array.from(u);
+        })
+    })
+    document.getElementById('btn_product').addEventListener('click',function(e){
+        e.preventDefault();
+        pdate.productCategoryCode  = $('input[name="productCategoryCode"]:checked').val();
+        pdate.customerProductPrice = $('input[name="customerProductPrice"]').val();
+        pdate.customization        = $('input[name="customization"]:checked').val();
+        pdate.productInventory     = $('input[name="productInventory"]').val();
+        pdate.productName          = $('input[name="productName"]').val();
+        pdate.productPrice         = $('input[name="productPrice"]').val();
+        pdate.productDescription   = $('input[name="productDescription"]').val();
+        pdate = JSON.stringify(pdate);
+            axios({
+              method: "post",
+              url: "../Product/addNewProduct",
+              data: pdate,
+              headers: { "Content-Type": "application/json" },
+            }).then(res=>{
+                $(function(){           
+                    $("button.btn_modal_close").on("click", function(){
+                        $("div.overlay").fadeOut();
+                    });
+                });
+                let check = res.data;
+                let t = document.getElementById("target");
+                t.innerText = check;
+                // if(check.match(/success/) != null){
+                    $("div.overlay").cUploaded();
+                // }else{
+                //     $("div.overlay").cUpfail();
+                // }
+            })    
+>>>>>>> main
     })
 }
 // function callStateC(){
@@ -545,6 +626,7 @@ function productInsert() {
 //         $("div.overlay").fadeIn();
 //     }   
 // }
+<<<<<<< HEAD
 function callStateP() {
     $(function () {
         $("button.btn_modal_close").on("click", function () {
@@ -568,6 +650,31 @@ function callStateP() {
     }
 }
 function init() {
+=======
+// function callStateP(){
+//     $(function(){           
+//         $("button.btn_modal_close").on("click", function(){
+//             $("div.overlay").fadeOut();
+//         });
+//     });
+//     if(xhr.readyState == 4){    //readyState: 0 -> 1 -> 2 -> 3 -> 4
+//         let t = document.getElementById("target");
+//         if(xhr.status == 200){
+//             let text = `${xhr.responseText}`
+//             t.innerText = text;
+//             if(text.match(/成功/) != null){
+//                 $("div.overlay").pUploaded();
+//             }else{
+//                 $("div.overlay").pUpfail();
+//             }
+//         }else{
+//             t.innerText = `${xhr.status}: ${xhr.statusText}`
+//         }
+//         $("div.overlay").fadeIn();
+//     }   
+// }
+function init(){
+>>>>>>> main
     openWorker();
     productInsert();
     courseInsert();
@@ -577,6 +684,5 @@ $(document).ready(function () {
     getAccountInfo();
     getCustomers();
     getCourses();
-    getOrder();
 })
 window.addEventListener('load', init);
