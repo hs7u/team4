@@ -79,6 +79,9 @@ public class ProductService {
     public ArrayList<ProductVO> getAll() {
         return dao.getAllProduct();
     }
+    public ArrayList<ProductVO> getsomeproduct() {
+        return dao.selectCategoryByProduct();
+    }
     public void deleteProduct(Integer productId){
         dao.delete(productId);
     }

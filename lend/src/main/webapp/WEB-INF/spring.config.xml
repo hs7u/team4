@@ -9,7 +9,10 @@
 	
 	<context:annotation-config></context:annotation-config>
 	<context:component-scan base-package="web"></context:component-scan>
-	
+
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <constructor-arg name="strength" value="20"/>
+    </bean>
 	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" >
 	    <property name="corePoolSize" value="5"></property>
 	    <property name="maxPoolSize" value="10"></property>

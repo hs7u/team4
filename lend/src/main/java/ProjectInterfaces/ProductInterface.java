@@ -12,4 +12,5 @@ public interface ProductInterface<ProductVO> {
     public ProductVO selectByProductId(Integer productId);
     public byte[] selectPhotoByProductId(Integer productId);
     public ArrayList<ProductVO> getAllProduct();
+    public ArrayList<ProductVO> selectCategoryByProduct();
 }
