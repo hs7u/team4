@@ -14,7 +14,7 @@
 <%
     ApplicationContext context = (ApplicationContext)request.getServletContext().getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
 	ProductService psc = context.getBean(ProductService.class);
-    ArrayList<ProductVO> list = psc.selectProductByCategory(11, "productPrice");
+    ArrayList<ProductVO> list = psc.selectProductByCategory(22, "productPrice");
     pageContext.setAttribute("list", list);
 %>
 
@@ -24,7 +24,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>studio4art – 手繪瓷盤</title>
+    <title>studio4art – 電烙畫</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

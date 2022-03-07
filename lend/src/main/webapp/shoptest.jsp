@@ -89,10 +89,13 @@
                         <ul>
                               <li class="has-children"><a href="#"><span class="menu-text">商品專區</span></a>
                                   <ul class="sub-menu">
-                                      <li><a href="shoptest.jsp"><span class="menu-text">全部商品</span></a></li>
-                                      <li><a href="shop11.jsp"><span class="menu-text">手繪瓷盤</span></a></li>
-                                      <li><a href="shop22.jsp"><span class="menu-text">電烙畫</span></a></li>
-                                      <li><a href="shop33.jsp"><span class="menu-text">釉燒陶</span></a></li>
+                                    <li><a href="shoptest.jsp"><span class="menu-text">全部商品</span></a></li>
+                             		<li><a href="shop11.jsp"><span class="menu-text">手繪瓷盤</span></a></li>
+                             		<li><a href="shop22.jsp"><span class="menu-text">電烙畫</span></a></li>
+                            		<li><a href="shop33.jsp"><span class="menu-text">釉燒陶</span></a></li>
+                             		<li><a href="shop44.jsp"><span class="menu-text">彩色鉛筆</span></a></li>
+                             		<li><a href="shop55.jsp"><span class="menu-text">水彩</span></a></li>
+                             		<li><a href="shop66.jsp"><span class="menu-text">壓克力彩繪</span></a></li>
                                   </ul>
                               </li>
                               
@@ -163,12 +166,16 @@
                     <nav class="site-main-menu justify-content-center">
                         <ul>       
                             <li class="has-children"><a href="#"><span class="menu-text">商品專區</span></a>
-                                <ul class="sub-menu">
-                                      <li><a href="shoptest.jsp"><span class="menu-text">全部商品</span></a></li>
-                                      <li><a href="shop11.jsp"><span class="menu-text">手繪瓷盤</span></a></li>
-                                      <li><a href="shop22.jsp"><span class="menu-text">電烙畫</span></a></li>
-                                      <li><a href="shop33.jsp"><span class="menu-text">釉燒陶</span></a></li>
-                                    </ul>
+                                  <ul class="sub-menu">
+                                    <li><a href="shoptest.jsp"><span class="menu-text">全部商品</span></a></li>
+                             		<li><a href="shop11.jsp"><span class="menu-text">手繪瓷盤</span></a></li>
+                             		<li><a href="shop22.jsp"><span class="menu-text">電烙畫</span></a></li>
+                            		<li><a href="shop33.jsp"><span class="menu-text">釉燒陶</span></a></li>
+                             		<li><a href="shop44.jsp"><span class="menu-text">彩色鉛筆</span></a></li>
+                             		<li><a href="shop55.jsp"><span class="menu-text">水彩</span></a></li>
+                             		<li><a href="shop66.jsp"><span class="menu-text">壓克力彩繪</span></a></li>
+                                  </ul>
+                              </li>
                             <li class="has-children"><a href=""><span class="menu-text">手作課程</span></a>
                                 <ul class="sub-menu">
                                             <li><a href="courseList.html"><span class="menu-text">報名課程</span></a></li>
@@ -431,14 +438,17 @@
             </div>
             <div class="offcanvas-menu">
                 <ul>
-                      <li><a href="#"><span class="menu-text">商品專區</span></a>
-                        <ul class="sub-menu">
-                                <li><a href="shoptest.jsp"><span class="menu-text">全部商品</span></a></li>
-                                      <li><a href="shop11.jsp"><span class="menu-text">手繪瓷盤</span></a></li>
-                                      <li><a href="shop22.jsp"><span class="menu-text">電烙畫</span></a></li>
-                                      <li><a href="shop33.jsp"><span class="menu-text">釉燒陶</span></a></li>
-						 </ul>
-                    </li>
+                      <li class="has-children"><a href="#"><span class="menu-text">商品專區</span></a>
+                                  <ul class="sub-menu">
+                                    <li><a href="shoptest.jsp"><span class="menu-text">全部商品</span></a></li>
+                             		<li><a href="shop11.jsp"><span class="menu-text">手繪瓷盤</span></a></li>
+                             		<li><a href="shop22.jsp"><span class="menu-text">電烙畫</span></a></li>
+                            		<li><a href="shop33.jsp"><span class="menu-text">釉燒陶</span></a></li>
+                             		<li><a href="shop44.jsp"><span class="menu-text">彩色鉛筆</span></a></li>
+                             		<li><a href="shop55.jsp"><span class="menu-text">水彩</span></a></li>
+                             		<li><a href="shop66.jsp"><span class="menu-text">壓克力彩繪</span></a></li>
+                                  </ul>
+                              </li>
                     <li><a href="#"><span class="menu-text">手作課程</span></a>
                         <ul class="sub-menu">
                             <li><a href="courseList.html"><span class="menu-text">報名課程</span></a></li>
@@ -519,8 +529,13 @@
                     <!-- Isotop Filter Start -->
                     <div class="col-md col-12 align-self-center learts-mb-20">
                         <div class="isotope-filter shop-product-filter" data-target="#shop-products">
-                            <button data-filter=".featured">全部</button>                         
-                            <button data-filter=".new">New !</button>
+                            &emsp;&emsp;<a href="shoptest.jsp"><span class="menu-text active">全部商品</span></a>&emsp;&emsp;&emsp;
+                            <a href="shop11.jsp"><span class="menu-text">手繪瓷盤</span></a>&emsp;&emsp;&emsp;
+                            <a href="shop22.jsp"><span class="menu-text">電烙畫</span></a>&emsp;&emsp;&emsp;
+							<a href="shop33.jsp"><span class="menu-text">釉燒陶</span></a>&emsp;&emsp;&emsp;
+							<a href="shop44.jsp"><span class="menu-text">彩色鉛筆</span></a>&emsp;&emsp;&emsp;
+							<a href="shop55.jsp"><span class="menu-text">水彩</span></a>&emsp;&emsp;&emsp;
+							<a href="shop66.jsp"><span class="menu-text">壓克力彩繪</span></a>
                         </div>
                     </div>
                     <!-- Isotop Filter End -->
@@ -528,19 +543,13 @@
                     <div class="col-md-auto col-12 learts-mb-20">
                         <ul class="shop-toolbar-controls">
                             <li>
-                                <div class="product-sorting">
-                                    <select class="nice-select">
-                                        <option value="menu_order" selected="selected">預設排序優先</option>
-                                        <option value="${p.productPrice}">價格由低至高</option>
-                                        <option value="${p.productPrice}">價格由高至低</option>
-                                    </select>
-                                </div>
+                                
                             </li>
                             <li>
                                 <div class="product-column-toggle d-none d-xl-flex">
-                                    <button class="toggle active hintT-top" data-hint="5 Column" data-column="5"><i class="ti-layout-grid4-alt"></i></button>
-                                    <button class="toggle hintT-top" data-hint="4 Column" data-column="4"><i class="ti-layout-grid3-alt"></i></button>
-                                    <button class="toggle hintT-top" data-hint="3 Column" data-column="3"><i class="ti-layout-grid2-alt"></i></button>
+                                    <button class="toggle active hintT-top" data-hint="5 項顯示" data-column="5"><i class="ti-layout-grid4-alt"></i></button>
+                                    <button class="toggle hintT-top" data-hint="4 項顯示" data-column="4"><i class="ti-layout-grid3-alt"></i></button>
+                                    <button class="toggle hintT-top" data-hint="3 項顯示" data-column="3"><i class="ti-layout-grid2-alt"></i></button>
                                 </div>
                             </li>
                         </ul>
@@ -683,8 +692,8 @@
                 <div class="col-lg-2 learts-mb-40">
                     <ul class="widget-list">
                         <li> <i class="fab fa-facebook-f"></i> <a href="https://www.facebook.com/fany121105/photos/">Facebook</a></li>
-                        <li> <i class="fab fa-instagram"></i> <a href="https://www.instagram.com/">Instagram</a></li>
-                        <li> <i class="fab fa-youtube"></i> <a href="https://www.youtube.com/">Youtube</a></li>
+                        <li> <i class="fab fa-instagram"></i> <a href="https://www.instagram.com/studio4arttfa105/">Instagram</a></li>
+                        <li> <i class="fab fa-youtube"></i> <a href="https://youtu.be/YF5OK4_PEJM">Youtube</a></li>
                     </ul>
                 </div>
             </div>
