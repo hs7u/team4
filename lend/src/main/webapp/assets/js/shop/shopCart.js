@@ -8,43 +8,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		$("span.cart-count").removeClass("-none");
 		$("span.cart-count").html(miniCart.length);
 
-		$(".minicart-product-list").empty();
-		for (let i = 0; i < miniCart.length; i++) {
-			s_price = miniCart[i].productPrice / miniCart[i].productQuantity * miniCart[i].productQuantity;
-			total += s_price
-			cartList +=
-				`<tr>
-					<td class="thumbnail"><a href="product-details.jsp"><img src=${miniCart[i].productImage} alt="cart-product-1"></a></td>
-					<td class="name"> <a href="product-details.jsp">${miniCart[i].productName}</a></td>
-					<td class="price"><span>NT ${miniCart[i].productPrice / miniCart[i].productQuantity}</span></td>
-					<td class="quantity">
-						<div class="product-quantity">
-							<span class="qty-btn minus"><i class="ti-minus"></i></span>
-							<input type="text" class="input-qty" value="${miniCart[i].productQuantity}">
-							<span class="qty-btn plus"><i class="ti-plus"></i></span>
-						</div>
-					</td>
-					<td class="subtotal"><span>NT ${s_price}</span></td>
-					<td><input type="file" name="customer_upload_img" id=""></td>
-					<td class="remove"><a herf="#" class="btn_delete">×</a></td>
-				</tr>`
-			let littleCartList =
-				`<li>
-					<a href="product-details.jsp" class="image"><img src=${miniCart[i].productImage} alt="Cart product Image"></a>
-					<div class="content">
-						<a href="product-details.jsp" class="title miniCartName">${miniCart[i].productName}</a>
-						<span class="quantity-price">${miniCart[i].productQuantity} x <span>$ ${miniCart[i].productPrice / miniCart[i].productQuantity}</span></span>
-						<a href="#" class="remove miniRemove">×</a>
-					</div>
-				</li>`
-
-				$(".minicart-product-list").append(littleCartList);
-		}
-		$(".AllMiniCart")
-			.empty()
-			.append(cartList);
-		$(".amount").html(total);
-	
+		showProduct();
 
 
 	}
@@ -129,6 +93,30 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		$(".amount").html(total);
 	})
 
+	//控制購物車加減
+	$(document).on('click','.qty-btn', function () {
+        var oldValue = $(this).siblings('input').val();
+		console.log(oldValue);
+        if ($(this).hasClass('plus')) {
+            var newVal = parseInt(oldValue) + 1;
+        } else {
+            if (oldValue > 1) {
+                var newVal = parseInt(oldValue) - 1;
+            } else {
+                newVal = 1;
+            }
+        }
+		let check = $(this).closest("tr").find(".name").children("a").text();
+		let miniCart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
+		for (let i = 0; i < miniCart.length; i++) {
+			if (miniCart[i].productName.match(check) != null) {
+				miniCart[i].productQuantity = newVal;
+			}
+		}
+		localStorage.setItem("cart", JSON.stringify(miniCart));
+		showProduct();
+    });
+	
 })
 /* <div class="product-quantity"> -->
 <!--                                     <span class="qty-btn minus"><i class="ti-minus"></i></span> -->
@@ -136,10 +124,44 @@ document.addEventListener("DOMContentLoaded", function (event) {
 <!--                                     <span class="qty-btn plus"><i class="ti-plus"></i></span> -->
 <!--                                 </div> --> */
 
-$(".ti-minus").on("click",function(e){
-	
-})
 
-$(".ti-plus").on("click",function(e){
+function showProduct(){
+		let miniCart = localStorage.getItem("cart") != null ? JSON.parse(localStorage.getItem("cart")) : [];
+		let cartList, s_price = 0, total = 0;
+		$(".minicart-product-list").empty();
+		for (let i = 0; i < miniCart.length; i++) {
+			s_price = miniCart[i].productPrice * miniCart[i].productQuantity;
+			total += s_price
+			cartList +=
+				`<tr>
+					<td class="thumbnail"><a href="product-details.jsp"><img src=${miniCart[i].productImage} alt="cart-product-1"></a></td>
+					<td class="name"> <a href="product-details.jsp">${miniCart[i].productName}</a></td>
+					<td class="price"><span>NT ${miniCart[i].productPrice}</span></td>
+					<td class="quantity">
+						<div class="product-quantity">
+							<span class="qty-btn minus"><i class="ti-minus"></i></span>
+							<input type="text" class="input-qty" value="${miniCart[i].productQuantity}">
+							<span class="qty-btn plus"><i class="ti-plus"></i></span>
+						</div>
+					</td>
+					<td class="subtotal"><span>NT ${s_price}</span></td>
+					<td><input type="file" name="customer_upload_img" id=""></td>
+					<td class="remove"><a herf="#" class="btn_delete">×</a></td>
+				</tr>`
+			let littleCartList =
+				`<li>
+					<a href="product-details.jsp" class="image"><img src=${miniCart[i].productImage} alt="Cart product Image"></a>
+					<div class="content">
+						<a href="product-details.jsp" class="title miniCartName">${miniCart[i].productName}</a>
+						<span class="quantity-price">${miniCart[i].productQuantity} x <span>$ ${miniCart[i].productPrice / miniCart[i].productQuantity}</span></span>
+						<a href="#" class="remove miniRemove">×</a>
+					</div>
+				</li>`
 
-})
+				$(".minicart-product-list").append(littleCartList);
+		}
+		$(".AllMiniCart")
+			.empty()
+			.append(cartList);
+		$(".amount").html(total);
+}
