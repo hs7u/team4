@@ -212,7 +212,7 @@
                             <a href="#offcanvas-search" class="offcanvas-toggle"><i class="fal fa-search"></i></a>
                         </div>
                         <div class="header-wishlist d-none d-sm-block">
-                            <a href="#offcanvas-wishlist" class="offcanvas-toggle"><span class="wishlist-count">3</span><i class="fal fa-heart"></i></a>
+                            <a href="#offcanvas-wishlist" class="offcanvas-toggle"><span class="wishlist-count -none"></span><i class="fal fa-heart"></i></a>
                         </div>
                         <div class="header-cart">
                             <a href="#offcanvas-cart" class="offcanvas-toggle"><span class="cart-count -none"></span><i class="fal fa-shopping-cart"></i></a>
@@ -363,32 +363,16 @@
                 <span class="title">Wishlist</span>
                 <button class="offcanvas-close">×</button>
             </div>
-            <div class="body customScroll">
-                <ul class="minicart-product-list">
-                    <li>
+            <div class="body customScroll" style="overflow: auto !important">
+                <ul class="wish-product-list">
+                    <!-- <li>
                         <a href="product-details.jsp" class="image"><img src="assets/images/product/cart-product-1.webp" alt="Cart product Image"></a>
                         <div class="content">
                             <a href="product-details.jsp" class="title">Walnut Cutting Board</a>
-                            <span class="quantity-price">1 x <span class="amount">$100.00</span></span>
+                            <span class="quantity-price"><span class="amount">$100.00</span></span>
                             <a href="#" class="remove">×</a>
                         </div>
-                    </li>
-                    <li>
-                        <a href="product-details.jsp" class="image"><img src="assets/images/product/cart-product-2.webp" alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="product-details.jsp" class="title">Lucky Wooden Elephant</a>
-                            <span class="quantity-price">1 x <span class="amount">$35.00</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="product-details.jsp" class="image"><img src="assets/images/product/cart-product-3.webp" alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="product-details.jsp" class="title">Fish Cut Out Set</a>
-                            <span class="quantity-price">1 x <span class="amount">$9.00</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <div class="foot">

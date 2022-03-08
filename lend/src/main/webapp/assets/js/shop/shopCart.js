@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	}
 
 	//移除
-	$(".btn_delete").off("click").on("click", function () {
+	$(document).off("click").on("click",".btn_delete", function () {
 		$(this).closest("tr").fadeOut(0, function () {
 			let check = $(this).closest("tr").find(".name").children("a").text();
 			let cartAll = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
@@ -29,16 +29,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		})
 		let miniCart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
 		$(".minicart-product-list").empty();
-		total = 0;
+		total = 0,s_price=0;
 		for(let i=0;i<miniCart.length;i++){
-			s_price = miniCart[i].productPrice / miniCart[i].productQuantity * miniCart[i].productQuantity;
+			s_price = miniCart[i].productPrice * miniCart[i].productQuantity;
 			total += s_price
 			let littleCartList =
 				`<li>
 					<a href="product-details.jsp" class="image"><img src=${miniCart[i].productImage} alt="Cart product Image"></a>
 					<div class="content">
 						<a href="product-details.jsp" class="title miniCartName">${miniCart[i].productName}</a>
-						<span class="quantity-price">${miniCart[i].productQuantity} x <span>$ ${miniCart[i].productPrice / miniCart[i].productQuantity}</span></span>
+						<span class="quantity-price">${miniCart[i].productQuantity} x <span>$ ${miniCart[i].productPrice}</span></span>
 						<a href="#" class="remove miniRemove">×</a>
 					</div>
 				</li>`
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	
 
 	//移除miniCart
-	$(".miniRemove").off("click").on("click", function () {
+	$(document).on("click",".miniRemove", function () {
 		$(this).closest("li").fadeOut(0, function () {
 			let check = $(this).closest("li").find(".miniCartName").text();
 			let miniCart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
@@ -67,15 +67,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 		let miniCart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
 		$(".AllMiniCart").empty();
-		total = 0;
+		total = 0,s_price=0;
 		for(let i=0;i<miniCart.length;i++){
-			s_price = miniCart[i].productPrice / miniCart[i].productQuantity * miniCart[i].productQuantity;
+			s_price = miniCart[i].productPrice * miniCart[i].productQuantity;
 			total += s_price
 			cartList =
 				`<tr>
 					<td class="thumbnail"><a href="product-details.jsp"><img src=${miniCart[i].productImage} alt="cart-product-1"></a></td>
 					<td class="name"> <a href="product-details.jsp">${miniCart[i].productName}</a></td>
-					<td class="price"><span>NT ${miniCart[i].productPrice / miniCart[i].productQuantity}</span></td>
+					<td class="price"><span>NT ${miniCart[i].productPrice}</span></td>
 					<td class="quantity">
 						<div class="product-quantity">
 							<span class="qty-btn minus"><i class="ti-minus"></i></span>
@@ -153,7 +153,7 @@ function showProduct(){
 					<a href="product-details.jsp" class="image"><img src=${miniCart[i].productImage} alt="Cart product Image"></a>
 					<div class="content">
 						<a href="product-details.jsp" class="title miniCartName">${miniCart[i].productName}</a>
-						<span class="quantity-price">${miniCart[i].productQuantity} x <span>$ ${miniCart[i].productPrice / miniCart[i].productQuantity}</span></span>
+						<span class="quantity-price">${miniCart[i].productQuantity} x <span>$ ${miniCart[i].productPrice}</span></span>
 						<a href="#" class="remove miniRemove">×</a>
 					</div>
 				</li>`
