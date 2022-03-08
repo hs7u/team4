@@ -100,7 +100,7 @@ public class CustomerOrdersVO implements java.io.Serializable{
 	public void setOrderShippingDate(Timestamp orderShippingDate){
 		this.orderShippingDate = orderShippingDate;
 	}
-	public String getRecipint(){
+	public String getRecipient(){
 		return recipient;
 	}
 	public void setRecipient(String recipient){

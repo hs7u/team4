@@ -16,6 +16,7 @@ div.overOUP{
     height: 100vh;
     z-index: 9999;
     /* background-color: hsla(0, 0%, 0%, .5); */   
+    display: none;
 }
 div.overOUP > article{
     height: 65%;
@@ -86,7 +87,23 @@ div.overOUP > article{
 .orderB{
     height: 100%;
 }
-.nomal{
+.oans2 >td{
+    width: 170px;
+    text-align: center;
+    font-size: .9rem;
+}
+.oans2{      
+    flex:1;
+    display:block;
+    border:none;
+    margin-bottom: 0.2rem;
+    /* border-bottom-style:solid; 
+    border-bottom-width:0.1px; */
+    width: 100%;
+    height: 50px;
+    border-bottom: dashed #68718071 1px;
+}
+.onomal{
     border-radius: 15px;
     padding: .5rem;
     border: 1px solid;
@@ -94,6 +111,6 @@ div.overOUP > article{
     outline: none;
     width: 10rem;
 }
-.hh{
+.ohh{
     height: 1.4rem;
 }

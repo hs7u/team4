@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import web.OrderDetail.service.OrderService;
-import web.OrderDetail.vo.OrderDetailVO;
 
 @RestController
 public class getDetail  {
@@ -19,6 +18,6 @@ public class getDetail  {
 	private OrderService osc;
     @RequestMapping(path = {"/Customer/orderDetail/{param}"}, method = RequestMethod.GET)
 	protected ResponseEntity<?> allDetail(@PathVariable("param") Integer orderId){
-		return new ResponseEntity<List<OrderDetailVO> >(osc.getAllDetail(orderId), HttpStatus.OK);
+		return new ResponseEntity<List<?> >(osc.getAllDetail(orderId), HttpStatus.OK);
 	}
 }

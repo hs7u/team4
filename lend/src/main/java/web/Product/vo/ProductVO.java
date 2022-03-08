@@ -1,16 +1,22 @@
 package web.Product.vo;
 import java.sql.Timestamp;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+
+import web.OrderDetail.vo.OrderDetailVO;
 @Entity
 @Table(name = "Product")
 @DynamicInsert
@@ -53,6 +59,14 @@ public class ProductVO implements java.io.Serializable{
 			columnDefinition = "bit"
 			)
 	private Byte productStatus;
+	@OneToMany(mappedBy = "product", fetch=FetchType.EAGER)
+	private Set<OrderDetailVO> detail;
+	public Set<OrderDetailVO> getDetail(){
+		return detail;
+	}
+	public void setDetail(Set<OrderDetailVO> detail){
+		this.detail = detail;
+	}
 	public ProductVO() {
 		super();
 	}

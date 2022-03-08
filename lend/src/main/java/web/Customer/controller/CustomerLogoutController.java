@@ -5,19 +5,21 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @RestController
 public class CustomerLogoutController {
-    @RequestMapping(path = {"/Customer/logout"}, method=RequestMethod.GET)
+	@GetMapping(path = {"/Customer/logout"})
     public void customerLogout(HttpSession session, HttpServletResponse response) throws IOException{
-        if (!session.isNew() && session.getAttribute("customerAccount") != null) {
+        System.out.println("logout");
+    	if (!session.isNew() && session.getAttribute("customerAccount") != null) {
 	    	session.invalidate();
-			response.sendRedirect("/lend/Customer/login-register.html");  
+			response.sendRedirect("../login-register.html");  
     	}else {
-    		response.sendRedirect("/lend/Customer/login-register.html");
+    		response.sendRedirect("./index.html");
     	}
     }
 }

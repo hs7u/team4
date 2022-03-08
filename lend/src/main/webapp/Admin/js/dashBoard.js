@@ -155,7 +155,10 @@ function getOrder() {
         $("tbody.dynamicsD").empty();
         $("div.forOUP").empty();
         for(let i = 0 ; i < res.data.length; i++){
-            let state = res.data[i].orderStatus == 0 ? '未完成' : res.data[i].orderStatus == 1 ? "完成" : "訂單處理中" ;
+            let state1 = res.data[i].orderStatus == 0 ? '未完成' : res.data[i].orderStatus == 1 ? "完成" : "訂單處理中" ;
+            let state2 = res.data[i].paymentStatus == 0 ? '未付款' : res.data[i].paymentStatus == 1 ? "已付款" : "已退款" ;
+            let state3 = res.data[i].shippingStatus == 0 ? '未出貨' : res.data[i].shippingStatus == 1 ? "已出貨" : "已退貨" ;
+            let ship = res.data[i].shippingMethodCode == 2 ? '超商店到店' : res.data[i].shippingMethodCode == 3 ? "宅急便" : res.data[i].shippingMethodCode == 4 ? "面交" : "處理中";
             let light = res.data[i].orderStatus == 0 ? 'red' : res.data[i].orderStatus == 1 ? "green" : "yellow" ;
             let table = `<tr>
                             <td>${res.data[i].orderId}</td>
@@ -163,11 +166,11 @@ function getOrder() {
                             <td>${moment(res.data[i].orderCreatedDate).locale("zh-tw").format("YYYY-MM-DD HH:mm")}</td>
                             <td>
                                 <span class="status ${light}"></span>
-                                ${state}
+                                ${state1}
                             </td>
                             <td><input type="button" class="las OUP" OUPtarget="${res.data[i].orderId}" value="明細"></td>
                         </tr>`;
-            let detail = `<div class="overOUP${res.data[i].orderId}"  style="display : none">
+            let detail = `<div class="overOUP" id="OUP${res.data[i].orderId}" >
                             <article>
                                 <FORM METHOD="post" id="courseForm" enctype="multipart/form-data">
                                     <div id="forflexO1">
@@ -180,11 +183,17 @@ function getOrder() {
                                                 <td><label for="">運送狀態</label></td>
                                             </tr>
                                             <tr class="oans">
-                                                <td class="${res.data[i].orderId}"><label for="">${res.data[i].shippingMethodCode}</label></td>
-                                                <td class="${res.data[i].orderId}"><label for="">${res.data[i].order_delivery_charge}</label></td>
-                                                <td class="${res.data[i].orderId}"><label for="">${res.data[i].order_shipping_date}</label></td>
-                                                <td class="${res.data[i].orderId}"><label for="">${res.data[i].payment_status}</label></td>
-                                                <td class="${res.data[i].orderId}"><label for="">${res.data[i].shipping_status}</label></td>
+                                                <td>${ship}</td>
+                                                <td class="${res.data[i].orderId}"><label for="">${res.data[i].orderDeliveryCharge}</label></td>
+                                                <td>${moment(res.data[i].orderShippingDate).locale("zh-tw").format("YYYY-MM-DD HH:mm")}</td>
+                                                <td>
+                                                    <span class="status ${light}"></span>
+                                                    ${state2}
+                                                </td>
+                                                <td>
+                                                    <span class="status ${light}"></span>
+                                                    ${state3}
+                                                </td>
                                             </tr>
                                             <tr class="twoban">
                                                 <td><label for="">收件人</label></td>
@@ -210,12 +219,8 @@ function getOrder() {
                                                 </tr>
                                             </thead>
                                             <tbody class="orderB${i}">
-                                                <tr class="oans">
-                                                    <td class="${res.data[i].orderId}"><label for="">${res.data[i].productId}</label></td>
-                                                    <td class="${res.data[i].orderId}"><label for="">${res.data[i].productName}</label></td>
-                                                    <td class="${res.data[i].orderId}"><label for="">${res.data[i].productQuantity}</label></td>
-                                                    <td class="${res.data[i].orderId}"><label for="">${res.data[i].productPrice}</label></td>
-                                                    <td class="${res.data[i].orderId}"><label for="">${res.data[i].customerUploadImg}</label></td>
+                                                <tr>
+
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -229,27 +234,23 @@ function getOrder() {
             
             axios({
                 method: "get",
-                url: `../Customer/orderDetail/res.data[i].orderId`,
-                data: odList,
+                url: `../Customer/orderDetail/${res.data[i].orderId}`,
                 headers: { "Content-Type": "application/json" },
             }).then(res2 => {
-                for(let j = 0; j < res2.data.length; j++){
-                    let innerDetail = `<tr>
-                                        <td>${res2[j].productId}</td>
-                                        <td>${res2[j].productName}</td>
-                                        <td>${res2[j].productQuantity}</td>
-                                        <td>${res2[j].productPrice}</td>
-                                        <td><img src="data:image/png;base64,${res2[j].customerUploadImg}" width="60" height="40""/></td>
-                                       </tr>`;
-                    $(innerDetail).appendTo(`orderB${i}`);
-                }
+                 console.log(res2.data);
+	             for(let j = 0; j < res2.data.length; j++){
+	                 let img = res2.data[j].customerUploadImg == null ? `<img src="https://stickershop.line-scdn.net/stickershop/v1/product/9247729/IOS/main_animation@2x.png" width="60" height="40""/>` : `<img src="data:image/png;base64,${res2.data[j].customerUploadImg}" width="60" height="40""/>` ;
+	                 let innerDetail = `<tr class="oans2">
+	                                     <td>${res2.data[j].productId}</td>
+	                                     <td>${res2.data[j].productName}</td>
+	                                     <td>${res2.data[j].productQuantity}</td>
+	                                     <td>${res2.data[j].productPrice}</td>
+	                                     <td>${img}</td>
+	                                    </tr>`;
+	                 $(innerDetail).appendTo(`.orderB${i}`);
+	             }
             })
         }
-        // $(".OUP").on("click", function (e) {
-        //     e.preventDefault();
-        //     $(this).closest("li").toggleClass("-on");
-        //     $(this).closest("li").find("div.overOUP").slideToggle();
-        // });
         $('#orderTable').DataTable({
             "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]
             "pageLength": '5',
@@ -271,7 +272,7 @@ function timeable(res) {
 function cupListener() {
     let sendCoDate = {};
     let sendCTDate = {};
-    $("input.CUP").on("click", function (e) {
+    $('#courseTable').on('click', 'input.CUP' ,function (e) {
         e.preventDefault();
         $("div.overCUP." + $(this).attr("CUPtarget")).fadeIn();
         $("input[name='courseImage']").on("change", function () {
@@ -337,11 +338,11 @@ function cupListener() {
 function oupListener() {
     $("input.OUP").on("click", function (e) {
         e.preventDefault();
-        $("div.overOUP." + $(this).attr("OUPtarget")).fadeIn();
+        $("div#OUP" + $(this).attr("OUPtarget")).fadeIn();
     });
     $("button.closeOUP").on("click", function (e) {
         e.preventDefault();
-        $("div.overOUP." + $(this).attr("OUPtarget")).fadeOut();
+        $("div#OUP" + $(this).attr("OUPtarget")).fadeOut();
     });
 }
 function getCustomers() {

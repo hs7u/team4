@@ -21,8 +21,7 @@ public class actionFilter implements javax.servlet.Filter{
 		// 【取得 session】
 		HttpSession session = req.getSession();
 		// 【從 session 判斷此user是否登入過】
-		Object account = session.getAttribute("customerAccount");
-		if (account == null) {
+		if (session.getAttribute("customerAccount") == null) {
 			res.sendRedirect(req.getContextPath() + "/login-register.html");
 			return;
 		} else {
