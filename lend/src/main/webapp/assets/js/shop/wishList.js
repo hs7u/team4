@@ -29,4 +29,44 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			$("span.wishlist-count").html(cartAll.length);
 		})
     })
+
+    //加入購物車
+	$(document).off("click").on("click",".add-to-cart", function () {
+		$(this).closest("tr").fadeOut(0, function () {
+			let check = $(this).closest("tr").find(".name").children("a").text();
+			let wishAll = localStorage.getItem("wish") ? JSON.parse(localStorage.getItem("wish")) : [];
+            let cartAll = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
+            
+			for (let i = 0; i < wishAll.length; i++) {
+				if (wishAll[i].productName.match(check) != null) {
+                    cartAll.push(wishAll[i]);
+					wishAll.splice(i, 1)
+				}
+			}
+			$(this).closest("tr").remove();
+			localStorage.setItem("wish", JSON.stringify(wishAll));
+            localStorage.setItem("cart", JSON.stringify(cartAll));
+			$("span.wishlist-count").html(wishAll.length);
+            $("span.cart-count").html(cartAll.length);
+		})
+        let miniCart = localStorage.getItem("cart") != null ? JSON.parse(localStorage.getItem("cart")) : [];
+        let s_price = 0, total = 0;
+		$(".minicart-product-list").empty();
+		for (let i = 0; i < miniCart.length; i++) {
+			s_price = miniCart[i].productPrice * miniCart[i].productQuantity;
+			total += s_price
+			let littleCartList =
+				`<li>
+					<a href="product-details.jsp" class="image"><img src=${miniCart[i].productImage} alt="Cart product Image"></a>
+					<div class="content">
+						<a href="product-details.jsp" class="title miniCartName">${miniCart[i].productName}</a>
+						<span class="quantity-price">${miniCart[i].productQuantity} x <span>$ ${miniCart[i].productPrice}</span></span>
+						<a href="#" class="remove miniRemove">×</a>
+					</div>
+				</li>`
+
+				$(".minicart-product-list").append(littleCartList);
+		}
+        $(".amount").html(total);
+    })
 })
