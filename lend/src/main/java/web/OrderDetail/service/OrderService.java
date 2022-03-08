@@ -2,6 +2,8 @@ package web.OrderDetail.service;
 
 import java.util.List;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,7 +58,7 @@ public class OrderService {
     public OrderDetailVO getOneDetail(Integer orderDetailsId){
         return dao.getOneDetail(orderDetailsId);
     }
-    public List<OrderDetailVO> getAllDetail(Integer orderId){
+    public List<ObjectNode> getAllDetail(Integer orderId){
         return dao.getAllDetail(orderId);
     }
 }

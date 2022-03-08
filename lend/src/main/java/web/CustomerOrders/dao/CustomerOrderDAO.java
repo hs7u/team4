@@ -102,7 +102,7 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
                .set(root.get("shippingMethodCode"), coVo.getShippingMethodCode())
                .set(root.get("orderDeliveryCharge"), coVo.getOrderDeliveryCharge())
                .set(root.get("orderShippingDate"), coVo.getOrderShippingDate())
-               .set(root.get("recipient"), coVo.getRecipint())
+               .set(root.get("recipient"), coVo.getRecipient())
                .set(root.get("sendersAddress"), coVo.getSendersAddress())
                .set(root.get("orderDetials"), coVo.getOrderDetails());
         getSession().createQuery(cu).executeUpdate();

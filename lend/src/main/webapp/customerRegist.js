@@ -31,8 +31,10 @@ function init(){
             headers: { "Content-Type": "application/json" },
           }).then(res=>{
               let check = res.data;
-              if(check.match(/success/) != null || check.match(/login/) != null){
-                window.location.href = "./my-account.html"
+              if(check.match(/Success/) != null){
+                window.location.href = "./my-account.html";
+              }else if (check.match(/login/) != null){
+              	window.location.href = "./my-account.html";
               }
           })
     })

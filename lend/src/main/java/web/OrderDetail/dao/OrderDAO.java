@@ -1,6 +1,9 @@
 package web.OrderDetail.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -11,6 +14,9 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import ProjectInterfaces.OrderInteface;
 import web.OrderDetail.vo.OrderDetailVO;
@@ -53,11 +59,22 @@ public class OrderDAO implements OrderInteface<OrderDetailVO>{
         cq = cq.where(cb.equal(root.get("orderDetailsId"), orderDetailsId));
         return this.session.createQuery(cq).getSingleResult();
     }
-    public List<OrderDetailVO> getAllDetail(Integer orderId){
-        CriteriaBuilder cb = this.session.getCriteriaBuilder();
-        CriteriaQuery<OrderDetailVO> cq = cb.createQuery(OrderDetailVO.class);
-        Root<OrderDetailVO> root = cq.from(OrderDetailVO.class);
-        cq = cq.where(cb.equal(root.get("orderId"), orderId));
-        return this.session.createQuery(cq).getResultList();
+    public List<ObjectNode> getAllDetail(Integer orderId){
+        String SQL = "SELECT new Map(p.productName as key1, od as key2) FROM OrderDetailVO od, ProductVO p where od.orderId = :orderId";
+        List<Map> result =  this.session.createQuery(SQL, Map.class).setParameter("orderId", orderId).list();
+        ObjectMapper mapper = new ObjectMapper();
+        List<ObjectNode> output = new ArrayList<>();
+        for(Map map : result) {
+        	OrderDetailVO currentDetail = (OrderDetailVO)map.get("key2");      	
+            // create a JSON object
+            ObjectNode detail = mapper.createObjectNode();
+            detail.put("productName", (String)map.get("key1"));
+            detail.put("productId", currentDetail.getProductId());
+            detail.put("productPrice", currentDetail.getProductPrice());
+            detail.put("productQuantity", currentDetail.getProductQuantity());
+            detail.put("customerUploadImg", currentDetail.getCustomerUploadImg());
+            output.add(detail);
+        }
+        return output;
     }
 }

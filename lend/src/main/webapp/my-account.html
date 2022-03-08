@@ -31,6 +31,9 @@
     <link rel="stylesheet" href="assets/css/plugins/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/plugins/slick.css">
 
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/e865aa13ab.js" crossorigin="anonymous"></script>
+
     <!-- Main Style CSS -->
     <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
 
@@ -38,6 +41,7 @@
     <!-- <link rel="stylesheet" href="assets/css/vendor/vendor.min.css">
     <link rel="stylesheet" href="assets/css/plugins/plugins.min.css"> -->
     <link rel="stylesheet" href="assets/css/style.min.css">
+    <i class="fa-solid fa-caret-right"></i>
 
 </head>
 
@@ -492,7 +496,7 @@
                     	<a href="#account-info" class="active" data-bs-toggle="tab">基本資料<i class="far fa-user"></i></a>
                         <a href="#orders" data-bs-toggle="tab">購買訂單 <i class="far fa-file-alt"></i></a>
                         <a href="#address" data-bs-toggle="tab">您的地址 <i class="far fa-map-marker-alt"></i></a>
-                        <a href="login-register.html">登出 <i class="far fa-sign-out-alt"></i></a>
+                        <a href="./Customer/logout">登出 <i class="far fa-sign-out-alt"></i></a>
                     </div>
                 </div>
                 <!-- My Account Tab List End -->
@@ -555,21 +559,84 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Order</th>
-                                                <th>Date</th>
-                                                <th>Status</th>
-                                                <th>Total</th>
-                                                <th>Action</th>
+                                                <th></th>
+                                                <th>訂單</th>
+                                                <th>日期</th>
+                                                <th>狀態</th>
+                                                <th>金額</th>
+                                                <th>內容</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
+                                        <tbody class="co">
+                                                <table>
+                                                    <tr>
+                                                        <td><a href="#tr1" class="tog"><i class="fa-solid fa-caret-right"></i></a></td>
+                                                        <td>1</td>
+                                                        <td>Aug 22, 2018</td>
+                                                        <td>Pending</td>
+                                                        <td>$3000</td>
+                                                        <!-- <td><a href="#tr1">+</a></td> -->
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="9" class="content">
+                                                          <div id="tr1" style="display:none;">
+                                                            <!--控制細項顯示與隱藏 -->
+                                                            <table>
+                                                                <tr class="change_style">
+                                                                    <tr class="cot">
+                                                                        <td><label for="">運送方式</label></td>
+                                                                        <td><label for="">出貨日</label></td>
+                                                                        <td><label for="">運費</label></td>
+                                                                        <td><label for="">付款狀態</label></td>
+                                                                        <td><label for="">運送狀態</label></td>
+                                                                    </tr>
+                                                                    <tr class="cot">
+                                                                        <td><label for="">收件人</label></td>
+                                                                        <td class="adre"><label for="">收件地址</label></td>
+                                                                        <td><label for="">備註</label></td>
+                                                                    </tr>
+                                                                    <tr class="cot">
+                                                                        <td><label for="">商品編號</label></td>
+                                                                        <td><label for="">商品名稱</label></td>
+                                                                        <td><label for="">數量</label></td>
+                                                                        <td><label for="">金額</label></td>
+                                                                        <td><label for="">客製化圖片</label></td>
+                                                                    </tr>
+                                                                </tr>
+                                                            </table>
+                                                          </div>
+                                                        </td>
+                                                      </tr>
+
+                                                </table>
+                                            <!-- <tr>
                                                 <td>1</td>
                                                 <td>Aug 22, 2018</td>
                                                 <td>Pending</td>
                                                 <td>$3000</td>
-                                                <td><a href="shopping-cart.jsp">View</a></td>
-                                            </tr>
+                                                <td><button type="button" class="co_btn">按鈕</button></td>
+                                                <tr class="change_style">
+                                                    <tr class="cot">
+                                                        <td><label for="">運送方式</label></td>
+                                                        <td><label for="">出貨日</label></td>
+                                                        <td><label for="">運費</label></td>
+                                                        <td><label for="">付款狀態</label></td>
+                                                        <td><label for="">運送狀態</label></td>
+                                                    </tr>
+                                                    <tr class="cot">
+                                                        <td><label for="">收件人</label></td>
+                                                        <td class="adre"><label for="">收件地址</label></td>
+                                                        <td><label for="">備註</label></td>
+                                                    </tr>
+                                                    <tr class="cot">
+                                                        <td><label for="">商品編號</label></td>
+                                                        <td><label for="">商品名稱</label></td>
+                                                        <td><label for="">數量</label></td>
+                                                        <td><label for="">金額</label></td>
+                                                        <td><label for="">客製化圖片</label></td>
+                                                    </tr>
+                                                </tr>
+                                            </tr> -->
                                             <tr>
                                                 <td>2</td>
                                                 <td>July 22, 2018</td>
@@ -697,6 +764,7 @@
     <script src="assets/js/plugins/jquery.scrollUp.min.js"></script>
     <script src="assets/js/plugins/scrollax.min.js"></script>
     <script src="assets/js/plugins/instafeed.min.js"></script>
+    <script src="assets/js/plugins/co.js"></script>
 
     <!-- Use the minified version files listed below for better performance and remove the files listed above -->
     <!-- <script src="assets/js/vendor/vendor.min.js"></script>

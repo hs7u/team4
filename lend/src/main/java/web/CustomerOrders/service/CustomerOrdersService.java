@@ -38,7 +38,7 @@ public class CustomerOrdersService {
             errorMsg.append("運費不得為0"+System.lineSeparator());
         if(coVo.getOrderShippingDate() == null)
             errorMsg.append("日期不得為空"+System.lineSeparator());
-        if(coVo.getRecipint().isEmpty())
+        if(coVo.getRecipient().isEmpty())
             errorMsg.append("取貨人不得為空"+System.lineSeparator());
         if(coVo.getSendersAddress().isEmpty())
             errorMsg.append("地址不得為空"+System.lineSeparator());

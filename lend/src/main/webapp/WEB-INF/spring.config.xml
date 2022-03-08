@@ -50,6 +50,7 @@
 				<value>web.Course.vo.CourseVO</value>
 				<value>web.CustomerOrders.vo.CustomerOrdersVO</value>
 				<value>web.CourseTimeable.vo.CourseTimeableVO</value>
+				<value>web.OrderDetail.vo.OrderDetailVO</value>
 			</array>
 		</property>
 		<property name="hibernateProperties">
