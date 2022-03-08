@@ -3,6 +3,7 @@ package web.Customer.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class CustomerLoginController {
     @Autowired
     private CustomerService cs;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @RequestMapping(path = {"/Customer/login"}, method=RequestMethod.POST)
     public String login(@RequestBody(required = false) CustomerVO vo, HttpSession session) {
         if(session.getAttribute("customerAccount") == null){
@@ -29,8 +32,8 @@ public class CustomerLoginController {
             if(errorMsg.length() > 0){
                 return errorMsg.toString();
             }      
-            CustomerVO check = cs.getOneCustomer(vo.getCustomerEmail(), vo.getCustomerPassword());
-            if(check != null && check.getCustomerStatus() != (byte) 0){
+            CustomerVO check = cs.getOneCustomer(vo.getCustomerEmail(), passwordEncoder.encode(vo.getCustomerPassword()));
+            if(check != null && check.getCustomerStatus() != 0){
                 session.setAttribute("customerAccount", check.getCustomerEmail());
                 session.setAttribute("customerInfo", check);
                 return "Login Success";
