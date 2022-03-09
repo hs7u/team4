@@ -1,5 +1,6 @@
 package web.OrderDetail.vo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -39,10 +40,10 @@ public class OrderDetailVO {
 		nullable = true
 		)
 	private byte[] customerUploadImg;
-	@ManyToOne(optional=false, fetch = FetchType.LAZY)
+	@ManyToOne(optional=false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "product_id", referencedColumnName = "product_id")
 	private ProductVO product;
-	@ManyToOne(optional=false, fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "order_id", referencedColumnName = "order_id")
 	private CustomerOrdersVO order;
 	public CustomerOrdersVO getOrder(){
@@ -63,18 +64,6 @@ public class OrderDetailVO {
 	public void setOrderDetailsId(Integer orderDetailsId) {
 		this.orderDetailsId = orderDetailsId;
 	}
-	public Integer getOrderId() {
-		return orderId;
-	}
-	public void setOrderId(Integer orderId) {
-		this.orderId = orderId;
-	}
-	public Integer getProductId() {
-		return productId;
-	}
-	public void setProductId(Integer productId) {
-		this.productId = productId;
-	}
 	public Integer getProductPrice() {
 		return productPrice;
 	}
@@ -92,5 +81,17 @@ public class OrderDetailVO {
 	}
 	public void setCustomerUploadImg(byte[] customerUploadImg) {
 		this.customerUploadImg = customerUploadImg;
+	}
+	public Integer getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
+	}
+	public Integer getProductId() {
+		return productId;
+	}
+	public void setProductId(Integer productId) {
+		this.productId = productId;
 	}
 }

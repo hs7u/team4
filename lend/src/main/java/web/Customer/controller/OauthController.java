@@ -68,7 +68,7 @@ public class OauthController {
                 CustomerVO oauthUser = getEmail(jo);
                 session.setAttribute("customerAccount", oauthUser.getCustomerEmail());
                 session.setAttribute("customerInfo", oauthUser);
-                req.getRequestDispatcher(req.getContextPath()).forward(req, resp);
+                resp.sendRedirect(req.getContextPath()+"/my-account.html");
                 // 印出Google回傳的access token
                 // resp.getWriter().println(jo.getString("access_token")); 
             } catch (JSONException e) {
@@ -99,6 +99,7 @@ public class OauthController {
             JSONObject joInfo = new JSONObject(sbLines.toString());
                 
             // 印出Google回傳的"emailtoken
+            System.out.println(joInfo.getString("name"));
             CustomerVO googleUser = new CustomerVO();
             googleUser.setCustomerEmail(joInfo.getString("email"));
             googleUser.setCustomerName(joInfo.getString("name"));
@@ -108,10 +109,11 @@ public class OauthController {
                 googleUser.setCustomerGender("G");
                 googleUser.setCustomerBirthday(new java.sql.Date(System.currentTimeMillis()));
                 googleUser.setCustomerAddress("GOOGlE");
+                googleUser.setCustomerPhone("no phone");
                 cs.oauth2User(googleUser);
                 return googleUser;
             }
-            return check;
+            	return check;
             } catch (JSONException e) {
                 e.printStackTrace();
             }

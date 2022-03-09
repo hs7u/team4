@@ -2,6 +2,7 @@ package web.Product.vo;
 import java.sql.Timestamp;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -58,7 +59,8 @@ public class ProductVO implements java.io.Serializable{
 			columnDefinition = "bit"
 			)
 	private Byte productStatus;
-	@OneToMany(mappedBy = "product", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "product", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @Column(nullable = false)
 	private Set<OrderDetailVO> detail;
 	public Set<OrderDetailVO> getDetail(){
 		return detail;

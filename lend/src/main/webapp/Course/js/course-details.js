@@ -29,7 +29,7 @@ window.addEventListener("load", function () {
             let u8 = new Uint8Array(res.courseImage)
             let b64encoded = btoa(Uint8ToString(u8));
             
-            $(".portfolio-image").find("img").attr("src",`data:image/png;base64,${b64encoded}`);
+            $("#courseImage").attr("src",`data:image/png;base64,${b64encoded}`);
 
             $(".portfolio-content").find("h2").html(res.courseName);
             $(".portfolio-content").find(".desc p").html(res.courseDescribe);

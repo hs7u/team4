@@ -25,7 +25,7 @@ public class OrderDAO implements OrderInteface<OrderDetailVO>{
     @PersistenceContext
     private Session session;
     public void insert(OrderDetailVO vo){
-        this.session.save(vo);
+        this.session.persist(vo);
     }
     public void update(OrderDetailVO vo){
         CriteriaBuilder cb = this.session.getCriteriaBuilder();

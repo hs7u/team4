@@ -2,6 +2,7 @@ package web.CustomerOrders.vo;
 import java.sql.Timestamp;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -66,16 +67,13 @@ public class CustomerOrdersVO implements java.io.Serializable{
 		columnDefinition = "bit"
 		)
 	private Byte returnStatus;
-	@OneToMany(mappedBy = "order", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private Set<OrderDetailVO> detail;
 	public Set<OrderDetailVO> getDetail(){
 		return detail;
 	}
 	public void setDetail(Set<OrderDetailVO> detail){
 		this.detail = detail;
-	}
-	public void setOneDetail(OrderDetailVO oneDetail){
-		this.detail.add(oneDetail);
 	}
 	public CustomerOrdersVO() {
 		super();

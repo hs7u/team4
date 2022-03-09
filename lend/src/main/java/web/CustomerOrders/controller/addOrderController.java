@@ -22,11 +22,17 @@ import web.CustomerOrders.service.CustomerOrdersService;
 import web.CustomerOrders.vo.CustomerOrdersVO;
 import web.OrderDetail.service.OrderService;
 import web.OrderDetail.vo.OrderDetailVO;
+import web.Product.service.ProductService;
+import web.Product.vo.ProductVO;
 
 @RestController
 public class addOrderController {
     @Autowired
     private CustomerOrdersService cos;
+    @Autowired
+    private OrderService os;
+    @Autowired
+    private ProductService ps;
     private String pattern = "yyyy/MM/dd HH:mm:ss";//2022/03/07 09:35:50
     @RequestMapping(path = {"/Customer/Order/checkout"})
     public String insert(@RequestBody(required = false) List<Map<String, String>> orderDetail, HttpSession session){
@@ -45,9 +51,11 @@ public class addOrderController {
         Set<OrderDetailVO> details = new HashSet<OrderDetailVO>();
         for(Map<String, String> detail : orderDetail){
             OrderDetailVO singVo = new OrderDetailVO();
-            singVo.setProductId(Integer.parseInt(detail.get("productId")));
+            ProductVO pVo = ps.getOneProduct(Integer.parseInt(detail.get("productId")));
+            singVo.setProduct(pVo);
             singVo.setProductPrice(Integer.parseInt(detail.get("productPrice")));
             singVo.setProductQuantity(Integer.parseInt(detail.get("productQuantity")));
+            singVo.setOrder(order);
             details.add(singVo);
         }
         order.setDetail(details);

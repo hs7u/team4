@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class CustomerLogoutController {
 	@GetMapping(path = {"/Customer/logout"})
     public void customerLogout(HttpSession session, HttpServletResponse response) throws IOException{
-        System.out.println("logout");
     	if (!session.isNew() && session.getAttribute("customerAccount") != null) {
+    		System.out.println("logout");
+    		response.setHeader("Pragma","No-cache");   
+    		response.setHeader("Cache-Control","no-cache");   
+    		response.setDateHeader("Expires", 0);
+    		session.removeAttribute("customerAccount");
 	    	session.invalidate();
 			response.sendRedirect("../login-register.html");  
     	}else {
-    		response.sendRedirect("./index.html");
+    		response.sendRedirect("../index.html");
     	}
     }
 }
