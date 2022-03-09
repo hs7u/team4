@@ -66,13 +66,16 @@ public class CustomerOrdersVO implements java.io.Serializable{
 		columnDefinition = "bit"
 		)
 	private Byte returnStatus;
-	@OneToMany(mappedBy = "CustomerOrdersVO", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "order", fetch=FetchType.EAGER)
 	private Set<OrderDetailVO> detail;
 	public Set<OrderDetailVO> getDetail(){
 		return detail;
 	}
 	public void setDetail(Set<OrderDetailVO> detail){
 		this.detail = detail;
+	}
+	public void setOneDetail(OrderDetailVO oneDetail){
+		this.detail.add(oneDetail);
 	}
 	public CustomerOrdersVO() {
 		super();

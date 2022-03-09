@@ -184,7 +184,7 @@ function getOrder() {
                                             </tr>
                                             <tr class="oans">
                                                 <td>${ship}</td>
-                                                <td class="${res.data[i].orderId}"><label for="">${res.data[i].orderDeliveryCharge}</label></td>
+                                                <td class="${res.data[i].orderId}"><label for="">$ ${res.data[i].orderDeliveryCharge}</label></td>
                                                 <td>${moment(res.data[i].orderShippingDate).locale("zh-tw").format("YYYY-MM-DD HH:mm")}</td>
                                                 <td>
                                                     <span class="status ${light}"></span>
@@ -218,7 +218,7 @@ function getOrder() {
                                                     <td><label for="">客製化圖片</label></td>
                                                 </tr>
                                             </thead>
-                                            <tbody class="orderB${i}">
+                                            <tbody class="orderB${i} ds">
                                                 <tr>
 
                                                 </tr>
@@ -244,7 +244,7 @@ function getOrder() {
 	                                     <td>${res2.data[j].productId}</td>
 	                                     <td>${res2.data[j].productName}</td>
 	                                     <td>${res2.data[j].productQuantity}</td>
-	                                     <td>${res2.data[j].productPrice}</td>
+	                                     <td>$ ${res2.data[j].productPrice}</td>
 	                                     <td>${img}</td>
 	                                    </tr>`;
 	                 $(innerDetail).appendTo(`.orderB${i}`);
@@ -336,7 +336,7 @@ function cupListener() {
     });
 }
 function oupListener() {
-    $("input.OUP").on("click", function (e) {
+    $("#orderTable").on("click", 'input.OUP' ,function (e) {
         e.preventDefault();
         $("div#OUP" + $(this).attr("OUPtarget")).fadeIn();
     });
