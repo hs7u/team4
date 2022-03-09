@@ -67,6 +67,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 				$(".minicart-product-list").append(littleCartList);
 		}
-        $(".amount").html(total);
+        $(".miniCartTotal").html(total);
     })
 })
