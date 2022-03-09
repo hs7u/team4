@@ -1,16 +1,21 @@
 package web.CustomerOrders.vo;
 import java.sql.Timestamp;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+
+import web.OrderDetail.vo.OrderDetailVO;
 
 @Entity
 @Table(name = "Customer_Orders")
@@ -61,6 +66,14 @@ public class CustomerOrdersVO implements java.io.Serializable{
 		columnDefinition = "bit"
 		)
 	private Byte returnStatus;
+	@OneToMany(mappedBy = "CustomerOrdersVO", fetch=FetchType.EAGER)
+	private Set<OrderDetailVO> detail;
+	public Set<OrderDetailVO> getDetail(){
+		return detail;
+	}
+	public void setDetail(Set<OrderDetailVO> detail){
+		this.detail = detail;
+	}
 	public CustomerOrdersVO() {
 		super();
 	}

@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import web.CustomerOrders.vo.CustomerOrdersVO;
 import web.Product.vo.ProductVO;
 
 @Entity
@@ -24,7 +25,7 @@ public class OrderDetailVO {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	@Column(name = "orderDetails_id")
 	private Integer orderDetailsId;
-	@Column(name = "order_id")
+	@Column(name = "order_id", insertable = false, updatable = false)
 	private Integer orderId;
 	@Column(name = "product_id", insertable = false, updatable = false)
 	private Integer productId;
@@ -41,6 +42,15 @@ public class OrderDetailVO {
 	@ManyToOne(optional=false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id", referencedColumnName = "product_id")
 	private ProductVO product;
+	@ManyToOne(optional=false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "order_id", referencedColumnName = "order_id")
+	private CustomerOrdersVO order;
+	public CustomerOrdersVO getOrder(){
+		return order;
+	}
+	public void setOrder(CustomerOrdersVO order){
+		this.order = order;
+	}
 	public ProductVO getProduct(){
 		return product;
 	}

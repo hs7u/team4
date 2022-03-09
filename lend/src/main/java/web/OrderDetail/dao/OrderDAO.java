@@ -1,7 +1,6 @@
 package web.OrderDetail.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,13 +58,14 @@ public class OrderDAO implements OrderInteface<OrderDetailVO>{
         cq = cq.where(cb.equal(root.get("orderDetailsId"), orderDetailsId));
         return this.session.createQuery(cq).getSingleResult();
     }
+    @SuppressWarnings("unchecked")
     public List<ObjectNode> getAllDetail(Integer orderId){
         String SQL = "SELECT new Map(p.productName as key1, od as key2) FROM OrderDetailVO od, ProductVO p where od.orderId = :orderId";
-        List<Map> result =  this.session.createQuery(SQL, Map.class).setParameter("orderId", orderId).list();
+        List<Map<String, Object>> result =  this.session.createQuery(SQL).setParameter("orderId", orderId).list();
         ObjectMapper mapper = new ObjectMapper();
         List<ObjectNode> output = new ArrayList<>();
-        for(Map map : result) {
-        	OrderDetailVO currentDetail = (OrderDetailVO)map.get("key2");      	
+        for(Map<String, Object> map : result) {
+        	OrderDetailVO currentDetail = (OrderDetailVO)map.get("key2");
             // create a JSON object
             ObjectNode detail = mapper.createObjectNode();
             detail.put("productName", (String)map.get("key1"));
