@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
 
     //移除
-	$(document).off("click").on("click",".wishRemove", function () {
+	$(".wishRemove").on("click", function () {
 		$(this).closest("tr").fadeOut(0, function () {
 			let check = $(this).closest("tr").find(".name").children("a").text();
 			let cartAll = localStorage.getItem("wish") ? JSON.parse(localStorage.getItem("wish")) : [];
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     })
 
     //加入購物車
-	$(document).off("click").on("click",".add-to-cart", function () {
+	$(document).on("click",".add-to-cart", function () {
 		$(this).closest("tr").fadeOut(0, function () {
 			let check = $(this).closest("tr").find(".name").children("a").text();
 			let wishAll = localStorage.getItem("wish") ? JSON.parse(localStorage.getItem("wish")) : [];

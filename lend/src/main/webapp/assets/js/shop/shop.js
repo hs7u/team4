@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	}
 
 	//移除minicart
-	$(document).on("click", ".miniRemove", function () {
+	$(".miniRemove").on("click", function () {
 		$(this).closest("li").fadeOut(0, function () {
 			let s_price = 0, total = 0;
 			let check = $(this).closest("li").find("a.title").text();
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			$("span.cart-count").html(miniCart.length);
 
 			for (let i = 0; i < miniCart.length; i++) {
-				s_price = miniCart[i].productPrice;
+				s_price = miniCart[i].productPrice * miniCart[i].productQuantity ;
 				total += parseInt(s_price, 10)
 			}
 			$(".miniCartTotal").html(total);

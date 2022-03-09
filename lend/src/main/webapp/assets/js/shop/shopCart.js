@@ -2,6 +2,7 @@
 document.addEventListener("DOMContentLoaded", function (event) {
 
 	let miniCart = localStorage.getItem("cart") != null ? JSON.parse(localStorage.getItem("cart")) : [];
+	let wishAll = localStorage.getItem("wish") ? JSON.parse(localStorage.getItem("wish")) : [];
 	let cartList, s_price = 0, total = 0;
 	console.log(miniCart);
 	if (miniCart != null) {
@@ -9,10 +10,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		$("span.cart-count").html(miniCart.length);
 
 		showProduct();
-
-
 	}
-
+	if (miniCart != null) {
+	$("span.wishlist-count").html(wishAll.length);
+	}
 	//移除
 	$(document).off("click").on("click",".btn_delete", function () {
 		$(this).closest("tr").fadeOut(0, function () {
