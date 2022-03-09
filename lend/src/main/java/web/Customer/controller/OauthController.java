@@ -102,7 +102,7 @@ public class OauthController {
             CustomerVO googleUser = new CustomerVO();
             googleUser.setCustomerEmail(joInfo.getString("email"));
             googleUser.setCustomerName(joInfo.getString("name"));
-            CustomerVO check = cs.getOneCustomer(googleUser.getCustomerEmail(), googleUser.getCustomerPassword());
+            CustomerVO check = cs.getOneCustomer(googleUser.getCustomerEmail());
             if(check == null){
                 googleUser.setCustomerPassword(passwordEncoder.encode(getCode()));
                 googleUser.setCustomerGender("G");

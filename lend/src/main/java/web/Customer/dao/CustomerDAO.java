@@ -61,7 +61,7 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
        Root<CustomerVO> root = cq.from(CustomerVO.class);
        cq = cq.select(cb.count(root)).where(cb.equal(root.get("customerEmail"), customerVo.getCustomerEmail()));
        Long result = getSession().createQuery(cq).getSingleResult();
-       if(result == null){
+       if(result == 0){
             return getSession().save(customerVo);
        }
        return null;
@@ -239,16 +239,13 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
 					+ se.getMessage());
         } */
     }
-    public CustomerVO selectByUserEmailAndPassword(String customerEmail, String customerPassword){
+    public CustomerVO selectByUserEmail(String customerEmail){
         // JPA CriterQuery
         CriteriaBuilder cb =  getSession().getCriteriaBuilder();
         CriteriaQuery<CustomerVO> cq = cb.createQuery(CustomerVO.class);
         Root<CustomerVO> root = cq.from(CustomerVO.class);
         
-        cq = cq.where(cb.and(cb.equal(root.get("customerEmail"), customerEmail), 
-                             cb.equal(root.get("customerPassword"), customerPassword)
-                            )
-                     );
+        cq = cq.where(cb.equal(root.get("customerEmail"), customerEmail));
 		try {
 			return  getSession().createQuery(cq).getSingleResult();
 		} catch (Exception e) {

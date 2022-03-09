@@ -100,9 +100,9 @@ public class CustomerService {
     public void changeStatus(Integer customeId ,Byte statusCode){
         dao.changeStatus(customeId, statusCode);
     }
-    public CustomerVO getOneCustomer(String customerEmail,String customerPassword){
+    public CustomerVO getOneCustomer(String customerEmail){
     	try {
-			CustomerVO cVo = dao.selectByUserEmailAndPassword(customerEmail, customerPassword);
+			CustomerVO cVo = dao.selectByUserEmail(customerEmail);
 			return cVo;
 		} catch (HibernateException e) {
 			e.printStackTrace();

@@ -8,7 +8,7 @@ public interface CustomerInterface<CustomerVO> {
     public void update(CustomerVO customerVo);
     public void delete(Integer customerId);
     public void changeStatus(Integer customerId ,Byte statusCode);
-    public CustomerVO selectByUserEmailAndPassword(String customerEmail, String customerPassword); 
+    public CustomerVO selectByUserEmail(String customerEmail); 
     public List<CustomerVO> getAll();
     public Long countCustomer();
 }

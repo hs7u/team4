@@ -31,10 +31,11 @@ public class CustomerLoginController {
             }
             if(errorMsg.length() > 0){
                 return errorMsg.toString();
-            }      
-            CustomerVO check = cs.getOneCustomer(vo.getCustomerEmail(), passwordEncoder.encode(vo.getCustomerPassword()));
-            if(check != null && check.getCustomerStatus() != 0){
-                session.setAttribute("customerAccount", check.getCustomerEmail());
+            }
+            CustomerVO check = cs.getOneCustomer(vo.getCustomerEmail());
+            if(check != null && passwordEncoder.matches(vo.getCustomerPassword(), check.getCustomerPassword())){
+                System.out.println("ok");
+            	session.setAttribute("customerAccount", check.getCustomerEmail());
                 session.setAttribute("customerInfo", check);
                 return "Login Success";
             }else{
