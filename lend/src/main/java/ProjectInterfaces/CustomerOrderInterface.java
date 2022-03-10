@@ -13,5 +13,4 @@ public interface CustomerOrderInterface<CustomerOrdersVO> {
     public List<CustomerOrdersVO> getAll();
     public List<CustomerOrdersVO> getCustomerAllOrder(Integer customerId);
     public Long countOrder(); 
-    public List<CustomerOrdersVO> getAllDetail(Integer customerId);
 }

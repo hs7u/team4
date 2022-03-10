@@ -6,9 +6,11 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -52,9 +54,11 @@ public class CourseVO implements java.io.Serializable{
 			columnDefinition = "bit"
 			)
 	private Byte courseStatus;
-	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+	@OneToMany(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name = "course_id", referencedColumnName = "course_id")
 	private Set<CourseTimeableVO> timeable;
-	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+	@OneToMany(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name = "course_id", referencedColumnName = "course_id")
 	private Set<CourseRegistraionVO> regist;
 	public Set<CourseTimeableVO> getTimeable(){
 		return timeable;

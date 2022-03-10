@@ -1,5 +1,6 @@
 package web.CourseRegistraion.vo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,14 +22,14 @@ public class CourseRegistraionVO implements java.io.Serializable{
     private Integer customerId;
 	@Column(name = "course_id", insertable = false, updatable = false)
     private Integer courseId;
-	@Column(name = "course_timeble_id", insertable = false, updatable = false)
+	@Column(name = "course_timeable_id", insertable = false, updatable = false)
     private Integer courseTimeableId;
 	@Column(name = "numOfPeople")
     private Integer numOfPeople;
-	@ManyToOne(optional=false, fetch = FetchType.LAZY)
-	@JoinColumn(name = "course_id", referencedColumnName = "course_id")
-	private CourseVO course;
-	@ManyToOne
+//	@ManyToOne(fetch=FetchType.EAGER, optional=true, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "course_id", referencedColumnName = "course_id")
+//	private CourseVO course;
+	@ManyToOne(fetch=FetchType.EAGER, optional=true, cascade = CascadeType.ALL)
 	@JoinColumn(name = "course_timeable_id", referencedColumnName = "course_timeable_id")
 	private CourseTimeableVO timeable;
 	public CourseTimeableVO getTimeable(){
@@ -37,12 +38,12 @@ public class CourseRegistraionVO implements java.io.Serializable{
 	public void setTimeable(CourseTimeableVO timeable){
 		this.timeable = timeable;
 	}
-	public CourseVO getCourse(){
-		return course;
-	}
-	public void setCourse(CourseVO course){
-		this.course = course;
-	}
+//	public CourseVO getCourse(){
+//		return course;
+//	}
+//	public void setCourse(CourseVO course){
+//		this.course = course;
+//	}
 	public CourseRegistraionVO() {
 		super();
 	}
