@@ -69,7 +69,7 @@ public class CustomerOrdersVO implements java.io.Serializable{
 		columnDefinition = "bit"
 		)
 	private Byte returnStatus;
-	@OneToMany(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@OneToMany(fetch=FetchType.EAGER , cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "order_id")
 	private Set<OrderDetailVO> detail;
 	public Set<OrderDetailVO> getDetail(){

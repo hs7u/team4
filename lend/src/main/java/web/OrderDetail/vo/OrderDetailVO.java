@@ -26,7 +26,7 @@ public class OrderDetailVO {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	@Column(name = "orderDetails_id")
 	private Integer orderDetailsId;
-	@Column(name = "order_id", insertable = false, updatable = false)
+	@Column(name = "order_id")
 	private Integer orderId;
 	@Column(name = "product_id", insertable = false, updatable = false)
 	private Integer productId;
@@ -43,15 +43,15 @@ public class OrderDetailVO {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "product_id", referencedColumnName = "product_id")
 	private ProductVO product;
-	@ManyToOne
-	@JoinColumn(name = "order_id")
-	private CustomerOrdersVO order;
-	public CustomerOrdersVO getOrders(){
-		return order;
-	}
-	public void setOrders(CustomerOrdersVO order){
-		this.order = order;
-	}
+//	@ManyToOne
+//	@JoinColumn(name = "order_id")
+//	private CustomerOrdersVO order;
+//	public CustomerOrdersVO getOrders(){
+//		return order;
+//	}
+//	public void setOrders(CustomerOrdersVO order){
+//		this.order = order;
+//	}
 	public ProductVO getProduct(){
 		return product;
 	}

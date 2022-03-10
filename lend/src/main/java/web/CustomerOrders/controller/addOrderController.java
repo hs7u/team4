@@ -48,18 +48,16 @@ public class addOrderController {
         Integer amount = orderDetail.stream().mapToInt(e -> Integer.valueOf(e.get("productPrice"))).sum();
         String itemName = orderDetail.stream().map(e -> e.get("productName")).collect(Collectors.joining("#"));
         System.out.println(amount);
-        Set<OrderDetailVO> details = new HashSet<OrderDetailVO>();
+        String result = cos.addOrder(order);
         for(Map<String, String> detail : orderDetail){
             OrderDetailVO singVo = new OrderDetailVO();
             ProductVO pVo = ps.getOneProduct(Integer.parseInt(detail.get("productId")));
             singVo.setProduct(pVo);
             singVo.setProductPrice(Integer.parseInt(detail.get("productPrice")));
             singVo.setProductQuantity(Integer.parseInt(detail.get("productQuantity")));
-            details.add(singVo);
-            singVo.setOrders(order);
+            singVo.setOrderId(Integer.valueOf(result));
+            os.insert(singVo);
         }
-        order.setDetail(details);
-        String result = cos.addOrder(order);
         if(result.matches("-?\\d+")){
 	        CustomerOrdersVO currentOrder = cos.getOneOrder(Integer.valueOf(result));
 	        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
