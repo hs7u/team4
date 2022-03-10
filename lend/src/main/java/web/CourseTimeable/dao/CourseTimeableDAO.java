@@ -146,13 +146,13 @@ public class CourseTimeableDAO implements CourseTimeableInterface<CourseTimeable
             }
         } */
     }    
-    public ArrayList<Timestamp> selectByCourseId(Integer courseId){
+    public ArrayList<CourseTimeableVO> selectByCourseId(Integer courseId){
         // JPA CriteriaQuery
         CriteriaBuilder cb = getSession().getCriteriaBuilder();
-        CriteriaQuery<Timestamp> cq = cb.createQuery(Timestamp.class);
-        Root<Timestamp> root = cq.from(Timestamp.class);
-        cq = cq.where(cb.equal(root.get("courseId"), courseId)).select(root.get("course_id"));
-        return new ArrayList<Timestamp>(getSession().createQuery(cq).getResultList());
+        CriteriaQuery<CourseTimeableVO> cq = cb.createQuery(CourseTimeableVO.class);
+        Root<CourseTimeableVO> root = cq.from(CourseTimeableVO.class);
+        cq = cq.where(cb.equal(root.get("courseId"), courseId)).select(root);
+        return new ArrayList<CourseTimeableVO>(getSession().createQuery(cq).getResultList());
         // Hibernate HQL
         /* if(courseId != null){
             List<Timestamp> result = getSession().createQuery("select course_date from Course_Timeable where course_id = :id", Timestamp.class)
@@ -174,5 +174,13 @@ public class CourseTimeableDAO implements CourseTimeableInterface<CourseTimeable
 					+ se.getMessage());
         }
         return list; */
+    }
+    public CourseTimeableVO selectByTimeableId(Integer courseTimeableId){
+        // JPA CriteriaQuery
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
+        CriteriaQuery<CourseTimeableVO> cq = cb.createQuery(CourseTimeableVO.class);
+        Root<CourseTimeableVO> root = cq.from(CourseTimeableVO.class);
+        cq = cq.where(cb.equal(root.get("courseTimeableId"), courseTimeableId)).select(root);
+        return getSession().createQuery(cq).getSingleResult();
     }
 }

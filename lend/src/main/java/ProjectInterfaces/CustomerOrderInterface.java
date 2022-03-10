@@ -3,8 +3,6 @@ package ProjectInterfaces;
 import java.io.Serializable;
 import java.util.List;
 
-import web.OrderDetail.vo.OrderDetailVO;
-
 public interface CustomerOrderInterface<CustomerOrdersVO> {
     public Serializable insert(CustomerOrdersVO coVo);
     public void update(CustomerOrdersVO coVo);
@@ -13,6 +11,7 @@ public interface CustomerOrderInterface<CustomerOrdersVO> {
     public void updateStatus(String statusName, Integer orderId,Byte statusCode);
     public CustomerOrdersVO selectByOrderId(Integer orderId);
     public List<CustomerOrdersVO> getAll();
+    public List<CustomerOrdersVO> getCustomerAllOrder(Integer customerId);
     public Long countOrder(); 
-    public List<OrderDetailVO> getAllDetail(Integer orderId);
+    public List<CustomerOrdersVO> getAllDetail(Integer customerId);
 }

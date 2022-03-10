@@ -1,17 +1,23 @@
 package web.Course.vo;
 
 import java.sql.Timestamp;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+
+import web.CourseRegistraion.vo.CourseRegistraionVO;
+import web.CourseTimeable.vo.CourseTimeableVO;
 @Entity
 @Table(name = "Course")
 @DynamicInsert
@@ -46,6 +52,22 @@ public class CourseVO implements java.io.Serializable{
 			columnDefinition = "bit"
 			)
 	private Byte courseStatus;
+	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+	private Set<CourseTimeableVO> timeable;
+	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+	private Set<CourseRegistraionVO> regist;
+	public Set<CourseTimeableVO> getTimeable(){
+		return timeable;
+	}
+	public void setTimeable(Set<CourseTimeableVO> timeable){
+		this.timeable = timeable;
+	}
+	public Set<CourseRegistraionVO> getRegist(){
+		return regist;
+	}
+	public void setRegist(Set<CourseRegistraionVO> regist){
+		this.regist = regist;
+	}
 	public CourseVO() {
 		super();
 	}
