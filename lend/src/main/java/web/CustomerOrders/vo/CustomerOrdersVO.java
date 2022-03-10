@@ -9,12 +9,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.validator.internal.util.stereotypes.Lazy;
 
 import web.OrderDetail.vo.OrderDetailVO;
 
@@ -67,7 +69,8 @@ public class CustomerOrdersVO implements java.io.Serializable{
 		columnDefinition = "bit"
 		)
 	private Byte returnStatus;
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name = "order_id")
 	private Set<OrderDetailVO> detail;
 	public Set<OrderDetailVO> getDetail(){
 		return detail;
