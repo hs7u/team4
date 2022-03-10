@@ -41,7 +41,10 @@ public class CourseTimeableService {
     public void deleteCourseTimeable(Integer courseTimeableId){
         dao.delete(courseTimeableId);
     }
-    public ArrayList<Timestamp> selectByCourseId(Integer courseId) {
+    public ArrayList<CourseTimeableVO> selectByCourseId(Integer courseId) {
         return dao.selectByCourseId(courseId);
+    }
+    public CourseTimeableVO selectByTimeableId(Integer courseTimeableId) {
+        return dao.selectByTimeableId(courseTimeableId);
     }
 }

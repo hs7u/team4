@@ -507,16 +507,13 @@
                        
                     </div>
                     <div class="col-md-6 col-12 learts-mb-20">
-                        <label for="course_date">課程日期與時間 <abbr class="required">*</abbr></label>
-                        <select id="bdTownOrCity" class="select2-basic">
+                        <label for="courseDate">課程日期與時間 <abbr class="required">*</abbr></label>
+                        <select id="courseDate" class="select2-basic">
                             <option value="">日期與時間</option>
                             
                         </select>
                     </div>
                     <div class="col-12 learts-mb-20">
-                        
-                        
-                        
                         
                     </div>
                 </div>
@@ -581,7 +578,7 @@
                         <div class="text-center">
                             <p class="payment-note">你的付款資訊將用於處理您的訂單，我們以加密方式保障你的隱私，請安心使用</p>
                             <br>
-                            <button class="btn btn-dark btn-outline-hover-dark">確認課程訂單</button>
+                            <button id="courseRegist" class="btn btn-dark btn-outline-hover-dark">確認課程訂單</button>
                         </div>
                     </div>
                 </div>
@@ -679,29 +676,35 @@
     <!-- Main Activation JS -->
     <script src="assets/js/main.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
     <script>
         function init(){
-            let miniCart = localStorage.getItem("cart")!= null ? JSON.parse(localStorage.getItem("cart")) : [];
-            let sendData = [];
-            console.log(miniCart);
-            for(let i = 0; i < miniCart.length ; i++){
-                let item = {};
-                item.productId = miniCart[i].productId; 
-                item.productName = miniCart[i].productName; 
-                item.productPrice = miniCart[i].productPrice;
-                item.productQuantity = miniCart[i].productQuantity;
-                sendData.push(item);
-            }
-            console.log(sendData);
-        	axios({
-        		method: "post",
-        		url: "./Customer/Order/checkout",
-        		data: JSON.stringify(sendData),
-        		headers: { "Content-Type": "application/json" },
-        	}).then(res => {
-        		$("div#ecpay").html(res.data);
-        	})
-            
+            axios({
+        		    method: "post",
+        		    url: "./Course/schedule",
+        		    data: localStorage.getItem("courseId"),
+        		    headers: { "Content-Type": "application/json" },
+                }).then(res => {
+                    res.foreach(e => {
+                        let option = `<option value="${e.courseTimeableId}">${moment(e.courseDate).locale("zh-tw").format("YYYY-MM-DD HH:mm")}</option>`;
+                        
+                        $(option).appendTo("#courseDate");
+                    })
+                })
+            $("#courseRegist").on("click", function(){
+                let regist = {};
+                regist.courseId = JSON.parse(localStorage.getItem("courseId"));
+                regist.numOfPeople = $().val();
+                regist.courseTimeableId = $().val();
+                axios({
+        		    method: "post",
+        		    url: "./Course/regist",
+        		    data: JSON.stringify(regist),
+        		    headers: { "Content-Type": "application/json" },
+                }).then(res => {
+                    $("div#ecpay").html(res.data);
+                })
+            });
         }
         window.addEventListener("load", init);
     </script>

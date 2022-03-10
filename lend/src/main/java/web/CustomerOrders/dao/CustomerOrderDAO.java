@@ -2,6 +2,8 @@ package web.CustomerOrders.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -9,6 +11,10 @@ import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /* import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -315,12 +321,12 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
         cq = cq.select(cb.count(root));
         return getSession().createQuery(cq).getSingleResult();
     }
-	public List<OrderDetailVO> getAllDetail(Integer orderId) {
-//		return null;
-		CriteriaBuilder cb = getSession().getCriteriaBuilder();
-        CriteriaQuery<OrderDetailVO> cq = cb.createQuery(OrderDetailVO.class);
-        Root<OrderDetailVO> root = cq.from(OrderDetailVO.class);
-        cq = cq.where(cb.equal(root.get("orderId"), orderId));
+	public List<CustomerOrdersVO> getCustomerAllOrder(Integer customerId) {
+        // JPA CtiteriaQuery
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
+        CriteriaQuery<CustomerOrdersVO> cq = cb.createQuery(CustomerOrdersVO.class);
+        Root<CustomerOrdersVO> root = cq.from(CustomerOrdersVO.class);
+        cq = cq.select(root).where(cb.equal(root.get("customerId"), customerId));
         return getSession().createQuery(cq).getResultList();
     }
 }

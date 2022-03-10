@@ -3,14 +3,7 @@ package web.CustomerOrders.service;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.task.TaskExecutor;
-import org.springframework.mail.MailParseException;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -81,7 +74,7 @@ public class CustomerOrdersService {
     public List<CustomerOrdersVO> getAll(){
     	return dao.getAll();
     }
-    public List<OrderDetailVO> getAllDetail(Integer orderId){
-        return dao.getAllDetail(orderId);
+    public List<CustomerOrdersVO> getCustomerAllOrder(Integer customerId){
+    	return dao.getCustomerAllOrder(customerId);
     }
 }

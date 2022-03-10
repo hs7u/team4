@@ -38,12 +38,21 @@ window.addEventListener("load", function () {
             // console.log(response);
             // console.log(typeof response);
             // console.log(response[0]["courseName"])
+            let courseInfo = [];
             res.forEach(element => {
+                let cucInfo = {}
+                cucInfo.courseId = element.courseId;
+                cucInfo.courseName = element.courseName;
+                cucInfo.coursePrice = element.coursePrice;
+                cucInfo.minOfCourse = element.minOfCourse;
+                cucInfo.maxOfCourse = element.maxOfCourse;
+                cucInfo.courseLocation = element.courseLocation;
+                cucInfo.courseDescribe = element.courseDescribe;
                 let u8 = new Uint8Array(element.courseImage)
                 // console.log(element);
                 let b64encoded = btoa(Uint8ToString(u8));
                 let status = element.courseStatus;
-
+                cucInfo.courseImage = b64encoded;
                 let showData = `<div class="col learts-mb-30">
                                 <div class="portfolio">
                                     <div class="thumbnail"><img src="data:image/png;base64,${b64encoded}" /></div>
@@ -59,8 +68,9 @@ window.addEventListener("load", function () {
                 if (status == 1) {
                     $(showData).appendTo("#show");
                 }
+                courseInfo.push(cucInfo);
             });
-            
+            sessionStorage.setItem("course", JSON.stringify(courseInfo));
         },
         error: function (xhr) {         // request 發生錯誤的話執行
             // console.log(xhr);
@@ -75,6 +85,12 @@ window.addEventListener("load", function () {
         let courseId = $(this).next().find("h4").attr("id");
 
         localStorage.setItem("courseId",JSON.stringify(courseId));
+        let nextP = JSON.parse(sessionStorage.setItem("course"));
+        nextP.forEach(element => {
+            if(element.courseId == courseId){
+                localStorage.setItem("current",JSON.stringify(element));
+            }
+        });
         location.href="./course-details.html";
 
 
