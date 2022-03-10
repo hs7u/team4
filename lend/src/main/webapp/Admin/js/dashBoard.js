@@ -231,25 +231,17 @@ function getOrder() {
             
             $(table).appendTo("tbody.dynamicsD");
             $(detail).appendTo("div.forOUP");
-            
-            axios({
-                method: "get",
-                url: `../Customer/orderDetail/${res.data[i].orderId}`,
-                headers: { "Content-Type": "application/json" },
-            }).then(res2 => {
-                 console.log(res2.data);
-	             for(let j = 0; j < res2.data.length; j++){
-	                 let img = res2.data[j].customerUploadImg == null ? `<img src="https://stickershop.line-scdn.net/stickershop/v1/product/9247729/IOS/main_animation@2x.png" width="60" height="40""/>` : `<img src="data:image/png;base64,${res2.data[j].customerUploadImg}" width="60" height="40""/>` ;
-	                 let innerDetail = `<tr class="oans2">
-	                                     <td>${res2.data[j].productId}</td>
-	                                     <td>${res2.data[j].productName}</td>
-	                                     <td>${res2.data[j].productQuantity}</td>
-	                                     <td>$ ${res2.data[j].productPrice}</td>
-	                                     <td>${img}</td>
-	                                    </tr>`;
-	                 $(innerDetail).appendTo(`.orderB${i}`);
-	             }
-            })
+            for(let j = 0; j < res.data[i].detail.length; j++){
+                let img = res.data[i].detail[j].customerUploadImg == null ? `<img src="https://stickershop.line-scdn.net/stickershop/v1/product/9247729/IOS/main_animation@2x.png" width="60" height="40""/>` : `<img src="data:image/png;base64,${res.data[i].detail[j].customerUploadImg}" width="60" height="40""/>` ;
+                let innerDetail = `<tr class="oans2">
+                                    <td>${res.data[i].detail[j].productId}</td>
+                                    <td>${res.data[i].detail[j].product.productName}</td>
+                                    <td>${res.data[i].detail[j].productQuantity}</td>
+                                    <td>$ ${res.data[i].detail[j].productPrice}</td>
+                                    <td>${img}</td>
+                                   </tr>`;
+                $(innerDetail).appendTo(`.orderB${i}`);
+            }
         }
         $('#orderTable').DataTable({
             "lengthMenu": [5, 10, 20, 50], //顯示筆數設定 預設為[10, 25, 50, 100]

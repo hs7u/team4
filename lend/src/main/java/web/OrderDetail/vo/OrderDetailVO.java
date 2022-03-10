@@ -40,18 +40,12 @@ public class OrderDetailVO {
 		nullable = true
 		)
 	private byte[] customerUploadImg;
-	@ManyToOne(optional=false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "product_id", referencedColumnName = "product_id")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "product_id")
 	private ProductVO product;
-	@ManyToOne
-	@JoinColumn(name = "order_id", referencedColumnName = "order_id")
-	private CustomerOrdersVO order;
-	public CustomerOrdersVO getOrder(){
-		return order;
-	}
-	public void setOrder(CustomerOrdersVO order){
-		this.order = order;
-	}
+//	@ManyToOne(optional=false, fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "order_id", referencedColumnName = "order_id")
+//	private CustomerOrdersVO order;
 	public ProductVO getProduct(){
 		return product;
 	}

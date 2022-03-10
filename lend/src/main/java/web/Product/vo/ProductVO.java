@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -59,15 +60,15 @@ public class ProductVO implements java.io.Serializable{
 			columnDefinition = "bit"
 			)
 	private Byte productStatus;
-	@OneToMany(mappedBy = "product", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    @Column(nullable = false)
-	private Set<OrderDetailVO> detail;
-	public Set<OrderDetailVO> getDetail(){
-		return detail;
-	}
-	public void setDetail(Set<OrderDetailVO> detail){
-		this.detail = detail;
-	}
+//	@OneToMany(fetch=FetchType.EAGER)
+//	@JoinColumn(name = "product_id")
+//	private Set<OrderDetailVO> detail;
+//	public Set<OrderDetailVO> getDetail(){
+//		return detail;
+//	}
+//	public void setDetail(Set<OrderDetailVO> detail){
+//		this.detail = detail;
+//	}
 	public ProductVO() {
 		super();
 	}
