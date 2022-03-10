@@ -63,7 +63,7 @@ function getCourses() {
                                 ${state}
                             </td>
                             <td><input type="button" class="las CUP" CUPtarget="${res.data[i].courseId}" value="修改"></td>
-                            <td><input type="button" class="las" value="刪除"></td>
+                            <td><input type="button" class="las Cdelete" CUPtarget="${res.data[i].courseId} value="刪除"></td>
                         </tr>`;
             let uptable = `<div class="overCUP ${res.data[i].courseId}" style="display : none">
                                 <article>
@@ -264,6 +264,12 @@ function timeable(res) {
 function cupListener() {
     let sendCoDate = {};
     let sendCTDate = {};
+    $("tbody.dynamicsC").on("click", 'button.Cdelete', function(){
+        let torget = $(this).attr("CUPtarget");
+        axios.get(`../Course/delete/${torget}`).then(res => {
+            console.log(res.data);
+        })
+    })
     $('#courseTable').on('click', 'input.CUP' ,function (e) {
         e.preventDefault();
         $("div.overCUP." + $(this).attr("CUPtarget")).fadeIn();
