@@ -85,7 +85,7 @@ window.addEventListener("load", function () {
         let courseId = $(this).next().find("h4").attr("id");
 
         localStorage.setItem("courseId",JSON.stringify(courseId));
-        let nextP = JSON.parse(sessionStorage.setItem("course"));
+        let nextP = JSON.parse(sessionStorage.getItem("course"));
         nextP.forEach(element => {
             if(element.courseId == courseId){
                 localStorage.setItem("current",JSON.stringify(element));
