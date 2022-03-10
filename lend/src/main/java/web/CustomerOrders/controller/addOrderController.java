@@ -55,8 +55,8 @@ public class addOrderController {
             singVo.setProduct(pVo);
             singVo.setProductPrice(Integer.parseInt(detail.get("productPrice")));
             singVo.setProductQuantity(Integer.parseInt(detail.get("productQuantity")));
-            singVo.setOrder(order);
             details.add(singVo);
+            singVo.setOrders(order);
         }
         order.setDetail(details);
         String result = cos.addOrder(order);

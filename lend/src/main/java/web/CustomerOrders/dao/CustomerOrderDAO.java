@@ -71,7 +71,8 @@ public class CustomerOrderDAO implements CustomerOrderInterface<CustomerOrdersVO
         if(coVo != null){
             // CustomerOrdersVO newOrder = getSession().get(CustomerOrdersVO.class, coVo.getOrderId());
             // if(newOrder == null){
-               return getSession().save(coVo);
+//               getSession().persist(coVo);
+           return getSession().save(coVo);
             // }
         }
         return null;
