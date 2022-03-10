@@ -43,15 +43,15 @@ public class OrderDetailVO {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "product_id", referencedColumnName = "product_id")
 	private ProductVO product;
-//	@ManyToOne(fetch=FetchType.EAGER, optional=true, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "order_id", referencedColumnName = "order_id")
-//	private CustomerOrdersVO order;
-//	public CustomerOrdersVO getOrders(){
-//		return order;
-//	}
-//	public void setOrders(CustomerOrdersVO order){
-//		this.order = order;
-//	}
+	@ManyToOne
+	@JoinColumn(name = "order_id")
+	private CustomerOrdersVO order;
+	public CustomerOrdersVO getOrders(){
+		return order;
+	}
+	public void setOrders(CustomerOrdersVO order){
+		this.order = order;
+	}
 	public ProductVO getProduct(){
 		return product;
 	}

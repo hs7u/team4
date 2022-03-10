@@ -29,7 +29,7 @@ public class CourseTimeableVO implements java.io.Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "course_timeable_id")
 	private Integer courseTimeableId;
-	@Column(name = "course_id", insertable = false, updatable = false)
+	@Column(name = "course_id")
     private Integer courseId;
 	@Column(name = "course_date")
     private Timestamp courseDate;
