@@ -55,7 +55,7 @@ public class addOrderController {
             singVo.setProduct(pVo);
             singVo.setProductPrice(Integer.parseInt(detail.get("productPrice")));
             singVo.setProductQuantity(Integer.parseInt(detail.get("productQuantity")));
-            singVo.setOrder(order);
+//            singVo.setOrder(order);
             details.add(singVo);
         }
         order.setDetail(details);
