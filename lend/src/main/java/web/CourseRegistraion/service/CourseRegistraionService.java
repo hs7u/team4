@@ -1,5 +1,6 @@
 package web.CourseRegistraion.service;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +19,8 @@ public class CourseRegistraionService {
     // public CourseRegistraionService(Session session){
     //     dao = new CourseRegistraionDAO(session);
     // }
-    public CourseRegistraionVO registCourse(Integer customerId, Integer courseId,
-    Integer courseTimeableId, Integer numOfPeople){
-        CourseRegistraionVO crVo = new CourseRegistraionVO();
-        crVo.setRegistrationId(hashCode(customerId, courseId, courseTimeableId, numOfPeople));
-        crVo.setCustomerId(customerId);
-        crVo.setCourseId(courseId);
-        crVo.setCourseTimeableId(courseTimeableId);
-        crVo.setNumOfPeople(numOfPeople);
-        dao.insert(crVo);
-        return crVo;
+    public Serializable registCourse(CourseRegistraionVO crVo){
+        return dao.insert(crVo);
     }
     public void deleteRegist(Integer registrationId){
         dao.delete(registrationId);

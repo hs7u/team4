@@ -54,24 +54,24 @@ public class CourseVO implements java.io.Serializable{
 			columnDefinition = "bit"
 			)
 	private Byte courseStatus;
-	@OneToMany(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@OneToMany(fetch=FetchType.EAGER , cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "course_id", referencedColumnName = "course_id")
 	private Set<CourseTimeableVO> timeable;
-	@OneToMany(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
-	@JoinColumn(name = "course_id", referencedColumnName = "course_id")
-	private Set<CourseRegistraionVO> regist;
+	// @OneToMany(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	// @JoinColumn(name = "course_id", referencedColumnName = "course_id")
+	// private Set<CourseRegistraionVO> regist;
 	public Set<CourseTimeableVO> getTimeable(){
 		return timeable;
 	}
 	public void setTimeable(Set<CourseTimeableVO> timeable){
 		this.timeable = timeable;
 	}
-	public Set<CourseRegistraionVO> getRegist(){
-		return regist;
-	}
-	public void setRegist(Set<CourseRegistraionVO> regist){
-		this.regist = regist;
-	}
+	// public Set<CourseRegistraionVO> getRegist(){
+	// 	return regist;
+	// }
+	// public void setRegist(Set<CourseRegistraionVO> regist){
+	// 	this.regist = regist;
+	// }
 	public CourseVO() {
 		super();
 	}

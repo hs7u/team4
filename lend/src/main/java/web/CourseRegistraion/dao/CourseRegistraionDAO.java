@@ -1,5 +1,6 @@
 package web.CourseRegistraion.dao;
 
+import java.io.Serializable;
 /* import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,14 +45,28 @@ public class CourseRegistraionDAO implements CourseRegistraionInterface<CourseRe
     private static final String GET_ONE_STM = "SELECT * FROM TEAM4.Course_Registraion WHERE `customer_id` = ? AND `course_timeble_id` = ?;";
     private static final String GET_ALL_CU = "SELECT * FROM TEAM4.Course_Registraion WHERE `customer_id` = ?;";
     private static final String GET_ALL_TI = "SELECT * FROM TEAM4.Course_Registraion WHERE `course_timeble_id` = ?;"; */
-    public void insert(CourseRegistraionVO crVo){
-        // Hibernate
-        if(crVo != null){
-            CourseRegistraionVO newCr = getSession().get(CourseRegistraionVO.class, crVo.getCourseId());
-            if(newCr == null){
-                getSession().save(crVo);
-            }
+    public Serializable insert(CourseRegistraionVO crVo){
+        // JPA CruteriaQuery
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
+        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+        Root<CourseRegistraionVO> root = cq.from(CourseRegistraionVO.class);
+        cq = cq.select(cb.count(root)).where(cb.and(cb.equal(root.get("customerId"), crVo.getCustomerId()),
+                                                    cb.equal(root.get("courseId"), crVo.getCourseId()),
+                                                    cb.equal(root.get("courseTimeableId"), crVo.getCourseTimeableId())
+                                                    )
+                                            );
+        Long result = getSession().createQuery(cq).getSingleResult();
+        if(result == 0){
+            return getSession().save(crVo);
         }
+        return null;
+        // Hibernate
+        // if(crVo != null){
+        //     CourseRegistraionVO newCr = getSession().get(CourseRegistraionVO.class, crVo.getCourseId());
+        //     if(newCr == null){
+        //         getSession().save(crVo);
+        //     }
+        // }
         // DateSource Jdbc
         /* try (Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement(INSERT)) {

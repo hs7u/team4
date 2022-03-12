@@ -1,6 +1,5 @@
 package web.OrderDetail.vo;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,7 +13,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import web.CustomerOrders.vo.CustomerOrdersVO;
 import web.Product.vo.ProductVO;
 
 @Entity

@@ -40,14 +40,14 @@ public class CourseTimeableVO implements java.io.Serializable{
 //	@ManyToOne(optional=false, fetch = FetchType.LAZY)
 //	@JoinColumn(name = "course_id", referencedColumnName = "course_id")
 //	private CourseVO course;
-//	@OneToMany(mappedBy = "timeable", cascade = CascadeType.ALL)
-//	private Set<CourseRegistraionVO> regist;
-//	public Set<CourseRegistraionVO> getRegist(){
-//		return regist;
-//	}
-//	public void setRegist(Set<CourseRegistraionVO> regist){
-//		this.regist = regist;
-//	}
+	@OneToMany(mappedBy = "timeable", cascade = CascadeType.ALL)
+	private Set<CourseRegistraionVO> regist;
+	public Set<CourseRegistraionVO> getRegist(){
+		return regist;
+	}
+	public void setRegist(Set<CourseRegistraionVO> regist){
+		this.regist = regist;
+	}
 //	public CourseVO getCourse(){
 //		return course;
 //	}

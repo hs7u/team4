@@ -33,8 +33,8 @@ public class CustomerLoginController {
                 return errorMsg.toString();
             }
             CustomerVO check = cs.getOneCustomer(vo.getCustomerEmail());
-            if(check != null && passwordEncoder.matches(vo.getCustomerPassword(), check.getCustomerPassword())){
-                System.out.println("ok");
+            if(check != null && check.getCustomerStatus() != (byte)0 && passwordEncoder.matches(vo.getCustomerPassword(), check.getCustomerPassword())){
+                System.out.println("USER"+check.getCustomerId()+" login");
             	session.setAttribute("customerAccount", check.getCustomerEmail());
                 session.setAttribute("customerInfo", check);
                 return "Login Success";

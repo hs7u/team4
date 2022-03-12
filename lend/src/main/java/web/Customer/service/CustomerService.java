@@ -42,24 +42,18 @@ public class CustomerService {
     public String addCustomer(CustomerVO cVo, String code) {
         java.sql.Timestamp customerRegisterTime = new java.sql.Timestamp(System.currentTimeMillis());
         StringBuilder errorMsg = new StringBuilder();
-        if(cVo.getCustomerName().trim().isEmpty()){
+        if(cVo.getCustomerName().trim().isEmpty())
             errorMsg.append("姓名不得為空"+System.lineSeparator());
-        }
-        if(cVo.getCustomerEmail().trim().isEmpty()){
+        if(cVo.getCustomerEmail().trim().isEmpty())
             errorMsg.append("信箱不得為空"+System.lineSeparator());
-        }
-        if(cVo.getCustomerPassword().trim().isEmpty()){
+        if(cVo.getCustomerPassword().trim().isEmpty())
             errorMsg.append("密碼不得為空"+System.lineSeparator());
-        }
-        if(cVo.getCustomerPhone().trim().isEmpty()){
+        if(cVo.getCustomerPhone().trim().isEmpty())
             errorMsg.append("電話不得為空"+System.lineSeparator());
-        }
-        if(cVo.getCustomerBirthday() == null){
+        if(cVo.getCustomerBirthday() == null)
             errorMsg.append("生日不得為空"+System.lineSeparator());
-        }
-        if(cVo.getCustomerAddress().trim().isEmpty()){
+        if(cVo.getCustomerAddress().trim().isEmpty())
             errorMsg.append("地址不得為空"+System.lineSeparator());
-        }
         if(errorMsg.length() > 0){
             return errorMsg.toString();
         } 
@@ -81,20 +75,25 @@ public class CustomerService {
         vo.setCustomerRegisterTime(customerRegisterTime);
     	dao.insert(vo);
     }
-    public CustomerVO updateCustomer(Integer customeId, String customerName, String customerEmail, String customerPassword,
-            String customerPhone, Date customerBirthday, String customerGender, String customerAddress, Byte customerStatus){
-        CustomerVO cVo = new CustomerVO();
-        cVo.setCustomerId(customeId);
-        cVo.setCustomerName(customerName);
-        cVo.setCustomerEmail(customerEmail);
-        cVo.setCustomerPassword(customerPassword);
-        cVo.setCustomerPhone(customerPhone);
-        cVo.setCustomerBirthday(customerBirthday);
-        cVo.setCustomerGender(customerGender);
-        cVo.setCustomerAddress(customerAddress);
-        cVo.setCustomerStatus(customerStatus);
-        dao.update(cVo);
-        return cVo;
+    public String updateCustomer(CustomerVO cVo, CustomerVO check){
+        if(cVo.getCustomerName().trim().isEmpty())
+            cVo.setCustomerName(check.getCustomerName());
+        if(cVo.getCustomerEmail().trim().isEmpty())
+            cVo.setCustomerEmail(check.getCustomerEmail());
+        if(cVo.getCustomerPassword().trim().isEmpty())
+            cVo.setCustomerPassword(check.getCustomerPassword());
+        if(cVo.getCustomerPhone().trim().isEmpty())
+            cVo.setCustomerPhone(check.getCustomerPhone());
+        if(cVo.getCustomerBirthday() == null)
+            cVo.setCustomerBirthday(check.getCustomerBirthday());
+        if(cVo.getCustomerGender().trim().isEmpty())
+            cVo.setCustomerGender(check.getCustomerGender());
+        if(cVo.getCustomerAddress().trim().isEmpty())
+            cVo.setCustomerAddress(check.getCustomerAddress());
+        if(dao.update(cVo)){
+            return "success";
+        }
+        return "false";
     }
     public void deleteCustomer(Integer customeId){
         dao.delete(customeId);

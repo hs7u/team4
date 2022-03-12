@@ -1,6 +1,5 @@
 package web.CourseRegistraion.vo;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +10,7 @@ import javax.persistence.Table;
 
 import web.Course.vo.CourseVO;
 import web.CourseTimeable.vo.CourseTimeableVO;
+
 
 @Entity
 @Table(name = "Course_Registraion")
@@ -26,10 +26,10 @@ public class CourseRegistraionVO implements java.io.Serializable{
     private Integer courseTimeableId;
 	@Column(name = "numOfPeople")
     private Integer numOfPeople;
-//	@ManyToOne(fetch=FetchType.EAGER, optional=true, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "course_id", referencedColumnName = "course_id")
-//	private CourseVO course;
-	@ManyToOne(fetch=FetchType.EAGER, optional=true, cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "course_id", referencedColumnName = "course_id")
+	private CourseVO course;
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "course_timeable_id", referencedColumnName = "course_timeable_id")
 	private CourseTimeableVO timeable;
 	public CourseTimeableVO getTimeable(){
@@ -38,12 +38,12 @@ public class CourseRegistraionVO implements java.io.Serializable{
 	public void setTimeable(CourseTimeableVO timeable){
 		this.timeable = timeable;
 	}
-//	public CourseVO getCourse(){
-//		return course;
-//	}
-//	public void setCourse(CourseVO course){
-//		this.course = course;
-//	}
+	public CourseVO getCourse(){
+		return course;
+	}
+	public void setCourse(CourseVO course){
+		this.course = course;
+	}
 	public CourseRegistraionVO() {
 		super();
 	}

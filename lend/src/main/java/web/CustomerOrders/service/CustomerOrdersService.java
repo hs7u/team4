@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ProjectInterfaces.CustomerOrderInterface;
 import web.CustomerOrders.vo.CustomerOrdersVO;
-import web.OrderDetail.vo.OrderDetailVO;
 
 @Service
 @Transactional

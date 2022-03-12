@@ -90,7 +90,7 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
          } */
         
     }
-    public void update(CustomerVO customerVo){
+    public Boolean update(CustomerVO customerVo){
         //JPA CriterQuery
         CriteriaBuilder cb =  getSession().getCriteriaBuilder();
         CriteriaUpdate<CustomerVO> cu = cb.createCriteriaUpdate(CustomerVO.class);
@@ -105,7 +105,7 @@ public class CustomerDAO implements CustomerInterface<CustomerVO>{
                .set(root.get("customerAddress"),customerVo.getCustomerAddress())
                .where(cb.equal(root.get("customerId"), customerVo.getCustomerId()));
           
-         getSession().createQuery(cu).executeUpdate();
+        return getSession().createQuery(cu).executeUpdate() > 0 ? true : false;
         
         // Hibernate
         /* 

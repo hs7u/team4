@@ -20,6 +20,7 @@ import web.CourseRegistraion.service.CourseRegistraionService;
 import web.CourseRegistraion.vo.CourseRegistraionVO;
 import web.CourseTimeable.service.CourseTimeableService;
 import web.CourseTimeable.vo.CourseTimeableVO;
+import web.Customer.vo.CustomerVO;
 
 @RestController
 public class CourseRegistController {
@@ -34,11 +35,14 @@ public class CourseRegistController {
         CourseVO            cVo  = cs.getOneCourse(Integer.valueOf(registDetail.get("courseId")));
         CourseTimeableVO    ctVo = cts.selectByTimeableId(Integer.valueOf(registDetail.get("courseTimeableId")));
         CourseRegistraionVO crVo = new CourseRegistraionVO();
+        crVo.setCustomerId(((CustomerVO)session.getAttribute("customerInfo")).getCustomerId());
+        crVo.setNumOfPeople(Integer.valueOf(registDetail.get("numOfPeople")));
         crVo.setCourse(cVo);
         crVo.setTimeable(ctVo);
-        
+        Integer serNo =  (Integer)crs.registCourse(crVo);
+
         AioCheckOutALL obj = new AioCheckOutALL();
-        obj.setMerchantTradeNo(getCode()+cVo.getCourseId());
+        obj.setMerchantTradeNo(getCode()+cVo.getCourseId()+serNo);
         obj.setMerchantTradeDate(String.valueOf(new Date(System.currentTimeMillis())));
         obj.setTotalAmount(String.valueOf(cVo.getCoursePrice()));
         obj.setTradeDesc(cVo.getCourseDescribe());

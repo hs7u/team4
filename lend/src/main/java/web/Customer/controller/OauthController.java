@@ -95,24 +95,24 @@ public class OauthController {
             }
             
             try {
-            // 把上面取回來的資料，放進JSONObject中，以方便我們直接存取到想要的參數
-            JSONObject joInfo = new JSONObject(sbLines.toString());
-                
-            // 印出Google回傳的"emailtoken
-            System.out.println(joInfo.getString("name"));
-            CustomerVO googleUser = new CustomerVO();
-            googleUser.setCustomerEmail(joInfo.getString("email"));
-            googleUser.setCustomerName(joInfo.getString("name"));
-            CustomerVO check = cs.getOneCustomer(googleUser.getCustomerEmail());
-            if(check == null){
-                googleUser.setCustomerPassword(passwordEncoder.encode(getCode()));
-                googleUser.setCustomerGender("G");
-                googleUser.setCustomerBirthday(new java.sql.Date(System.currentTimeMillis()));
-                googleUser.setCustomerAddress("GOOGlE");
-                googleUser.setCustomerPhone("no phone");
-                cs.oauth2User(googleUser);
-                return googleUser;
-            }
+	            // 把上面取回來的資料，放進JSONObject中，以方便我們直接存取到想要的參數
+	            JSONObject joInfo = new JSONObject(sbLines.toString());
+	                
+	            // 印出Google回傳的"emailtoken
+	            CustomerVO googleUser = new CustomerVO();
+	            googleUser.setCustomerEmail(joInfo.getString("email"));
+	            googleUser.setCustomerName(joInfo.getString("name"));
+	            CustomerVO check = cs.getOneCustomer(googleUser.getCustomerEmail());
+	            if(check == null){
+	                googleUser.setCustomerPassword(passwordEncoder.encode(getCode()));
+	                googleUser.setCustomerGender("G");
+	                googleUser.setCustomerBirthday(new java.sql.Date(System.currentTimeMillis()));
+	                googleUser.setCustomerAddress("GOOGlE");
+	                googleUser.setCustomerPhone("no phone");
+	                googleUser.setCustomerStatus((byte)1);
+	                cs.oauth2User(googleUser);
+	                return googleUser;
+	            }
             	return check;
             } catch (JSONException e) {
                 e.printStackTrace();

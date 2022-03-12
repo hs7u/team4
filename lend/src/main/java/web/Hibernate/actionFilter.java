@@ -12,7 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(value = {"/checkout.html","/shopping-cart.jsp","/my-account.html","/course-checkout.html"})
+@WebFilter(value = {"/checkout.html",
+					"/shopping-cart.jsp",
+					"/my-account.html",
+					"/course-checkout.html",
+					"/Customer/info/update",
+					"/Customer/Order/checkout",
+					"/Course/regist"})
 public class actionFilter implements javax.servlet.Filter{
     public void init(FilterConfig filterConfig) throws ServletException{}
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {

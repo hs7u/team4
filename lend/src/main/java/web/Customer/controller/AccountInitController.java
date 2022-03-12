@@ -16,9 +16,7 @@ public class AccountInitController {
     @RequestMapping(path = {"/Customer/init/id/{param1}/status/{param2}/account/{param3}/check/{param4}"})
     public String accountInit(@PathVariable("param1") Integer customeId, @PathVariable("param2") Byte statusCode,
                       @PathVariable("param3") String email,  @PathVariable("param4") String code, HttpSession session){
-    	System.out.println(customeId);
-    	System.out.println(statusCode);
-    	System.out.println(email);
+    	System.out.println("customeId = "+customeId+"\t"+"email = "+email);
     	try {
     		String test = (String) session.getAttribute(email);
 			if(test.equals(code)){
