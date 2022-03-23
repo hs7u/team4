@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLL</title>
+    <!-- <link rel="stylesheet" href="./Admin/css/AdminDashBoard.css"> -->
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <style>
+        .btn_OUP{
+            height: 2.3rem;
+            width: 10rem;
+            cursor: pointer;
+            border-radius: 15px;
+            margin: 0 auto;
+            display: block;
+        }
+        div.overOUP{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            /* background-color: hsla(0, 0%, 0%, .5); */
+            /* display: none;     */
+        }
+        div.overOUP > article{
+            background-color: #f1f5f9;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(4, 0, 5, 0.493);
+            padding: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #forflex{
+            height: 25rem;
+            display:flex;
+        }
+        .twoline{      
+            flex:1;
+            display:block;
+            border:none;
+            margin-bottom: 0.2rem;
+        }
+        .tt{
+            margin-top: 1.6rem;
+        }  
+        .nomal{
+            border-radius: 15px;
+            padding: .5rem;
+            border: 1px solid;
+            border-color: #f1f5f9;
+            outline: none;
+            width: 10rem;
+        }
+        .hh{
+            height: 1.4rem;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <input type="checkbox" class="nomal" id="nav-toggle">
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h2><span class="lab la-accusoft"></span><span>studio4art</span></h2>
+        </div>
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="#" class="tab active" data-target="main" headerName="Dashboard"><span
+                            class="las la-igloo"></span>
+                        <span>Dashboard</span></a>
+                </li>
+                <li>
+                    <a href="#" class="tab " data-target="customer" headerName="客戶管理"><span class="las la-users"></span>
+                        <span>客戶管理</span></a>
+                </li>
+                <li>
+                    <a href="#" class="tab " data-target="course" headerName="課程管理"><span
+                            class="las la-clipboard-list"></span>
+                        <span>課程管理</span></a>
+                </li>
+                <li>
+                    <a href="#" class="tab " data-target="order" headerName="訂單列表"><span
+                            class="las la-shopping-bag"></span>
+                        <span>訂單列表</span></a>
+                </li>
+                <li>
+                    <a href="#" class="tab " data-target="product" headerName="商品管理"><span
+                            class="las la-receipt"></span>
+                        <span>商品管理</span></a>
+                </li>
+                <li>
+                    <a href="#" class="tab " data-target="account" headerName="帳號管理"><span
+                            class="las la-user-circle"></span>
+                        <span>帳號管理</span></a>
+                </li>
+                <li>
+                    <a href="#" class="tab " data-target="addProduct" headerName="新增商品"><span
+                            class="las la-clipboard-list"></span>
+                        <span>新增商品</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h2>
+                <label for="nav-toggle">
+                    <span class="las la-bars"></span>
+                </label>
+                <span class="headerName">Dashboard</span>
+            </h2>
+            <div class="search-wrapper">
+                <span class="las la-search"></span>
+                <input type="search" class="nomal" placeholder="Search here">
+            </div>
+            <div class="user-wrapper">
+                <img src="./Admin/icon/cat.jpg" width="40px" height="40px" alt="">
+                <div>
+                    <h4>doge</h4>
+                    <small>toor</small>
+                </div>
+            </div>
+        </header>
+        <main style="display: none;">
+            <div class="cards">
+                <div class="cards-single">
+                    <div>
+                        <h1 id="customerCount">0</h1>
+                        <span>Customers</span>
+                    </div>
+                    <div>
+                        <span class="las la-users"></span>
+                    </div>
+                </div>
+                <div class="cards-single">
+                    <div>
+                        <h1 id="courseCount">0</h1>
+                        <span>Course</span>
+                    </div>
+                    <div>
+                        <span class="las la-clipboard-list"></span>
+                    </div>
+                </div>
+                <div class="cards-single">
+                    <div>
+                        <h1 id="orderCount">0</h1>
+                        <span>Orders</span>
+                    </div>
+                    <div>
+                        <span class="las la-shopping-bag"></span>
+                    </div>
+                </div>
+                <div class="cards-single">
+                    <div>
+                        <h1 id="incomeCount">$0</h1>
+                        <span>Income</span>
+                    </div>
+                    <div>
+                        <span class="lab la-google-wallet"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-grid">
+                <div class="projects">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Recent Course</h3>
+                            <button>See All <span class="las la-arrow-right"></span></button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <td>Course Title</td>
+                                            <td>Teacher</td>
+                                            <td>Status</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Design</td>
+                                            <td>Tom</td>
+                                            <td>
+                                                <span class="status red"></span>
+                                                pending
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Servlet dev</td>
+                                            <td>Big Wu</td>
+                                            <td>
+                                                <span class="status green"></span>
+                                                approval
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Java SE</td>
+                                            <td>Small Wu</td>
+                                            <td>
+                                                <span class="status green"></span>
+                                                approval
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>mySQL</td>
+                                            <td>Wei Min</td>
+                                            <td>
+                                                <span class="status yellow"></span>
+                                                review
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="customers">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>New Customers</h3>
+                            <button>See All <span class="las la-arrow-right"></span></button>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="customer">
+                                <div class="info">
+                                    <img src="./Admin/icon/cat.jpg" width="40px" height="40px" alt="">
+                                    <div>
+                                        <h4>Ge Ku~~~~ </h4>
+                                        <small>How dare you come Ice Bird</small>
+                                    </div>
+                                    <div class="contact">
+                                        <span class="las la-user-circle"></span>
+                                        <span class="las la-comment"></span>
+                                        <span class="las la-phone"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </main>
+        <!-- <main id="test">
+            <div id="check"></div>
+        </main> -->
+    </div>
+    <div class="overOUP">
+        <article>
+            <FORM METHOD="post" id="courseForm" enctype="multipart/form-data">
+                <div id="forflex">
+                    <table>
+
+                        <tr class="twoline">
+                            <td><label for="">運送方式<input class="hh nomal" type="TEXT" name="shippingMethodCode" size="45" placeholder="Ex:/ 腳踏車" readonly/></label></td>
+                        </tr>
+
+                        <tr class="twoline">
+                            <td><label for="">運費<br><input class="hh nomal" type="TEXT" name="orderDeliveryCharge" placeholder="Ex:/ 60" readonly></label></td>
+                        </tr>
+                        <tr class="twoline">
+                            <td><label for="">出貨日<br><input type="date" class="nomal" name="orderShippingDate" readonly></label>
+                            </td>
+                        </tr>
+                    </table>                    
+                    <table>
+                        <tr class="twoline tt">
+                            <td><label for="">收件人<br><input class="hh nomal" type="TEXT" name="recipient" placeholder="Ex:/ gg" readonly></label></td>
+                        </tr>
+                        <tr class="twoline">
+                            <td><label for="">收件地址<input class="hh nomal" type="TEXT" name="sendersAddress" size="45" placeholder="Ex:/ 台北市XX區XX路XX號XX樓" readonly/></label></td>
+                        </tr>
+                        <tr class="twoline">
+                            <td><label for="">備註<br><input class="hh nomal" type="TEXT" name="orderDetails" size="45" placeholder="Ex:/ 微糖去冰加珍珠" readonly/></label></td>
+                        </tr>                        
+                        <!-- <tr class="twoline">
+                            <td>
+                                <label for="">訂單狀態
+                                 <select id=”orderSelect” class="nomal" name="orderStatus">
+                                    <option value=”訂單成立″>訂單成立</option>
+                                    <option value=”訂單處理中″>訂單處理中</option>
+                                    <option value=”訂單取消″>訂單取消</option>
+                                 </select>
+                                </label>
+                            </td>
+                        </tr> -->
+                        <tr class="twoline">
+                            <td>
+                                <label for="">付款狀態
+                                 <select id=”orderSelect” class="nomal" name="paymentStatus">
+                                    <option value=”已付款″>已付款</option>
+                                    <option value=”未付款″>未付款</option>
+                                 </select>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="twoline">
+                            <td>
+                                <label for="">運送狀態
+                                 <select id=”orderSelect” class="nomal" name="shipping_status">
+                                    <option value=”已送達″>已送達</option>
+                                    <option value=”運送中″>運送中</option>
+                                    <option value=”未出貨″>未出貨</option>
+                                 </select>
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="forflex">
+                    <table>
+
+                    </table>
+                </div>
+                <button type="button"  class="btn_OUP" id="btn_UPorder" >修改</button>
+                <button type="button" class="btn_OUP">關閉</button>
+            </FORM>
+        </article>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(function() { // when DOM is ready
+            
+            $("#check").load("http://localhost:7080/lend/Product/listAllProduct_test.jsp"); // load the sample.jsp page in the #chkcomments element
+            
+        });
+    </script>
+</body>
+
+</html>

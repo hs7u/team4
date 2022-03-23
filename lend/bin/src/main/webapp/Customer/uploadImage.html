@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<meta name="google-signin-scope" content="profile email">
+<meta name="google-signin-client_id"
+	content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<!-- Favicon -->
+<link rel="shortcut icon" type="image/x-icon"
+	href="assets/images/favicon.webp">
+
+<!-- CSS
+	============================================ -->
+
+<!-- Vendor CSS (Bootstrap & Icon Font) -->
+<link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/vendor/font-awesome-pro.min.css">
+<link rel="stylesheet" href="assets/css/vendor/themify-icons.css">
+<link rel="stylesheet" href="assets/css/vendor/customFonts.css">
+
+<!-- Plugins CSS (All Plugins Files) -->
+<link rel="stylesheet" href="assets/css/plugins/select2.min.css">
+<link rel="stylesheet" href="assets/css/plugins/perfect-scrollbar.css">
+<link rel="stylesheet" href="assets/css/plugins/swiper.min.css">
+<link rel="stylesheet" href="assets/css/plugins/nice-select.css">
+<link rel="stylesheet" href="assets/css/plugins/ion.rangeSlider.min.css">
+<link rel="stylesheet" href="assets/css/plugins/photoswipe.css">
+<link rel="stylesheet"
+	href="assets/css/plugins/photoswipe-default-skin.css">
+<link rel="stylesheet" href="assets/css/plugins/magnific-popup.css">
+<link rel="stylesheet" href="assets/css/plugins/slick.css">
+
+<!-- Boostrap 導入程式 -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+	crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="clientLogin.css">
+
+<style>
+img.preview {
+	width: 200px;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul>li {
+	display: inline-block;
+	vertical-align: top;
+}
+
+div.progressbar {
+	height: 20px;
+	background-color: #e9ecef;
+	border-radius: 8px;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 30px;
+}
+
+div.progressbar>span.progress {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	box-sizing: border-box;
+	background-color: #007bff;
+}
+</style>
+
+</head>
+
+
+<a href="index.html" type="button" data-bs-toggle="modal"
+	data-bs-target="#loginModal">檔案上傳</a>
+
+<div class="modal fade" id="loginModal">
+	<i class="fal fa-user"></i>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+			<p>客製化圖片</p>
+				<input type="file" id="the_file" accept="image/*" multiple>
+				<ul class="picture_list"></ul>
+				
+				<script
+					src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+				<script>
+        window.addEventListener("DOMContentLoaded", function () {
+
+            var the_file_element = document.getElementById("the_file");
+            the_file_element.addEventListener("change", function (e) {
+
+                var picture_list = document.getElementsByClassName("picture_list")[0];
+                picture_list.innerHTML = ""; // 清空
+
+                var that = this; // 將 this 用 that 來替代，底下程式會用到
+
+                // 跑每個使用者選的檔案
+                for (let i = 0; i < this.files.length; i++) {
+
+                    let reader = new FileReader(); // 用來讀取檔案
+
+                    reader.readAsDataURL(this.files[i]); // 讀取檔案
+
+                    reader.addEventListener("load", function (e) {
+                        console.log("load 事件");
+                        console.log(e);
+
+                        // 建立 li 標籤，加上屬性、圖片、進度條，最後放入 ul 標籤裡
+                        let li_html = `
+                <li data-index="${i}">
+                  <img class="preview" src="${reader.result}">
+                  <div class="progressbar"><span class="progress" style="width: 0%;"></span></div>
+                </li>
+              `;
+                        picture_list.insertAdjacentHTML("beforeend", li_html); // 加進節點
+
+                        // 這裡實際將檔案傳送出去：ajax 技術
+                        let form_data = new FormData();
+                        form_data.append('the_file', that.files[i]);
+
+                        $.ajax({
+                            url: "http://notes.carlos-studio.com/html5_tutorial/file/file_receive.php",
+                            type: "POST",
+                            data: form_data,
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+
+                            xhr: function () {
+                                //console.log("這是第幾個索引：" + i);
+                                var myXhr = $.ajaxSettings.xhr();
+                                if (myXhr.upload) {
+                                    myXhr.upload.addEventListener('progress', function (evt) {
+                                        console.log("progress 事件觸發");
+                                        // 註：nth-child 是從 1 開始
+                                        var progress_el = document.querySelector(".picture_list li:nth-child(" + (i + 1) + ") span.progress");
+
+                                        if (evt.lengthComputable) {
+                                            var loaded = (evt.loaded / evt.total);
+                                            if (loaded <= 1) {
+                                                //console.log(evt.loaded / evt.total)
+                                                var percent = loaded * 100;
+                                                console.log("進度：" + percent + "%");
+
+                                                // 改變介面進度條的百分比
+                                                progress_el.setAttribute("style", "width: " + percent + "%;");
+                                            }
+                                        }
+
+                                    }, false);
+                                }
+                                return myXhr;
+                            },
+
+                            success: function (data_obj) { // 從伺服器回傳的資料
+                                //console.log("success");
+                                alert("傳送完成");
+                                console.log(data_obj);
+
+                            }
+                        });
+
+                    });
+                }
+
+            });
+        });
+
+    </script>
+
+
+		</div>
+	</div>
+</div>
+</html>

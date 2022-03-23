@@ -1,0 +1,55 @@
+.btn_CUP{
+    height: 2rem;
+    width: 10rem;
+    cursor: pointer;
+    border-radius: 15px;
+    margin: 0 auto;
+    display: block;
+}
+div.overCUP{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    /* background-color: hsla(0, 0%, 0%, .5); */
+    display: none;
+}
+div.overCUP > article{
+    background-color: #f1f5f9;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(255, 0, 0);
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.forflex{
+    height: 19.7rem;
+    display:flex;
+}
+.twoline{      
+    flex:1;
+    display:block;
+    border:none;
+    margin-bottom: 0.2rem;
+}
+.nomal{
+    display: inline-block;
+    border-radius: 15px;
+    padding: .5rem;
+    border: 1px solid;
+    border-color: #f1f5f9;
+    outline: none;
+    width: 10rem;
+}
+.hh{
+    height: 2.5rem;
+}
+.CUPlable{
+    text-align: center;
+    background-color: white;
+}

@@ -1,0 +1,35 @@
+main.tab.product div.addNewProduct table {
+    width: 500px;
+    margin-top: 0.1px;
+    margin-bottom: 1px;
+}
+main.tab.product div.addNewProduct table, th, td {
+  border: 0px solid #CCCCFF;
+}
+main.tab.product div.addNewProduct th, td {
+  margin : 0.3rem;
+  padding: 1px;
+}
+main.tab.product div.addNewProduct label{
+  height: 100%;
+  padding: .5rem;
+  border: none;
+  outline: none;
+}
+main.tab.product div.addNewProduct input {
+  border-radius: 15px;
+  padding: .5rem;
+  border: none;
+  outline: none;
+}
+main.tab.product div.addNewProduct input.las:hover{
+  cursor: pointer;
+  background-color: #666666;
+  color: white;
+}
+main.tab.product div.addNewProduct .lineUp {
+	margin-left: 0.9rem;
+}
+main.tab.product div.addNewProduct .secLine {
+  margin-left: 1.8rem;
+}

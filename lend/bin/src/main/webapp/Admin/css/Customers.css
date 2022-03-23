@@ -1,0 +1,17 @@
+main.tab.customers div.table-responsive input {
+    border-radius: 15px;
+    padding: .5rem;
+    border: none;
+    outline: none;
+    font-size: 6px;
+}
+main.tab.customers div.table-responsive input[type="search"] {
+	border: 0.5px solid black;
+    height: 2rem;
+}
+
+main.tab.customers div.table-responsive input.las:hover {
+	cursor: pointer;
+	background-color: #666666;
+	color: white;	
+}

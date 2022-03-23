@@ -1,0 +1,67 @@
+main.tab.course div.addNewCourse table#table-1 {
+    background-color: #CCCCFF;
+    border: 2px solid black;
+    text-align: center;
+}
+main.tab.course div.addNewCourse table#table-1 h4 {
+    color: red;
+    display: block;
+    margin-bottom: 1px;
+}
+main.tab.course div.addNewCourse h4 {
+    color: blue;
+    display: inline;
+}
+main.tab.course div.addNewCourse table {
+    width: 500px;
+    margin-top: 0.1px;
+    margin-bottom: 1px;
+}
+main.tab.course div.addNewCourse table, th, td {
+    border: 0px solid #CCCCFF;
+}
+main.tab.course div.addNewCourse th, td {
+    margin : 0.4rem;
+    padding: 0.3rem;
+}
+main.tab.course div.addNewCourse label{
+    height: 100%;
+    padding: 0.4rem;
+    border: none;
+    outline: none;
+    text-align: center;
+    background-color: white;
+    outline: none;
+    width: 22rem;
+    display: inline-block;
+    border-radius: 15px;
+}
+main.tab.course div.addNewCourse input {
+    border-radius: 15px;
+    padding: .5rem;
+    border: none;
+    outline: none;
+}
+main.tab.course div.addNewCourse input.las:hover{
+    cursor: pointer;
+    background-color: rgb(197, 238, 169);
+}
+
+
+main.tab.course div.table-responsive input {
+	border-radius: 15px;
+	padding: .5rem;
+	border: none;
+	outline: none;
+	font-size: 6px;
+}
+main.tab.course div.table-responsive input[type="search"] {
+	border: 0.5px solid black;
+    height: 2rem;
+}
+
+main.tab.course div.table-responsive input.las:hover {
+	cursor: pointer;
+	background-color: #666666;
+	color: white;	
+}

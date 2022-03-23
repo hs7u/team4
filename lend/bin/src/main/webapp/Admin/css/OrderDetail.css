@@ -1,0 +1,116 @@
+.btn_OUP{
+    height: 2.3rem;
+    width: 4rem;
+    cursor: pointer;
+    border-radius: 15px;
+    margin: 0 auto;
+    display: block;
+    margin-top: 16px;
+    margin-bottom: 7px;
+}
+div.overOUP{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 9999;
+    /* background-color: hsla(0, 0%, 0%, .5); */   
+    display: none;
+}
+div.overOUP > article{
+    height: 65%;
+    max-height: 900px;
+    background-color: #f1f5f9;
+    width: 90%;
+    max-width: 900px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(4, 0, 5, 0.493);
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#forflexO1{
+    height: 9rem;
+    display:flex;
+    flex-wrap: nowrap;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+}
+#forflexO2{
+    /* height: 65%; */
+    max-height: 900px;
+    height: 50%;
+    display:flex;
+    flex-wrap: nowrap;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    background-color: white;
+    border-radius: 15px;
+    align-items: center;
+}
+.twoban{      
+    flex:1;
+    display:block;
+    border:none;
+    margin-bottom: 0.2rem;
+    /* border-bottom-style:solid; 
+    border-bottom-width:0.1px; */
+    width: 100%;
+    height: 30px;
+    border-bottom: solid #061838e7 1px;
+}
+.twoban > td{
+    width: 170px;
+    text-align: center;
+    font-weight: 700;
+    font-size: .9rem;
+}
+.oans{      
+    flex:1;
+    display:block;
+    border:none;
+    margin-bottom: 0.2rem;
+    /* border-bottom-style:solid; 
+    border-bottom-width:0.1px; */
+    width: 100%;
+    height: 30px;
+    border-bottom: dashed #68718071 1px;
+}
+.oans >td{
+    width: 170px;
+    text-align: center;
+    font-size: .9rem;
+}
+.orderB{
+    height: 100%;
+}
+.oans2 >td{
+    width: 170px;
+    text-align: center;
+    font-size: .9rem;
+}
+.oans2{      
+    flex:1;
+    display:block;
+    border:none;
+    margin-bottom: 0.2rem;
+    /* border-bottom-style:solid; 
+    border-bottom-width:0.1px; */
+    width: 100%;
+    height: 50px;
+    border-bottom: dashed #68718071 1px;
+}
+.onomal{
+    border-radius: 15px;
+    padding: .5rem;
+    border: 1px solid;
+    border-color: #f1f5f9;
+    outline: none;
+    width: 10rem;
+}
+.ohh{
+    height: 1.4rem;
+}

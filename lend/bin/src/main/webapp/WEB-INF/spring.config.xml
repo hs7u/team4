@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<context:annotation-config></context:annotation-config>
+	<context:component-scan base-package="web"></context:component-scan>
+
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <constructor-arg name="strength" value="4"/>
+    </bean>
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" >
+	    <property name="corePoolSize" value="5"></property>
+	    <property name="maxPoolSize" value="10"></property>
+	    <property name="queueCapacity" value="40"></property>
+	    <property name="waitForTasksToCompleteOnShutdown" value="true"></property>
+    </bean>
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="tfa105g4@gmail.com" />
+		<property name="password" value="javag4200" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>	
+	
+	
+	<tx:annotation-driven />
+	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	
+	<bean id="sessionFactory" destroy-method="destroy"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="annotatedClasses">
+			<array>
+				<value>web.Admin.vo.AdminVO</value>
+				<value>web.Product.vo.ProductVO</value>
+				<value>web.Customer.vo.CustomerVO</value>
+				<value>web.Course.vo.CourseVO</value>
+				<value>web.CustomerOrders.vo.CustomerOrdersVO</value>
+				<value>web.CourseTimeable.vo.CourseTimeableVO</value>
+				<value>web.CourseRegistraion.vo.CourseRegistraionVO</value>
+				<value>web.OrderDetail.vo.OrderDetailVO</value>
+			</array>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+        		<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+		<constructor-arg>
+			<bean class="com.zaxxer.hikari.HikariConfig">
+				<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+				<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/team4?serverTimezone=Asia/Taipei"></property>
+				<property name="username" value="root"></property>
+				<property name="password" value="password"></property>
+				<property name="dataSourceProperties">
+					<props>
+						<prop key="cachePrepStmts">true</prop>
+						<prop key="prepStmtCacheSize">250</prop>
+						<prop key="prepStmtCacheSqlLimit">2048</prop>
+					</props>
+				</property>
+			</bean>
+		</constructor-arg>
+	</bean>
+
+</beans>

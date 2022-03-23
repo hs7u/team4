@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/Regist.css">
+</head>
+<body bgcolor="#f1f5f9">
+    <label for="myForm" class="title centerControl">Regist</label>
+    <div class="box centerControl">
+        <form id="myForm" method="post" enctype="multipart/form-data">    
+            <input type="text" class="line" name="cname" placeholder="Name"><br>
+            <input type="text" class="line" name="email" placeholder="Email"><br>
+            <input type="text" class="line" name="password" placeholder="Password"><br>
+            <input type="text" class="line" name="Phone" placeholder="Phone"><br>
+            <label for="birth" class="hint centerControl">BirthDay</label>
+            <input type="date" class="line" name="birth"><br>
+            <label for="gender" class="hint">Man</label>
+            <input type="radio" name="gender" value="m">
+            <label for="gender" class="hint">Female</label>
+            <input type="radio" name="gender" value="f">
+            <br>
+            <input type="text" class="line" name="address" placeholder="Address"><br>
+            <input type="button" class="line" id="btn_sub" value="Regist">
+        </form>
+    </div>
+    <div class="overlay" style="border: none">
+        <article>
+            <p id="target"></p>
+            <button type="button" class="btn_modal_close">關閉</button>
+        </article>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./js/Redist.js"></script>
+</body>
+</html>
